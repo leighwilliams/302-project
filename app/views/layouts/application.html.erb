@@ -13,10 +13,9 @@
 
   <body>
     <%= render 'layouts/header' %>
+    <%= javascript_include_tag "application" %>
     <%= yield %>
     <%= render 'layouts/footer' %>
-    <%= javascript_include_tag "application" %>
-    <%= render 'layouts/scene' %>
   </body>
 
 </html>

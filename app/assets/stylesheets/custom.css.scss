@@ -7,23 +7,33 @@ footer {
   position: fixed;
 }
 
-// Side control area
-.side-control-fixed {
-  background-color: #222;
-  width: 200px;
+html, body {
   height: 100%;
-  left: 0;
-  position: fixed;
+}
+
+/* apply a natural box layout model to all elements */
+ *, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-  overflow  : hidden;
+  display: flex;
+  overflow: hidden;
 }
 
-// Scene area
-.scene {
-  right: 800px;
-  top: 250px;
-  position: fixed;
+// canvas.ChemDoodleWebComponent {
+// }
+
+#left {
+  background-color: #222;
+  height: 100%;
+  width: 200px;
+  float: left;
 }
 
+#right {
+  background-color: #111;
+  height: 100%;
+}
