@@ -1,5 +1,4 @@
-// footer
-@import "foundation";
+// Footer
 footer {
   background-color: #333;
   width: 100%;
@@ -8,8 +7,8 @@ footer {
   position: fixed;
 }
 
-// side control fixed
-.side-control-fixed{
+// Side control area
+.side-control-fixed {
   background-color: #222;
   width: 200px;
   height: 100%;
@@ -17,7 +16,14 @@ footer {
   position: fixed;
 }
 
-body{
+body {
   overflow  : hidden;
+}
+
+// Scene area
+.scene {
+  right: 800px;
+  top: 250px;
+  position: fixed;
 }
 
