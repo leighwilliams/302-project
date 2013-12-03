@@ -11,9 +11,6 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-# Use rack-zippy instead of ActionDispatch
-config.middleware.swap(ActionDispatch::Static, Rack::Zippy::AssetServer)
-
 module ProjectPrototype
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
