@@ -35,7 +35,10 @@ gem 'jbuilder', '~> 1.2'
 gem 'foundation-rails'
 
 # Use rack-zippy for asset compression
-gem 'rack-zippy'
+#gem 'rack-zippy'
+
+# Use action_dispatch-gz_static for asset compression
+gem 'action_dispatch-gz_static'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
