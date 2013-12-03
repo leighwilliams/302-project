@@ -77,7 +77,4 @@ ProjectPrototype::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-
-  # Use rack-zippy instead of ActionDispatch
-  config.middleware.swap(ActionDispatch::Static, Rack::Zippy::AssetServer)
 end
