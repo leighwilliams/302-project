@@ -34,6 +34,9 @@ gem 'jbuilder', '~> 1.2'
 # Use Zurb Foundation framework
 gem 'foundation-rails'
 
+# Use rack-zippy for asset compression
+gem 'rack-zippy'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
