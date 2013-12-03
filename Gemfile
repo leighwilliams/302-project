@@ -38,7 +38,7 @@ gem 'foundation-rails'
 #gem 'rack-zippy'
 
 # Use action_dispatch-gz_static for asset compression
-gem 'action_dispatch-gz_static'
+#gem 'action_dispatch-gz_static'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

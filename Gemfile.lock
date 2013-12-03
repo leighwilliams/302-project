@@ -1,9 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    action_dispatch-gz_static (0.0.3)
-      actionpack (>= 3.1.0)
-      railties (>= 3.1.0)
     actionmailer (4.0.1)
       actionpack (= 4.0.1)
       mail (~> 2.5.4)
@@ -114,7 +111,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  action_dispatch-gz_static
   coffee-rails (~> 4.0.0)
   foundation-rails
   jbuilder (~> 1.2)
