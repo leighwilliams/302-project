@@ -21,13 +21,15 @@ ProjectPrototype::Application.configure do
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
   config.serve_static_assets = true
+  # Set cache control variable to 1 year
+  config.static_cache_control = 'public, max-age=31536000'
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :sass
+  config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = true
+  config.assets.compile = false
 
   # Generate digests for assets URLs.
   config.assets.digest = true

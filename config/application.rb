@@ -28,7 +28,5 @@ module ProjectPrototype
     # Use rack-zippy instead of ActionDispatch
     #config.middleware.swap(ActionDispatch::Static, Rack::Zippy::AssetServer)
 
-    # This isn't required, but is generally a good idea.
-    config.static_cache_control = "public, max-age=#{1.month.to_i}"
   end
 end
