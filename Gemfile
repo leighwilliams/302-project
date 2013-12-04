@@ -40,6 +40,12 @@ gem 'foundation-rails'
 # Use action_dispatch-gz_static for asset compression
 #gem 'action_dispatch-gz_static'
 
+# Use
+gem 'heroku-deflater', :group => :production
+
+# Use
+gem 'rails_12factor', group: :production
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
