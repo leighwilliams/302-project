@@ -28,9 +28,5 @@ ProjectPrototype::Application.configure do
   config.assets.debug = true
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
-
-  # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
-  config.assets.css_compressor = :sass
+  config.assets.compile = true
 end
