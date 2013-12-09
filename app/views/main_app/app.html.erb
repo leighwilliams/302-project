@@ -16,56 +16,58 @@
     var width = window.innerWidth - 200;
     var height = window.innerHeight - 71;
     // setup component
-    var model = new ChemDoodle.TransformCanvas3D('model', width, height);
+    var viewer = new ChemDoodle.TransformCanvas3D('viewer', width, height);
     // set the representation to 'Ball and Stick'
-    model.specs.set3DRepresentation('Ball and Stick');
-    model.specs.macro_displayAtoms = true;
-    model.specs.macro_displayBonds = true;
-    model.specs.macro_atomToLigandDistance = 5;
+    viewer.specs.set3DRepresentation('Ball and Stick');
+    viewer.specs.macro_displayAtoms = true;
+    viewer.specs.macro_displayBonds = true;
+    viewer.specs.macro_atomToLigandDistance = 5;
     // set the background color to black
-    model.specs.backgroundColor = '#111';
+    viewer.specs.backgroundColor = '#111';
     // set to 'cartoon' mode
-    model.specs.proteins_ribbonCartoonize = true;
+    viewer.specs.proteins_ribbonCartoonize = true;
     // load data
-    var molFile = pdb_4F5S;
+    var molFile = pdb_1F6F;
     // set the coordinate multiplier to 1 to stay in Angstroms
     //var molecule = ChemDoodle.readMOL(molFile, 1);
     molFile.residueSpecs = new ChemDoodle.structures.VisualSpecifications();
-    molFile.residueSpecs.set3DRepresentation('Wireframe');
-    model.loadMolecule(molFile);
+    molFile.residueSpecs.set3DRepresentation('Ball and Stick');
+
+    //var AS2Casein = ChemDoodle.readPDB(AS1CaseinPDB, 1);
+    viewer.loadMolecule(molFile);
 
     // Click events
     $("#BS").click(function() {
       $(this).addClass("success");
       $("#SF").removeClass("success");
       $("#WF").removeClass("success");
-      model.specs.set3DRepresentation('Ball and Stick');
-      model.setupScene();
-      model.repaint();
+      viewer.specs.set3DRepresentation('Ball and Stick');
+      viewer.setupScene();
+      viewer.repaint();
     });
 
     $("#SF").click(function() {
       $(this).addClass("success");
       $("#BS").removeClass("success");
       $("#WF").removeClass("success");
-      model.specs.set3DRepresentation('van der Waals Spheres');
-      model.setupScene();
-      model.repaint();
+      viewer.specs.set3DRepresentation('van der Waals Spheres');
+      viewer.setupScene();
+      viewer.repaint();
     });
 
     $("#WF").click(function() {
       $(this).addClass("success");
       $("#BS").removeClass("success");
       $("#SF").removeClass("success");
-      model.specs.set3DRepresentation('Wireframe');
-      model.setupScene();
-      model.repaint();
+      viewer.specs.set3DRepresentation('Wireframe');
+      viewer.setupScene();
+      viewer.repaint();
     });
 
     $("#Labs").click(function() {
-      model.specs.atoms_displayLabels_3D =! model.specs.atoms_displayLabels_3D;
-      model.setupScene();
-      model.repaint();
+      viewer.specs.atoms_displayLabels_3D =! viewer.specs.atoms_displayLabels_3D;
+      viewer.setupScene();
+      viewer.repaint();
     });
   </script>
 </div>
