@@ -9,15 +9,17 @@
     viewer.specs.macro_displayAtoms = true;
     viewer.specs.macro_displayBonds = true;
     viewer.specs.macro_showWater = false;
+    viewer.specs.proteins_displayBackbone = false;
+    viewer.specs.proteins_displayRibbon = true;
     viewer.specs.macro_atomToLigandDistance = 5;
     // set the background color to black
     viewer.specs.backgroundColor = '#111';
     // set to 'cartoon' mode
     viewer.specs.proteins_ribbonCartoonize = true;
-    //viewer.specs.proteins_displayRibbon = false;
+
     viewer.specs.compass_display = true;
 
-    viewer.specs.surfaces_style = 'Solid';
+
     //viewer.specs. = true;
     // load data
     var molFile = pdb_1BEB;
@@ -35,8 +37,7 @@
       $("#SF").removeClass("success");
       $("#WF").removeClass("success");
       viewer.specs.set3DRepresentation('Ball and Stick');
-      viewer.setupScene();
-      viewer.repaint();
+      viewer.updateScene()
     });
 
     $("#SF").click(function() {
@@ -44,8 +45,7 @@
       $("#BS").removeClass("success");
       $("#WF").removeClass("success");
       viewer.specs.set3DRepresentation('van der Waals Spheres');
-      viewer.setupScene();
-      viewer.repaint();
+      viewer.updateScene()
     });
 
     $("#WF").click(function() {
@@ -53,13 +53,11 @@
       $("#BS").removeClass("success");
       $("#SF").removeClass("success");
       viewer.specs.set3DRepresentation('Wireframe');
-      viewer.setupScene();
-      viewer.repaint();
+      viewer.updateScene()
     });
 
     $("#Labs").click(function() {
       viewer.specs.atoms_displayLabels_3D =! viewer.specs.atoms_displayLabels_3D;
-      viewer.setupScene();
-      viewer.repaint();
+      viewer.updateScene()
     });
 </script>
