@@ -1,6 +1,6 @@
 # SIT302 - Project Prototype
 
-Initial internal project prototype for protein visualisation tool.
+Project prototype for protein visualisation tool.
 
 ## Made With
 * [Zurb Foundation](http://foundation.zurb.com)
