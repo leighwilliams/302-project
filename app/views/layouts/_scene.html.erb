@@ -16,7 +16,7 @@
     viewer.specs.backgroundColor = '#111';
     // set to 'cartoon' mode
     viewer.specs.proteins_ribbonCartoonize = true;
-
+    viewer.emptyMessage = 'No Data Loaded!';
     viewer.specs.compass_display = true;
 
 
@@ -25,39 +25,9 @@
     var molFile = pdb_1BEB;
     // set the coordinate multiplier to 1 to stay in Angstroms
     //var molecule = ChemDoodle.readMOL(molFile, 1);
-    molFile.residueSpecs = new ChemDoodle.structures.VisualSpecifications();
-    molFile.residueSpecs.set3DRepresentation('Ball and Stick');
+    //molFile.residueSpecs = new ChemDoodle.structures.VisualSpecifications();
+    //molFile.residueSpecs.set3DRepresentation('Ball and Stick');
 
     //var AS2Casein = ChemDoodle.readPDB(AS1CaseinPDB, 1);
     viewer.loadMolecule(molFile);
-
-    // Click events
-    $("#BS").click(function() {
-      $(this).addClass("success");
-      $("#SF").removeClass("success");
-      $("#WF").removeClass("success");
-      viewer.specs.set3DRepresentation('Ball and Stick');
-      viewer.updateScene()
-    });
-
-    $("#SF").click(function() {
-      $(this).addClass("success");
-      $("#BS").removeClass("success");
-      $("#WF").removeClass("success");
-      viewer.specs.set3DRepresentation('van der Waals Spheres');
-      viewer.updateScene()
-    });
-
-    $("#WF").click(function() {
-      $(this).addClass("success");
-      $("#BS").removeClass("success");
-      $("#SF").removeClass("success");
-      viewer.specs.set3DRepresentation('Wireframe');
-      viewer.updateScene()
-    });
-
-    $("#Labs").click(function() {
-      viewer.specs.atoms_displayLabels_3D =! viewer.specs.atoms_displayLabels_3D;
-      viewer.updateScene()
-    });
 </script>
