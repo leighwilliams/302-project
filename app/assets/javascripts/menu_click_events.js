@@ -52,8 +52,8 @@ $("#PS").change(function() {
       molFile = pdb_1B8E;
       viewer.loadMolecule(molFile);
       break;
-    case "1F6F":
-      molFile = pdb_1F6F;
+    case "1F6S":
+      molFile = pdb_1F6S;
       viewer.loadMolecule(molFile);
       break;
   }
