@@ -22,14 +22,10 @@
 
   //viewer.specs. = true;
   // load data
-  var molFile = pdb_1BEB;
-  //var molFile = ChemDoodle.readMOL(molFile, 1);
-  //var molFile = ChemDoodle.readPDB(AS1CaseinPDB, 1);
-  molFile.residueSpecs = new ChemDoodle.structures.VisualSpecifications();
-  // set representation of nucleic acid atoms and bonds to 'Wireframe'
-  molFile.residueSpecs.set3DRepresentation('Ball and Stick');
-
-  viewer.loadMolecule(molFile);
+  var file = pdb_1BEB;
+  //var file = ChemDoodle.readMOL(file);
+  //var file = ChemDoodle.readPDB(pdb_AS1Casein, 1);
+  viewer.loadMolecule(file);
 
   // Browser window -> scene resizing
   var timer, width, height;
@@ -40,9 +36,10 @@
         width = $(window).innerWidth() - 200;
         height = $(window).innerHeight() - 71;
         viewer.resize(width, height);
-        // Have to use loadMolecule on each resize so avoid warped 3D image.
-        viewer.loadMolecule(molFile);
+        // Have to use loadMolecule() on each resize to avoid warped 3D image.
+        viewer.loadMolecule(file);
       }, 150); // delay in milliseconds (Don't want to update while resizing too much)
     });
   }); // jQuery ready
+
 </script>

@@ -35,29 +35,43 @@ $(function() {
   var model;
   $("#PS").change(function() {
     model = $("#PS").val();
-
     switch(model) {
       case "4F5S":
-        molFile = pdb_4F5S;
-        viewer.loadMolecule(molFile);
+        file = pdb_4F5S;
+        viewer.loadMolecule(file);
         break;
       case "1BEB":
-        molFile = pdb_1BEB;
-        viewer.loadMolecule(molFile);
+        file = pdb_1BEB;
+        viewer.loadMolecule(file);
         break;
       case "1BLF":
-        molFile = pdb_1BLF;
-        viewer.loadMolecule(molFile);
+        file = pdb_1BLF;
+        viewer.loadMolecule(file);
         break;
       case "1B8E":
-        molFile = pdb_1B8E;
-        viewer.loadMolecule(molFile);
+        file = pdb_1B8E;
+        viewer.loadMolecule(file);
         break;
       case "1F6S":
-        molFile = pdb_1F6S;
-        viewer.loadMolecule(molFile);
+        file = pdb_1F6S;
+        viewer.loadMolecule(file);
         break;
+      case "AS1CB":
+        file = ChemDoodle.readPDB(pdb_AS1CB, 1);
+        viewer.loadMolecule(file);
+        break;
+      case "AS2C":
+        file = ChemDoodle.readPDB(pdb_AS2C, 1);
+        viewer.loadMolecule(file);
+        break;
+      // case "BCA":
+      //   file = ChemDoodle.readPDB(pdb_BCA, 1);
+      //   viewer.loadMolecule(file);
+      //   break;
+      // case "KCB":
+      //   file = ChemDoodle.readPDB(pdb_KCB, 1);
+      //   viewer.loadMolecule(file);
+      //   break;
     }
-
   });
 }); // jQuery ready
