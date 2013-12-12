@@ -31,12 +31,18 @@
 
   viewer.loadMolecule(molFile);
 
-  // var timer;
-  // $(window).resize(function(){
-  //   clearTimeout(timer);
-  //   timer = setTimeout(function() {
-  //     viewer.resize($(window).innerWidth() - 200, $(window).innerHeight() - 71);
-  //     viewer.loadMolecule(pdb_1BEB);
-  //   }, 100);
-  // });
+  // Browser window -> scene resizing
+  var timer, width, height;
+  $(function() {
+    $(window).resize(function(){
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        width = $(window).innerWidth() - 200;
+        height = $(window).innerHeight() - 71;
+        viewer.resize(width, height);
+        // Have to use loadMolecule on each resize so avoid warped 3D image.
+        viewer.loadMolecule(molFile);
+      }, 150); // delay in milliseconds (Don't want to update while resizing too much)
+    });
+  }); // jQuery ready
 </script>

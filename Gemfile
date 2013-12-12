@@ -34,12 +34,6 @@ gem 'jbuilder', '~> 1.2'
 # Use Zurb Foundation framework
 gem 'foundation-rails'
 
-# Use rack-zippy for asset compression
-#gem 'rack-zippy'
-
-# Use action_dispatch-gz_static for asset compression
-#gem 'action_dispatch-gz_static'
-
 # Use
 gem 'heroku-deflater', :group => :production
 
