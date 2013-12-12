@@ -4,14 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <title><%= content_for?(:title) ? yield(:title) : "Protein Visualiser" %></title>
-    <%= stylesheet_link_tag    "application" %>
+    <%= stylesheet_link_tag "application", :async => true %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
     <%= render 'layouts/header' %>
     <%= yield %>
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "application", :async => true %>
     <%= render 'layouts/scene' %>
     <%= render 'layouts/footer' %>
   </body>
