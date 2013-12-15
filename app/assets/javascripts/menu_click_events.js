@@ -84,8 +84,8 @@ $(function() { // jQuery document ready
   // Right click canvas popup.
   $("#viewer").bind('contextmenu', function(e) {
     $("#popup").css({
-      top: e.pageY,
-      left: e.pageX
+      top: e.pageY - 19,
+      left: e.pageX + 6
     }).fadeIn('fast');
     popupViewer.startAnimation();
     return false;
