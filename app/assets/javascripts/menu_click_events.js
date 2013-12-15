@@ -1,5 +1,6 @@
 // == menu click events ==
 $(function() {
+
   // Display Modes
   $("#BS").click(function() {
     $(this).addClass("success");
@@ -25,11 +26,18 @@ $(function() {
     viewer.updateScene()
   });
 
+
   // Labels
   $("#Labs").click(function() {
     viewer.specs.atoms_displayLabels_3D =! viewer.specs.atoms_displayLabels_3D;
     viewer.updateScene()
   });
+
+  // // Count nitrogen atoms test.
+  // $("#test").click(function() {
+  //   alert(ChemDoodle.countNitrogens(file));
+  // });
+
 
   // Load models
   var model;
@@ -74,4 +82,26 @@ $(function() {
       //   break;
     }
   });
+
+  // Right click canvas popup.
+  $("#viewer").bind('contextmenu', function(e) {
+    $("#popup").css({
+      top: e.pageY,
+      left: e.pageX
+    }).fadeIn('fast');
+    return false;
+  });
+
+  // Close popup.
+  // Click.
+  $(".close").click(function() {
+    $("#popup").fadeOut("fast");
+  });
+  // Escape key
+  $(document).keydown(function(e) {
+    if (e.keyCode == 27) {
+      $("#popup").fadeOut("fast");
+    };
+  });
+
 }); // jQuery ready

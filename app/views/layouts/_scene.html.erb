@@ -43,3 +43,23 @@
   }); // jQuery ready
 
 </script>
+
+<script>
+  // setup component
+  var popupViewer = new ChemDoodle.TransformCanvas3D('popupViewer', 200, 200);
+  popupViewer.specs.set3DRepresentation('van der Waals Spheres');
+  popupViewer.specs.macro_displayAtoms = true;
+  popupViewer.specs.macro_displayBonds = true;
+  popupViewer.specs.macro_showWater = false;
+  popupViewer.specs.proteins_displayBackbone = false;
+  popupViewer.specs.proteins_displayRibbon = true;
+  popupViewer.specs.macro_atomToLigandDistance = 5;
+  // black
+  popupViewer.specs.backgroundColor = '#222';
+  popupViewer.specs.proteins_ribbonCartoonize = true;
+  popupViewer.emptyMessage = 'No Data Loaded!';
+  popupViewer.specs.compass_display = true;
+  popupViewer.macro_displayBonds = true;
+  var file2 = pdb_1B8E;
+  popupViewer.loadMolecule(file2);
+</script>

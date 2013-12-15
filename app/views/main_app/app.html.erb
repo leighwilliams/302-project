@@ -1,3 +1,4 @@
+<!-- Left menu. -->
 <div id="left">
 
   <h6 class="subheader">Display Modes</h6>
@@ -10,23 +11,39 @@
 
   <h6 class="subheader">Protein Structures</h6>
   <select id="PS">
-    <option value="">From RCSB PDB</option>
-    <option value="">-------------</option>
+    <option disabled value="">From RCSB PDB</option>
+    <option disabled value="">-------------</option>
     <option value="4F5S">4F5S</option>
     <option value="1BEB" selected="selected">1BEB</option>
     <option value="1BLF">1BLF</option>
     <option value="1B8E">1B8E</option>
     <option value="1F6S">1F6S</option>
     <option value=""></option>
-    <option value="">From arserrc</option>
-    <option value="">-----------</option>
+    <option disabled value="">From arserrc</option>
+    <option disabled value="">-----------</option>
     <option value="AS1CB">Alpha S1 Casein B</option>
     <option value="AS2C">Alpha S2 Casein</option>
-    <option disabled="" value="BCA">Beta Casein A</option>
-    <option disabled="" value="KCB">Kappa Casein B</option>
+    <option disabled value="BCA">Beta Casein A</option>
+    <option disabled value="KCB">Kappa Casein B</option>
   </select>
-</div>
+  <!-- <ul>
+    <li><a id="test" class="tiny button radius alert">Count nitrogen atoms!</a></li>
+  </ul> -->
+</div> <!-- End left menu. -->
 <!-- Scene -->
 <div id="right">
-  <canvas id="viewer"></canvas>
-</div>
+
+  <!-- Main scene. -->
+  <canvas id="viewer">
+  </canvas> <!-- End main scene. -->
+
+  <!-- Popup box. -->
+  <div id="popup" class="popup" style="Display: none;">
+    <div class="arrow" ></div>
+    <div class="close">&times;</div>
+    <!-- Popup scene. -->
+    <canvas id="popupViewer">
+    </canvas> <!-- End popup scene. -->
+  </div> <!-- End popup box. -->
+
+</div> <!-- End scene. -->

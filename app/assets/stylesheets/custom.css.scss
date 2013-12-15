@@ -29,6 +29,7 @@ body {
 // canvas.ChemDoodleWebComponent {
 // }
 
+// Left nav
 #left {
   background-color: #222;
   height: 100%;
@@ -36,7 +37,38 @@ body {
   float: left;
 }
 
+// Scene
 #right {
   background-color: #111;
   height: 100%;
+}
+
+// popup
+.popup {
+  display: none;
+  position: absolute;
+  z-index: 999;
+  padding: 3px;
+  background: #333;
+  border-radius: 2px;
+
+  .arrow {
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: solid 5px;
+    border-color: transparent #333 transparent transparent;
+    top: 6px;
+    left: -10px;
+  }
+
+  .close {
+    display: block;
+    position: absolute;
+    color: #FFF;
+    top: -17px;
+    right: -8px;
+    font-size: 30px;
+  }
 }
