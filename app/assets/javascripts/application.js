@@ -37,6 +37,6 @@
 //= require ChemDoodleWeb-libs
 //= require ChemDoodleWeb
 //= require_tree .
-//= require modernizr
+// require modernizr
 
 $(function(){ $(document).foundation(); });
