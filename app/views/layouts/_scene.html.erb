@@ -35,6 +35,7 @@
       timer = setTimeout(function() {
         width = $(window).innerWidth() - 200;
         height = $(window).innerHeight() - 71;
+        //viewer.specs.projectionWidthHeightRatio_3D = width / height;
         viewer.resize(width, height);
         // Have to use loadMolecule() on each resize to avoid warped 3D image.
         viewer.loadMolecule(file);
@@ -46,20 +47,13 @@
 
 <script>
   // setup component
-  var popupViewer = new ChemDoodle.TransformCanvas3D('popupViewer', 200, 200);
-  popupViewer.specs.set3DRepresentation('van der Waals Spheres');
-  popupViewer.specs.macro_displayAtoms = true;
-  popupViewer.specs.macro_displayBonds = true;
-  popupViewer.specs.macro_showWater = false;
-  popupViewer.specs.proteins_displayBackbone = false;
-  popupViewer.specs.proteins_displayRibbon = true;
-  popupViewer.specs.macro_atomToLigandDistance = 5;
-  // black
+  var popupViewer = new ChemDoodle.TransformCanvas3D('popupViewer', 300, 300);
+  popupViewer.specs.set3DRepresentation('Ball and Stick');
   popupViewer.specs.backgroundColor = '#222';
-  popupViewer.specs.proteins_ribbonCartoonize = true;
-  popupViewer.emptyMessage = 'No Data Loaded!';
-  popupViewer.specs.compass_display = true;
-  popupViewer.macro_displayBonds = true;
-  var file2 = pdb_1B8E;
-  popupViewer.loadMolecule(file2);
+  popupViewer.specs.atoms_displayLabels_3D = true;
+
+  var molecule = ChemDoodle.readMOL(mol_GLYCINE, 1);
+  popupViewer.loadMolecule(molecule);
+
+
 </script>

@@ -18,452 +18,12323 @@
 // are not obligated to do so. If you do not wish to do so, delete this
 // exception statement from your version.
 //
-// As an additional exception to the GPL, you may distribute this
-// packed form of the code without the copy of the GPL license normally
-// required, provided you include this license notice and a URL through
-// which recipients can access the corresponding unpacked source code.
-//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
 // Please contact iChemLabs <http://www.ichemlabs.com/contact-us> for
 // alternate licensing options.
 //
-var ChemDoodle=function(){var a={structures:{}};a.structures.d2={};a.structures.d3={};a.iChemLabs={};a.informatics={};a.io={};a.getVersion=function(){return"5.2.3"};return a}();
-ChemDoodle.extensions=function(a,c,g){return{stringStartsWith:function(a,c){return a.slice(0,c.length)===c},vec3AngleFrom:function(a,f){var d=c.length(a),n=c.length(f),d=c.dot(a,f)/d/n;return g.acos(d)},contextHashTo:function(c,f,d,n,b,m,v){var j=0,h=(new a.Point(f,d)).distance(new a.Point(n,b)),k=!1,p=f,g=d;f=n-f;for(d=b-d;j<h;){if(k)if(j+v>h){c.moveTo(n,b);break}else{var l=v/h,p=p+l*f,g=g+l*d;c.moveTo(p,g);j+=v}else if(j+m>h){c.lineTo(n,b);break}else l=m/h,p+=l*f,g+=l*d,c.lineTo(p,g),j+=m;k=!k}},
-contextRoundRect:function(a,c,d,n,b,m){a.beginPath();a.moveTo(c+m,d);a.lineTo(c+n-m,d);a.quadraticCurveTo(c+n,d,c+n,d+m);a.lineTo(c+n,d+b-m);a.quadraticCurveTo(c+n,d+b,c+n-m,d+b);a.lineTo(c+m,d+b);a.quadraticCurveTo(c,d+b,c,d+b-m);a.lineTo(c,d+m);a.quadraticCurveTo(c,d,c+m,d);a.closePath()},contextEllipse:function(a,c,d,n,b){var m=0.5522848*(n/2),v=0.5522848*(b/2),j=c+n,h=d+b;n=c+n/2;b=d+b/2;a.beginPath();a.moveTo(c,b);a.bezierCurveTo(c,b-v,n-m,d,n,d);a.bezierCurveTo(n+m,d,j,b-v,j,b);a.bezierCurveTo(j,
-b+v,n+m,h,n,h);a.bezierCurveTo(n-m,h,c,b+v,c,b);a.closePath()},getFontString:function(a,c,d,n){var b=[];d&&b.push("bold ");n&&b.push("italic ");b.push(a+"px ");a=0;for(d=c.length;a<d;a++)n=c[a],-1!==n.indexOf(" ")&&(n='"'+n+'"'),b.push((0!==a?",":"")+n);return b.join("")}}}(ChemDoodle.structures,vec3,Math);
-ChemDoodle.math=function(a,c,g){var e={},f={aliceblue:"#f0f8ff",antiquewhite:"#faebd7",aqua:"#00ffff",aquamarine:"#7fffd4",azure:"#f0ffff",beige:"#f5f5dc",bisque:"#ffe4c4",black:"#000000",blanchedalmond:"#ffebcd",blue:"#0000ff",blueviolet:"#8a2be2",brown:"#a52a2a",burlywood:"#deb887",cadetblue:"#5f9ea0",chartreuse:"#7fff00",chocolate:"#d2691e",coral:"#ff7f50",cornflowerblue:"#6495ed",cornsilk:"#fff8dc",crimson:"#dc143c",cyan:"#00ffff",darkblue:"#00008b",darkcyan:"#008b8b",darkgoldenrod:"#b8860b",
-darkgray:"#a9a9a9",darkgreen:"#006400",darkkhaki:"#bdb76b",darkmagenta:"#8b008b",darkolivegreen:"#556b2f",darkorange:"#ff8c00",darkorchid:"#9932cc",darkred:"#8b0000",darksalmon:"#e9967a",darkseagreen:"#8fbc8f",darkslateblue:"#483d8b",darkslategray:"#2f4f4f",darkturquoise:"#00ced1",darkviolet:"#9400d3",deeppink:"#ff1493",deepskyblue:"#00bfff",dimgray:"#696969",dodgerblue:"#1e90ff",firebrick:"#b22222",floralwhite:"#fffaf0",forestgreen:"#228b22",fuchsia:"#ff00ff",gainsboro:"#dcdcdc",ghostwhite:"#f8f8ff",
-gold:"#ffd700",goldenrod:"#daa520",gray:"#808080",green:"#008000",greenyellow:"#adff2f",honeydew:"#f0fff0",hotpink:"#ff69b4","indianred ":"#cd5c5c","indigo ":"#4b0082",ivory:"#fffff0",khaki:"#f0e68c",lavender:"#e6e6fa",lavenderblush:"#fff0f5",lawngreen:"#7cfc00",lemonchiffon:"#fffacd",lightblue:"#add8e6",lightcoral:"#f08080",lightcyan:"#e0ffff",lightgoldenrodyellow:"#fafad2",lightgrey:"#d3d3d3",lightgreen:"#90ee90",lightpink:"#ffb6c1",lightsalmon:"#ffa07a",lightseagreen:"#20b2aa",lightskyblue:"#87cefa",
-lightslategray:"#778899",lightsteelblue:"#b0c4de",lightyellow:"#ffffe0",lime:"#00ff00",limegreen:"#32cd32",linen:"#faf0e6",magenta:"#ff00ff",maroon:"#800000",mediumaquamarine:"#66cdaa",mediumblue:"#0000cd",mediumorchid:"#ba55d3",mediumpurple:"#9370d8",mediumseagreen:"#3cb371",mediumslateblue:"#7b68ee",mediumspringgreen:"#00fa9a",mediumturquoise:"#48d1cc",mediumvioletred:"#c71585",midnightblue:"#191970",mintcream:"#f5fffa",mistyrose:"#ffe4e1",moccasin:"#ffe4b5",navajowhite:"#ffdead",navy:"#000080",
-oldlace:"#fdf5e6",olive:"#808000",olivedrab:"#6b8e23",orange:"#ffa500",orangered:"#ff4500",orchid:"#da70d6",palegoldenrod:"#eee8aa",palegreen:"#98fb98",paleturquoise:"#afeeee",palevioletred:"#d87093",papayawhip:"#ffefd5",peachpuff:"#ffdab9",peru:"#cd853f",pink:"#ffc0cb",plum:"#dda0dd",powderblue:"#b0e0e6",purple:"#800080",red:"#ff0000",rosybrown:"#bc8f8f",royalblue:"#4169e1",saddlebrown:"#8b4513",salmon:"#fa8072",sandybrown:"#f4a460",seagreen:"#2e8b57",seashell:"#fff5ee",sienna:"#a0522d",silver:"#c0c0c0",
-skyblue:"#87ceeb",slateblue:"#6a5acd",slategray:"#708090",snow:"#fffafa",springgreen:"#00ff7f",steelblue:"#4682b4",tan:"#d2b48c",teal:"#008080",thistle:"#d8bfd8",tomato:"#ff6347",turquoise:"#40e0d0",violet:"#ee82ee",wheat:"#f5deb3",white:"#ffffff",whitesmoke:"#f5f5f5",yellow:"#ffff00",yellowgreen:"#9acd32"};e.angleBetweenLargest=function(d){if(0===d.length)return{angle:0,largest:2*g.PI};if(1===d.length)return{angle:d[0]+g.PI,largest:2*g.PI};for(var a=0,b=0,m=0,c=d.length-1;m<c;m++){var j=d[m+1]-d[m];
-j>a&&(a=j,b=(d[m+1]+d[m])/2)}m=d[0]+2*g.PI-d[d.length-1];m>a&&(b=d[0]-m/2,a=m,0>b&&(b+=2*g.PI));return{angle:b,largest:a}};e.isBetween=function(d,a,b){if(a>b){var m=a;a=b;b=m}return d>=a&&d<=b};e.getRGB=function(d,n){var b=[0,0,0];f[d.toLowerCase()]&&(d=f[d.toLowerCase()]);if("#"===d.charAt(0))return 4===d.length&&(d="#"+d.charAt(1)+d.charAt(1)+d.charAt(2)+d.charAt(2)+d.charAt(3)+d.charAt(3)),[parseInt(d.substring(1,3),16)/255*n,parseInt(d.substring(3,5),16)/255*n,parseInt(d.substring(5,7),16)/255*
-n];if(a.stringStartsWith(d,"rgb")){var m=d.replace(/rgb\(|\)/g,"").split(",");return 3!==m.length?b:[parseInt(m[0])/255*n,parseInt(m[1])/255*n,parseInt(m[2])/255*n]}return b};e.idx2color=function(d){d=d.toString(16);for(var a=0,b=6-d.length;a<b;a++)d="0"+d;return"#"+d};e.distanceFromPointToLineInclusive=function(d,a,b){var m=a.distance(b);b=a.angle(b);b=g.PI/2-b;b=a.angle(d)+b;d=a.distance(d);d=new c.Point(d*g.cos(b),-d*g.sin(b));return e.isBetween(-d.y,0,m)?g.abs(d.x):-1};e.calculateDistanceInterior=
-function(d,a,b){if(this.isBetween(a.x,b.x,b.x+b.w)&&this.isBetween(a.y,b.y,b.y+b.w))return d.distance(a);var m=[];m.push({x1:b.x,y1:b.y,x2:b.x+b.w,y2:b.y});m.push({x1:b.x,y1:b.y+b.h,x2:b.x+b.w,y2:b.y+b.h});m.push({x1:b.x,y1:b.y,x2:b.x,y2:b.y+b.h});m.push({x1:b.x+b.w,y1:b.y,x2:b.x+b.w,y2:b.y+b.h});b=[];for(var c=0;4>c;c++){var j=m[c];(j=this.intersectLines(a.x,a.y,d.x,d.y,j.x1,j.y1,j.x2,j.y2))&&b.push(j)}if(0===b.length)return 0;c=a=0;for(m=b.length;c<m;c++){var j=b[c],h=d.x-j.x,j=d.y-j.y;a=g.max(a,
-g.sqrt(h*h+j*j))}return a};e.intersectLines=function(d,a,b,m,c,j,h,f){b-=d;m-=a;h-=c;f-=j;var e=m*h-b*f;if(0===e)return!1;h=(f*(d-c)-h*(a-j))/e;c=(m*(d-c)-b*(a-j))/e;return 0<=c&&1>=c&&0<=h&&1>=h?{x:d+h*b,y:a+h*m}:!1};e.hsl2rgb=function(d,a,b){var m=function(b,m,d){0>d?d+=1:1<d&&(d-=1);return d<1/6?b+6*(m-b)*d:0.5>d?m:d<2/3?b+6*(m-b)*(2/3-d):b};if(0===a)b=a=d=b;else{var c=0.5>b?b*(1+a):b+a-b*a,j=2*b-c;b=m(j,c,d+1/3);a=m(j,c,d);d=m(j,c,d-1/3)}return[255*b,255*a,255*d]};e.isPointInPoly=function(d,a){for(var b=
-!1,m=-1,c=d.length,j=c-1;++m<c;j=m)(d[m].y<=a.y&&a.y<d[j].y||d[j].y<=a.y&&a.y<d[m].y)&&a.x<(d[j].x-d[m].x)*(a.y-d[m].y)/(d[j].y-d[m].y)+d[m].x&&(b=!b);return b};e.clamp=function(d,a,b){return d<a?a:d>b?b:d};return e}(ChemDoodle.extensions,ChemDoodle.structures,Math);
-(function(a,c){a.Bounds=function(){};var g=a.Bounds.prototype;g.minX=g.minY=g.minZ=Infinity;g.maxX=g.maxY=g.maxZ=-Infinity;g.expand=function(e,f,d,n){e instanceof a.Bounds?(this.minX=c.min(this.minX,e.minX),this.minY=c.min(this.minY,e.minY),this.maxX=c.max(this.maxX,e.maxX),this.maxY=c.max(this.maxY,e.maxY),Infinity!==e.maxZ&&(this.minZ=c.min(this.minZ,e.minZ),this.maxZ=c.max(this.maxZ,e.maxZ))):(this.minX=c.min(this.minX,e),this.maxX=c.max(this.maxX,e),this.minY=c.min(this.minY,f),this.maxY=c.max(this.maxY,
-f),void 0!==d&&void 0!==n&&(this.minX=c.min(this.minX,d),this.maxX=c.max(this.maxX,d),this.minY=c.min(this.minY,n),this.maxY=c.max(this.maxY,n)))};g.expand3D=function(a,f,d,n,b,m){this.minX=c.min(this.minX,a);this.maxX=c.max(this.maxX,a);this.minY=c.min(this.minY,f);this.maxY=c.max(this.maxY,f);this.minZ=c.min(this.minZ,d);this.maxZ=c.max(this.maxZ,d);void 0!==n&&(void 0!==b&&void 0!==m)&&(this.minX=c.min(this.minX,n),this.maxX=c.max(this.maxX,n),this.minY=c.min(this.minY,b),this.maxY=c.max(this.maxY,
-b),this.minZ=c.min(this.minZ,m),this.maxZ=c.max(this.maxZ,m))}})(ChemDoodle.math,Math);
-(function(){var a={subtract:function(b,m){return{x:b.x-m.x,y:b.y-m.y}},dotProduct:function(b,m){return b.x*m.x+b.y*m.y},square:function(b){return Math.sqrt(b.x*b.x+b.y*b.y)},scale:function(b,m){return{x:b.x*m,y:b.y*m}}},c=Math.pow(2,-65),g=function(b,m){for(var d=[],c=m.length-1,n=2*c-1,v=[],g=[],o=[],r=[],q=[[1,0.6,0.3,0.1],[0.4,0.6,0.6,0.4],[0.1,0.3,0.6,1]],w=0;w<=c;w++)v[w]=a.subtract(m[w],b);for(w=0;w<=c-1;w++)g[w]=a.subtract(m[w+1],m[w]),g[w]=a.scale(g[w],3);for(w=0;w<=c-1;w++)for(var y=0;y<=
-c;y++)o[w]||(o[w]=[]),o[w][y]=a.dotProduct(g[w],v[y]);for(w=0;w<=n;w++)r[w]||(r[w]=[]),r[w].y=0,r[w].x=parseFloat(w)/n;n=c-1;for(v=0;v<=c+n;v++){w=Math.max(0,v-n);for(g=Math.min(v,c);w<=g;w++)y=v-w,r[w+y].y+=o[y][w]*q[y][w]}c=m.length-1;r=e(r,2*c-1,d,0);n=a.subtract(b,m[0]);o=a.square(n);for(w=q=0;w<r;w++)n=a.subtract(b,f(m,c,d[w],null,null)),n=a.square(n),n<o&&(o=n,q=d[w]);n=a.subtract(b,m[c]);n=a.square(n);n<o&&(o=n,q=1);return{location:q,distance:o}},e=function(b,m,d,a){var n=[],v=[],g=[],o=[],
-r=0,q,w;w=0==b[0].y?0:0<b[0].y?1:-1;for(var y=1;y<=m;y++)q=0==b[y].y?0:0<b[y].y?1:-1,q!=w&&r++,w=q;switch(r){case 0:return 0;case 1:if(64<=a)return d[0]=(b[0].x+b[m].x)/2,1;var z,x,A,r=b[0].y-b[m].y;q=b[m].x-b[0].x;w=b[0].x*b[m].y-b[m].x*b[0].y;y=z=0;for(x=1;x<m;x++)A=r*b[x].x+q*b[x].y+w,A>z?z=A:A<y&&(y=A);A=q;x=0*A-1*r;z=(1*(w-z)-0*A)*(1/x);A=q;x=0*A-1*r;r=(1*(w-y)-0*A)*(1/x);q=Math.min(z,r);if(Math.max(z,r)-q<c)return g=b[m].x-b[0].x,o=b[m].y-b[0].y,d[0]=0+1*(g*(b[0].y-0)-o*(b[0].x-0))*(1/(0*g-
-1*o)),1}f(b,m,0.5,n,v);b=e(n,m,g,a+1);m=e(v,m,o,a+1);for(a=0;a<b;a++)d[a]=g[a];for(a=0;a<m;a++)d[a+b]=o[a];return b+m},f=function(b,m,d,a,c){for(var n=[[]],f=0;f<=m;f++)n[0][f]=b[f];for(b=1;b<=m;b++)for(f=0;f<=m-b;f++)n[b]||(n[b]=[]),n[b][f]||(n[b][f]={}),n[b][f].x=(1-d)*n[b-1][f].x+d*n[b-1][f+1].x,n[b][f].y=(1-d)*n[b-1][f].y+d*n[b-1][f+1].y;if(null!=a)for(f=0;f<=m;f++)a[f]=n[f][0];if(null!=c)for(f=0;f<=m;f++)c[f]=n[m-f][f];return n[m][0]},d={},n=function(b,m){var a,c=b.length-1;a=d[c];if(!a){a=[];
-var n=function(b){return function(){return b}},f=function(){return function(b){return b}},e=function(){return function(b){return 1-b}},v=function(b){return function(m){for(var d=1,a=0;a<b.length;a++)d*=b[a](m);return d}};a.push(new function(){return function(b){return Math.pow(b,c)}});for(var g=1;g<c;g++){for(var q=[new n(c)],w=0;w<c-g;w++)q.push(new f);for(w=0;w<g;w++)q.push(new e);a.push(new v(q))}a.push(new function(){return function(b){return Math.pow(1-b,c)}});d[c]=a}for(e=f=n=0;e<b.length;e++)n+=
-b[e].x*a[e](m),f+=b[e].y*a[e](m);return{x:n,y:f}},b=function(b,m){return Math.sqrt(Math.pow(b.x-m.x,2)+Math.pow(b.y-m.y,2))},m=function(m,d,a){for(var c=n(m,d),f=0,e=0<a?1:-1,v=null;f<Math.abs(a);)d+=0.005*e,v=n(m,d),f+=b(v,c),c=v;return{point:v,location:d}},v=function(b,m){var d=n(b,m),a=n(b.slice(0,b.length-1),m),c=a.y-d.y,d=a.x-d.x;return 0==c?Infinity:Math.atan(c/d)};ChemDoodle.math.jsBezier={distanceFromCurve:g,gradientAtPoint:v,gradientAtPointAlongCurveFrom:function(b,d,a){d=m(b,d,a);1<d.location&&
-(d.location=1);0>d.location&&(d.location=0);return v(b,d.location)},nearestPointOnCurve:function(b,m){var d=g(b,m);return{point:f(m,m.length-1,d.location,null,null),location:d.location}},pointOnCurve:n,pointAlongCurveFrom:function(b,d,a){return m(b,d,a).point},perpendicularToCurveAt:function(b,d,a,c){d=m(b,d,null==c?0:c);b=v(b,d.location);c=Math.atan(-1/b);b=a/2*Math.sin(c);a=a/2*Math.cos(c);return[{x:d.point.x+a,y:d.point.y+b},{x:d.point.x-a,y:d.point.y-b}]},locationAlongCurveFrom:function(b,d,a){return m(b,
-d,a).location},getLength:function(m){for(var d=n(m,0),a=0,c=0,f=null;1>c;)c+=0.005,f=n(m,c),a+=b(f,d),d=f;return a}}})(ChemDoodle.math);
-ChemDoodle.featureDetection=function(a,c,g,e){var f={supports_canvas:function(){return!!g.createElement("canvas").getContext},supports_canvas_text:function(){return!f.supports_canvas()?!1:"function"===typeof g.createElement("canvas").getContext("2d").fillText},supports_webgl:function(){var d=g.createElement("canvas");try{if(d.getContext("webgl")||d.getContext("experimental-webgl"))return!0}catch(a){}return!1},supports_xhr2:function(){return c.support.cors},supports_touch:function(){return"ontouchstart"in
-e&&navigator.userAgent.match(/iPhone|iPad|iPod|Android|BlackBerry|BB10/i)},supports_gesture:function(){return"ongesturestart"in e}};return f}(ChemDoodle.iChemLabs,jQuery,document,window);ChemDoodle.SYMBOLS="H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe Cs Ba La Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm Yb Lu Hf Ta W Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn Fr Ra Ac Th Pa U Np Pu Am Cm Bk Cf Es Fm Md No Lr Rf Db Sg Bh Hs Mt Ds Rg Cn Uut Uuq Uup Uuh Uus Uuo".split(" ");
-ChemDoodle.ELEMENT=function(){function a(a,c,f,d,n,b,m,v,j){this.symbol=a;this.name=c;this.atomicNumber=f;this.addH=d;this.jmolColor=this.pymolColor=n;this.covalentRadius=b;this.vdWRadius=m;this.valency=v;this.mass=j}var c=[];c.H=new a("H","Hydrogen",1,!1,"#FFFFFF",0.31,1.2,1,1);c.He=new a("He","Helium",2,!1,"#D9FFFF",0.28,1.4,0,4);c.Li=new a("Li","Lithium",3,!1,"#CC80FF",1.28,1.82,1,7);c.Be=new a("Be","Beryllium",4,!1,"#C2FF00",0.96,0,2,9);c.B=new a("B","Boron",5,!0,"#FFB5B5",0.84,0,3,11);c.C=new a("C",
-"Carbon",6,!0,"#909090",0.76,1.7,4,12);c.N=new a("N","Nitrogen",7,!0,"#3050F8",0.71,1.55,3,14);c.O=new a("O","Oxygen",8,!0,"#FF0D0D",0.66,1.52,2,16);c.F=new a("F","Fluorine",9,!0,"#90E050",0.57,1.47,1,19);c.Ne=new a("Ne","Neon",10,!1,"#B3E3F5",0.58,1.54,0,20);c.Na=new a("Na","Sodium",11,!1,"#AB5CF2",1.66,2.27,1,23);c.Mg=new a("Mg","Magnesium",12,!1,"#8AFF00",1.41,1.73,0,24);c.Al=new a("Al","Aluminum",13,!1,"#BFA6A6",1.21,0,0,27);c.Si=new a("Si","Silicon",14,!0,"#F0C8A0",1.11,2.1,4,28);c.P=new a("P",
-"Phosphorus",15,!0,"#FF8000",1.07,1.8,3,31);c.S=new a("S","Sulfur",16,!0,"#FFFF30",1.05,1.8,2,32);c.Cl=new a("Cl","Chlorine",17,!0,"#1FF01F",1.02,1.75,1,35);c.Ar=new a("Ar","Argon",18,!1,"#80D1E3",1.06,1.88,0,40);c.K=new a("K","Potassium",19,!1,"#8F40D4",2.03,2.75,0,39);c.Ca=new a("Ca","Calcium",20,!1,"#3DFF00",1.76,0,0,40);c.Sc=new a("Sc","Scandium",21,!1,"#E6E6E6",1.7,0,0,45);c.Ti=new a("Ti","Titanium",22,!1,"#BFC2C7",1.6,0,1,48);c.V=new a("V","Vanadium",23,!1,"#A6A6AB",1.53,0,1,51);c.Cr=new a("Cr",
-"Chromium",24,!1,"#8A99C7",1.39,0,2,52);c.Mn=new a("Mn","Manganese",25,!1,"#9C7AC7",1.39,0,3,55);c.Fe=new a("Fe","Iron",26,!1,"#E06633",1.32,0,2,56);c.Co=new a("Co","Cobalt",27,!1,"#F090A0",1.26,0,1,59);c.Ni=new a("Ni","Nickel",28,!1,"#50D050",1.24,1.63,1,58);c.Cu=new a("Cu","Copper",29,!1,"#C88033",1.32,1.4,0,63);c.Zn=new a("Zn","Zinc",30,!1,"#7D80B0",1.22,1.39,0,64);c.Ga=new a("Ga","Gallium",31,!1,"#C28F8F",1.22,1.87,0,69);c.Ge=new a("Ge","Germanium",32,!1,"#668F8F",1.2,0,4,74);c.As=new a("As",
-"Arsenic",33,!0,"#BD80E3",1.19,1.85,3,75);c.Se=new a("Se","Selenium",34,!0,"#FFA100",1.2,1.9,2,80);c.Br=new a("Br","Bromine",35,!0,"#A62929",1.2,1.85,1,79);c.Kr=new a("Kr","Krypton",36,!1,"#5CB8D1",1.16,2.02,0,84);c.Rb=new a("Rb","Rubidium",37,!1,"#702EB0",2.2,0,0,85);c.Sr=new a("Sr","Strontium",38,!1,"#00FF00",1.95,0,0,88);c.Y=new a("Y","Yttrium",39,!1,"#94FFFF",1.9,0,0,89);c.Zr=new a("Zr","Zirconium",40,!1,"#94E0E0",1.75,0,0,90);c.Nb=new a("Nb","Niobium",41,!1,"#73C2C9",1.64,0,1,93);c.Mo=new a("Mo",
-"Molybdenum",42,!1,"#54B5B5",1.54,0,2,98);c.Tc=new a("Tc","Technetium",43,!1,"#3B9E9E",1.47,0,3,0);c.Ru=new a("Ru","Ruthenium",44,!1,"#248F8F",1.46,0,2,102);c.Rh=new a("Rh","Rhodium",45,!1,"#0A7D8C",1.42,0,1,103);c.Pd=new a("Pd","Palladium",46,!1,"#006985",1.39,1.63,0,106);c.Ag=new a("Ag","Silver",47,!1,"#C0C0C0",1.45,1.72,0,107);c.Cd=new a("Cd","Cadmium",48,!1,"#FFD98F",1.44,1.58,0,114);c.In=new a("In","Indium",49,!1,"#A67573",1.42,1.93,0,115);c.Sn=new a("Sn","Tin",50,!1,"#668080",1.39,2.17,4,120);
-c.Sb=new a("Sb","Antimony",51,!1,"#9E63B5",1.39,0,3,121);c.Te=new a("Te","Tellurium",52,!0,"#D47A00",1.38,2.06,2,130);c.I=new a("I","Iodine",53,!0,"#940094",1.39,1.98,1,127);c.Xe=new a("Xe","Xenon",54,!1,"#429EB0",1.4,2.16,0,132);c.Cs=new a("Cs","Cesium",55,!1,"#57178F",2.44,0,0,133);c.Ba=new a("Ba","Barium",56,!1,"#00C900",2.15,0,0,138);c.La=new a("La","Lanthanum",57,!1,"#70D4FF",2.07,0,0,139);c.Ce=new a("Ce","Cerium",58,!1,"#FFFFC7",2.04,0,0,140);c.Pr=new a("Pr","Praseodymium",59,!1,"#D9FFC7",2.03,
-0,0,141);c.Nd=new a("Nd","Neodymium",60,!1,"#C7FFC7",2.01,0,0,142);c.Pm=new a("Pm","Promethium",61,!1,"#A3FFC7",1.99,0,0,0);c.Sm=new a("Sm","Samarium",62,!1,"#8FFFC7",1.98,0,0,152);c.Eu=new a("Eu","Europium",63,!1,"#61FFC7",1.98,0,0,153);c.Gd=new a("Gd","Gadolinium",64,!1,"#45FFC7",1.96,0,0,158);c.Tb=new a("Tb","Terbium",65,!1,"#30FFC7",1.94,0,0,159);c.Dy=new a("Dy","Dysprosium",66,!1,"#1FFFC7",1.92,0,0,164);c.Ho=new a("Ho","Holmium",67,!1,"#00FF9C",1.92,0,0,165);c.Er=new a("Er","Erbium",68,!1,"#00E675",
-1.89,0,0,166);c.Tm=new a("Tm","Thulium",69,!1,"#00D452",1.9,0,0,169);c.Yb=new a("Yb","Ytterbium",70,!1,"#00BF38",1.87,0,0,174);c.Lu=new a("Lu","Lutetium",71,!1,"#00AB24",1.87,0,0,175);c.Hf=new a("Hf","Hafnium",72,!1,"#4DC2FF",1.75,0,0,180);c.Ta=new a("Ta","Tantalum",73,!1,"#4DA6FF",1.7,0,1,181);c.W=new a("W","Tungsten",74,!1,"#2194D6",1.62,0,2,184);c.Re=new a("Re","Rhenium",75,!1,"#267DAB",1.51,0,3,187);c.Os=new a("Os","Osmium",76,!1,"#266696",1.44,0,2,192);c.Ir=new a("Ir","Iridium",77,!1,"#175487",
-1.41,0,3,193);c.Pt=new a("Pt","Platinum",78,!1,"#D0D0E0",1.36,1.75,0,195);c.Au=new a("Au","Gold",79,!1,"#FFD123",1.36,1.66,1,197);c.Hg=new a("Hg","Mercury",80,!1,"#B8B8D0",1.32,1.55,0,202);c.Tl=new a("Tl","Thallium",81,!1,"#A6544D",1.45,1.96,0,205);c.Pb=new a("Pb","Lead",82,!1,"#575961",1.46,2.02,4,208);c.Bi=new a("Bi","Bismuth",83,!1,"#9E4FB5",1.48,0,3,209);c.Po=new a("Po","Polonium",84,!1,"#AB5C00",1.4,0,2,0);c.At=new a("At","Astatine",85,!0,"#754F45",1.5,0,1,0);c.Rn=new a("Rn","Radon",86,!1,"#428296",
-1.5,0,0,0);c.Fr=new a("Fr","Francium",87,!1,"#420066",2.6,0,0,0);c.Ra=new a("Ra","Radium",88,!1,"#007D00",2.21,0,0,0);c.Ac=new a("Ac","Actinium",89,!1,"#70ABFA",2.15,0,0,0);c.Th=new a("Th","Thorium",90,!1,"#00BAFF",2.06,0,0,232);c.Pa=new a("Pa","Protactinium",91,!1,"#00A1FF",2,0,0,231);c.U=new a("U","Uranium",92,!1,"#008FFF",1.96,1.86,0,238);c.Np=new a("Np","Neptunium",93,!1,"#0080FF",1.9,0,0,0);c.Pu=new a("Pu","Plutonium",94,!1,"#006BFF",1.87,0,0,0);c.Am=new a("Am","Americium",95,!1,"#545CF2",1.8,
-0,0,0);c.Cm=new a("Cm","Curium",96,!1,"#785CE3",1.69,0,0,0);c.Bk=new a("Bk","Berkelium",97,!1,"#8A4FE3",0,0,0,0);c.Cf=new a("Cf","Californium",98,!1,"#A136D4",0,0,0,0);c.Es=new a("Es","Einsteinium",99,!1,"#B31FD4",0,0,0,0);c.Fm=new a("Fm","Fermium",100,!1,"#B31FBA",0,0,0,0);c.Md=new a("Md","Mendelevium",101,!1,"#B30DA6",0,0,0,0);c.No=new a("No","Nobelium",102,!1,"#BD0D87",0,0,0,0);c.Lr=new a("Lr","Lawrencium",103,!1,"#C70066",0,0,0,0);c.Rf=new a("Rf","Rutherfordium",104,!1,"#CC0059",0,0,0,0);c.Db=
-new a("Db","Dubnium",105,!1,"#D1004F",0,0,0,0);c.Sg=new a("Sg","Seaborgium",106,!1,"#D90045",0,0,0,0);c.Bh=new a("Bh","Bohrium",107,!1,"#E00038",0,0,0,0);c.Hs=new a("Hs","Hassium",108,!1,"#E6002E",0,0,0,0);c.Mt=new a("Mt","Meitnerium",109,!1,"#EB0026",0,0,0,0);c.Ds=new a("Ds","Darmstadtium",110,!1,"#000000",0,0,0,0);c.Rg=new a("Rg","Roentgenium",111,!1,"#000000",0,0,0,0);c.Cn=new a("Cn","Copernicium",112,!1,"#000000",0,0,0,0);c.Uut=new a("Uut","Ununtrium",113,!1,"#000000",0,0,0,0);c.Uuq=new a("Uuq",
-"Ununquadium",114,!1,"#000000",0,0,0,0);c.Uup=new a("Uup","Ununpentium",115,!1,"#000000",0,0,0,0);c.Uuh=new a("Uuh","Ununhexium",116,!1,"#000000",0,0,0,0);c.Uus=new a("Uus","Ununseptium",117,!1,"#000000",0,0,0,0);c.Uuo=new a("Uuo","Ununoctium",118,!1,"#000000",0,0,0,0);c.H.pymolColor="#E6E6E6";c.C.pymolColor="#33FF33";c.N.pymolColor="#3333FF";c.O.pymolColor="#FF4D4D";c.F.pymolColor="#B3FFFF";c.S.pymolColor="#E6C640";return c}(ChemDoodle.SYMBOLS);
-ChemDoodle.RESIDUE=function(){function a(a,c,f,d,n){this.symbol=a;this.name=c;this.polar=f;this.aminoColor=d;this.shapelyColor=n}var c=[];c.Ala=new a("Ala","Alanine",!1,"#C8C8C8","#8CFF8C");c.Arg=new a("Arg","Arginine",!0,"#145AFF","#00007C");c.Asn=new a("Asn","Asparagine",!0,"#00DCDC","#FF7C70");c.Asp=new a("Asp","Aspartic Acid",!0,"#E60A0A","#A00042");c.Cys=new a("Cys","Cysteine",!0,"#E6E600","#FFFF70");c.Gln=new a("Gln","Glutamine",!0,"#00DCDC","#FF4C4C");c.Glu=new a("Glu","Glutamic Acid",!0,"#E60A0A",
-"#660000");c.Gly=new a("Gly","Glycine",!1,"#EBEBEB","#FFFFFF");c.His=new a("His","Histidine",!0,"#8282D2","#7070FF");c.Ile=new a("Ile","Isoleucine",!1,"#0F820F","#004C00");c.Leu=new a("Leu","Leucine",!1,"#0F820F","#455E45");c.Lys=new a("Lys","Lysine",!0,"#145AFF","#4747B8");c.Met=new a("Met","Methionine",!1,"#E6E600","#B8A042");c.Phe=new a("Phe","Phenylalanine",!1,"#3232AA","#534C52");c.Pro=new a("Pro","Proline",!1,"#DC9682","#525252");c.Ser=new a("Ser","Serine",!0,"#FA9600","#FF7042");c.Thr=new a("Thr",
-"Threonine",!0,"#FA9600","#B84C00");c.Trp=new a("Trp","Tryptophan",!0,"#B45AB4","#4F4600");c.Tyr=new a("Tyr","Tyrosine",!0,"#3232AA","#8C704C");c.Val=new a("Val","Valine",!1,"#0F820F","#FF8CFF");c.Asx=new a("Asx","Asparagine/Aspartic Acid",!0,"#FF69B4","#FF00FF");c.Glx=new a("Glx","Glutamine/Glutamic Acid",!0,"#FF69B4","#FF00FF");c["*"]=new a("*","Other",!1,"#BEA06E","#FF00FF");c.A=new a("A","Adenine",!1,"#BEA06E","#A0A0FF");c.G=new a("G","Guanine",!1,"#BEA06E","#FF7070");c.I=new a("I","",!1,"#BEA06E",
-"#80FFFF");c.C=new a("C","Cytosine",!1,"#BEA06E","#FF8C4B");c.T=new a("T","Thymine",!1,"#BEA06E","#A0FFA0");c.U=new a("U","Uracil",!1,"#BEA06E","#FF8080");return c}();
-(function(a){a.Queue=function(){this.queue=[]};a=a.Queue.prototype;a.queueSpace=0;a.getSize=function(){return this.queue.length-this.queueSpace};a.isEmpty=function(){return 0===this.queue.length};a.enqueue=function(a){this.queue.push(a)};a.dequeue=function(){var a;this.queue.length&&(a=this.queue[this.queueSpace],2*++this.queueSpace>=this.queue.length&&(this.queue=this.queue.slice(this.queueSpace),this.queueSpace=0));return a};a.getOldestElement=function(){var a;this.queue.length&&(a=this.queue[this.queueSpace]);
-return a}})(ChemDoodle.structures);
-(function(a,c){a.Point=function(a,c){this.x=a?a:0;this.y=c?c:0};var g=a.Point.prototype;g.sub=function(a){this.x-=a.x;this.y-=a.y};g.add=function(a){this.x+=a.x;this.y+=a.y};g.distance=function(a){var f=a.x-this.x;a=a.y-this.y;return c.sqrt(f*f+a*a)};g.angleForStupidCanvasArcs=function(a){var f=a.x-this.x;a=a.y-this.y;for(var d=0,d=0===f?0===a?0:0<a?c.PI/2:3*c.PI/2:0===a?0<f?0:c.PI:0>f?c.atan(a/f)+c.PI:0>a?c.atan(a/f)+2*c.PI:c.atan(a/f);0>d;)d+=2*c.PI;return d%=2*c.PI};g.angle=function(a){var f=a.x-
-this.x;a=this.y-a.y;for(var d=0,d=0===f?0===a?0:0<a?c.PI/2:3*c.PI/2:0===a?0<f?0:c.PI:0>f?c.atan(a/f)+c.PI:0>a?c.atan(a/f)+2*c.PI:c.atan(a/f);0>d;)d+=2*c.PI;return d%=2*c.PI}})(ChemDoodle.structures,Math);
-(function(a,c,g,e,f,d){e.Atom=function(d,b,m,c){this.label=d?d.replace(/\s/g,""):"C";a[this.label]||(this.label="C");this.x=b?b:0;this.y=m?m:0;this.z=c?c:0};e=e.Atom.prototype=new e.Point(0,0);e.charge=0;e.numLonePair=0;e.numRadical=0;e.mass=-1;e.coordinationNumber=0;e.bondNumber=0;e.angleOfLeastInterference=0;e.isHidden=!1;e.altLabel=void 0;e.any=!1;e.rgroup=-1;e.isLone=!1;e.isHover=!1;e.isSelected=!1;e.add3D=function(a){this.x+=a.x;this.y+=a.y;this.z+=a.z};e.sub3D=function(a){this.x-=a.x;this.y-=
-a.y;this.z-=a.z};e.distance3D=function(a){var b=a.x-this.x,m=a.y-this.y;a=a.z-this.z;return f.sqrt(b*b+m*m+a*a)};e.draw=function(a,b){if(this.isLassoed){var m=a.createRadialGradient(this.x-1,this.y-1,0,this.x,this.y,7);m.addColorStop(0,"rgba(212, 99, 0, 0)");m.addColorStop(0.7,"rgba(212, 99, 0, 0.8)");a.fillStyle=m;a.beginPath();a.arc(this.x,this.y,5,0,2*f.PI,!1);a.fill()}this.textBounds=[];this.specs&&(b=this.specs);var d=c.getFontString(b.atoms_font_size_2D,b.atoms_font_families_2D,b.atoms_font_bold_2D,
-b.atoms_font_italic_2D);a.font=d;a.fillStyle=this.getElementColor(b.atoms_useJMOLColors,b.atoms_usePYMOLColors,b.atoms_color,2);var j;if(this.isLone&&!b.atoms_displayAllCarbonLabels_2D||b.atoms_circles_2D)a.beginPath(),a.arc(this.x,this.y,b.atoms_circleDiameter_2D/2,0,2*f.PI,!1),a.fill(),0<b.atoms_circleBorderWidth_2D&&(a.lineWidth=b.atoms_circleBorderWidth_2D,a.strokeStyle="black",a.stroke(this.x,this.y,0,2*f.PI,b.atoms_circleDiameter_2D/2));else if(this.isLabelVisible(b))if(a.textAlign="center",
-a.textBaseline="middle",void 0!==this.altLabel){a.fillText(this.altLabel,this.x,this.y);var h=a.measureText(this.altLabel).width;this.textBounds.push({x:this.x-h/2,y:this.y-b.atoms_font_size_2D/2+1,w:h,h:b.atoms_font_size_2D-2})}else if(this.any)a.font=c.getFontString(b.atoms_font_size_2D+5,b.atoms_font_families_2D,!0),a.fillText("*",this.x+1,this.y+3),h=a.measureText("*").width,this.textBounds.push({x:this.x-h/2,y:this.y-b.atoms_font_size_2D/2+1,w:h,h:b.atoms_font_size_2D-2});else if(-1!==this.rgroup)m=
-"R"+this.rgroup,a.fillText(m,this.x,this.y),h=a.measureText(m).width,this.textBounds.push({x:this.x-h/2,y:this.y-b.atoms_font_size_2D/2+1,w:h,h:b.atoms_font_size_2D-2});else{a.fillText(this.label,this.x,this.y);h=a.measureText(this.label).width;this.textBounds.push({x:this.x-h/2,y:this.y-b.atoms_font_size_2D/2+1,w:h,h:b.atoms_font_size_2D-2});var e=0;if(-1!==this.mass){var p=c.getFontString(0.7*b.atoms_font_size_2D,b.atoms_font_families_2D,b.atoms_font_bold_2D,b.atoms_font_italic_2D),m=a.font;a.font=
-c.getFontString(0.7*b.atoms_font_size_2D,b.atoms_font_families_2D,b.atoms_font_bold_2D,b.atoms_font_italic_2D);e=a.measureText(this.mass).width;a.fillText(this.mass,this.x-e-0.5,this.y-b.atoms_font_size_2D/2+1);this.textBounds.push({x:this.x-h/2-e-0.5,y:this.y-1.7*b.atoms_font_size_2D/2+1,w:e,h:b.atoms_font_size_2D/2-1});a.font=m}var m=h/2,u=this.getImplicitHydrogenCount();if(b.atoms_implicitHydrogens_2D&&0<u){j=0;var l=a.measureText("H").width,t=!0;if(1<u){var o=h/2+l/2,r=0,p=c.getFontString(0.8*
-b.atoms_font_size_2D,b.atoms_font_families_2D,b.atoms_font_bold_2D,b.atoms_font_italic_2D);a.font=p;var q=a.measureText(u).width;1===this.bondNumber?this.angleOfLeastInterference>f.PI/2&&this.angleOfLeastInterference<3*f.PI/2&&(o=-h/2-q-l/2-e/2,t=!1,j=f.PI):this.angleOfLeastInterference<=f.PI/4||(this.angleOfLeastInterference<3*f.PI/4?(o=0,r=0.9*-b.atoms_font_size_2D,0!==this.charge&&(r-=0.3*b.atoms_font_size_2D),t=!1,j=f.PI/2):this.angleOfLeastInterference<=5*f.PI/4?(o=-h/2-q-l/2-e/2,t=!1,j=f.PI):
-this.angleOfLeastInterference<7*f.PI/4&&(o=0,r=0.9*b.atoms_font_size_2D,t=!1,j=3*f.PI/2));a.font=d;a.fillText("H",this.x+o,this.y+r);a.font=p;a.fillText(u,this.x+o+l/2+q/2,this.y+r+0.3*b.atoms_font_size_2D);this.textBounds.push({x:this.x+o-l/2,y:this.y+r-b.atoms_font_size_2D/2+1,w:l,h:b.atoms_font_size_2D-2});this.textBounds.push({x:this.x+o+l/2,y:this.y+r+0.3*b.atoms_font_size_2D-b.atoms_font_size_2D/2+1,w:q,h:0.8*b.atoms_font_size_2D-2})}else o=h/2+l/2,r=0,1===this.bondNumber?this.angleOfLeastInterference>
-f.PI/2&&this.angleOfLeastInterference<3*f.PI/2&&(o=-h/2-l/2-e/2,j=f.PI):this.angleOfLeastInterference<=f.PI/4||(this.angleOfLeastInterference<3*f.PI/4?(o=0,r=0.9*-b.atoms_font_size_2D,t=!1,j=f.PI/2):this.angleOfLeastInterference<=5*f.PI/4?(o=-h/2-l/2-e/2,t=!1,j=f.PI):this.angleOfLeastInterference<7*f.PI/4&&(o=0,r=0.9*b.atoms_font_size_2D,t=!1,j=3*f.PI/2)),a.fillText("H",this.x+o,this.y+r),this.textBounds.push({x:this.x+o-l/2,y:this.y+r-b.atoms_font_size_2D/2+1,w:l,h:b.atoms_font_size_2D-2});t&&(m+=
-l)}0!==this.charge&&(d=this.charge.toFixed(0),d="1"===d?"+":"-1"===d?"\u2013":c.stringStartsWith(d,"-")?d.substring(1)+"\u2013":d+"+",h=a.measureText(d).width,m+=h/2,a.textAlign="center",a.textBaseline="middle",a.font=c.getFontString(f.floor(0.8*b.atoms_font_size_2D),b.atoms_font_families_2D,b.atoms_font_bold_2D,b.atoms_font_italic_2D),a.fillText(d,this.x+m-1,this.y-b.atoms_font_size_2D/2+1),this.textBounds.push({x:this.x+m-h/2-1,y:this.y-1.8*b.atoms_font_size_2D/2+5,w:h,h:b.atoms_font_size_2D/2-
-1}))}if(0<this.numLonePair||0<this.numRadical){a.fillStyle="black";p=this.angles.slice(0);m=this.angleOfLeastInterference;d=this.largestAngle;void 0!==j&&(p.push(j),p.sort(),d=g.angleBetweenLargest(p),m=d.angle%(2*f.PI),d=d.largest);h=[];for(e=0;e<this.numLonePair;e++)h.push({t:2});for(e=0;e<this.numRadical;e++)h.push({t:1});if(void 0===j&&f.abs(d-2*f.PI/p.length)<f.PI/60){p=f.ceil(h.length/p.length);e=0;for(u=h.length;e<u;e+=p,m+=d)this.drawElectrons(a,b,h.slice(e,f.min(h.length,e+p)),m,d,j)}else this.drawElectrons(a,
-b,h,m,d,j)}};e.drawElectrons=function(a,b,d,c,j,h){h=j/(d.length+(0===this.bonds.length&&void 0===h?0:1));j=c-j/2+h;for(var e=0;e<d.length;e++){var g=d[e];c=j+e*h;var u=this.x+Math.cos(c)*b.atoms_lonePairDistance_2D,l=this.y-Math.sin(c)*b.atoms_lonePairDistance_2D;2===g.t?(g=c+Math.PI/2,c=Math.cos(g)*b.atoms_lonePairSpread_2D/2,g=-Math.sin(g)*b.atoms_lonePairSpread_2D/2,a.beginPath(),a.arc(u+c,l+g,b.atoms_lonePairDiameter_2D,0,2*f.PI,!1),a.fill(),a.beginPath(),a.arc(u-c,l-g,b.atoms_lonePairDiameter_2D,
-0,2*f.PI,!1),a.fill()):1===g.t&&(a.beginPath(),a.arc(u,l,b.atoms_lonePairDiameter_2D,0,2*f.PI,!1),a.fill())}};e.drawDecorations=function(a){if(this.isHover||this.isSelected)a.strokeStyle=this.isHover?"#885110":"#0060B2",a.lineWidth=1.2,a.beginPath(),a.arc(this.x,this.y,this.isHover?7:15,0,2*f.PI,!1),a.stroke();this.isOverlap&&(a.strokeStyle="#C10000",a.lineWidth=1.2,a.beginPath(),a.arc(this.x,this.y,7,0,2*f.PI,!1),a.stroke())};e.render=function(c,b,m){this.specs&&(b=this.specs);var f=d.translate(c.modelViewMatrix,
-[this.x,this.y,this.z],[]),j=b.atoms_useVDWDiameters_3D?a[this.label].vdWRadius*b.atoms_vdwMultiplier_3D:b.atoms_sphereDiameter_3D/2;0===j&&(j=1);d.scale(f,[j,j,j]);m||(m=b.atoms_color,b.atoms_useJMOLColors?m=a[this.label].jmolColor:b.atoms_usePYMOLColors&&(m=a[this.label].pymolColor),c.material.setDiffuseColor(m));c.setMatrixUniforms(f);c.drawElements(c.TRIANGLES,(this.renderAsStar?c.starBuffer:c.sphereBuffer).vertexIndexBuffer.numItems,c.UNSIGNED_SHORT,0)};e.isLabelVisible=function(a){return a.atoms_displayAllCarbonLabels_2D||
-"C"!==this.label||this.altLabel||(this.any||-1!==this.rgroup)||(-1!==this.mass||0!==this.charge)||a.atoms_showAttributedCarbons_2D&&(0!==this.numRadical||0!==this.numLonePair)||this.isHidden&&a.atoms_showHiddenCarbons_2D||a.atoms_displayTerminalCarbonLabels_2D&&1===this.bondNumber?!0:!1};e.getImplicitHydrogenCount=function(){if("H"===this.label||!a[this.label]||!a[this.label].addH)return 0;var d=a[this.label].valency,b=d-this.coordinationNumber;0<this.numRadical&&(b=f.max(0,b-this.numRadical));0<
-this.charge?(d=4-d,b=this.charge<=d?b+this.charge:4-this.coordinationNumber-this.charge+d):b+=this.charge;return 0>b?0:f.floor(b)};e.getBounds=function(){var a=new g.Bounds;a.expand(this.x,this.y);if(this.textBounds)for(var b=0,d=this.textBounds.length;b<d;b++){var c=this.textBounds[b];a.expand(c.x,c.y,c.x+c.w,c.y+c.h)}return a};e.getBounds3D=function(){var a=new g.Bounds;a.expand3D(this.x,this.y,this.z);return a};e.getElementColor=function(d,b,m,c){if(2==c&&this.any||-1!==this.rgroup)return m;d?
-m=a[this.label].jmolColor:b&&(m=a[this.label].pymolColor);return m}})(ChemDoodle.ELEMENT,ChemDoodle.extensions,ChemDoodle.math,ChemDoodle.structures,Math,mat4);
-(function(a,c,g,e,f,d,n){g.Bond=function(b,a,d){this.a1=b;this.a2=a;this.bondOrder=void 0!==d?d:1};g.Bond.STEREO_NONE="none";g.Bond.STEREO_PROTRUDING="protruding";g.Bond.STEREO_RECESSED="recessed";g.Bond.STEREO_AMBIGUOUS="ambiguous";a=g.Bond.prototype;a.stereo=g.Bond.STEREO_NONE;a.isHover=!1;a.ring=void 0;a.getCenter=function(){return new g.Point((this.a1.x+this.a2.x)/2,(this.a1.y+this.a2.y)/2)};a.getLength=function(){return this.a1.distance(this.a2)};a.getLength3D=function(){return this.a1.distance3D(this.a2)};
-a.contains=function(b){return b===this.a1||b===this.a2};a.getNeighbor=function(b){if(b===this.a1)return this.a2;if(b===this.a2)return this.a1};a.draw=function(b,a){if(!(this.a1.x===this.a2.x&&this.a1.y===this.a2.y)){this.specs&&(a=this.specs);var d=this.a1.x,j=this.a2.x,h=this.a1.y,n=this.a2.y,p=this.a1.distance(this.a2),u=j-d,l=n-h;if(this.a1.isLassoed&&this.a2.isLassoed){var t=b.createLinearGradient(d,h,j,n);t.addColorStop(0,"rgba(212, 99, 0, 0)");t.addColorStop(0.5,"rgba(212, 99, 0, 0.8)");t.addColorStop(1,
-"rgba(212, 99, 0, 0)");var o=2.5,r=this.a1.angle(this.a2)+f.PI/2,q=f.cos(r),r=f.sin(r),w=d-q*o,y=h+r*o,z=d+q*o,x=h-r*o,A=j+q*o,B=n-r*o,q=j-q*o,r=n+r*o;b.fillStyle=t;b.beginPath();b.moveTo(w,y);b.lineTo(z,x);b.lineTo(A,B);b.lineTo(q,r);b.closePath();b.fill()}if(a.atoms_display&&!a.atoms_circles_2D&&this.a1.isLabelVisible(a)&&this.a1.textBounds){o=q=0;for(w=this.a1.textBounds.length;o<w;o++)q=Math.max(q,e.calculateDistanceInterior(this.a1,this.a2,this.a1.textBounds[o]));q+=a.bonds_atomLabelBuffer_2D;
-q/=p;d+=u*q;h+=l*q}if(a.atoms_display&&!a.atoms_circles_2D&&this.a2.isLabelVisible(a)&&this.a2.textBounds){o=q=0;for(w=this.a2.textBounds.length;o<w;o++)q=Math.max(q,e.calculateDistanceInterior(this.a2,this.a1,this.a2.textBounds[o]));q+=a.bonds_atomLabelBuffer_2D;q/=p;j-=u*q;n-=l*q}a.bonds_clearOverlaps_2D&&(q=d+0.15*u,r=h+0.15*l,o=j-0.15*u,p=n-0.15*l,b.strokeStyle=a.backgroundColor,b.lineWidth=a.bonds_width_2D+2*a.bonds_overlapClearWidth_2D,b.lineCap="round",b.beginPath(),b.moveTo(q,r),b.lineTo(o,
-p),b.closePath(),b.stroke());b.strokeStyle=a.bonds_color;b.fillStyle=a.bonds_color;b.lineWidth=a.bonds_width_2D;b.lineCap=a.bonds_ends_2D;if(a.bonds_useJMOLColors||a.bonds_usePYMOLColors)q=b.createLinearGradient(d,h,j,n),r=this.a1.getElementColor(a.bonds_useJMOLColors,a.bonds_usePYMOLColors,a.atoms_color,2),o=this.a2.getElementColor(a.bonds_useJMOLColors,a.bonds_usePYMOLColors,a.atoms_color,2),q.addColorStop(0,r),a.bonds_colorGradient||(q.addColorStop(0.5,r),q.addColorStop(0.51,o)),q.addColorStop(1,
-o),b.strokeStyle=q,b.fillStyle=q;switch(this.bondOrder){case 0:j-=d;n-=h;j=f.sqrt(j*j+n*n);n=f.floor(j/a.bonds_dotSize_2D);j=(j-(n-1)*a.bonds_dotSize_2D)/2;1===n%2?j+=a.bonds_dotSize_2D/4:(j-=a.bonds_dotSize_2D/4,n+=2);n/=2;l=this.a1.angle(this.a2);q=d+j*Math.cos(l);r=h-j*Math.sin(l);b.beginPath();for(o=0;o<n;o++)b.arc(q,r,a.bonds_dotSize_2D/2,0,2*f.PI,!1),q+=2*a.bonds_dotSize_2D*Math.cos(l),r-=2*a.bonds_dotSize_2D*Math.sin(l);b.fill();break;case 0.5:b.beginPath();b.moveTo(d,h);c.contextHashTo(b,
-d,h,j,n,a.bonds_hashSpacing_2D,a.bonds_hashSpacing_2D);b.stroke();break;case 1:if(this.stereo===g.Bond.STEREO_PROTRUDING||this.stereo===g.Bond.STEREO_RECESSED)l=a.bonds_width_2D/2,o=this.a1.distance(this.a2)*a.bonds_wedgeThickness_2D/2,r=this.a1.angle(this.a2)+f.PI/2,q=f.cos(r),r=f.sin(r),w=d-q*l,y=h+r*l,z=d+q*l,x=h-r*l,A=j+q*o,B=n-r*o,q=j-q*o,r=n+r*o,b.beginPath(),b.moveTo(w,y),b.lineTo(z,x),b.lineTo(A,B),b.lineTo(q,r),b.closePath(),this.stereo===g.Bond.STEREO_PROTRUDING?b.fill():(b.save(),b.clip(),
-b.lineWidth=2*o,b.lineCap="butt",b.beginPath(),b.moveTo(d,h),c.contextHashTo(b,d,h,j,n,a.bonds_hashWidth_2D,a.bonds_hashSpacing_2D),b.stroke(),b.restore());else if(this.stereo===g.Bond.STEREO_AMBIGUOUS){b.beginPath();b.moveTo(d,h);j=f.floor(f.sqrt(u*u+l*l)/a.bonds_wavyLength_2D);r=this.a1.angle(this.a2)+f.PI/2;q=f.cos(r);r=f.sin(r);n=u/j;l/=j;o=0;for(w=j;o<w;o++)d+=n,h+=l,j=a.bonds_wavyLength_2D*q+d-0.5*n,p=a.bonds_wavyLength_2D*-r+h-0.5*l,u=a.bonds_wavyLength_2D*-q+d-0.5*n,y=a.bonds_wavyLength_2D*
-r+h-0.5*l,0===o%2?b.quadraticCurveTo(j,p,d,h):b.quadraticCurveTo(u,y,d,h);b.stroke();break}else b.beginPath(),b.moveTo(d,h),b.lineTo(j,n),b.stroke();break;case 1.5:case 2:this.stereo===g.Bond.STEREO_AMBIGUOUS?(o=this.a1.distance(this.a2)*a.bonds_saturationWidth_2D/2,r=this.a1.angle(this.a2)+f.PI/2,q=f.cos(r),r=f.sin(r),w=d-q*o,y=h+r*o,z=d+q*o,x=h-r*o,A=j+q*o,B=n-r*o,q=j-q*o,r=n+r*o,b.beginPath(),b.moveTo(w,y),b.lineTo(A,B),b.moveTo(z,x),b.lineTo(q,r),b.stroke()):!a.bonds_symmetrical_2D&&(this.ring||
-"C"===this.a1.label&&"C"===this.a2.label)?(b.beginPath(),b.moveTo(d,h),b.lineTo(j,n),q=0,p=this.a1.distance(this.a2),l=this.a1.angle(this.a2),r=l+f.PI/2,o=p*a.bonds_saturationWidth_2D,u=a.bonds_saturationAngle_2D,u<f.PI/2&&(q=-(o/f.tan(u))),f.abs(q)<p/2&&(u=d-f.cos(l)*q,d=j+f.cos(l)*q,j=h+f.sin(l)*q,h=n-f.sin(l)*q,q=f.cos(r),r=f.sin(r),w=u-q*o,y=j+r*o,z=u+q*o,x=j-r*o,A=d-q*o,B=h+r*o,q=d+q*o,r=h-r*o,!this.ring||this.ring.center.angle(this.a1)>this.ring.center.angle(this.a2)&&!(this.ring.center.angle(this.a1)-
-this.ring.center.angle(this.a2)>f.PI)||this.ring.center.angle(this.a1)-this.ring.center.angle(this.a2)<-f.PI?(b.moveTo(w,y),2===this.bondOrder?b.lineTo(A,B):c.contextHashTo(b,w,y,A,B,a.bonds_hashSpacing_2D,a.bonds_hashSpacing_2D)):(b.moveTo(z,x),2===this.bondOrder?b.lineTo(q,r):c.contextHashTo(b,z,x,q,r,a.bonds_hashSpacing_2D,a.bonds_hashSpacing_2D)),b.stroke())):(o=this.a1.distance(this.a2)*a.bonds_saturationWidth_2D/2,r=this.a1.angle(this.a2)+f.PI/2,q=f.cos(r),r=f.sin(r),w=d-q*o,y=h+r*o,z=d+q*o,
-x=h-r*o,A=j+q*o,B=n-r*o,q=j-q*o,r=n+r*o,b.beginPath(),b.moveTo(w,y),b.lineTo(q,r),b.moveTo(z,x),2===this.bondOrder?b.lineTo(A,B):c.contextHashTo(b,z,x,A,B,a.bonds_hashSpacing_2D,a.bonds_hashSpacing_2D),b.stroke());break;case 3:o=this.a1.distance(this.a2)*a.bonds_saturationWidth_2D,r=this.a1.angle(this.a2)+f.PI/2,q=f.cos(r),r=f.sin(r),w=d-q*o,y=h+r*o,z=d+q*o,x=h-r*o,A=j+q*o,B=n-r*o,q=j-q*o,r=n+r*o,b.beginPath(),b.moveTo(w,y),b.lineTo(q,r),b.moveTo(z,x),b.lineTo(A,B),b.moveTo(d,h),b.lineTo(j,n),b.stroke()}}};
-a.drawDecorations=function(b){if(this.isHover||this.isSelected){var a=2*f.PI,d=(this.a1.angleForStupidCanvasArcs(this.a2)+f.PI/2)%a;b.strokeStyle=this.isHover?"#885110":"#0060B2";b.lineWidth=1.2;b.beginPath();var c=(d+f.PI)%a,c=c%(2*f.PI);b.arc(this.a1.x,this.a1.y,7,d,c,!1);b.stroke();b.beginPath();d+=f.PI;c=(d+f.PI)%a;b.arc(this.a2.x,this.a2.y,7,d,c,!1);b.stroke()}};a.render=function(b,a,e){this.specs&&(a=this.specs);var j=this.a1.distance3D(this.a2);if(0!==j){var h=a.bonds_cylinderDiameter_3D/2,
-k=a.bonds_color,g,u=d.translate(b.modelViewMatrix,[this.a1.x,this.a1.y,this.a1.z],[]),l,t=[this.a2.x-this.a1.x,this.a2.y-this.a1.y,this.a2.z-this.a1.z],o=[0,1,0],r=0;this.a1.x===this.a2.x&&this.a1.z===this.a2.z?(o=[0,0,1],this.a2.y<this.a1.y&&(r=f.PI)):(r=c.vec3AngleFrom(o,t),o=n.cross(o,t,[]));var q=a.bonds_useJMOLColors,w=a.bonds_usePYMOLColors;if(q||w)k=this.a1.getElementColor(q,w,k),g=this.a2.getElementColor(q,w,a.bonds_color),k!=g&&(l=d.translate(b.modelViewMatrix,[this.a2.x,this.a2.y,this.a2.z],
-[]));var q=[0],y;if(e){a.bonds_showBondOrders_3D&&1<this.bondOrder&&(q=[a.bonds_cylinderDiameter_3D],y=[0,0,1],e=d.inverse(b.rotationMatrix,[]),d.multiplyVec3(e,y),y=n.cross(t,y,[]),n.normalize(y));var h=1,z=a.bonds_pillSpacing_3D,t=a.bonds_pillHeight_3D;0==this.bondOrder&&(a.bonds_renderAsLines_3D?t=z:(t=a.bonds_pillDiameter_3D,t<a.bonds_cylinderDiameter_3D&&(t/=2),h=t/2,j/=h,z/=h/2));e=t+z;var w=f.floor(j/e),x=(z+a.bonds_pillDiameter_3D+(j-e*w))/2,A=w;l&&(A=f.floor(w/2));j=0;for(z=q.length;j<z;j++){var B=
-d.set(u,[]);0!==q[j]&&d.translate(B,n.scale(y,q[j],[]));0!==r&&d.rotate(B,r,o);1!=h&&d.scale(B,[h,h,h]);k&&b.material.setDiffuseColor(k);d.translate(B,[0,x,0]);for(var F=0;F<A;F++)a.bonds_renderAsLines_3D?0==this.bondOrder?(b.setMatrixUniforms(B),b.drawArrays(b.POINTS,0,1)):(d.scale(B,[1,t,1]),b.setMatrixUniforms(B),b.drawArrays(b.LINES,0,b.lineBuffer.vertexPositionBuffer.numItems),d.scale(B,[1,1/t,1])):(b.setMatrixUniforms(B),0==this.bondOrder?b.drawElements(b.TRIANGLES,b.sphereBuffer.vertexIndexBuffer.numItems,
-b.UNSIGNED_SHORT,0):b.drawElements(b.TRIANGLES,b.pillBuffer.vertexIndexBuffer.numItems,b.UNSIGNED_SHORT,0)),d.translate(B,[0,e,0]);if(l){var D,E;a.bonds_renderAsLines_3D?(D=t,D/=2,E=0):(D=2/3,E=(1-D)/2);0!=w%2&&(d.scale(B,[1,D,1]),b.setMatrixUniforms(B),a.bonds_renderAsLines_3D?0==this.bondOrder?b.drawArrays(b.POINTS,0,1):b.drawArrays(b.LINES,0,b.lineBuffer.vertexPositionBuffer.numItems):0==this.bondOrder?b.drawElements(b.TRIANGLES,b.sphereBuffer.vertexIndexBuffer.numItems,b.UNSIGNED_SHORT,0):b.drawElements(b.TRIANGLES,
-b.pillBuffer.vertexIndexBuffer.numItems,b.UNSIGNED_SHORT,0),d.translate(B,[0,e*(1+E),0]),d.scale(B,[1,1/D,1]));d.set(l,B);0!==q[j]&&d.translate(B,n.scale(y,q[j],[]));d.rotate(B,r+f.PI,o);1!=h&&d.scale(B,[h,h,h]);g&&b.material.setDiffuseColor(g);d.translate(B,[0,x,0]);for(F=0;F<A;F++)a.bonds_renderAsLines_3D?0==this.bondOrder?(b.setMatrixUniforms(B),b.drawArrays(b.POINTS,0,1)):(d.scale(B,[1,t,1]),b.setMatrixUniforms(B),b.drawArrays(b.LINES,0,b.lineBuffer.vertexPositionBuffer.numItems),d.scale(B,[1,
-1/t,1])):(b.setMatrixUniforms(B),0==this.bondOrder?b.drawElements(b.TRIANGLES,b.sphereBuffer.vertexIndexBuffer.numItems,b.UNSIGNED_SHORT,0):b.drawElements(b.TRIANGLES,b.pillBuffer.vertexIndexBuffer.numItems,b.UNSIGNED_SHORT,0)),d.translate(B,[0,e,0]);0!=w%2&&(d.scale(B,[1,D,1]),b.setMatrixUniforms(B),a.bonds_renderAsLines_3D?0==this.bondOrder?b.drawArrays(b.POINTS,0,1):b.drawArrays(b.LINES,0,b.lineBuffer.vertexPositionBuffer.numItems):0==this.bondOrder?b.drawElements(b.TRIANGLES,b.sphereBuffer.vertexIndexBuffer.numItems,
-b.UNSIGNED_SHORT,0):b.drawElements(b.TRIANGLES,b.pillBuffer.vertexIndexBuffer.numItems,b.UNSIGNED_SHORT,0),d.translate(B,[0,e*(1+E),0]),d.scale(B,[1,1/D,1]))}}}else{if(a.bonds_showBondOrders_3D){switch(this.bondOrder){case 1.5:q=[-a.bonds_cylinderDiameter_3D];break;case 2:q=[-a.bonds_cylinderDiameter_3D,a.bonds_cylinderDiameter_3D];break;case 3:q=[-1.2*a.bonds_cylinderDiameter_3D,0,1.2*a.bonds_cylinderDiameter_3D]}1<this.bondOrder&&(y=[0,0,1],e=d.inverse(b.rotationMatrix,[]),d.multiplyVec3(e,y),y=
-n.cross(t,y,[]),n.normalize(y))}else switch(this.bondOrder){case 0:h*=0.25;break;case 0.5:case 1.5:h*=0.5}l&&(j/=2);h=[h,j,h];j=0;for(z=q.length;j<z;j++)B=d.set(u,[]),0!==q[j]&&d.translate(B,n.scale(y,q[j],[])),0!==r&&d.rotate(B,r,o),d.scale(B,h),k&&b.material.setDiffuseColor(k),b.setMatrixUniforms(B),a.bonds_renderAsLines_3D?b.drawArrays(b.LINES,0,b.lineBuffer.vertexPositionBuffer.numItems):b.drawArrays(b.TRIANGLE_STRIP,0,b.cylinderBuffer.vertexPositionBuffer.numItems),l&&(d.set(l,B),0!==q[j]&&d.translate(B,
-n.scale(y,q[j],[])),d.rotate(B,r+f.PI,o),d.scale(B,h),g&&b.material.setDiffuseColor(g),b.setMatrixUniforms(B),a.bonds_renderAsLines_3D?b.drawArrays(b.LINES,0,b.lineBuffer.vertexPositionBuffer.numItems):b.drawArrays(b.TRIANGLE_STRIP,0,b.cylinderBuffer.vertexPositionBuffer.numItems))}}};a.renderPicker=function(b,a){this.specs&&(a=this.specs);var e=this.a1.distance3D(this.a2);if(0!==e){var j=a.bonds_cylinderDiameter_3D/2,h=d.translate(b.modelViewMatrix,[this.a1.x,this.a1.y,this.a1.z],[]),k=[this.a2.x-
-this.a1.x,this.a2.y-this.a1.y,this.a2.z-this.a1.z],g=[0,1,0],u=0;this.a1.x===this.a2.x&&this.a1.z===this.a2.z?(g=[0,0,1],this.a2.y<this.a1.y&&(u=f.PI)):(u=c.vec3AngleFrom(g,k),g=n.cross(g,k,[]));var l=[0],t;if(a.bonds_showBondOrders_3D)if(a.bonds_renderAsLines_3D){switch(this.bondOrder){case 1.5:case 2:l=[-a.bonds_cylinderDiameter_3D,a.bonds_cylinderDiameter_3D];break;case 3:l=[-1.2*a.bonds_cylinderDiameter_3D,0,1.2*a.bonds_cylinderDiameter_3D]}if(1<this.bondOrder){t=[0,0,1];var o=d.inverse(b.rotationMatrix,
-[]);d.multiplyVec3(o,t);t=n.cross(k,t,[]);n.normalize(t)}}else switch(this.bondOrder){case 1.5:case 2:j*=3;break;case 3:j*=3.4}else switch(this.bondOrder){case 0:j*=0.25;break;case 0.5:case 1.5:j*=0.5}e=[j,e,j];j=0;for(k=l.length;j<k;j++)o=d.set(h,[]),0!==l[j]&&d.translate(o,n.scale(t,l[j],[])),0!==u&&d.rotate(o,u,g),d.scale(o,e),b.setMatrixUniforms(o),a.bonds_renderAsLines_3D?b.drawArrays(b.LINES,0,b.lineBuffer.vertexPositionBuffer.numItems):b.drawArrays(b.TRIANGLE_STRIP,0,b.cylinderBuffer.vertexPositionBuffer.numItems)}}})(ChemDoodle.ELEMENT,
-ChemDoodle.extensions,ChemDoodle.structures,ChemDoodle.math,Math,mat4,vec3);
-(function(a,c){a.Ring=function(){this.atoms=[];this.bonds=[]};var g=a.Ring.prototype;g.center=void 0;g.setupBonds=function(){for(var a=0,c=this.bonds.length;a<c;a++)this.bonds[a].ring=this;this.center=this.getCenter()};g.getCenter=function(){for(var e=Infinity,f=Infinity,d=-Infinity,n=-Infinity,b=0,m=this.atoms.length;b<m;b++)e=c.min(this.atoms[b].x,e),f=c.min(this.atoms[b].y,f),d=c.max(this.atoms[b].x,d),n=c.max(this.atoms[b].y,n);return new a.Point((d+e)/2,(n+f)/2)}})(ChemDoodle.structures,Math);
-(function(a,c,g,e,f){g.Molecule=function(){this.atoms=[];this.bonds=[];this.rings=[]};var d=g.Molecule.prototype;d.findRings=!0;d.draw=function(a,b){this.specs&&(b=this.specs);if(b.atoms_display&&!b.atoms_circles_2D)for(var d=0,c=this.atoms.length;d<c;d++)this.atoms[d].draw(a,b);if(b.bonds_display){d=0;for(c=this.bonds.length;d<c;d++)this.bonds[d].draw(a,b)}if(b.atoms_display&&b.atoms_circles_2D){d=0;for(c=this.atoms.length;d<c;d++)this.atoms[d].draw(a,b)}};d.render=function(a,b){this.specs&&(b=this.specs);
-var d=0<this.atoms.length&&void 0!==this.atoms[0].hetatm;if(d){if(b.macro_displayBonds){0<this.bonds.length&&(b.bonds_renderAsLines_3D&&!this.residueSpecs||this.residueSpecs&&this.residueSpecs.bonds_renderAsLines_3D?(a.lineWidth(this.residueSpecs?this.residueSpecs.bonds_width_2D:b.bonds_width_2D),a.lineBuffer.bindBuffers(a)):a.cylinderBuffer.bindBuffers(a),a.material.setTempColors(b.bonds_materialAmbientColor_3D,void 0,b.bonds_materialSpecularColor_3D,b.bonds_materialShininess_3D));for(var c=0,f=
-this.bonds.length;c<f;c++){var h=this.bonds[c];if(!h.a1.hetatm&&(-1===b.macro_atomToLigandDistance||void 0!==h.a1.closestDistance&&b.macro_atomToLigandDistance>=h.a1.closestDistance&&b.macro_atomToLigandDistance>=h.a2.closestDistance))h.render(a,this.residueSpecs?this.residueSpecs:b)}}if(b.macro_displayAtoms){0<this.atoms.length&&(a.sphereBuffer.bindBuffers(a),a.material.setTempColors(b.atoms_materialAmbientColor_3D,void 0,b.atoms_materialSpecularColor_3D,b.atoms_materialShininess_3D));c=0;for(f=
-this.atoms.length;c<f;c++)if(h=this.atoms[c],!h.hetatm&&(-1===b.macro_atomToLigandDistance||void 0!==h.closestDistance&&b.macro_atomToLigandDistance>=h.closestDistance))h.render(a,this.residueSpecs?this.residueSpecs:b)}}if(b.bonds_display){var k=[],p=[];0<this.bonds.length&&(b.bonds_renderAsLines_3D?(a.lineWidth(b.bonds_width_2D),a.lineBuffer.bindBuffers(a)):a.cylinderBuffer.bindBuffers(a),a.material.setTempColors(b.bonds_materialAmbientColor_3D,void 0,b.bonds_materialSpecularColor_3D,b.bonds_materialShininess_3D));
-c=0;for(f=this.bonds.length;c<f;c++)if(h=this.bonds[c],!d||h.a1.hetatm)b.bonds_showBondOrders_3D?0==h.bondOrder?p.push(h):0.5==h.bondOrder?k.push(h):(1.5==h.bondOrder&&k.push(h),h.render(a,b)):h.render(a,b);if(0<k.length){b.bonds_renderAsLines_3D||a.pillBuffer.bindBuffers(a);c=0;for(f=k.length;c<f;c++)k[c].render(a,b,!0)}if(0<p.length){b.bonds_renderAsLines_3D||a.sphereBuffer.bindBuffers(a);c=0;for(f=p.length;c<f;c++)p[c].render(a,b,!0)}}if(b.atoms_display){c=0;for(f=this.atoms.length;c<f;c++)h=this.atoms[c],
-h.bondNumber=0,h.renderAsStar=!1;c=0;for(f=this.bonds.length;c<f;c++)h=this.bonds[c],h.a1.bondNumber++,h.a2.bondNumber++;0<this.atoms.length&&(a.sphereBuffer.bindBuffers(a),a.material.setTempColors(b.atoms_materialAmbientColor_3D,void 0,b.atoms_materialSpecularColor_3D,b.atoms_materialShininess_3D));k=[];c=0;for(f=this.atoms.length;c<f;c++)if(h=this.atoms[c],!d||h.hetatm&&(b.macro_showWater||!h.isWater))b.atoms_nonBondedAsStars_3D&&0===h.bondNumber?(h.renderAsStar=!0,k.push(h)):h.render(a,b);if(0<
-k.length){a.starBuffer.bindBuffers(a);c=0;for(f=k.length;c<f;c++)k[c].render(a,b)}}if(this.chains){a.setMatrixUniforms(a.modelViewMatrix);if(b.proteins_displayRibbon){a.material.setTempColors(b.proteins_materialAmbientColor_3D,void 0,b.proteins_materialSpecularColor_3D,b.proteins_materialShininess_3D);d=0;for(k=this.ribbons.length;d<k;d++)if(b.proteins_useShapelyColors||b.proteins_useAminoColors||b.proteins_usePolarityColors){h=b.proteins_ribbonCartoonize?this.cartoons[d]:this.ribbons[d];h.front.bindBuffers(a);
-c=0;for(f=h.front.segments.length;c<f;c++)h.front.segments[c].render(a,b);h.back.bindBuffers(a);c=0;for(f=h.back.segments.length;c<f;c++)h.back.segments[c].render(a,b)}else if(b.proteins_ribbonCartoonize){h=this.cartoons[d];h.front.bindBuffers(a);c=0;for(f=h.front.cartoonSegments.length;c<f;c++)h.front.cartoonSegments[c].render(a,b);h.back.bindBuffers(a);c=0;for(f=h.back.cartoonSegments.length;c<f;c++)h.back.cartoonSegments[c].render(a,b)}else h=this.ribbons[d],h.front.render(a,b),h.back.render(a,
-b)}if(b.proteins_displayBackbone){if(!this.alphaCarbonTrace){this.alphaCarbonTrace={nodes:[],edges:[]};d=0;for(k=this.chains.length;d<k;d++)if(p=this.chains[d],!(2<p.length&&e[p[2].name]&&"#BEA06E"===e[p[2].name].aminoColor)&&0<p.length){c=1;for(f=p.length-2;c<f;c++)h=p[c].cp1,h.chainColor=p.chainColor,this.alphaCarbonTrace.nodes.push(h),h=new g.Bond(p[c].cp1,p[c+1].cp1),h.residueName=p[c].name,h.chainColor=p.chainColor,this.alphaCarbonTrace.edges.push(h),c===p.length-3&&(h=p[c+1].cp1,h.chainColor=
-p.chainColor,this.alphaCarbonTrace.nodes.push(h))}}if(0<this.alphaCarbonTrace.nodes.length){d=new g.VisualSpecifications;d.atoms_display=!0;d.bonds_display=!0;d.atoms_sphereDiameter_3D=b.proteins_backboneThickness;d.bonds_cylinderDiameter_3D=b.proteins_backboneThickness;d.bonds_useJMOLColors=!1;d.atoms_color=b.proteins_backboneColor;d.bonds_color=b.proteins_backboneColor;d.atoms_useVDWDiameters_3D=!1;a.material.setTempColors(b.proteins_materialAmbientColor_3D,void 0,b.proteins_materialSpecularColor_3D,
-b.proteins_materialShininess_3D);a.material.setDiffuseColor(b.proteins_backboneColor);c=0;for(f=this.alphaCarbonTrace.nodes.length;c<f;c++)h=this.alphaCarbonTrace.nodes[c],b.macro_colorByChain&&(d.atoms_color=h.chainColor),a.sphereBuffer.bindBuffers(a),h.render(a,d);c=0;for(f=this.alphaCarbonTrace.edges.length;c<f;c++){var h=this.alphaCarbonTrace.edges[c],u,k=e[h.residueName]?e[h.residueName]:e["*"];b.macro_colorByChain?u=h.chainColor:b.proteins_useShapelyColors?u=k.shapelyColor:b.proteins_useAminoColors?
-u=k.aminoColor:b.proteins_usePolarityColors&&(u=k.polar?"#C10000":"#FFFFFF");u&&(d.bonds_color=u);a.cylinderBuffer.bindBuffers(a);h.render(a,d)}}}if(b.nucleics_display){a.material.setTempColors(b.nucleics_materialAmbientColor_3D,void 0,b.nucleics_materialSpecularColor_3D,b.nucleics_materialShininess_3D);d=0;for(k=this.tubes.length;d<k;d++)a.setMatrixUniforms(a.modelViewMatrix),h=this.tubes[d],h.render(a,b)}}b.crystals_displayUnitCell&&this.unitCell&&(a.setMatrixUniforms(a.modelViewMatrix),this.unitCell.bindBuffers(a),
-a.material.setDiffuseColor(b.crystals_unitCellColor),a.lineWidth(b.crystals_unitCellLineWidth),a.drawElements(a.LINES,this.unitCell.vertexIndexBuffer.numItems,a.UNSIGNED_SHORT,0));this.surface&&b.surfaces_display&&(a.setMatrixUniforms(a.modelViewMatrix),this.surface.bindBuffers(a),a.material.setTempColors(b.surfaces_materialAmbientColor_3D,b.surfaces_color,b.surfaces_materialSpecularColor_3D,b.surfaces_materialShininess_3D),"Dot"===b.surfaces_style?a.drawArrays(a.POINTS,0,this.surface.vertexPositionBuffer.numItems):
-a.drawElements(a.TRIANGLES,this.surface.vertexIndexBuffer.numItems,a.UNSIGNED_SHORT,0))};d.renderPickFrame=function(a,b,d){this.specs&&(b=this.specs);var f=0<this.atoms.length&&void 0!==this.atoms[0].hetatm;if(b.bonds_display){0<this.bonds.length&&(b.bonds_renderAsLines_3D?(a.lineWidth(b.bonds_width_2D),a.lineBuffer.bindBuffers(a)):a.cylinderBuffer.bindBuffers(a));for(var e=0,h=this.bonds.length;e<h;e++){var k=this.bonds[e];if(!f||k.a1.hetatm)a.material.setDiffuseColor(c.idx2color(d.length)),k.renderPicker(a,
-b),d.push(k)}}if(b.atoms_display){e=0;for(h=this.atoms.length;e<h;e++)k=this.atoms[e],k.bondNumber=0,k.renderAsStar=!1;e=0;for(h=this.bonds.length;e<h;e++)k=this.bonds[e],k.a1.bondNumber++,k.a2.bondNumber++;0<this.atoms.length&&a.sphereBuffer.bindBuffers(a);for(var g=[],e=0,h=this.atoms.length;e<h;e++)if(k=this.atoms[e],!f||k.hetatm&&(b.macro_showWater||!k.isWater))b.atoms_nonBondedAsStars_3D&&0===k.bondNumber?(k.renderAsStar=!0,g.push(k)):(a.material.setDiffuseColor(c.idx2color(d.length)),k.render(a,
-b,!0),d.push(k));if(0<g.length){a.starBuffer.bindBuffers(a);e=0;for(h=g.length;e<h;e++)k=g[e],a.material.setDiffuseColor(c.idx2color(d.length)),k.render(a,b,!0),d.push(k)}}};d.getCenter3D=function(){if(1===this.atoms.length)return new g.Atom("C",this.atoms[0].x,this.atoms[0].y,this.atoms[0].z);var a=Infinity,b=Infinity,d=Infinity,c=-Infinity,e=-Infinity,h=-Infinity;if(this.chains)for(var k=0,p=this.chains.length;k<p;k++)for(var u=this.chains[k],l=0,t=u.length;l<t;l++)var o=u[l],a=f.min(o.cp1.x,o.cp2.x,
-a),b=f.min(o.cp1.y,o.cp2.y,b),d=f.min(o.cp1.z,o.cp2.z,d),c=f.max(o.cp1.x,o.cp2.x,c),e=f.max(o.cp1.y,o.cp2.y,e),h=f.max(o.cp1.z,o.cp2.z,h);k=0;for(p=this.atoms.length;k<p;k++)a=f.min(this.atoms[k].x,a),b=f.min(this.atoms[k].y,b),d=f.min(this.atoms[k].z,d),c=f.max(this.atoms[k].x,c),e=f.max(this.atoms[k].y,e),h=f.max(this.atoms[k].z,h);return new g.Atom("C",(c+a)/2,(e+b)/2,(h+d)/2)};d.getCenter=function(){if(1===this.atoms.length)return new g.Point(this.atoms[0].x,this.atoms[0].y);for(var a=Infinity,
-b=Infinity,d=-Infinity,c=-Infinity,e=0,h=this.atoms.length;e<h;e++)a=f.min(this.atoms[e].x,a),b=f.min(this.atoms[e].y,b),d=f.max(this.atoms[e].x,d),c=f.max(this.atoms[e].y,c);return new g.Point((d+a)/2,(c+b)/2)};d.getDimension=function(){if(1===this.atoms.length)return new g.Point(0,0);var a=Infinity,b=Infinity,d=-Infinity,c=-Infinity;if(this.chains){for(var e=0,h=this.chains.length;e<h;e++)for(var k=this.chains[e],p=0,u=k.length;p<u;p++)var l=k[p],a=f.min(l.cp1.x,l.cp2.x,a),b=f.min(l.cp1.y,l.cp2.y,
-b),d=f.max(l.cp1.x,l.cp2.x,d),c=f.max(l.cp1.y,l.cp2.y,c);a-=30;b-=30;d+=30;c+=30}e=0;for(h=this.atoms.length;e<h;e++)a=f.min(this.atoms[e].x,a),b=f.min(this.atoms[e].y,b),d=f.max(this.atoms[e].x,d),c=f.max(this.atoms[e].y,c);return new g.Point(d-a,c-b)};d.check=function(d){if(d&&this.doChecks){if(this.findRings)if(this.bonds.length-this.atoms.length!==this.fjNumCache){this.rings=(new a.informatics.SSSRFinder(this)).rings;for(var b=0,c=this.bonds.length;b<c;b++)this.bonds[b].ring=void 0;b=0;for(c=
-this.rings.length;b<c;b++)this.rings[b].setupBonds()}else{b=0;for(c=this.rings.length;b<c;b++){var f=this.rings[b];f.center=f.getCenter()}}b=0;for(c=this.atoms.length;b<c;b++)if(this.atoms[b].isLone=!1,"C"===this.atoms[b].label){for(var e=f=0,h=this.bonds.length;e<h;e++)(this.bonds[e].a1===this.atoms[b]||this.bonds[e].a2===this.atoms[b])&&f++;0===f&&(this.atoms[b].isLone=!0)}f=!1;b=0;for(c=this.atoms.length;b<c;b++)0!==this.atoms[b].z&&(f=!0);f&&(this.sortAtomsByZ(),this.sortBondsByZ());this.setupMetaData();
-this.atomNumCache=this.atoms.length;this.bondNumCache=this.bonds.length;this.fjNumCache=this.bonds.length-this.atoms.length}this.doChecks=!d};d.getAngles=function(a){for(var b=[],d=0,c=this.bonds.length;d<c;d++)this.bonds[d].contains(a)&&b.push(a.angle(this.bonds[d].getNeighbor(a)));b.sort();return b};d.getCoordinationNumber=function(a){for(var b=0,d=0,c=a.length;d<c;d++)b+=a[d].bondOrder;return b};d.getBonds=function(a){for(var b=[],d=0,c=this.bonds.length;d<c;d++)this.bonds[d].contains(a)&&b.push(this.bonds[d]);
-return b};d.sortAtomsByZ=function(){for(var a=1,b=this.atoms.length;a<b;a++)for(var d=a;0<d&&this.atoms[d].z<this.atoms[d-1].z;){var c=this.atoms[d];this.atoms[d]=this.atoms[d-1];this.atoms[d-1]=c;d--}};d.sortBondsByZ=function(){for(var a=1,b=this.bonds.length;a<b;a++)for(var d=a;0<d&&this.bonds[d].a1.z+this.bonds[d].a2.z<this.bonds[d-1].a1.z+this.bonds[d-1].a2.z;){var c=this.bonds[d];this.bonds[d]=this.bonds[d-1];this.bonds[d-1]=c;d--}};d.setupMetaData=function(){for(var a=this.getCenter(),b=0,d=
-this.atoms.length;b<d;b++){var e=this.atoms[b];e.bonds=this.getBonds(e);e.angles=this.getAngles(e);e.isHidden=2===e.bonds.length&&f.abs(f.abs(e.angles[1]-e.angles[0])-f.PI)<f.PI/30&&e.bonds[0].bondOrder===e.bonds[1].bondOrder;var j=c.angleBetweenLargest(e.angles);e.angleOfLeastInterference=j.angle%(2*f.PI);e.largestAngle=j.largest;e.coordinationNumber=this.getCoordinationNumber(e.bonds);e.bondNumber=e.bonds.length;e.molCenter=a}b=0;for(d=this.bonds.length;b<d;b++)this.bonds[b].molCenter=a};d.scaleToAverageBondLength=
-function(a){var b=this.getAverageBondLength();if(0!==b){a/=b;for(var b=0,d=this.atoms.length;b<d;b++)this.atoms[b].x*=a,this.atoms[b].y*=a}};d.getAverageBondLength=function(){if(0===this.bonds.length)return 0;for(var a=0,b=0,d=this.bonds.length;b<d;b++)a+=this.bonds[b].getLength();return a/=this.bonds.length};d.getBounds=function(){for(var a=new c.Bounds,b=0,d=this.atoms.length;b<d;b++)a.expand(this.atoms[b].getBounds());if(this.chains){b=0;for(d=this.chains.length;b<d;b++)for(var f=this.chains[b],
-e=0,h=f.length;e<h;e++){var k=f[e];a.expand(k.cp1.x,k.cp1.y);a.expand(k.cp2.x,k.cp2.y)}a.minX-=30;a.minY-=30;a.maxX+=30;a.maxY+=30}return a};d.getBounds3D=function(){for(var a=new c.Bounds,b=0,d=this.atoms.length;b<d;b++)a.expand(this.atoms[b].getBounds3D());if(this.chains){b=0;for(d=this.chains.length;b<d;b++)for(var f=this.chains[b],e=0,h=f.length;e<h;e++){var k=f[e];a.expand3D(k.cp1.x,k.cp1.y,k.cp1.z);a.expand3D(k.cp2.x,k.cp2.y,k.cp2.z)}}return a}})(ChemDoodle,ChemDoodle.math,ChemDoodle.structures,
-ChemDoodle.RESIDUE,Math);
-(function(a,c,g,e){var f,d=-1;a.Residue=function(b){this.resSeq=b};var n=a.Residue.prototype;n.setup=function(b,d){this.horizontalResolution=d;var c=[b.x-this.cp1.x,b.y-this.cp1.y,b.z-this.cp1.z],f=e.cross(c,[this.cp2.x-this.cp1.x,this.cp2.y-this.cp1.y,this.cp2.z-this.cp1.z],[]);this.D=e.cross(f,c,[]);e.normalize(f);e.normalize(this.D);this.guidePointsSmall=[];this.guidePointsLarge=[];c=[(b.x+this.cp1.x)/2,(b.y+this.cp1.y)/2,(b.z+this.cp1.z)/2];this.helix&&(e.scale(f,1.5),e.add(c,f));this.guidePointsSmall[0]=
-new a.Atom("",c[0]-this.D[0]/2,c[1]-this.D[1]/2,c[2]-this.D[2]/2);for(f=1;f<d;f++)this.guidePointsSmall[f]=new a.Atom("",this.guidePointsSmall[0].x+this.D[0]*f/d,this.guidePointsSmall[0].y+this.D[1]*f/d,this.guidePointsSmall[0].z+this.D[2]*f/d);e.scale(this.D,4);this.guidePointsLarge[0]=new a.Atom("",c[0]-this.D[0]/2,c[1]-this.D[1]/2,c[2]-this.D[2]/2);for(f=1;f<d;f++)this.guidePointsLarge[f]=new a.Atom("",this.guidePointsLarge[0].x+this.D[0]*f/d,this.guidePointsLarge[0].y+this.D[1]*f/d,this.guidePointsLarge[0].z+
-this.D[2]*f/d)};n.getGuidePointSet=function(b){if(0===b)return this.helix||this.sheet?this.guidePointsLarge:this.guidePointsSmall;if(1===b)return this.guidePointsSmall;if(2===b)return this.guidePointsLarge};n.computeLineSegments=function(b,a,c,e,h){if(h!==d){var n=h*h,p=h*h*h;f=g.multiply([-1/6,0.5,-0.5,1/6,0.5,-1,0.5,0,-0.5,0,0.5,0,1/6,2/3,1/6,0],[6/p,0,0,0,6/p,2/n,0,0,1/p,1/n,1/h,0,0,0,0,1],[]);d=h}this.split=a.helix!==this.helix||a.sheet!==this.sheet;this.lineSegments=this.innerCompute(0,b,a,c,
-!1,h);e&&(this.lineSegmentsCartoon=this.innerCompute(a.helix||a.sheet?2:1,b,a,c,!0,h))};n.innerCompute=function(b,d,n,j,h,k){var p=[],u=this.getGuidePointSet(b);d=d.getGuidePointSet(b);n=n.getGuidePointSet(b);for(var l=j.getGuidePointSet(b),t=0,o=this.guidePointsLarge.length;t<o;t++){for(var r=g.multiply([d[t].x,d[t].y,d[t].z,1,u[t].x,u[t].y,u[t].z,1,n[t].x,n[t].y,n[t].z,1,l[t].x,l[t].y,l[t].z,1],f,[]),q=[],w=0;w<k;w++){for(b=3;0<b;b--)for(j=0;4>j;j++)r[4*b+j]+=r[4*(b-1)+j];q[w]=new a.Atom("",r[12]/
-r[15],r[13]/r[15],r[14]/r[15])}p[t]=q}if(h&&this.arrow)for(b=0;b<k;b++){h=1.5-1.3*b/k;u=c.floor(this.horizontalResolution/2);d=p[u];j=0;for(n=p.length;j<n;j++)j!==u&&(l=d[b],t=p[j][b],o=[t.x-l.x,t.y-l.y,t.z-l.z],e.scale(o,h),t.x=l.x+o[0],t.y=l.y+o[1],t.z=l.z+o[2])}return p}})(ChemDoodle.structures,Math,mat4,vec3);
-(function(a,c,g,e,f){c.Spectrum=function(){this.data=[];this.metadata=[];this.dataDisplay=[];this.memory={offsetTop:0,offsetLeft:0,offsetBottom:0,flipXAxis:!1,scale:1,width:0,height:0}};e=c.Spectrum.prototype;e.title=void 0;e.xUnit=void 0;e.yUnit=void 0;e.continuous=!0;e.integrationSensitivity=0.01;e.draw=function(d,c,b,e){this.specs&&(c=this.specs);var g=5,j=0,h=0;d.fillStyle=c.text_color;d.textAlign="center";d.textBaseline="alphabetic";d.font=a.getFontString(c.text_font_size,c.text_font_families);
-this.xUnit&&(h+=c.text_font_size,d.fillText(this.xUnit,b/2,e-2));this.yUnit&&c.plots_showYAxis&&(j+=c.text_font_size,d.save(),d.translate(c.text_font_size,e/2),d.rotate(-f.PI/2),d.fillText(this.yUnit,0,0),d.restore());this.title&&(g+=c.text_font_size,d.fillText(this.title,b/2,c.text_font_size));h+=5+c.text_font_size;c.plots_showYAxis&&(j+=5+d.measureText("1000").width);c.plots_showGrid&&(d.strokeStyle=c.plots_gridColor,d.lineWidth=c.plots_gridLineWidth,d.strokeRect(j,g,b-j,e-h-g));d.textAlign="center";
-d.textBaseline="top";for(var k=this.maxX-this.minX,p=k/100,u=0.001;u<p||25<k/u;)u*=10;for(var l=0,t=c.plots_flipXAxis?b:0,k=f.round(this.minX/u)*u;k<=this.maxX;k+=u/2){var o=this.getTransformedX(k,c,b,j);if(o>j)if(d.strokeStyle="black",d.lineWidth=1,0===l%2){d.beginPath();d.moveTo(o,e-h);d.lineTo(o,e-h+2);d.stroke();for(p=k.toFixed(5);"0"===p.charAt(p.length-1);)p=p.substring(0,p.length-1);"."===p.charAt(p.length-1)&&(p=p.substring(0,p.length-1));var r=d.measureText(p).width;c.plots_flipXAxis&&(r*=
--1);var q=o-r/2;if(c.plots_flipXAxis?q<t:q>t)d.fillText(p,o,e-h+2),t=o+r/2;c.plots_showGrid&&(d.strokeStyle=c.plots_gridColor,d.lineWidth=c.plots_gridLineWidth,d.beginPath(),d.moveTo(o,e-h),d.lineTo(o,g),d.stroke())}else d.beginPath(),d.moveTo(o,e-h),d.lineTo(o,e-h+2),d.stroke();l++}if(c.plots_showYAxis||c.plots_showGrid){u=1/c.scale;d.textAlign="right";d.textBaseline="middle";for(k=0;10>=k;k++)if(p=u/10*k,l=g+(e-h-g)*(1-p*c.scale),c.plots_showGrid&&(d.strokeStyle=c.plots_gridColor,d.lineWidth=c.plots_gridLineWidth,
-d.beginPath(),d.moveTo(j,l),d.lineTo(b,l),d.stroke()),c.plots_showYAxis){d.strokeStyle="black";d.lineWidth=1;d.beginPath();d.moveTo(j,l);d.lineTo(j-3,l);d.stroke();p*=100;t=f.max(0,3-f.floor(p).toString().length);p=p.toFixed(t);if(0<t)for(;"0"===p.charAt(p.length-1);)p=p.substring(0,p.length-1);"."===p.charAt(p.length-1)&&(p=p.substring(0,p.length-1));d.fillText(p,j-3,l)}}d.strokeStyle="black";d.lineWidth=1;d.beginPath();d.moveTo(b,e-h);d.lineTo(j,e-h);c.plots_showYAxis&&d.lineTo(j,g);d.stroke();
-if(0<this.dataDisplay.length){d.textAlign="left";d.textBaseline="top";k=p=0;for(u=this.dataDisplay.length;k<u;k++)if(this.dataDisplay[k].value)d.fillText([this.dataDisplay[k].display,": ",this.dataDisplay[k].value].join(""),j+10,g+10+p*(c.text_font_size+5)),p++;else if(this.dataDisplay[k].tag){l=0;for(t=this.metadata.length;l<t;l++)if(a.stringStartsWith(this.metadata[l],this.dataDisplay[k].tag)){t=this.metadata[l];this.dataDisplay[k].display&&(t=this.metadata[l].indexOf("\x3d"),t=[this.dataDisplay[k].display,
-": ",-1<t?this.metadata[l].substring(t+2):this.metadata[l]].join(""));d.fillText(t,j+10,g+10+p*(c.text_font_size+5));p++;break}}}this.drawPlot(d,c,b,e,g,j,h);this.memory.offsetTop=g;this.memory.offsetLeft=j;this.memory.offsetBottom=h;this.memory.flipXAxis=c.plots_flipXAxis;this.memory.scale=c.scale;this.memory.width=b;this.memory.height=e};e.drawPlot=function(a,e,b,m,g,j,h){this.specs&&(e=this.specs);a.strokeStyle=e.plots_color;a.lineWidth=e.plots_width;var k=[];a.beginPath();if(this.continuous)for(var p=
-!1,u=0,l=0,t=this.data.length;l<t;l++){var o=this.getTransformedX(this.data[l].x,e,b,j);if(o>=j&&o<b){var r=this.getTransformedY(this.data[l].y,e,m,h,g);e.plots_showIntegration&&f.abs(this.data[l].y)>this.integrationSensitivity&&k.push(new c.Point(this.data[l].x,this.data[l].y));p||(a.moveTo(o,r),p=!0);a.lineTo(o,r);u++;0===u%1E3&&(a.stroke(),a.beginPath(),a.moveTo(o,r))}else if(p)break}else{l=0;for(t=this.data.length;l<t;l++)o=this.getTransformedX(this.data[l].x,e,b,j),o>=j&&o<b&&(a.moveTo(o,m-h),
-a.lineTo(o,this.getTransformedY(this.data[l].y,e,m,h,g)))}a.stroke();if(e.plots_showIntegration&&1<k.length){a.strokeStyle=e.plots_integrationColor;a.lineWidth=e.plots_integrationLineWidth;a.beginPath();l=k[1].x>k[0].x;if(this.flipXAxis&&!l||!this.flipXAxis&&l){for(l=k.length-2;0<=l;l--)k[l].y+=k[l+1].y;p=k[0].y}else{l=1;for(t=k.length;l<t;l++)k[l].y+=k[l-1].y;p=k[k.length-1].y}l=0;for(t=k.length;l<t;l++)o=this.getTransformedX(k[l].x,e,b,j),r=this.getTransformedY(k[l].y/e.scale/p,e,m,h,g),0===l?a.moveTo(o,
-r):a.lineTo(o,r);a.stroke()}};e.getTransformedY=function(a,c,b,f,e){return e+(b-f-e)*(1-a*c.scale)};e.getInverseTransformedY=function(a){return 100*((1-(a-this.memory.offsetTop)/(this.memory.height-this.memory.offsetBottom-this.memory.offsetTop))/this.memory.scale)};e.getTransformedX=function(a,c,b,f){a=f+(a-this.minX)/(this.maxX-this.minX)*(b-f);c.plots_flipXAxis&&(a=b+f-a);return a};e.getInverseTransformedX=function(a){this.memory.flipXAxis&&(a=this.memory.width+this.memory.offsetLeft-a);return(a-
-this.memory.offsetLeft)*(this.maxX-this.minX)/(this.memory.width-this.memory.offsetLeft)+this.minX};e.setup=function(){for(var a=Number.MAX_VALUE,c=Number.MIN_VALUE,b=Number.MIN_VALUE,e=0,g=this.data.length;e<g;e++)a=f.min(a,this.data[e].x),c=f.max(c,this.data[e].x),b=f.max(b,this.data[e].y);this.continuous?(this.minX=a,this.maxX=c):(this.minX=a-1,this.maxX=c+1);e=0;for(g=this.data.length;e<g;e++)this.data[e].y/=b};e.zoom=function(a,c,b,e){a=this.getInverseTransformedX(a);c=this.getInverseTransformedX(c);
-this.minX=f.min(a,c);this.maxX=f.max(a,c);if(e){e=Number.MIN_VALUE;c=0;for(a=this.data.length;c<a;c++)g.isBetween(this.data[c].x,this.minX,this.maxX)&&(e=f.max(e,this.data[c].y));return 1/e}};e.translate=function(a,c){var b=a/(c-this.memory.offsetLeft)*(this.maxX-this.minX)*(this.memory.flipXAxis?1:-1);this.minX+=b;this.maxX+=b};e.alertMetadata=function(){alert(this.metadata.join("\n"))};e.getInternalCoordinates=function(a,c){return new ChemDoodle.structures.Point(this.getInverseTransformedX(a),this.getInverseTransformedY(c))};
-e.getClosestPlotInternalCoordinates=function(a){var c=this.getInverseTransformedX(a-1);a=this.getInverseTransformedX(a+1);if(c>a){var b=c,c=a;a=b}for(var b=-1,f=-Infinity,e=!1,j=0,h=this.data.length;j<h;j++){var k=this.data[j];if(g.isBetween(k.x,c,a))k.y>f&&(e=!0,f=k.y,b=j);else if(e)break}if(-1!==b)return k=this.data[b],new ChemDoodle.structures.Point(k.x,100*k.y)};e.getClosestPeakInternalCoordinates=function(a){var c=this.getInverseTransformedX(a);a=0;for(var b=Infinity,e=0,g=this.data.length;e<
-g;e++){var j=f.abs(this.data[e].x-c);if(j<=b)b=j,a=e;else break}c=highestRight=a;b=maxRight=this.data[a].y;e=a+1;for(g=this.data.length;e<g;e++)if(this.data[e].y+0.05>maxRight)maxRight=this.data[e].y,highestRight=e;else break;for(e=a-1;0<=e;e--)if(this.data[e].y+0.05>b)b=this.data[e].y,c=e;else break;a=this.data[c-a>highestRight-a?highestRight:c];return new ChemDoodle.structures.Point(a.x,100*a.y)}})(ChemDoodle.extensions,ChemDoodle.structures,ChemDoodle.math,jQuery,Math);
-(function(a,c,g){c._Shape=function(){};c=c._Shape.prototype;c.drawDecorations=function(a,c){if(this.isHover)for(var d=this.getPoints(),n=0,b=d.length;n<b;n++){var m=d[n];this.drawAnchor(a,c,m,m===this.hoverPoint)}};c.getBounds=function(){for(var c=new a.Bounds,f=this.getPoints(),d=0,n=f.length;d<n;d++){var b=f[d];c.expand(b.x,b.y)}return c};c.drawAnchor=function(a,c,d,n){a.save();a.translate(d.x,d.y);a.rotate(g.PI/4);a.scale(1/c.scale,1/c.scale);a.beginPath();a.moveTo(-4,-4);a.lineTo(4,-4);a.lineTo(4,
-4);a.lineTo(-4,4);a.closePath();a.fillStyle=n?"#885110":"white";a.fill();a.beginPath();a.moveTo(-4,-2);a.lineTo(-4,-4);a.lineTo(-2,-4);a.moveTo(2,-4);a.lineTo(4,-4);a.lineTo(4,-2);a.moveTo(4,2);a.lineTo(4,4);a.lineTo(2,4);a.moveTo(-2,4);a.lineTo(-4,4);a.lineTo(-4,2);a.moveTo(-4,-2);a.strokeStyle="rgba(0,0,0,.2)";a.lineWidth=5;a.stroke();a.strokeStyle="blue";a.lineWidth=1;a.stroke();a.restore()}})(ChemDoodle.math,ChemDoodle.structures.d2,Math);
-(function(a,c,g,e,f){e.Bracket=function(a,c){this.p1=a?a:new g.Point;this.p2=c?c:new g.Point};e=e.Bracket.prototype=new e._Shape;e.charge=0;e.mult=0;e.repeat=0;e.draw=function(d,c){var b=f.min(this.p1.x,this.p2.x),e=f.max(this.p1.x,this.p2.x),g=f.min(this.p1.y,this.p2.y),j=f.max(this.p1.y,this.p2.y),h=j-g,k=h/10;d.beginPath();d.moveTo(b+k,g);d.lineTo(b,g);d.lineTo(b,j);d.lineTo(b+k,j);d.moveTo(e-k,j);d.lineTo(e,j);d.lineTo(e,g);d.lineTo(e-k,g);this.isLassoed&&(k=d.createLinearGradient(this.p1.x,this.p1.y,
-this.p2.x,this.p2.y),k.addColorStop(0,"rgba(212, 99, 0, 0)"),k.addColorStop(0.5,"rgba(212, 99, 0, 0.8)"),k.addColorStop(1,"rgba(212, 99, 0, 0)"),d.lineWidth=c.shapes_lineWidth_2D+5,d.strokeStyle=k,d.lineJoin="miter",d.lineCap="square",d.stroke());d.strokeStyle=c.shapes_color;d.lineWidth=c.shapes_lineWidth_2D;d.lineJoin="miter";d.lineCap="butt";d.stroke();0!==this.charge&&(d.fillStyle=c.text_color,d.textAlign="left",d.textBaseline="alphabetic",d.font=a.getFontString(c.text_font_size,c.text_font_families),
-k=this.charge.toFixed(0),k="1"===k?"+":"-1"===k?"\u2013":a.stringStartsWith(k,"-")?k.substring(1)+"\u2013":k+"+",d.fillText(k,e+5,g+5));0!==this.mult&&(d.fillStyle=c.text_color,d.textAlign="right",d.textBaseline="middle",d.font=a.getFontString(c.text_font_size,c.text_font_families),d.fillText(this.mult.toFixed(0),b-5,g+h/2));0!==this.repeat&&(d.fillStyle=c.text_color,d.textAlign="left",d.textBaseline="top",d.font=a.getFontString(c.text_font_size,c.text_font_families),k=this.repeat.toFixed(0),d.fillText(k,
-e+5,j-5))};e.getPoints=function(){return[this.p1,this.p2]};e.isOver=function(a){return c.isBetween(a.x,this.p1.x,this.p2.x)&&c.isBetween(a.y,this.p1.y,this.p2.y)}})(ChemDoodle.extensions,ChemDoodle.math,ChemDoodle.structures,ChemDoodle.structures.d2,Math);
-(function(a,c,g,e){g.Line=function(a,f){this.p1=a?a:new c.Point;this.p2=f?f:new c.Point};g.Line.ARROW_SYNTHETIC="synthetic";g.Line.ARROW_RETROSYNTHETIC="retrosynthetic";g.Line.ARROW_RESONANCE="resonance";g.Line.ARROW_EQUILIBRIUM="equilibrium";var f=g.Line.prototype=new g._Shape;f.arrowType=void 0;f.topText=void 0;f.bottomText=void 0;f.draw=function(a,c){if(this.isLassoed){var b=a.createLinearGradient(this.p1.x,this.p1.y,this.p2.x,this.p2.y);b.addColorStop(0,"rgba(212, 99, 0, 0)");b.addColorStop(0.5,
-"rgba(212, 99, 0, 0.8)");b.addColorStop(1,"rgba(212, 99, 0, 0)");var f=2.5,v=this.p1.angle(this.p2)+e.PI/2,j=e.cos(v),v=e.sin(v),h=this.p1.x-j*f,k=this.p1.y+v*f,p=this.p1.x+j*f,u=this.p1.y-v*f,l=this.p2.x+j*f,t=this.p2.y-v*f,o=this.p2.x-j*f,r=this.p2.y+v*f;a.fillStyle=b;a.beginPath();a.moveTo(h,k);a.lineTo(p,u);a.lineTo(l,t);a.lineTo(o,r);a.closePath();a.fill()}a.strokeStyle=c.shapes_color;a.fillStyle=c.shapes_color;a.lineWidth=c.shapes_lineWidth_2D;a.lineJoin="miter";a.lineCap="butt";if(this.p1.x!==
-this.p2.x||this.p1.y!==this.p2.y){if(this.arrowType===g.Line.ARROW_RETROSYNTHETIC){var b=2*e.sqrt(2),f=c.shapes_arrowLength_2D/b,j=this.p1.angle(this.p2),v=j+e.PI/2,b=c.shapes_arrowLength_2D/b,q=e.cos(j),w=e.sin(j),j=e.cos(v),v=e.sin(v),h=this.p1.x-j*f,k=this.p1.y+v*f,p=this.p1.x+j*f,u=this.p1.y-v*f,l=this.p2.x+j*f-q*b,t=this.p2.y-v*f+w*b,o=this.p2.x-j*f-q*b,r=this.p2.y+v*f+w*b,y=this.p2.x+2*j*f-2*q*b,z=this.p2.y-2*v*f+2*w*b,x=this.p2.x-2*j*f-2*q*b,f=this.p2.y+2*v*f+2*w*b;a.beginPath();a.moveTo(p,
-u);a.lineTo(l,t);a.moveTo(y,z);a.lineTo(this.p2.x,this.p2.y);a.lineTo(x,f);a.moveTo(o,r);a.lineTo(h,k)}else this.arrowType===g.Line.ARROW_EQUILIBRIUM?(b=2*e.sqrt(2),f=c.shapes_arrowLength_2D/b/2,j=this.p1.angle(this.p2),v=j+e.PI/2,b=2*c.shapes_arrowLength_2D/e.sqrt(3),q=e.cos(j),w=e.sin(j),j=e.cos(v),v=e.sin(v),h=this.p1.x-j*f,k=this.p1.y+v*f,p=this.p1.x+j*f,u=this.p1.y-v*f,l=this.p2.x+j*f,t=this.p2.y-v*f,o=this.p2.x-j*f,r=this.p2.y+v*f,a.beginPath(),a.moveTo(p,u),a.lineTo(l,t),a.moveTo(o,r),a.lineTo(h,
-k),a.stroke(),p=l-0.8*q*b,u=t+0.8*w*b,y=l+j*c.shapes_arrowLength_2D/3-q*b,z=t-v*c.shapes_arrowLength_2D/3+w*b,a.beginPath(),a.moveTo(l,t),a.lineTo(y,z),a.lineTo(p,u),a.closePath(),a.fill(),a.stroke(),p=h+0.8*q*b,u=k-0.8*w*b,y=h-j*c.shapes_arrowLength_2D/3+q*b,z=k+v*c.shapes_arrowLength_2D/3-w*b,a.beginPath(),a.moveTo(h,k),a.lineTo(y,z),a.lineTo(p,u),a.closePath(),a.fill()):this.arrowType===g.Line.ARROW_SYNTHETIC?(j=this.p1.angle(this.p2),v=j+e.PI/2,b=2*c.shapes_arrowLength_2D/e.sqrt(3),q=e.cos(j),
-w=e.sin(j),j=e.cos(v),v=e.sin(v),a.beginPath(),a.moveTo(this.p1.x,this.p1.y),a.lineTo(this.p2.x-q*b/2,this.p2.y+w*b/2),a.stroke(),p=this.p2.x-0.8*q*b,u=this.p2.y+0.8*w*b,y=this.p2.x+j*c.shapes_arrowLength_2D/3-q*b,z=this.p2.y-v*c.shapes_arrowLength_2D/3+w*b,x=this.p2.x-j*c.shapes_arrowLength_2D/3-q*b,f=this.p2.y+v*c.shapes_arrowLength_2D/3+w*b,a.beginPath(),a.moveTo(this.p2.x,this.p2.y),a.lineTo(x,f),a.lineTo(p,u),a.lineTo(y,z),a.closePath(),a.fill()):this.arrowType===g.Line.ARROW_RESONANCE?(j=this.p1.angle(this.p2),
-v=j+e.PI/2,b=2*c.shapes_arrowLength_2D/e.sqrt(3),q=e.cos(j),w=e.sin(j),j=e.cos(v),v=e.sin(v),a.beginPath(),a.moveTo(this.p1.x+q*b/2,this.p1.y-w*b/2),a.lineTo(this.p2.x-q*b/2,this.p2.y+w*b/2),a.stroke(),p=this.p2.x-0.8*q*b,u=this.p2.y+0.8*w*b,y=this.p2.x+j*c.shapes_arrowLength_2D/3-q*b,z=this.p2.y-v*c.shapes_arrowLength_2D/3+w*b,x=this.p2.x-j*c.shapes_arrowLength_2D/3-q*b,f=this.p2.y+v*c.shapes_arrowLength_2D/3+w*b,a.beginPath(),a.moveTo(this.p2.x,this.p2.y),a.lineTo(x,f),a.lineTo(p,u),a.lineTo(y,
-z),a.closePath(),a.fill(),a.stroke(),p=this.p1.x+0.8*q*b,u=this.p1.y-0.8*w*b,y=this.p1.x-j*c.shapes_arrowLength_2D/3+q*b,z=this.p1.y+v*c.shapes_arrowLength_2D/3-w*b,x=this.p1.x+j*c.shapes_arrowLength_2D/3+q*b,f=this.p1.y-v*c.shapes_arrowLength_2D/3-w*b,a.beginPath(),a.moveTo(this.p1.x,this.p1.y),a.lineTo(x,f),a.lineTo(p,u),a.lineTo(y,z),a.closePath(),a.fill()):(a.beginPath(),a.moveTo(this.p1.x,this.p1.y),a.lineTo(this.p2.x,this.p2.y));a.stroke();this.topText&&(a.textAlign="center",a.textBaseline=
-"bottom",a.fillText(this.topText,(this.p1.x+this.p2.x)/2,this.p1.y-5));this.bottomText&&(a.textAlign="center",a.textBaseline="top",a.fillText(this.bottomText,(this.p1.x+this.p2.x)/2,this.p1.y+5))}};f.getPoints=function(){return[this.p1,this.p2]};f.isOver=function(c,f){var b=a.distanceFromPointToLineInclusive(c,this.p1,this.p2);return-1!==b&&b<f}})(ChemDoodle.math,ChemDoodle.structures,ChemDoodle.structures.d2,Math);
-(function(a,c,g,e,f){var d=function(a){var b=[];if(a instanceof g.Atom)if(0===a.bondNumber)b.push(f.PI);else{if(a.angles){if(1===a.angles.length)b.push(a.angles[0]+f.PI);else{for(var c=1,d=a.angles.length;c<d;c++)b.push(a.angles[c-1]+(a.angles[c]-a.angles[c-1])/2);c=a.angles[a.angles.length-1];b.push(c+(a.angles[0]+2*f.PI-c)/2)}a.largestAngle>f.PI&&(b=[a.angleOfLeastInterference]);if(a.bonds){c=0;for(d=a.bonds.length;c<d;c++){var e=a.bonds[c];if(2===e.bondOrder&&(e=e.getNeighbor(a),"O"===e.label)){b=
-[e.angle(a)];break}}}}}else a=a.a1.angle(a.a2),b.push(a+f.PI/2),b.push(a+3*f.PI/2);c=0;for(d=b.length;c<d;c++){for(;b[c]>2*f.PI;)b[c]-=2*f.PI;for(;0>b[c];)b[c]+=2*f.PI}return b},n=function(a,b){var c=3;if(a instanceof g.Atom){if(a.isLabelVisible(b)&&(c=8),0!==a.charge||0!==a.numRadical||0!==a.numLonePair)c=13}else a instanceof g.Point?c=0:1<a.bondOrder&&(c=5);return c},b=function(a,b,c,d,e,p,u,l,t,o){var r=p.angle(e),q=u.angle(l),w=r+f.PI/2,y=f.cos(r),r=f.sin(r),w=n(c,b);e.x-=y*w;e.y+=r*w;w=q+f.PI/
-2;c=2*b.shapes_arrowLength_2D/f.sqrt(3);var y=f.cos(q),r=f.sin(q),z=f.cos(w),x=f.sin(w);l.x-=5*y;l.y+=5*r;q=new g.Point(l.x,l.y);w=n(d,b)/3;q.x-=y*w;q.y+=r*w;l.x-=y*(0.8*c+w);l.y+=r*(0.8*c+w);d=q.x-0.8*y*c;var w=q.y+0.8*r*c,A=new g.Point(q.x+z*b.shapes_arrowLength_2D/3-y*c,q.y-x*b.shapes_arrowLength_2D/3+r*c);b=new g.Point(q.x-z*b.shapes_arrowLength_2D/3-y*c,q.y+x*b.shapes_arrowLength_2D/3+r*c);r=y=!0;1===t&&(A.distance(p)>b.distance(p)?r=!1:y=!1);a.beginPath();a.moveTo(q.x,q.y);r&&a.lineTo(b.x,b.y);
-a.lineTo(d,w);y&&a.lineTo(A.x,A.y);a.closePath();a.fill();a.stroke();a.beginPath();a.moveTo(e.x,e.y);a.bezierCurveTo(p.x,p.y,u.x,u.y,l.x,l.y);a.stroke();o.push([e,p,u,l])};e.Pusher=function(a,b,c){this.o1=a;this.o2=b;this.numElectron=c?c:1};e=e.Pusher.prototype=new e._Shape;e.drawDecorations=function(a,b){if(this.isHover)for(var c=this.o1 instanceof g.Atom?new g.Point(this.o1.x,this.o1.y):this.o1.getCenter(),d=this.o2 instanceof g.Atom?new g.Point(this.o2.x,this.o2.y):this.o2.getCenter(),c=[c,d],
-d=0,f=c.length;d<f;d++){var e=c[d];this.drawAnchor(a,b,e,e===this.hoverPoint)}};e.draw=function(c,e){if(this.o1&&this.o2){c.strokeStyle=e.shapes_color;c.fillStyle=e.shapes_color;c.lineWidth=e.shapes_lineWidth_2D;c.lineJoin="miter";c.lineCap="butt";for(var j=this.o1 instanceof g.Atom?new g.Point(this.o1.x,this.o1.y):this.o1.getCenter(),h=this.o2 instanceof g.Atom?new g.Point(this.o2.x,this.o2.y):this.o2.getCenter(),k=d(this.o1),n=d(this.o2),u,l,t=Infinity,o=0,r=k.length;o<r;o++)for(var q=0,w=n.length;q<
-w;q++){var y=new g.Point(j.x+35*f.cos(k[o]),j.y-35*f.sin(k[o])),z=new g.Point(h.x+35*f.cos(n[q]),h.y-35*f.sin(n[q])),x=y.distance(z);x<t&&(t=x,u=y,l=z)}this.caches=[];-1===this.numElectron?(o=j.distance(h)/2,n=j.angle(h),k=n+f.PI/2,r=f.cos(n),q=f.sin(n),n=new g.Point(j.x+(o-1)*r,j.y-(o-1)*q),t=new g.Point(n.x+35*f.cos(k+f.PI/6),n.y-35*f.sin(k+f.PI/6)),o=new g.Point(j.x+(o+1)*r,j.y-(o+1)*q),k=new g.Point(o.x+35*f.cos(k-f.PI/6),o.y-35*f.sin(k-f.PI/6)),b(c,e,this.o1,n,j,u,t,n,1,this.caches),b(c,e,this.o2,
-o,h,l,k,o,1,this.caches)):(a.intersectLines(j.x,j.y,u.x,u.y,h.x,h.y,l.x,l.y)&&(k=u,u=l,l=k),k=u.angle(j),n=l.angle(h),t=f.max(k,n)-f.min(k,n),0.001>f.abs(t-f.PI)&&this.o1.molCenter===this.o2.molCenter&&(k+=f.PI/2,n-=f.PI/2,u.x=j.x+35*f.cos(k+f.PI),u.y=j.y-35*f.sin(k+f.PI),l.x=h.x+35*f.cos(n+f.PI),l.y=h.y-35*f.sin(n+f.PI)),b(c,e,this.o1,this.o2,j,u,l,h,this.numElectron,this.caches))}};e.getPoints=function(){return[]};e.isOver=function(a,b){for(var d=0,f=this.caches.length;d<f;d++)if(c.distanceFromCurve(a,
-this.caches[d]).distance<b)return!0;return!1}})(ChemDoodle.math,ChemDoodle.math.jsBezier,ChemDoodle.structures,ChemDoodle.structures.d2,Math);
-(function(a){a._Mesh=function(){};a=a._Mesh.prototype;a.storeData=function(a,g,e){this.positionData=a;this.normalData=g;this.indexData=e};a.setupBuffers=function(a){this.vertexPositionBuffer=a.createBuffer();a.bindBuffer(a.ARRAY_BUFFER,this.vertexPositionBuffer);a.bufferData(a.ARRAY_BUFFER,new Float32Array(this.positionData),a.STATIC_DRAW);this.vertexPositionBuffer.itemSize=3;this.vertexPositionBuffer.numItems=this.positionData.length/3;this.vertexNormalBuffer=a.createBuffer();a.bindBuffer(a.ARRAY_BUFFER,
-this.vertexNormalBuffer);a.bufferData(a.ARRAY_BUFFER,new Float32Array(this.normalData),a.STATIC_DRAW);this.vertexNormalBuffer.itemSize=3;this.vertexNormalBuffer.numItems=this.normalData.length/3;this.indexData&&(this.vertexIndexBuffer=a.createBuffer(),a.bindBuffer(a.ELEMENT_ARRAY_BUFFER,this.vertexIndexBuffer),a.bufferData(a.ELEMENT_ARRAY_BUFFER,new Uint16Array(this.indexData),a.STATIC_DRAW),this.vertexIndexBuffer.itemSize=1,this.vertexIndexBuffer.numItems=this.indexData.length);if(this.partitions)for(var g=
-0,e=this.partitions.length;g<e;g++){var f=this.partitions[g],d=this.generateBuffers(a,f.positionData,f.normalData,f.indexData);f.vertexPositionBuffer=d[0];f.vertexNormalBuffer=d[1];f.vertexIndexBuffer=d[2]}};a.generateBuffers=function(a,g,e,f){var d=a.createBuffer();a.bindBuffer(a.ARRAY_BUFFER,d);a.bufferData(a.ARRAY_BUFFER,new Float32Array(g),a.STATIC_DRAW);d.itemSize=3;d.numItems=g.length/3;g=a.createBuffer();a.bindBuffer(a.ARRAY_BUFFER,g);a.bufferData(a.ARRAY_BUFFER,new Float32Array(e),a.STATIC_DRAW);
-g.itemSize=3;g.numItems=e.length/3;var n;f&&(n=a.createBuffer(),a.bindBuffer(a.ELEMENT_ARRAY_BUFFER,n),a.bufferData(a.ELEMENT_ARRAY_BUFFER,new Uint16Array(f),a.STATIC_DRAW),n.itemSize=1,n.numItems=f.length);return[d,g,n]};a.bindBuffers=function(a){this.vertexPositionBuffer||this.setupBuffers(a);a.bindBuffer(a.ARRAY_BUFFER,this.vertexPositionBuffer);a.vertexAttribPointer(a.shader.vertexPositionAttribute,this.vertexPositionBuffer.itemSize,a.FLOAT,!1,0,0);a.bindBuffer(a.ARRAY_BUFFER,this.vertexNormalBuffer);
-a.vertexAttribPointer(a.shader.vertexNormalAttribute,this.vertexNormalBuffer.itemSize,a.FLOAT,!1,0,0);this.vertexIndexBuffer&&a.bindBuffer(a.ELEMENT_ARRAY_BUFFER,this.vertexIndexBuffer)}})(ChemDoodle.structures.d3,Math);
-(function(a,c){a.Arrow=function(a,e){for(var f=[],d=[],n=0;n<=e;n++){var b=2*n*c.PI/e,m=c.sin(b),b=c.cos(b);d.push(0,0,-1,0,0,-1,b,m,0,b,m,0,0,0,-1,0,0,-1,b,m,1,b,m,1);f.push(0,0,0,a*b,a*m,0,a*b,a*m,0,a*b,a*m,2,a*b,a*m,2,2*a*b,2*a*m,2,2*a*b,2*a*m,2,0,0,3)}n=[];for(m=0;m<e;m++)for(var b=8*m,v=0;7>v;v++){var j=v+b,h=j+7+2;n.push(j,h,j+1,h,j,h-1)}this.storeData(f,d,n)};(a.Arrow.prototype=new a._Mesh).getLength=function(){return 3}})(ChemDoodle.structures.d3,Math);
-(function(a,c,g){a.Compass=function(f,d){this.textImage=new a.TextImage;this.textImage.init(f);this.textImage.updateFont(f,d.text_font_size,d.text_font_families,d.text_font_bold,d.text_font_italic,d.text_font_stroke_3D);this.textMesh=new a.TextMesh;this.textMesh.init(f);var e=d.compass_size_3D/f.canvas.clientHeight,e=f.arrowBuffer.getLength()/e,b=c.tan(d.projectionPerspectiveVerticalFieldOfView_3D/360*c.PI),m=e/b,v=c.max(m-e,0.1),j=f.canvas.clientWidth/f.canvas.clientHeight,h=-(f.canvas.clientWidth-
-d.compass_size_3D)/2+this.textImage.charHeight,k=-(f.canvas.clientHeight-d.compass_size_3D)/2+this.textImage.charHeight,p,u;d.projectionPerspective_3D?(u=v,p=g.frustum):(u=m,p=g.ortho);var l=2*(u/f.canvas.clientHeight)*b,h=h*l,k=k*l,b=b*u;u=-b;this.projectionMatrix=p(j*u-h,j*b-h,u-k,b-k,v,m+e);this.translationMatrix=g.translate(g.identity([]),[0,0,-m]);e={position:[],texCoord:[],translation:[],zDepth:[]};this.textImage.pushVertexData("X",[3.5,0,0],0,e);this.textImage.pushVertexData("Y",[0,3.5,0],
-0,e);this.textImage.pushVertexData("Z",[0,0,3.5],0,e);this.textMesh.storeData(f,e.position,e.texCoord,e.translation,e.zDepth)};var e=a.Compass.prototype;e.renderArrow=function(a,c,e){a.material.setDiffuseColor(c);a.setMatrixUniforms(e);a.drawElements(a.TRIANGLES,a.arrowBuffer.vertexIndexBuffer.numItems,a.UNSIGNED_SHORT,0)};e.render=function(a,d){a.arrowBuffer.bindBuffers(a);a.material.setTempColors(d.bonds_materialAmbientColor_3D,void 0,d.bonds_materialSpecularColor_3D,d.bonds_materialShininess_3D);
-var e=g.multiply(this.translationMatrix,a.rotationMatrix,[]),b=c.PI/2;a.fogging.setMode(0);this.renderArrow(a,d.compass_axisXColor_3D,g.rotateY(e,b,[]));this.renderArrow(a,d.compass_axisYColor_3D,g.rotateX(e,-b,[]));this.renderArrow(a,d.compass_axisZColor_3D,e)};e.renderText=function(a){var c=g.multiply(this.translationMatrix,a.rotationMatrix,[]);a.shaderText.setUniforms(a,c,this.projectionMatrix);this.textImage.useTexture(a);this.textMesh.render(a)}})(ChemDoodle.structures.d3,Math,mat4);
-(function(a,c){a.Cylinder=function(a,e,f){for(var d=[],n=[],b=0;b<f;b++){var m=2*b*c.PI/f,v=c.cos(m),m=c.sin(m);n.push(v,0,m);d.push(a*v,0,a*m);n.push(v,0,m);d.push(a*v,e,a*m)}n.push(1,0,0);d.push(a,0,0);n.push(1,0,0);d.push(a,e,0);this.storeData(d,n)};a.Cylinder.prototype=new a._Mesh})(ChemDoodle.structures.d3,Math);
-(function(a,c){c.Fog=function(a){this.gl=a;this.mUL=a.getUniformLocation(a.program,"u_fog.mode");this.cUL=a.getUniformLocation(a.program,"u_fog.color");this.sUL=a.getUniformLocation(a.program,"u_fog.start");this.eUL=a.getUniformLocation(a.program,"u_fog.end");this.dUL=a.getUniformLocation(a.program,"u_fog.density")};var g=c.Fog.prototype;g.setTempParameter=function(c,f,d,g){if(!this.cCache||this.cCache!==c)this.cCache=c,c=a.getRGB(c,1),this.gl.uniform3f(this.cUL,c[0],c[1],c[2]);if(!this.sCache||this.sCache!==
-f)this.sCache=f,this.gl.uniform1f(this.sUL,f);if(!this.eCache||this.eCache!==d)this.eCache=d,this.gl.uniform1f(this.eUL,d);if(!this.dCache||this.dCache!==g)this.dCache=g,this.gl.uniform1f(this.dUL,g)};g.setMode=function(a){if(!this.mCache||this.mCache!==a)this.mCache=a,this.gl.uniform1i(this.mUL,a)}})(ChemDoodle.math,ChemDoodle.structures.d3,vec3);
-(function(a,c){c.Label=function(){this.textImage=new c.TextImage};var g=c.Label.prototype;g.init=function(a,c){this.textImage.init(a);this.textImage.updateFont(a,c.atoms_font_size_2D,c.atoms_font_families_2D,c.atoms_font_bold_2D,c.atoms_font_italic_2D,c.text_font_stroke_3D)};g.updateVerticesBuffer=function(c,f,d){for(var g=0,b=f.length;g<b;g++){for(var m=f[g],v=m.labelMesh,j=m.atoms,h=this.textImage,k={position:[],texCoord:[],translation:[],zDepth:[]},p=0<j.length&&void 0!=j[0].hetatm,u=0,l=j.length;u<
-l;u++){var t=j[u],o=t.label,r=0.05;if(d.atoms_useVDWDiameters_3D){var q=a[o].vdWRadius*d.atoms_vdwMultiplier_3D;0===q&&(q=1);r+=q}else d.atoms_sphereDiameter_3D&&(r+=1.5*(d.atoms_sphereDiameter_3D/2));if(p)if(t.hetatm){if(t.isWater&&!d.macro_showWaters)continue}else if(!d.macro_displayAtoms)continue;h.pushVertexData(o,[t.x,t.y,t.z],r,k)}if((m=m.chains)&&(d.proteins_displayRibbon||d.proteins_displayBackbone)){u=0;for(l=m.length;u<l;u++){j=m[u];p=0;for(o=j.length;p<o;p++)r=j[p],r.name&&(t=r.cp1,h.pushVertexData(r.name,
-[t.x,t.y,t.z],2,k))}}v.storeData(c,k.position,k.texCoord,k.translation,k.zDepth)}};g.render=function(a,c,d){a.shaderText.setUniforms(a,a.modelViewMatrix,a.projectionMatrix);this.textImage.useTexture(a);c=0;for(var g=d.length;c<g;c++)d[c].labelMesh&&d[c].labelMesh.render(a)}})(ChemDoodle.ELEMENT,ChemDoodle.structures.d3);
-(function(a,c){a.Sphere=function(a,e,f){for(var d=[],n=[],b=0;b<=e;b++)for(var m=b*c.PI/e,v=c.sin(m),j=c.cos(m),m=0;m<=f;m++){var h=2*m*c.PI/f,k=c.sin(h),h=c.cos(h)*v,p=j,k=k*v;n.push(h,p,k);d.push(a*h,a*p,a*k)}a=[];f+=1;for(b=0;b<e;b++)for(m=0;m<f;m++)v=b*f+m%f,j=v+f,a.push(v,v+1,j),m<f-1&&a.push(j,v+1,j+1);this.storeData(d,n,a)};a.Sphere.prototype=new a._Mesh})(ChemDoodle.structures.d3,Math);
-(function(a,c,g,e){function f(a,c,d,f){this.entire=a;this.name=c;this.indexes=d;this.pi=f}var d=function(a,c){a.bindBuffer(a.ARRAY_BUFFER,c.vertexPositionBuffer);a.vertexAttribPointer(a.shader.vertexPositionAttribute,c.vertexPositionBuffer.itemSize,a.FLOAT,!1,0,0);a.bindBuffer(a.ARRAY_BUFFER,c.vertexNormalBuffer);a.vertexAttribPointer(a.shader.vertexNormalAttribute,c.vertexNormalBuffer.itemSize,a.FLOAT,!1,0,0);a.bindBuffer(a.ELEMENT_ARRAY_BUFFER,c.vertexIndexBuffer)},n=f.prototype;n.getColor=function(b){return b.macro_colorByChain?
-this.chainColor:this.name?this.getResidueColor(a[this.name]?this.name:"*",b):this.helix?this.entire.front?b.proteins_ribbonCartoonHelixPrimaryColor:b.proteins_ribbonCartoonHelixSecondaryColor:this.sheet?b.proteins_ribbonCartoonSheetColor:this.entire.front?b.proteins_primaryColor:b.proteins_secondaryColor};n.getResidueColor=function(b,c){var d=a[b];return c.proteins_useShapelyColors?d.shapelyColor:c.proteins_useAminoColors?d.aminoColor:c.proteins_usePolarityColors&&d.polar?"#C10000":"#FFFFFF"};n.render=
-function(a,c){this.entire.partitions&&this.pi!==this.entire.partitions.lastRender&&(d(a,this.entire.partitions[this.pi]),this.entire.partitions.lastRender=this.pi);this.vertexIndexBuffer||(this.vertexIndexBuffer=a.createBuffer(),a.bindBuffer(a.ELEMENT_ARRAY_BUFFER,this.vertexIndexBuffer),a.bufferData(a.ELEMENT_ARRAY_BUFFER,new Uint16Array(this.indexes),a.STATIC_DRAW),this.vertexIndexBuffer.itemSize=1,this.vertexIndexBuffer.numItems=this.indexes.length);a.bindBuffer(a.ELEMENT_ARRAY_BUFFER,this.vertexIndexBuffer);
-a.material.setDiffuseColor(this.getColor(c));a.drawElements(a.TRIANGLES,this.vertexIndexBuffer.numItems,a.UNSIGNED_SHORT,0)};c.Ribbon=function(a,c,d){var j=a[0].lineSegments.length,h=a[0].lineSegments[0].length;this.partitions=[];this.partitions.lastRender=0;var k;this.front=0<c;for(var n=0,u=a.length-1;n<u;n++){if(!k||65E3<k.positionData.length)0<this.partitions.length&&n--,k={count:0,positionData:[],normalData:[],indexData:[]},this.partitions.push(k);var l=a[n];k.count++;for(var t=0;t<j;t++)for(var o=
-d?l.lineSegmentsCartoon[t]:l.lineSegments[t],r=0===t,q=!1,w=0;w<h;w++){var y=o[w],z=n,x=w+1;n===a.length-2&&w===h-1?x--:w===h-1&&(z++,x=0);var x=d?a[z].lineSegmentsCartoon[t][x]:a[z].lineSegments[t][x],z=!1,A=t+1;t===j-1&&(A-=2,z=!0);var A=d?l.lineSegmentsCartoon[A][w]:l.lineSegments[A][w],x=[x.x-y.x,x.y-y.y,x.z-y.z],A=[A.x-y.x,A.y-y.y,A.z-y.z],B=e.cross(x,A,[]);0===w&&(e.normalize(x),e.scale(x,-1),k.normalData.push(x[0],x[1],x[2]),k.positionData.push(y.x,y.y,y.z));r||q?(e.normalize(A),e.scale(A,
--1),k.normalData.push(A[0],A[1],A[2]),k.positionData.push(y.x,y.y,y.z),r&&w===h-1&&(r=!1,w=-1)):(e.normalize(B),(z&&!this.front||!z&&this.front)&&e.scale(B,-1),k.normalData.push(B[0],B[1],B[2]),e.scale(B,g.abs(c)),k.positionData.push(y.x+B[0],y.y+B[1],y.z+B[2]),t===j-1&&w===h-1&&(q=!0,w=-1));if(-1===w||w===h-1)e.normalize(x),k.normalData.push(x[0],x[1],x[2]),k.positionData.push(y.x,y.y,y.z)}}j+=2;h+=2;d&&(this.cartoonSegments=[]);this.segments=[];c=0;for(l=this.partitions.length;c<l;c++){k=this.partitions[c];
-var F;d&&(F=[]);n=0;for(u=k.count-1;n<u;n++){o=n;for(t=0;t<c;t++)o+=this.partitions[t].count-1;t=a[o];0<n&&(d&&t.split)&&(w=new f(this,void 0,F,c),t.helix&&(w.helix=!0),t.sheet&&(w.sheet=!0),this.cartoonSegments.push(w),F=[]);r=n*j*h;q=[];t=0;for(y=j-1;t<y;t++){z=r+t*h;for(w=0;w<h;w++)x=1,n===k.count-1?x=0:w===h-1&&(x=j*h-w),x=[z+w,z+h+w,z+h+w+x,z+w,z+w+x,z+h+w+x],w!==h-1&&(this.front?q.push(x[0],x[1],x[2],x[3],x[5],x[4]):q.push(x[0],x[2],x[1],x[3],x[4],x[5])),w===h-2&&n<k.count-1&&(A=j*h-w,x[2]+=
-A,x[4]+=A,x[5]+=A),this.front?k.indexData.push(x[0],x[1],x[2],x[3],x[5],x[4]):k.indexData.push(x[0],x[2],x[1],x[3],x[4],x[5]),d&&(this.front?F.push(x[0],x[1],x[2],x[3],x[5],x[4]):F.push(x[0],x[2],x[1],x[3],x[4],x[5]))}this.segments.push(new f(this,a[o+1].name,q,c))}if(d){w=new f(this,void 0,F,c);o=k.count-1;for(t=0;t<c;t++)o+=this.partitions[t].count-1;t=a[o];t.helix&&(w.helix=!0);t.sheet&&(w.sheet=!0);this.cartoonSegments.push(w)}}this.storeData(this.partitions[0].positionData,this.partitions[0].normalData,
-this.partitions[0].indexData);1===this.partitions.length&&(this.partitions=void 0)};(c.Ribbon.prototype=new c._Mesh).render=function(a,c){this.bindBuffers(a);var f=c.macro_colorByChain?this.chainColor:void 0;f||(f=this.front?c.proteins_primaryColor:c.proteins_secondaryColor);a.material.setDiffuseColor(f);a.drawElements(a.TRIANGLES,this.vertexIndexBuffer.numItems,a.UNSIGNED_SHORT,0);if(this.partitions)for(var f=1,e=this.partitions.length;f<e;f++){var h=this.partitions[f];d(a,h);a.drawElements(a.TRIANGLES,
-h.vertexIndexBuffer.numItems,a.UNSIGNED_SHORT,0)}}})(ChemDoodle.RESIDUE,ChemDoodle.structures.d3,Math,vec3);
-(function(a,c,g){c.Light=function(c,f,d){this.diffuseRGB=a.getRGB(c,1);this.specularRGB=a.getRGB(f,1);this.direction=d};c.Light.prototype.lightScene=function(a){a.uniform3f(a.getUniformLocation(a.program,"u_light.diffuse_color"),this.diffuseRGB[0],this.diffuseRGB[1],this.diffuseRGB[2]);a.uniform3f(a.getUniformLocation(a.program,"u_light.specular_color"),this.specularRGB[0],this.specularRGB[1],this.specularRGB[2]);var c=g.create(this.direction);g.normalize(c);g.negate(c);a.uniform3f(a.getUniformLocation(a.program,
-"u_light.direction"),c[0],c[1],c[2]);var d=[0,0,0],c=[d[0]+c[0],d[1]+c[1],d[2]+c[2]],d=g.length(c);0===d?c=[0,0,1]:g.scale(1/d);a.uniform3f(a.getUniformLocation(a.program,"u_light.half_vector"),c[0],c[1],c[2])}})(ChemDoodle.math,ChemDoodle.structures.d3,vec3);(function(a){a.Line=function(){this.storeData([0,0,0,0,1,0],[0,0,0,0,0,0])};a.Line.prototype=new a._Mesh})(ChemDoodle.structures.d3);
-(function(a,c){c.Material=function(a){this.gl=a;this.aUL=a.getUniformLocation(a.program,"u_material.ambient_color");this.dUL=a.getUniformLocation(a.program,"u_material.diffuse_color");this.sUL=a.getUniformLocation(a.program,"u_material.specular_color");this.snUL=a.getUniformLocation(a.program,"u_material.shininess");this.alUL=a.getUniformLocation(a.program,"u_material.alpha")};var g=c.Material.prototype;g.setTempColors=function(c,f,d,g){if(!this.aCache||this.aCache!==c)this.aCache=c,c=a.getRGB(c,
-1),this.gl.uniform3f(this.aUL,c[0],c[1],c[2]);if(f&&(!this.dCache||this.dCache!==f))this.dCache=f,c=a.getRGB(f,1),this.gl.uniform3f(this.dUL,c[0],c[1],c[2]);if(!this.sCache||this.sCache!==d)this.sCache=d,c=a.getRGB(d,1),this.gl.uniform3f(this.sUL,c[0],c[1],c[2]);if(!this.snCache||this.snCache!==g)this.snCache=g,this.gl.uniform1f(this.snUL,g);this.alCache=1;this.gl.uniform1f(this.alUL,1)};g.setDiffuseColor=function(c){if(!this.dCache||this.dCache!==c)this.dCache=c,c=a.getRGB(c,1),this.gl.uniform3f(this.dUL,
-c[0],c[1],c[2])};g.setAlpha=function(a){if(!this.alCache||this.alCache!==a)this.alCache=a,this.gl.uniform1f(this.alUL,a)}})(ChemDoodle.math,ChemDoodle.structures.d3);
-(function(a,c,g,e){c.MolecularSurface=function(c,d,n,b,m){function v(a,b,c,d){var f=a.index;if(a.contained)for(var f=-1,e=Infinity,h=0,k=b.length;h<k;h++)for(var j=b[h],m=0,g=j.length;m<g;m++){var n=j[m];if(!n.contained&&n.index!==c&&n.index!==d){var l=n.distance3D(a);l<e&&(f=n.index,e=l)}}return f}for(var j=[],h=[],k=[],p=[],u=0;u<=d;u++)for(var l=u*e.PI/d,t=e.sin(l),o=e.cos(l),l=0;l<=n;l++){var r=2*l*e.PI/n;p.push(e.cos(r)*t,o,e.sin(r)*t)}t=[];u=0;for(l=c.atoms.length;u<l;u++){for(var o=[],q=c.atoms[u],
-w=g[q.label][m]+b,y=[],r=0,z=c.atoms.length;r<z;r++)if(r!==u){var x=c.atoms[r];x.index=r;q.distance3D(x)<w+g[x.label][m]+b&&y.push(x)}r=0;for(z=p.length;r<z;r+=3){for(var A=new a.Atom("C",q.x+w*p[r],q.y+w*p[r+1],q.z+w*p[r+2]),B=0,F=y.length;B<F;B++)if(x=y[B],A.distance3D(x)<g[x.label][m]+b){A.contained=!0;break}o.push(A)}t.push(o)}c=[];n++;for(u=0;u<d;u++)for(l=0;l<n;l++)m=u*n+l%n,b=m+n,c.push(m),c.push(b),c.push(m+1),l<n-1&&(c.push(b),c.push(b+1),c.push(m+1));u=B=0;for(l=t.length;u<l;u++){o=t[u];
-r=0;for(z=o.length;r<z;r++)A=o[r],A.contained||(A.index=B,B++,j.push(A.x,A.y,A.z),h.push(p[3*r],p[3*r+1],p[3*r+2]));r=0;for(z=c.length;r<z;r+=3)m=o[c[r]],b=o[c[r+1]],A=o[c[r+2]],!m.contained&&(!b.contained&&!A.contained)&&k.push(m.index,b.index,A.index)}p=[];u=0;for(l=t.length;u<l;u++){o=t[u];r=0;for(z=c.length;r<z;r+=3){m=o[c[r]];b=o[c[r+1]];A=o[c[r+2]];y=[];B=0;for(F=t.length;B<F;B++)B!==u&&y.push(t[B]);if((!m.contained||!b.contained||!A.contained)&&(m.contained||b.contained||A.contained))if(d=
-v(m,y,-1,-1),n=v(b,y,d,-1),y=v(A,y,d,n),-1!==d&&-1!==n&&-1!==y){b=!1;B=0;for(F=p.length;B<F;B+=3)if(m=p[B],A=p[B+1],q=p[B+2],w=n===m||n===A||n===q,x=y===m||y===A||y===q,(d===m||d===A||d===q)&&w&&x){b=!0;break}b||p.push(d,n,y)}}}k=k.concat(p);this.storeData(j,h,k)};c.MolecularSurface.prototype=new c._Mesh})(ChemDoodle.structures,ChemDoodle.structures.d3,ChemDoodle.ELEMENT,Math);
-(function(a){a.Picker=function(){};a=a.Picker.prototype;a.init=function(a){this.framebuffer=a.createFramebuffer();var g=a.createTexture(),e=a.createRenderbuffer();a.bindTexture(a.TEXTURE_2D,g);a.texParameteri(a.TEXTURE_2D,a.TEXTURE_MAG_FILTER,a.NEAREST);a.texParameteri(a.TEXTURE_2D,a.TEXTURE_MIN_FILTER,a.NEAREST);a.texParameteri(a.TEXTURE_2D,a.TEXTURE_WRAP_S,a.CLAMP_TO_EDGE);a.texParameteri(a.TEXTURE_2D,a.TEXTURE_WRAP_T,a.CLAMP_TO_EDGE);a.bindRenderbuffer(a.RENDERBUFFER,e);a.bindFramebuffer(a.FRAMEBUFFER,
-this.framebuffer);a.framebufferTexture2D(a.FRAMEBUFFER,a.COLOR_ATTACHMENT0,a.TEXTURE_2D,g,0);a.framebufferRenderbuffer(a.FRAMEBUFFER,a.DEPTH_ATTACHMENT,a.RENDERBUFFER,e);a.bindTexture(a.TEXTURE_2D,null);a.bindRenderbuffer(a.RENDERBUFFER,null);a.bindFramebuffer(a.FRAMEBUFFER,null)};a.setDimension=function(a,g,e){a.bindFramebuffer(a.FRAMEBUFFER,this.framebuffer);var f=a.getFramebufferAttachmentParameter(a.FRAMEBUFFER,a.DEPTH_ATTACHMENT,a.FRAMEBUFFER_ATTACHMENT_OBJECT_NAME);a.isRenderbuffer(f)&&(a.bindRenderbuffer(a.RENDERBUFFER,
-f),a.renderbufferStorage(a.RENDERBUFFER,a.DEPTH_COMPONENT16,g,e),a.bindRenderbuffer(a.RENDERBUFFER,null));f=a.getFramebufferAttachmentParameter(a.FRAMEBUFFER,a.COLOR_ATTACHMENT0,a.FRAMEBUFFER_ATTACHMENT_OBJECT_NAME);a.isTexture(f)&&(a.bindTexture(a.TEXTURE_2D,f),a.texImage2D(a.TEXTURE_2D,0,a.RGBA,g,e,0,a.RGBA,a.UNSIGNED_BYTE,null),a.bindTexture(a.TEXTURE_2D,null));a.bindFramebuffer(a.FRAMEBUFFER,null)};a.pick=function(a,g,e,f,d){var n=void 0,b=a.getParameter(a.COLOR_CLEAR_VALUE);a.bindFramebuffer(a.FRAMEBUFFER,
-this.framebuffer);a.clearColor(1,1,1,0);a.clear(a.COLOR_BUFFER_BIT|a.DEPTH_BUFFER_BIT);a.fogging.setMode(0);a.disableVertexAttribArray(a.shader.vertexNormalAttribute);var m=[];a.material.setAlpha(255);for(var v=0,j=g.length;v<j;v++)g[v].renderPickFrame(a,e,m);a.flush();g=new Uint8Array(4);a.readPixels(f-2,d+2,1,1,a.RGBA,a.UNSIGNED_BYTE,g);0<g[3]&&(n=m[g[2]|g[1]<<8|g[0]<<16]);a.enableVertexAttribArray(a.shader.vertexNormalAttribute);a.fogging.setMode(e.fog_mode_3D);a.bindFramebuffer(a.FRAMEBUFFER,
-null);a.clearColor(b[0],b[1],b[2],b[3]);return n}})(ChemDoodle.structures.d3,document);
-(function(a,c){a.Pill=function(a,e,f,d){var n=1,b=2*a;e-=b;0>e?(n=0,e+=b):e<b&&(n=e/b,e=b);for(var b=[],m=[],v=0;v<=f;v++)for(var j=v*c.PI/f,h=c.sin(j),k=c.cos(j)*n,j=0;j<=d;j++){var p=2*j*c.PI/d,u=c.sin(p),p=c.cos(p)*h,l=k,u=u*h;m.push(p,l,u);b.push(a*p,a*l+(v<f/2?e:0),a*u)}a=[];d+=1;for(v=0;v<f;v++)for(j=0;j<d;j++)e=v*d+j%d,n=e+d,a.push(e,e+1,n),j<d-1&&a.push(n,e+1,n+1);this.storeData(b,m,a)};a.Pill.prototype=new a._Mesh})(ChemDoodle.structures.d3,Math);
-(function(a,c){a.Shader=function(){};var g=a.Shader.prototype;g.init=function(a){var c=this.getShader(a,"vertex-shader");c||(c=this.loadDefaultVertexShader(a));var d=this.getShader(a,"fragment-shader");d||(d=this.loadDefaultFragmentShader(a));a.attachShader(a.program,c);a.attachShader(a.program,d);this.vertexPositionAttribute=0;a.bindAttribLocation(a.program,this.vertexPositionAttribute,"a_vertex_position");a.linkProgram(a.program);a.getProgramParameter(a.program,a.LINK_STATUS)||alert("Could not initialize shaders: "+
-a.getProgramInfoLog(a.program));a.useProgram(a.program);a.enableVertexAttribArray(this.vertexPositionAttribute);this.vertexNormalAttribute=a.getAttribLocation(a.program,"a_vertex_normal");a.enableVertexAttribArray(this.vertexNormalAttribute)};g.getShader=function(a,f){var d=c.getElementById(f);if(d){for(var n=[],b=d.firstChild;b;)3===b.nodeType&&n.push(b.textContent),b=b.nextSibling;if("x-shader/x-fragment"===d.type)b=a.createShader(a.FRAGMENT_SHADER);else if("x-shader/x-vertex"===d.type)b=a.createShader(a.VERTEX_SHADER);
-else return;a.shaderSource(b,n.join(""));a.compileShader(b);if(a.getShaderParameter(b,a.COMPILE_STATUS))return b;alert(d.type+" "+a.getShaderInfoLog(b))}};g.loadDefaultVertexShader=function(a){var c=a.createShader(a.VERTEX_SHADER);a.shaderSource(c,"precision mediump float;struct Light{vec3 diffuse_color;vec3 specular_color;vec3 direction;vec3 half_vector;};struct Material{vec3 ambient_color;vec3 diffuse_color;vec3 specular_color;float shininess;float alpha;};attribute vec3 a_vertex_position;attribute vec3 a_vertex_normal;uniform Light u_light;uniform Material u_material;uniform mat4 u_model_view_matrix;uniform mat4 u_projection_matrix;uniform mat3 u_normal_matrix;varying vec3 v_diffuse;varying vec4 v_ambient;varying vec3 v_normal;void main(void){v_normal \x3d length(a_vertex_normal)\x3d\x3d0.0 ? a_vertex_normal : normalize(u_normal_matrix * a_vertex_normal);v_ambient \x3d vec4(u_material.ambient_color, 1.0);v_diffuse \x3d u_material.diffuse_color * u_light.diffuse_color;gl_Position \x3d u_projection_matrix * u_model_view_matrix * vec4(a_vertex_position, 1.0);gl_Position /\x3d gl_Position.w;gl_PointSize \x3d 2.0;}");
-a.compileShader(c);if(a.getShaderParameter(c,a.COMPILE_STATUS))return c;alert("Vertex shader failed to compile: "+a.getShaderInfoLog(c))};g.loadDefaultFragmentShader=function(a){var c=a.createShader(a.FRAGMENT_SHADER);a.shaderSource(c,"precision mediump float;\nstruct Light{vec3 diffuse_color;vec3 specular_color;vec3 direction;vec3 half_vector;};struct Material{vec3 ambient_color;vec3 diffuse_color;vec3 specular_color;float shininess;float alpha;};struct Fog{int mode;vec3 color;float density;float start;float end;};uniform Light u_light;uniform Material u_material;uniform Fog u_fog;varying vec3 v_diffuse;varying vec4 v_ambient;varying vec3 v_normal;void main(void){if(length(v_normal)\x3d\x3d0.0){gl_FragColor \x3d vec4(vec3(v_diffuse.rgb),u_material.alpha);}else{float nDotL \x3d max(dot(v_normal, u_light.direction), 0.0);vec4 color \x3d vec4(v_diffuse*nDotL, 1.0);float nDotHV \x3d max(dot(v_normal, u_light.half_vector), 0.0);vec3 specular \x3d u_material.specular_color * u_light.specular_color;color+\x3dvec4(specular * pow(nDotHV, u_material.shininess), 1.0);gl_FragColor \x3d color+v_ambient;gl_FragColor.a*\x3du_material.alpha;float fogCoord \x3d gl_FragCoord.z/gl_FragCoord.w;float fogFactor \x3d 1.;if(u_fog.mode \x3d\x3d 1){if(fogCoord \x3c u_fog.start){fogFactor \x3d 1.;}else if(fogCoord \x3e u_fog.end){fogFactor \x3d 0.;}else{fogFactor \x3d clamp((u_fog.end - fogCoord) / (u_fog.end - u_fog.start), 0.0, 1.0);}}else if(u_fog.mode \x3d\x3d 2) {fogFactor \x3d clamp(exp(-u_fog.density*fogCoord), 0.0, 1.0);}else if(u_fog.mode \x3d\x3d 3) {fogFactor \x3d clamp(exp(-pow(u_fog.density*fogCoord, 2.0)), 0.0, 1.0);}gl_FragColor \x3d mix(vec4(vec3(u_fog.color), 1.), gl_FragColor, fogFactor);}}");
-a.compileShader(c);if(a.getShaderParameter(c,a.COMPILE_STATUS))return c;alert("Fragment shader failed to compile: "+a.getShaderInfoLog(c))}})(ChemDoodle.structures.d3,document);
-(function(a,c,g){c.Shape=function(c,f){for(var d=c.length,n=[],b=[],m=new a.Point,v=0,j=d;v<j;v++){var h=v+1;v===j-1&&(h=0);for(var k=c[v],h=c[h],p=g.cross([0,0,1],[h.x-k.x,h.y-k.y,0]),u=0;2>u;u++)n.push(k.x,k.y,f/2),n.push(k.x,k.y,-f/2),n.push(h.x,h.y,f/2),n.push(h.x,h.y,-f/2);for(u=0;4>u;u++)b.push(p[0],p[1],p[2]);b.push(0,0,1);b.push(0,0,-1);b.push(0,0,1);b.push(0,0,-1);m.add(k)}m.x/=d;m.y/=d;b.push(0,0,1);n.push(m.x,m.y,f/2);b.push(0,0,-1);n.push(m.x,m.y,-f/2);m=[];k=8*d;v=0;for(j=d;v<j;v++)d=
-8*v,m.push(d),m.push(d+3),m.push(d+1),m.push(d),m.push(d+2),m.push(d+3),m.push(d+4),m.push(k),m.push(d+6),m.push(d+5),m.push(d+7),m.push(k+1);this.storeData(n,b,m)};c.Shape.prototype=new c._Mesh})(ChemDoodle.structures,ChemDoodle.structures.d3,vec3);
-(function(a,c,g){a.Star=function(){for(var a=[0.8944,0.4472,0,0.2764,0.4472,0.8506,0.2764,0.4472,-0.8506,-0.7236,0.4472,0.5257,-0.7236,0.4472,-0.5257,-0.3416,0.4472,0,-0.1056,0.4472,0.3249,-0.1056,0.4472,-0.3249,0.2764,0.4472,0.2008,0.2764,0.4472,-0.2008,-0.8944,-0.4472,0,-0.2764,-0.4472,0.8506,-0.2764,-0.4472,-0.8506,0.7236,-0.4472,0.5257,0.7236,-0.4472,-0.5257,0.3416,-0.4472,0,0.1056,-0.4472,0.3249,0.1056,-0.4472,-0.3249,-0.2764,-0.4472,0.2008,-0.2764,-0.4472,-0.2008,-0.5527,0.1058,0,-0.1708,0.1058,
-0.5527,-0.1708,0.1058,-0.5527,0.4471,0.1058,0.3249,0.4471,0.1058,-0.3249,0.5527,-0.1058,0,0.1708,-0.1058,0.5527,0.1708,-0.1058,-0.5527,-0.4471,-0.1058,0.3249,-0.4471,-0.1058,-0.3249,0,1,0,0,-1,0],c=[0,9,8,2,7,9,4,5,7,3,6,5,1,8,6,0,8,23,30,6,8,3,21,6,11,26,21,13,23,26,2,9,24,30,8,9,1,23,8,13,25,23,14,24,25,4,7,22,30,9,7,0,24,9,14,27,24,12,22,27,3,5,20,30,7,5,2,22,7,12,29,22,10,20,29,1,6,21,30,5,6,4,20,5,10,28,20,11,21,28,10,19,18,12,17,19,14,15,17,13,16,15,11,18,16,31,19,17,14,17,27,2,27,22,4,22,29,
-10,29,19,31,18,19,12,19,29,4,29,20,3,20,28,11,28,18,31,16,18,10,18,28,3,28,21,1,21,26,13,26,16,31,15,16,11,16,26,1,26,23,0,23,25,14,25,15,31,17,15,13,15,25,0,25,24,2,24,27,12,27,17],d=[],n=[],b=[],m=0,v=c.length;m<v;m+=3){var j=3*c[m],h=3*c[m+1],k=3*c[m+2],j=[a[j],a[j+1],a[j+2]],h=[a[h],a[h+1],a[h+2]],k=[a[k],a[k+1],a[k+2]],p=g.cross([k[0]-h[0],k[1]-h[1],k[2]-h[2]],[j[0]-h[0],j[1]-h[1],j[2]-h[2]],[]);g.normalize(p);d.push(j[0],j[1],j[2],h[0],h[1],h[2],k[0],k[1],k[2]);n.push(p[0],p[1],p[2],p[0],p[1],
-p[2],p[0],p[1],p[2]);b.push(m,m+1,m+2)}this.storeData(d,n,b)};a.Star.prototype=new a._Mesh})(ChemDoodle.structures.d3,Math,vec3);
-(function(a,c,g){a.TextImage=function(){this.ctx=g.createElement("canvas").getContext("2d");this.data=[];this.text="";this.charHeight=0};a=a.TextImage.prototype;a.init=function(a){this.textureImage=a.createTexture();a.bindTexture(a.TEXTURE_2D,this.textureImage);a.pixelStorei(a.UNPACK_FLIP_Y_WEBGL,!1);a.texParameteri(a.TEXTURE_2D,a.TEXTURE_WRAP_S,a.CLAMP_TO_EDGE);a.texParameteri(a.TEXTURE_2D,a.TEXTURE_WRAP_T,a.CLAMP_TO_EDGE);a.texParameteri(a.TEXTURE_2D,a.TEXTURE_MIN_FILTER,a.NEAREST);a.texParameteri(a.TEXTURE_2D,
-a.TEXTURE_MAG_FILTER,a.NEAREST);a.bindTexture(a.TEXTURE_2D,null);this.updateFont(a,12,["Sans-serif"],!1,!1,!1)};a.charData=function(a){a=this.text.indexOf(a);return 0<=a?this.data[a]:null};a.updateFont=function(a,f,d,n,b,m){var g=this.ctx,j=this.ctx.canvas,h=[],k="",p=c.getFontString(f,d,n,b);g.font=p;g.save();b=0;f*=1.5;d=32;for(n=127;d<n;d++){var u=String.fromCharCode(d),l=g.measureText(u).width;h.push({text:u,width:l,height:f});b+=2*l}d=Math.sqrt(b*f);d=Math.ceil(d/f);b=Math.ceil(b/(d-1));j.width=
-b;j.height=d*f;g.font=p;g.textAlign="left";g.textBaseline="middle";g.strokeStyle="#000";g.lineWidth=1.4;g.fillStyle="#fff";d=u=p=0;for(n=h.length;d<n;d++){var l=h[d],t=2*l.width;f=l.height;var o=l.text;u+t>b&&(p++,u=0);var r=p*f;m&&g.strokeText(o,u,r+f/2);g.fillText(o,u,r+f/2);l.x=u;l.y=r;k+=o;u+=t}this.text=k;this.data=h;this.charHeight=f;a.bindTexture(a.TEXTURE_2D,this.textureImage);a.texImage2D(a.TEXTURE_2D,0,a.RGBA,a.RGBA,a.UNSIGNED_BYTE,j);a.bindTexture(a.TEXTURE_2D,null)};a.pushVertexData=function(a,
-c,d,g){var b=a.toString().split(""),m=this.getHeight(),v=this.getWidth();a=-this.textWidth(a)/2;for(var j=-this.charHeight/2,h=0,k=b.length;h<k;h++){var p=this.charData(b[h]),u=p.width,l=p.x/v,t=l+1.8*p.width/v,o=p.y/m,p=o+p.height/m,r=a+1.8*u,q=this.charHeight/2;g.position.push(c[0],c[1],c[2],c[0],c[1],c[2],c[0],c[1],c[2],c[0],c[1],c[2],c[0],c[1],c[2],c[0],c[1],c[2]);g.texCoord.push(l,o,t,p,t,o,l,o,l,p,t,p);g.translation.push(a,q,r,j,r,q,a,q,a,j,r,j);g.zDepth.push(d,d,d,d,d,d);a=r+u-1.8*u}};a.getCanvas=
-function(){return this.ctx.canvas};a.getHeight=function(){return this.getCanvas().height};a.getWidth=function(){return this.getCanvas().width};a.textWidth=function(a){return this.ctx.measureText(a).width};a.test=function(){g.body.appendChild(this.getCanvas())};a.useTexture=function(a){a.bindTexture(a.TEXTURE_2D,this.textureImage)}})(ChemDoodle.structures.d3,ChemDoodle.extensions,document);
-(function(a){a.TextMesh=function(){};a=a.TextMesh.prototype;a.init=function(a){this.vertexPositionBuffer=a.createBuffer();this.vertexTexCoordBuffer=a.createBuffer();this.vertexTranslationBuffer=a.createBuffer();this.vertexZDepthBuffer=a.createBuffer()};a.setVertexData=function(a,g,e,f){a.bindBuffer(a.ARRAY_BUFFER,g);a.bufferData(a.ARRAY_BUFFER,new Float32Array(e),a.STATIC_DRAW);g.itemSize=f;g.numItems=e.length/f};a.storeData=function(a,g,e,f,d){this.setVertexData(a,this.vertexPositionBuffer,g,3);
-this.setVertexData(a,this.vertexTexCoordBuffer,e,2);this.setVertexData(a,this.vertexTranslationBuffer,f,2);this.setVertexData(a,this.vertexZDepthBuffer,d,1)};a.bindBuffers=function(a){var g=a.shaderText;a.bindBuffer(a.ARRAY_BUFFER,this.vertexPositionBuffer);a.vertexAttribPointer(g.vertexPositionAttribute,this.vertexPositionBuffer.itemSize,a.FLOAT,!1,0,0);a.bindBuffer(a.ARRAY_BUFFER,this.vertexTexCoordBuffer);a.vertexAttribPointer(g.vertexTexCoordAttribute,this.vertexTexCoordBuffer.itemSize,a.FLOAT,
-!1,0,0);a.bindBuffer(a.ARRAY_BUFFER,this.vertexTranslationBuffer);a.vertexAttribPointer(g.vertexTranslationAttribute,this.vertexTranslationBuffer.itemSize,a.FLOAT,!1,0,0);a.bindBuffer(a.ARRAY_BUFFER,this.vertexZDepthBuffer);a.vertexAttribPointer(g.vertexZDepthAttribute,this.vertexZDepthBuffer.itemSize,a.FLOAT,!1,0,0)};a.render=function(a){var g=this.vertexPositionBuffer.numItems;g&&(this.bindBuffers(a),a.drawArrays(a.TRIANGLES,0,g))}})(ChemDoodle.structures.d3,Math);
-(function(a){a.TextShader=function(){};a=a.TextShader.prototype=new a.Shader;a.init=function(a){a.blendFuncSeparate(a.SRC_ALPHA,a.ONE_MINUS_SRC_ALPHA,a.ONE,a.ONE_MINUS_SRC_ALPHA);var g=this.loadDefaultVertexShader(a),e=this.loadDefaultFragmentShader(a);a.attachShader(a.programLabel,g);a.attachShader(a.programLabel,e);a.linkProgram(a.programLabel);a.getProgramParameter(a.programLabel,a.LINK_STATUS)||alert("Could not initialize shaders: "+a.getProgramInfoLog(a.programLabel));this.vertexPositionAttribute=
-a.getAttribLocation(a.programLabel,"a_vertex_position");this.vertexTexCoordAttribute=a.getAttribLocation(a.programLabel,"a_vertex_texcoord");this.vertexTranslationAttribute=a.getAttribLocation(a.programLabel,"a_translation");this.vertexZDepthAttribute=a.getAttribLocation(a.programLabel,"a_z_depth");this.modelViewMatrixUniform=a.getUniformLocation(a.programLabel,"u_model_view_matrix");this.projectionMatrixUniform=a.getUniformLocation(a.programLabel,"u_projection_matrix");this.dimensionUniform=a.getUniformLocation(a.programLabel,
-"u_dimension")};a.loadDefaultVertexShader=function(a){var g=a.createShader(a.VERTEX_SHADER);a.shaderSource(g,"precision mediump float;attribute vec3 a_vertex_position;attribute vec2 a_vertex_texcoord;attribute vec2 a_translation;attribute float a_z_depth;uniform mat4 u_model_view_matrix;uniform mat4 u_projection_matrix;uniform vec2 u_dimension;varying vec2 v_texcoord;void main() {gl_Position \x3d u_model_view_matrix * vec4(a_vertex_position, 1.0);vec4 depth_pos \x3d vec4(gl_Position);depth_pos.z +\x3d a_z_depth;gl_Position \x3d u_projection_matrix * gl_Position;depth_pos \x3d u_projection_matrix * depth_pos;gl_Position /\x3d gl_Position.w;gl_Position.xy +\x3d a_translation / u_dimension * 2.0;gl_Position.z \x3d depth_pos.z / depth_pos.w;v_texcoord \x3d a_vertex_texcoord;}");
-a.compileShader(g);if(a.getShaderParameter(g,a.COMPILE_STATUS))return g;alert("Vertex shader failed to compile: "+a.getShaderInfoLog(g))};a.loadDefaultFragmentShader=function(a){var g=a.createShader(a.FRAGMENT_SHADER);a.shaderSource(g,"precision mediump float;uniform sampler2D u_image;varying vec2 v_texcoord;void main() {gl_FragColor \x3d texture2D(u_image, v_texcoord);}");a.compileShader(g);if(a.getShaderParameter(g,a.COMPILE_STATUS))return g;alert("Fragment shader failed to compile: "+a.getShaderInfoLog(g))};
-a.setUniforms=function(a,g,e){a.uniformMatrix4fv(this.modelViewMatrixUniform,!1,g);a.uniformMatrix4fv(this.projectionMatrixUniform,!1,e);a.uniform2f(this.dimensionUniform,a.canvas.clientWidth,a.canvas.clientHeight)}})(ChemDoodle.structures.d3);
-(function(a,c,g,e,f,d,n){var b=function(a,b,c){var h=f.sqrt(b[1]*b[1]+b[2]*b[2]),e=[1,0,0,0,0,b[2]/h,-b[1]/h,0,0,b[1]/h,b[2]/h,0,0,0,0,1],g=[1,0,0,0,0,b[2]/h,b[1]/h,0,0,-b[1]/h,b[2]/h,0,0,0,0,1],n=[h,0,-b[0],0,0,1,0,0,b[0],0,h,0,0,0,0,1];b=[h,0,b[0],0,0,1,0,0,-b[0],0,h,0,0,0,0,1];c=[f.cos(c),-f.sin(c),0,0,f.sin(c),f.cos(c),0,0,0,0,1,0,0,0,0,1];var l=d.multiply(e,d.multiply(n,d.multiply(c,d.multiply(b,g,[]))));this.rotate=function(){return d.multiplyVec3(l,a)}};e.Tube=function(e,v,j){var h=e[0].lineSegments[0].length;
-this.partitions=[];var k;this.ends=[];this.ends.push(e[0].lineSegments[0][0]);this.ends.push(e[e.length-2].lineSegments[0][0]);for(var p=[1,0,0],u=0,l=e.length-1;u<l;u++){if(!k||65E3<k.positionData.length)0<this.partitions.length&&u--,k={count:0,positionData:[],normalData:[],indexData:[]},this.partitions.push(k);var t=e[u];k.count++;for(var o=Infinity,r=new g.Atom("",e[u+1].cp1.x,e[u+1].cp1.y,e[u+1].cp1.z),q=0;q<h;q++){var w=t.lineSegments[0][q],y;y=q===h-1?u===e.length-2?t.lineSegments[0][q-1]:e[u+
-1].lineSegments[0][0]:t.lineSegments[0][q+1];y=[y.x-w.x,y.y-w.y,y.z-w.z];n.normalize(y);u===e.length-2&&q===h-1&&n.scale(y,-1);var z=vec3.cross(y,p,[]);n.normalize(z);n.scale(z,v/2);z=new b(z,y,2*Math.PI/j);y=0;for(var x=j;y<x;y++){var A=z.rotate();y===f.floor(j/4)&&(p=[A[0],A[1],A[2]]);k.normalData.push(A[0],A[1],A[2]);k.positionData.push(w.x+A[0],w.y+A[1],w.z+A[2])}r&&(y=w.distance3D(r),y<o&&(o=y,e[u+1].pPoint=w))}}p=0;for(t=this.partitions.length;p<t;p++){k=this.partitions[p];u=0;for(l=k.count-
-1;u<l;u++){o=u*h*j;q=0;for(r=h;q<r;q++){w=o+q*j;for(y=0;y<j;y++)z=w+y,k.indexData.push(z),k.indexData.push(z+j),k.indexData.push(z+j+1),k.indexData.push(z),k.indexData.push(z+j+1),k.indexData.push(z+1)}}}this.storeData(this.partitions[0].positionData,this.partitions[0].normalData,this.partitions[0].indexData);j=[new g.Point(2,0)];for(u=0;60>u;u++)h=u/60*f.PI,j.push(new g.Point(2*f.cos(h),-2*f.sin(h)));j.push(new g.Point(-2,0),new g.Point(-2,4),new g.Point(2,4));var B=new g.d3.Shape(j,1);this.render=
-function(b,h){this.bindBuffers(b);b.material.setDiffuseColor(h.macro_colorByChain?this.chainColor:h.nucleics_tubeColor);b.drawElements(b.TRIANGLES,this.vertexIndexBuffer.numItems,b.UNSIGNED_SHORT,0);if(this.partitions)for(var k=1,j=this.partitions.length;k<j;k++){var l=this.partitions[k],p=b,o=l;p.bindBuffer(p.ARRAY_BUFFER,o.vertexPositionBuffer);p.vertexAttribPointer(p.shader.vertexPositionAttribute,o.vertexPositionBuffer.itemSize,p.FLOAT,!1,0,0);p.bindBuffer(p.ARRAY_BUFFER,o.vertexNormalBuffer);
-p.vertexAttribPointer(p.shader.vertexNormalAttribute,o.vertexNormalBuffer.itemSize,p.FLOAT,!1,0,0);p.bindBuffer(p.ELEMENT_ARRAY_BUFFER,o.vertexIndexBuffer);b.drawElements(b.TRIANGLES,l.vertexIndexBuffer.numItems,b.UNSIGNED_SHORT,0)}b.sphereBuffer.bindBuffers(b);for(k=0;2>k;k++)l=this.ends[k],l=d.translate(b.modelViewMatrix,[l.x,l.y,l.z],[]),j=v/2,d.scale(l,[j,j,j]),b.setMatrixUniforms(l),b.drawElements(b.TRIANGLES,b.sphereBuffer.vertexIndexBuffer.numItems,b.UNSIGNED_SHORT,0);b.cylinderBuffer.bindBuffers(b);
-k=1;for(j=e.length-1;k<j;k++){var o=e[k],t=o.pPoint,r=new g.Atom("",o.cp2.x,o.cp2.y,o.cp2.z),l=1.001*t.distance3D(r),o=[v/4,l,v/4],l=d.translate(b.modelViewMatrix,[t.x,t.y,t.z],[]),u=[0,1,0],q=0,p=[r.x-t.x,r.y-t.y,r.z-t.z];t.x===r.x&&t.z===r.z?(u=[0,0,1],t.y<t.y&&(q=f.PI)):(q=a.vec3AngleFrom(u,p),u=n.cross(u,p,[]));0!==q&&d.rotate(l,q,u);d.scale(l,o);b.setMatrixUniforms(l);b.drawArrays(b.TRIANGLE_STRIP,0,b.cylinderBuffer.vertexPositionBuffer.numItems)}B.bindBuffers(b);!h.nucleics_useShapelyColors&&
-!h.macro_colorByChain&&b.material.setDiffuseColor(h.nucleics_baseColor);k=1;for(j=e.length-1;k<j;k++)o=e[k],r=o.cp2,l=d.translate(b.modelViewMatrix,[r.x,r.y,r.z],[]),u=[0,1,0],q=0,t=o.cp3,p=[t.x-r.x,t.y-r.y,t.z-r.z],r.x===t.x&&r.z===t.z?(u=[0,0,1],r.y<r.y&&(q=f.PI)):(q=a.vec3AngleFrom(u,p),u=n.cross(u,p,[])),0!==q&&d.rotate(l,q,u),r=[1,0,0],q=d.rotate(d.identity([]),q,u),d.multiplyVec3(q,r),q=o.cp4,t=o.cp5,q.y===t.y&&q.z===t.z||(q=[t.x-q.x,t.y-q.y,t.z-q.z],t=a.vec3AngleFrom(r,q),0>n.dot(p,n.cross(r,
-q))&&(t*=-1),d.rotateY(l,t)),h.nucleics_useShapelyColors&&!h.macro_colorByChain&&(c[o.name]?b.material.setDiffuseColor(c[o.name].shapelyColor):b.material.setDiffuseColor(c["*"].shapelyColor)),b.setMatrixUniforms(l),b.drawElements(b.TRIANGLES,B.vertexIndexBuffer.numItems,b.UNSIGNED_SHORT,0)}};e.Tube.prototype=new e._Mesh})(ChemDoodle.extensions,ChemDoodle.RESIDUE,ChemDoodle.structures,ChemDoodle.structures.d3,Math,mat4,vec3);
-(function(a){a.UnitCell=function(a){var g=[],e=[],f=function(a,b,c,d){g.push(a[0],a[1],a[2]);g.push(b[0],b[1],b[2]);g.push(c[0],c[1],c[2]);g.push(d[0],d[1],d[2]);for(a=0;4>a;a++)e.push(0,0,0)};f(a.o,a.x,a.xy,a.y);f(a.o,a.y,a.yz,a.z);f(a.o,a.z,a.xz,a.x);f(a.yz,a.y,a.xy,a.xyz);f(a.xyz,a.xz,a.z,a.yz);f(a.xy,a.x,a.xz,a.xyz);a=[];for(f=0;6>f;f++){var d=4*f;a.push(d,d+1,d+1,d+2,d+2,d+3,d+3,d)}this.storeData(g,e,a)};a.UnitCell.prototype=new a._Mesh})(ChemDoodle.structures.d3,vec3);
-(function(a,c,g){a.Plate=function(a){this.lanes=Array(a);i=0;for(ii=a;i<ii;i++)this.lanes[i]=[]};var e=a.Plate.prototype;e.sort=function(){i=0;for(ii=this.lanes.length;i<ii;i++)this.lanes[i].sort(function(a,c){return a-c})};e.draw=function(a){var d=a.canvas.width,e=a.canvas.height;this.origin=9*e/10;this.front=e/10;this.laneLength=this.origin-this.front;a.strokeStyle="#000000";a.beginPath();a.moveTo(0,this.front);c.contextHashTo(a,0,this.front,d,this.front,3,3);a.closePath();a.stroke();a.beginPath();
-a.moveTo(0,this.origin);a.lineTo(d,this.origin);a.closePath();a.stroke();i=0;for(ii=this.lanes.length;i<ii;i++){e=(i+1)*d/(ii+1);a.beginPath();a.moveTo(e,this.origin);a.lineTo(e,this.origin+3);a.closePath();a.stroke();s=0;for(ss=this.lanes[i].length;s<ss;s++){var b=this.origin-this.laneLength*this.lanes[i][s].rf;switch(this.lanes[i][s].type){case "compact":a.beginPath();a.arc(e,b,3,0,2*g.PI,!1);a.closePath();break;case "expanded":a.beginPath();a.arc(e,b,7,0,2*g.PI,!1);a.closePath();break;case "widened":c.contextOval(a,
-e-18,b-10,36,10);break;case "cresent":a.beginPath(),a.arc(e,b,9,0,g.PI,!0),a.closePath()}switch(this.lanes[i][s].style){case "solid":a.fillStyle="#000000";a.fill();break;case "transparent":a.stroke()}}}};a.Plate.Spot=function(a,c,e){this.type=a;this.rf=c;this.style=e?e:"solid"}})(ChemDoodle.structures,ChemDoodle.extensions,Math);
-(function(a,c,g){a.default_backgroundColor="#FFFFFF";a.default_scale=1;a.default_rotateAngle=0;a.default_bondLength_2D=20;a.default_angstromsPerBondLength=1.25;a.default_lightDirection_3D=[-0.1,-0.1,-1];a.default_lightDiffuseColor_3D="#FFFFFF";a.default_lightSpecularColor_3D="#FFFFFF";a.default_projectionPerspective_3D=!0;a.default_projectionPerspectiveVerticalFieldOfView_3D=45;a.default_projectionOrthoWidth_3D=40;a.default_projectionWidthHeightRatio_3D=void 0;a.default_projectionFrontCulling_3D=
-0.1;a.default_projectionBackCulling_3D=1E4;a.default_cullBackFace_3D=!0;a.default_fog_mode_3D=0;a.default_fog_color_3D="#000000";a.default_fog_start_3D=0;a.default_fog_end_3D=1;a.default_fog_density_3D=1;a.default_atoms_display=!0;a.default_atoms_color="#000000";a.default_atoms_font_size_2D=12;a.default_atoms_font_families_2D=["Helvetica","Arial","Dialog"];a.default_atoms_font_bold_2D=!1;a.default_atoms_font_italic_2D=!1;a.default_atoms_circles_2D=!1;a.default_atoms_circleDiameter_2D=10;a.default_atoms_circleBorderWidth_2D=
-1;a.default_atoms_lonePairDistance_2D=8;a.default_atoms_lonePairSpread_2D=4;a.default_atoms_lonePairDiameter_2D=1;a.default_atoms_useJMOLColors=!1;a.default_atoms_usePYMOLColors=!1;a.default_atoms_resolution_3D=60;a.default_atoms_sphereDiameter_3D=0.8;a.default_atoms_useVDWDiameters_3D=!1;a.default_atoms_vdwMultiplier_3D=1;a.default_atoms_materialAmbientColor_3D="#000000";a.default_atoms_materialSpecularColor_3D="#555555";a.default_atoms_materialShininess_3D=32;a.default_atoms_implicitHydrogens_2D=
-!0;a.default_atoms_displayTerminalCarbonLabels_2D=!1;a.default_atoms_showHiddenCarbons_2D=!0;a.default_atoms_showAttributedCarbons_2D=!0;a.default_atoms_displayAllCarbonLabels_2D=!1;a.default_atoms_nonBondedAsStars_3D=!1;a.default_atoms_displayLabels_3D=!1;a.default_bonds_display=!0;a.default_bonds_color="#000000";a.default_bonds_width_2D=1;a.default_bonds_saturationWidth_2D=0.2;a.default_bonds_ends_2D="round";a.default_bonds_useJMOLColors=!1;a.default_bonds_usePYMOLColors=!1;a.default_bonds_colorGradient=
-!1;a.default_bonds_saturationAngle_2D=g.PI/3;a.default_bonds_symmetrical_2D=!1;a.default_bonds_clearOverlaps_2D=!1;a.default_bonds_overlapClearWidth_2D=0.5;a.default_bonds_atomLabelBuffer_2D=1;a.default_bonds_wedgeThickness_2D=0.22;a.default_bonds_hashWidth_2D=1;a.default_bonds_hashSpacing_2D=2.5;a.default_bonds_dotSize_2D=2;a.default_bonds_showBondOrders_3D=!1;a.default_bonds_resolution_3D=60;a.default_bonds_renderAsLines_3D=!1;a.default_bonds_cylinderDiameter_3D=0.3;a.default_bonds_pillLatitudeResolution_3D=
-10;a.default_bonds_pillLongitudeResolution_3D=20;a.default_bonds_pillHeight_3D=0.3;a.default_bonds_pillSpacing_3D=0.1;a.default_bonds_pillDiameter_3D=0.3;a.default_bonds_materialAmbientColor_3D="#222222";a.default_bonds_materialSpecularColor_3D="#555555";a.default_bonds_materialShininess_3D=32;a.default_proteins_displayRibbon=!0;a.default_proteins_displayBackbone=!1;a.default_proteins_backboneThickness=1.5;a.default_proteins_backboneColor="#CCCCCC";a.default_proteins_ribbonCartoonize=!1;a.default_proteins_useShapelyColors=
-!1;a.default_proteins_useAminoColors=!1;a.default_proteins_usePolarityColors=!1;a.default_proteins_primaryColor="#FF0D0D";a.default_proteins_secondaryColor="#FFFF30";a.default_proteins_ribbonCartoonHelixPrimaryColor="#00E740";a.default_proteins_ribbonCartoonHelixSecondaryColor="#9905FF";a.default_proteins_ribbonCartoonSheetColor="#E8BB99";a.default_proteins_ribbonThickness=0.2;a.default_proteins_verticalResolution=10;a.default_proteins_horizontalResolution=9;a.default_proteins_materialAmbientColor_3D=
-"#222222";a.default_proteins_materialSpecularColor_3D="#555555";a.default_proteins_materialShininess_3D=32;a.default_nucleics_display=!0;a.default_nucleics_tubeColor="#CCCCCC";a.default_nucleics_baseColor="#C10000";a.default_nucleics_useShapelyColors=!0;a.default_nucleics_tubeThickness=1.5;a.default_nucleics_tubeResolution_3D=60;a.default_nucleics_verticalResolution=10;a.default_nucleics_materialAmbientColor_3D="#222222";a.default_nucleics_materialSpecularColor_3D="#555555";a.default_nucleics_materialShininess_3D=
-32;a.default_macro_displayAtoms=!1;a.default_macro_displayBonds=!1;a.default_macro_atomToLigandDistance=-1;a.default_macro_showWater=!1;a.default_macro_colorByChain=!1;a.default_surfaces_display=!0;a.default_surfaces_style="Dot";a.default_surfaces_color="#E9B862";a.default_surfaces_materialAmbientColor_3D="#000000";a.default_surfaces_materialSpecularColor_3D="#000000";a.default_surfaces_materialShininess_3D=32;a.default_crystals_displayUnitCell=!0;a.default_crystals_unitCellColor="green";a.default_crystals_unitCellLineWidth=
-1;a.default_plots_color="#000000";a.default_plots_width=1;a.default_plots_showIntegration=!1;a.default_plots_integrationColor="#c10000";a.default_plots_integrationLineWidth=1;a.default_plots_showGrid=!1;a.default_plots_gridColor="gray";a.default_plots_gridLineWidth=0.5;a.default_plots_showYAxis=!0;a.default_plots_flipXAxis=!1;a.default_text_font_size=12;a.default_text_font_families=["Helvetica","Arial","Dialog"];a.default_text_font_bold=!0;a.default_text_font_italic=!1;a.default_text_font_stroke_3D=
-!0;a.default_text_color="#000000";a.default_shapes_color="#000000";a.default_shapes_lineWidth_2D=1;a.default_shapes_arrowLength_2D=8;a.default_compass_display=!1;a.default_compass_axisXColor_3D="#FF0000";a.default_compass_axisYColor_3D="#00FF00";a.default_compass_axisZColor_3D="#0000FF";a.default_compass_size_3D=50;a.default_compass_resolution_3D=10;a.default_compass_displayText_3D=!0;c.VisualSpecifications=function(){this.backgroundColor=a.default_backgroundColor;this.scale=a.default_scale;this.rotateAngle=
-a.default_rotateAngle;this.bondLength=a.default_bondLength_2D;this.angstromsPerBondLength=a.default_angstromsPerBondLength;this.lightDirection_3D=a.default_lightDirection_3D;this.lightDiffuseColor_3D=a.default_lightDiffuseColor_3D;this.lightSpecularColor_3D=a.default_lightSpecularColor_3D;this.projectionPerspective_3D=a.default_projectionPerspective_3D;this.projectionPerspectiveVerticalFieldOfView_3D=a.default_projectionPerspectiveVerticalFieldOfView_3D;this.projectionOrthoWidth_3D=a.default_projectionOrthoWidth_3D;
-this.projectionWidthHeightRatio_3D=a.default_projectionWidthHeightRatio_3D;this.projectionFrontCulling_3D=a.default_projectionFrontCulling_3D;this.projectionBackCulling_3D=a.default_projectionBackCulling_3D;this.cullBackFace_3D=a.default_cullBackFace_3D;this.fog_mode_3D=a.default_fog_mode_3D;this.fog_color_3D=a.default_fog_color_3D;this.fog_start_3D=a.default_fog_start_3D;this.fog_end_3D=a.default_fog_end_3D;this.fog_density_3D=a.default_fog_density_3D;this.atoms_display=a.default_atoms_display;this.atoms_color=
-a.default_atoms_color;this.atoms_font_size_2D=a.default_atoms_font_size_2D;this.atoms_font_families_2D=[];for(var c=0,f=a.default_atoms_font_families_2D.length;c<f;c++)this.atoms_font_families_2D[c]=a.default_atoms_font_families_2D[c];this.atoms_font_bold_2D=a.default_atoms_font_bold_2D;this.atoms_font_italic_2D=a.default_atoms_font_italic_2D;this.atoms_circles_2D=a.default_atoms_circles_2D;this.atoms_circleDiameter_2D=a.default_atoms_circleDiameter_2D;this.atoms_circleBorderWidth_2D=a.default_atoms_circleBorderWidth_2D;
-this.atoms_lonePairDistance_2D=a.default_atoms_lonePairDistance_2D;this.atoms_lonePairSpread_2D=a.default_atoms_lonePairSpread_2D;this.atoms_lonePairDiameter_2D=a.default_atoms_lonePairDiameter_2D;this.atoms_useJMOLColors=a.default_atoms_useJMOLColors;this.atoms_usePYMOLColors=a.default_atoms_usePYMOLColors;this.atoms_resolution_3D=a.default_atoms_resolution_3D;this.atoms_sphereDiameter_3D=a.default_atoms_sphereDiameter_3D;this.atoms_useVDWDiameters_3D=a.default_atoms_useVDWDiameters_3D;this.atoms_vdwMultiplier_3D=
-a.default_atoms_vdwMultiplier_3D;this.atoms_materialAmbientColor_3D=a.default_atoms_materialAmbientColor_3D;this.atoms_materialSpecularColor_3D=a.default_atoms_materialSpecularColor_3D;this.atoms_materialShininess_3D=a.default_atoms_materialShininess_3D;this.atoms_implicitHydrogens_2D=a.default_atoms_implicitHydrogens_2D;this.atoms_displayTerminalCarbonLabels_2D=a.default_atoms_displayTerminalCarbonLabels_2D;this.atoms_showHiddenCarbons_2D=a.default_atoms_showHiddenCarbons_2D;this.atoms_showAttributedCarbons_2D=
-a.default_atoms_showAttributedCarbons_2D;this.atoms_displayAllCarbonLabels_2D=a.default_atoms_displayAllCarbonLabels_2D;this.atoms_nonBondedAsStars_3D=a.default_atoms_nonBondedAsStars_3D;this.atoms_displayLabels_3D=a.default_atoms_displayLabels_3D;this.bonds_display=a.default_bonds_display;this.bonds_color=a.default_bonds_color;this.bonds_width_2D=a.default_bonds_width_2D;this.bonds_saturationWidth_2D=a.default_bonds_saturationWidth_2D;this.bonds_ends_2D=a.default_bonds_ends_2D;this.bonds_useJMOLColors=
-a.default_bonds_useJMOLColors;this.bonds_usePYMOLColors=a.default_bonds_usePYMOLColors;this.bonds_colorGradient=a.default_bonds_colorGradient;this.bonds_saturationAngle_2D=a.default_bonds_saturationAngle_2D;this.bonds_symmetrical_2D=a.default_bonds_symmetrical_2D;this.bonds_clearOverlaps_2D=a.default_bonds_clearOverlaps_2D;this.bonds_overlapClearWidth_2D=a.default_bonds_overlapClearWidth_2D;this.bonds_atomLabelBuffer_2D=a.default_bonds_atomLabelBuffer_2D;this.bonds_wedgeThickness_2D=a.default_bonds_wedgeThickness_2D;
-this.bonds_hashWidth_2D=a.default_bonds_hashWidth_2D;this.bonds_hashSpacing_2D=a.default_bonds_hashSpacing_2D;this.bonds_dotSize_2D=a.default_bonds_dotSize_2D;this.bonds_showBondOrders_3D=a.default_bonds_showBondOrders_3D;this.bonds_resolution_3D=a.default_bonds_resolution_3D;this.bonds_renderAsLines_3D=a.default_bonds_renderAsLines_3D;this.bonds_cylinderDiameter_3D=a.default_bonds_cylinderDiameter_3D;this.bonds_pillHeight_3D=a.default_bonds_pillHeight_3D;this.bonds_pillLatitudeResolution_3D=a.default_bonds_pillLatitudeResolution_3D;
-this.bonds_pillLongitudeResolution_3D=a.default_bonds_pillLongitudeResolution_3D;this.bonds_pillSpacing_3D=a.default_bonds_pillSpacing_3D;this.bonds_pillDiameter_3D=a.default_bonds_pillDiameter_3D;this.bonds_materialAmbientColor_3D=a.default_bonds_materialAmbientColor_3D;this.bonds_materialSpecularColor_3D=a.default_bonds_materialSpecularColor_3D;this.bonds_materialShininess_3D=a.default_bonds_materialShininess_3D;this.proteins_displayRibbon=a.default_proteins_displayRibbon;this.proteins_displayBackbone=
-a.default_proteins_displayBackbone;this.proteins_backboneThickness=a.default_proteins_backboneThickness;this.proteins_backboneColor=a.default_proteins_backboneColor;this.proteins_ribbonCartoonize=a.default_proteins_ribbonCartoonize;this.proteins_useShapelyColors=a.default_proteins_useShapelyColors;this.proteins_useAminoColors=a.default_proteins_useAminoColors;this.proteins_usePolarityColors=a.default_proteins_usePolarityColors;this.proteins_primaryColor=a.default_proteins_primaryColor;this.proteins_secondaryColor=
-a.default_proteins_secondaryColor;this.proteins_ribbonCartoonHelixPrimaryColor=a.default_proteins_ribbonCartoonHelixPrimaryColor;this.proteins_ribbonCartoonHelixSecondaryColor=a.default_proteins_ribbonCartoonHelixSecondaryColor;this.proteins_ribbonCartoonSheetColor=a.default_proteins_ribbonCartoonSheetColor;this.proteins_ribbonThickness=a.default_proteins_ribbonThickness;this.proteins_verticalResolution=a.default_proteins_verticalResolution;this.proteins_horizontalResolution=a.default_proteins_horizontalResolution;
-this.proteins_materialAmbientColor_3D=a.default_proteins_materialAmbientColor_3D;this.proteins_materialSpecularColor_3D=a.default_proteins_materialSpecularColor_3D;this.proteins_materialShininess_3D=a.default_proteins_materialShininess_3D;this.macro_displayAtoms=a.default_macro_displayAtoms;this.macro_displayBonds=a.default_macro_displayBonds;this.macro_atomToLigandDistance=a.default_macro_atomToLigandDistance;this.nucleics_display=a.default_nucleics_display;this.nucleics_tubeColor=a.default_nucleics_tubeColor;
-this.nucleics_baseColor=a.default_nucleics_baseColor;this.nucleics_useShapelyColors=a.default_nucleics_useShapelyColors;this.nucleics_tubeThickness=a.default_nucleics_tubeThickness;this.nucleics_tubeResolution_3D=a.default_nucleics_tubeResolution_3D;this.nucleics_verticalResolution=a.default_nucleics_verticalResolution;this.nucleics_materialAmbientColor_3D=a.default_nucleics_materialAmbientColor_3D;this.nucleics_materialSpecularColor_3D=a.default_nucleics_materialSpecularColor_3D;this.nucleics_materialShininess_3D=
-a.default_nucleics_materialShininess_3D;this.macro_showWater=a.default_macro_showWater;this.macro_colorByChain=a.default_macro_colorByChain;this.surfaces_display=a.default_surfaces_display;this.surfaces_style=a.default_surfaces_style;this.surfaces_color=a.default_surfaces_color;this.surfaces_materialAmbientColor_3D=a.default_surfaces_materialAmbientColor_3D;this.surfaces_materialSpecularColor_3D=a.default_surfaces_materialSpecularColor_3D;this.surfaces_materialShininess_3D=a.default_surfaces_materialShininess_3D;
-this.crystals_displayUnitCell=a.default_crystals_displayUnitCell;this.crystals_unitCellColor=a.default_crystals_unitCellColor;this.crystals_unitCellLineWidth=a.default_crystals_unitCellLineWidth;this.plots_color=a.default_plots_color;this.plots_width=a.default_plots_width;this.plots_showIntegration=a.default_plots_showIntegration;this.plots_integrationColor=a.default_plots_integrationColor;this.plots_integrationLineWidth=a.default_plots_integrationLineWidth;this.plots_showGrid=a.default_plots_showGrid;
-this.plots_gridColor=a.default_plots_gridColor;this.plots_gridLineWidth=a.default_plots_gridLineWidth;this.plots_showYAxis=a.default_plots_showYAxis;this.plots_flipXAxis=a.default_plots_flipXAxis;this.text_font_size=a.default_text_font_size;this.text_font_families=[];c=0;for(f=a.default_text_font_families.length;c<f;c++)this.text_font_families[c]=a.default_text_font_families[c];this.text_font_bold=a.default_text_font_bold;this.text_font_italic=a.default_text_font_italic;this.text_font_stroke_3D=a.default_text_font_stroke_3D;
-this.text_color=a.default_text_color;this.shapes_color=a.default_shapes_color;this.shapes_lineWidth_2D=a.default_shapes_lineWidth_2D;this.shapes_arrowLength_2D=a.default_shapes_arrowLength_2D;this.compass_display=a.default_compass_display;this.compass_axisXColor_3D=a.default_compass_axisXColor_3D;this.compass_axisYColor_3D=a.default_compass_axisYColor_3D;this.compass_axisZColor_3D=a.default_compass_axisZColor_3D;this.compass_size_3D=a.default_compass_size_3D;this.compass_resolution_3D=a.default_compass_resolution_3D;
-this.compass_displayText_3D=a.default_compass_displayText_3D};c.VisualSpecifications.prototype.set3DRepresentation=function(c){this.bonds_display=this.atoms_display=!0;this.bonds_color="#777777";this.bonds_showBondOrders_3D=this.bonds_useJMOLColors=this.atoms_useJMOLColors=this.atoms_useVDWDiameters_3D=!0;this.bonds_renderAsLines_3D=!1;"Ball and Stick"===c?(this.atoms_vdwMultiplier_3D=0.3,this.bonds_useJMOLColors=!1,this.bonds_cylinderDiameter_3D=0.3,this.bonds_materialAmbientColor_3D=a.default_atoms_materialAmbientColor_3D,
-this.bonds_pillDiameter_3D=0.15):"van der Waals Spheres"===c?(this.bonds_display=!1,this.atoms_vdwMultiplier_3D=1):"Stick"===c?(this.bonds_showBondOrders_3D=this.atoms_useVDWDiameters_3D=!1,this.bonds_cylinderDiameter_3D=this.atoms_sphereDiameter_3D=0.8,this.bonds_materialAmbientColor_3D=this.atoms_materialAmbientColor_3D):"Wireframe"===c?(this.atoms_useVDWDiameters_3D=!1,this.bonds_cylinderDiameter_3D=this.bonds_pillDiameter_3D=0.05,this.atoms_sphereDiameter_3D=0.15,this.bonds_materialAmbientColor_3D=
-a.default_atoms_materialAmbientColor_3D):"Line"===c?(this.atoms_display=!1,this.bonds_renderAsLines_3D=!0,this.bonds_width_2D=1,this.bonds_cylinderDiameter_3D=0.05):alert('"'+c+'" is not recognized. Use one of the following strings:\n\n1. Ball and Stick\n2. van der Waals Spheres\n3. Stick\n4. Wireframe\n5. Line\n')}})(ChemDoodle,ChemDoodle.structures,Math);
-(function(a,c,g,e){g.getPointsPerAngstrom=function(){return a.default_bondLength_2D/a.default_angstromsPerBondLength};g.BondDeducer=function(){};var f=g.BondDeducer.prototype;f.margin=1.1;f.deduceCovalentBonds=function(a,f){var b=g.getPointsPerAngstrom();f&&(b=f);for(var m=0,v=a.atoms.length;m<v;m++)for(var j=m+1;j<v;j++){var h=a.atoms[m],k=a.atoms[j];h.distance3D(k)<(c[h.label].covalentRadius+c[k.label].covalentRadius)*b*this.margin&&a.bonds.push(new e.Bond(h,k,1))}}})(ChemDoodle,ChemDoodle.ELEMENT,
-ChemDoodle.informatics,ChemDoodle.structures);(function(a){a.HydrogenDeducer=function(){};a.HydrogenDeducer.prototype.removeHydrogens=function(a){for(var g=[],e=[],f=0,d=a.bonds.length;f<d;f++)"H"!==a.bonds[f].a1.label&&"H"!==a.bonds[f].a2.label&&e.push(a.bonds[f]);f=0;for(d=a.atoms.length;f<d;f++)"H"!==a.atoms[f].label&&g.push(a.atoms[f]);a.atoms=g;a.bonds=e}})(ChemDoodle.informatics);
-(function(a,c,g){c.MolecularSurfaceGenerator=function(){};c.MolecularSurfaceGenerator.prototype.generateSurface=function(a,c,d,n,b){return new g.MolecularSurface(a,c,d,n,b)}})(ChemDoodle,ChemDoodle.informatics,ChemDoodle.structures.d3);
-(function(a,c){a.Splitter=function(){};a.Splitter.prototype.split=function(a){for(var e=[],f=0,d=a.atoms.length;f<d;f++)a.atoms[f].visited=!1;f=0;for(d=a.bonds.length;f<d;f++)a.bonds[f].visited=!1;f=0;for(d=a.atoms.length;f<d;f++){var n=a.atoms[f];if(!n.visited){var b=new c.Molecule;b.atoms.push(n);n.visited=!0;var m=new c.Queue;for(m.enqueue(n);!m.isEmpty();)for(var n=m.dequeue(),v=0,j=a.bonds.length;v<j;v++){var h=a.bonds[v];h.contains(n)&&!h.visited&&(h.visited=!0,b.bonds.push(h),h=h.getNeighbor(n),
-h.visited||(h.visited=!0,b.atoms.push(h),m.enqueue(h)))}e.push(b)}}return e}})(ChemDoodle.informatics,ChemDoodle.structures);(function(a,c){a.StructureBuilder=function(){};a.StructureBuilder.prototype.copy=function(a){var e=new c.JSONInterpreter;return e.molFrom(e.molTo(a))}})(ChemDoodle.informatics,ChemDoodle.io,ChemDoodle.structures);
-(function(a){a._Counter=function(){};a=a._Counter.prototype;a.value=0;a.molecule=void 0;a.setMolecule=function(a){this.value=0;this.molecule=a;this.innerCalculate&&this.innerCalculate()}})(ChemDoodle.informatics);(function(a){a.FrerejacqueNumberCounter=function(a){this.setMolecule(a)};(a.FrerejacqueNumberCounter.prototype=new a._Counter).innerCalculate=function(){this.value=this.molecule.bonds.length-this.molecule.atoms.length+(new a.NumberOfMoleculesCounter(this.molecule)).value}})(ChemDoodle.informatics);
-(function(a,c){c.NumberOfMoleculesCounter=function(a){this.setMolecule(a)};(c.NumberOfMoleculesCounter.prototype=new c._Counter).innerCalculate=function(){for(var c=0,e=this.molecule.atoms.length;c<e;c++)this.molecule.atoms[c].visited=!1;c=0;for(e=this.molecule.atoms.length;c<e;c++)if(!this.molecule.atoms[c].visited){this.value++;var f=new a.Queue;this.molecule.atoms[c].visited=!0;for(f.enqueue(this.molecule.atoms[c]);!f.isEmpty();)for(var d=f.dequeue(),n=0,b=this.molecule.bonds.length;n<b;n++){var m=
-this.molecule.bonds[n];m.contains(d)&&(m=m.getNeighbor(d),m.visited||(m.visited=!0,f.enqueue(m)))}}}})(ChemDoodle.structures,ChemDoodle.informatics);
-(function(a){a._RingFinder=function(){};a=a._RingFinder.prototype;a.atoms=void 0;a.bonds=void 0;a.rings=void 0;a.reduce=function(a){for(var g=0,e=a.atoms.length;g<e;g++)a.atoms[g].visited=!1;g=0;for(e=a.bonds.length;g<e;g++)a.bonds[g].visited=!1;for(var f=!0;f;){f=!1;g=0;for(e=a.atoms.length;g<e;g++){for(var d=0,n,b=0,m=a.bonds.length;b<m;b++)if(a.bonds[b].contains(a.atoms[g])&&!a.bonds[b].visited){d++;if(2===d)break;n=a.bonds[b]}1===d&&(f=!0,n.visited=!0,a.atoms[g].visited=!0)}}g=0;for(e=a.atoms.length;g<
-e;g++)a.atoms[g].visited||this.atoms.push(a.atoms[g]);g=0;for(e=a.bonds.length;g<e;g++)a.bonds[g].visited||this.bonds.push(a.bonds[g]);0===this.bonds.length&&0!==this.atoms.length&&(this.atoms=[])};a.setMolecule=function(a){this.atoms=[];this.bonds=[];this.rings=[];this.reduce(a);2<this.atoms.length&&this.innerGetRings&&this.innerGetRings()};a.fuse=function(){for(var a=0,g=this.rings.length;a<g;a++)for(var e=0,f=this.bonds.length;e<f;e++)-1!==this.rings[a].atoms.indexOf(this.bonds[e].a1)&&-1!==this.rings[a].atoms.indexOf(this.bonds[e].a2)&&
-this.rings[a].bonds.push(this.bonds[e])}})(ChemDoodle.informatics);
-(function(a,c){function g(a,c){this.atoms=[];if(c)for(var e=0,b=c.atoms.length;e<b;e++)this.atoms[e]=c.atoms[e];this.atoms.push(a)}var e=g.prototype;e.grow=function(a,c){for(var e=this.atoms[this.atoms.length-1],b=[],m=0,v=a.length;m<v;m++)if(a[m].contains(e)){var j=a[m].getNeighbor(e);-1===c.indexOf(j)&&b.push(j)}e=[];m=0;for(v=b.length;m<v;m++)e.push(new g(b[m],this));return e};e.check=function(a,d,e){for(var b=0,m=d.atoms.length-1;b<m;b++)if(-1!==this.atoms.indexOf(d.atoms[b]))return;var g;if(d.atoms[d.atoms.length-
-1]===this.atoms[this.atoms.length-1]){g=new c.Ring;g.atoms[0]=e;b=0;for(m=this.atoms.length;b<m;b++)g.atoms.push(this.atoms[b]);for(b=d.atoms.length-2;0<=b;b--)g.atoms.push(d.atoms[b])}else{for(var j=[],b=0,m=a.length;b<m;b++)a[b].contains(d.atoms[d.atoms.length-1])&&j.push(a[b]);b=0;for(m=j.length;b<m;b++)if((1===d.atoms.length||!j[b].contains(d.atoms[d.atoms.length-2]))&&j[b].contains(this.atoms[this.atoms.length-1])){g=new c.Ring;g.atoms[0]=e;a=0;for(e=this.atoms.length;a<e;a++)g.atoms.push(this.atoms[a]);
-for(a=d.atoms.length-1;0<=a;a--)g.atoms.push(d.atoms[a]);break}}return g};a.EulerFacetRingFinder=function(a){this.setMolecule(a)};e=a.EulerFacetRingFinder.prototype=new a._RingFinder;e.fingerBreak=5;e.innerGetRings=function(){for(var a=0,c=this.atoms.length;a<c;a++){for(var e=[],b=0,m=this.bonds.length;b<m;b++)this.bonds[b].contains(this.atoms[a])&&e.push(this.bonds[b].getNeighbor(this.atoms[a]));b=0;for(m=e.length;b<m;b++)for(var v=b+1;v<e.length;v++){var j=[];j[0]=new g(e[b]);j[1]=new g(e[v]);var h=
-[];h[0]=this.atoms[a];for(var k=0,p=e.length;k<p;k++)k!==b&&k!==v&&h.push(e[k]);var u=[];for((k=j[0].check(this.bonds,j[1],this.atoms[a]))&&(u[0]=k);0===u.length&&0<j.length&&j[0].atoms.length<this.fingerBreak;){for(var l=[],k=0,p=j.length;k<p;k++)for(var t=j[k].grow(this.bonds,h),o=0,r=t.length;o<r;o++)l.push(t[o]);j=l;k=0;for(p=j.length;k<p;k++)for(o=k+1;o<p;o++)(r=j[k].check(this.bonds,j[o],this.atoms[a]))&&u.push(r);if(0===u.length){l=[];k=0;for(p=h.length;k<p;k++){o=0;for(r=this.bonds.length;o<
-r;o++)this.bonds[o].contains(h[k])&&(e=this.bonds[o].getNeighbor(h[k]),-1===h.indexOf(e)&&-1===l.indexOf(e)&&l.push(e))}k=0;for(p=l.length;k<p;k++)h.push(l[k])}}if(0<u.length){j=void 0;k=0;for(p=u.length;k<p;k++)if(!j||j.atoms.length>u[k].atoms.length)j=u[k];u=!1;k=0;for(p=this.rings.length;k<p;k++){h=!0;o=0;for(r=j.atoms.length;o<r;o++)if(-1===this.rings[k].atoms.indexOf(j.atoms[o])){h=!1;break}if(h){u=!0;break}}u||this.rings.push(j)}}}this.fuse()}})(ChemDoodle.informatics,ChemDoodle.structures);
-(function(a){a.SSSRFinder=function(c){this.rings=[];if(0<c.atoms.length){var g=(new a.FrerejacqueNumberCounter(c)).value,e=(new a.EulerFacetRingFinder(c)).rings;e.sort(function(a,b){return a.atoms.length-b.atoms.length});for(var f=0,d=c.bonds.length;f<d;f++)c.bonds[f].visited=!1;f=0;for(d=e.length;f<d;f++){c=!1;for(var n=0,b=e[f].bonds.length;n<b;n++)if(!e[f].bonds[n].visited){c=!0;break}if(c){n=0;for(b=e[f].bonds.length;n<b;n++)e[f].bonds[n].visited=!0;this.rings.push(e[f])}if(this.rings.length===
-g)break}}}})(ChemDoodle.informatics);(function(a){a._Interpreter=function(){};a._Interpreter.prototype.fit=function(a,g,e){for(var f=a.length,d=[],n=0;n<g-f;n++)d.push(" ");return e?a+d.join(""):d.join("")+a}})(ChemDoodle.io);
-(function(a,c,g,e,f,d){var n=/\s+/g,b=/\(|\)|\s+/g,m=/\'|\s+/g,v=/,|\'|\s+/g,j=/^\s+/,h=/[0-9]/g,k=/[0-9]|\+|\-/g,p=function(a){return 0!==a.length},u={P:[],A:[[0,0.5,0.5]],B:[[0.5,0,0.5]],C:[[0.5,0.5,0]],I:[[0.5,0.5,0.5]],R:[[2/3,1/3,1/3],[1/3,2/3,2/3]],S:[[1/3,1/3,2/3],[2/3,2/3,1/3]],T:[[1/3,2/3,1/3],[2/3,1/3,2/3]],F:[[0,0.5,0.5],[0.5,0,0.5],[0.5,0.5,0]]},l=function(a){var b=0,c=0,d=0,f=0,e=a.indexOf("x"),k=a.indexOf("y"),j=a.indexOf("z");-1!==e&&(c++,0<e&&"+"!==a.charAt(e-1)&&(c*=-1));-1!==k&&
-(d++,0<k&&"+"!==a.charAt(k-1)&&(d*=-1));-1!==j&&(f++,0<j&&"+"!==a.charAt(j-1)&&(f*=-1));if(2<a.length){e="+";k=0;for(j=a.length;k<j;k++){var m=a.charAt(k);if(("-"===m||"/"===m)&&(k===a.length-1||a.charAt(k+1).match(h)))e=m;m.match(h)&&("+"===e?b+=parseInt(m):"-"===e?b-=parseInt(m):"/"===e&&(b/=parseInt(m)))}}return[b,c,d,f]};g.CIFInterpreter=function(){};(g.CIFInterpreter.prototype=new g._Interpreter).read=function(h,g,t,w){g=g?g:1;t=t?t:1;w=w?w:1;var y=new e.Molecule;if(!h)return y;for(var z=h.split("\n"),
-x=0,A=0,B=0,F=h=0,D=0,E="P",I,G,L,C,H=!0;0<z.length;)if(H?C=z.shift():H=!0,0<C.length)if(c.stringStartsWith(C,"_cell_length_a"))x=parseFloat(C.split(b)[1]);else if(c.stringStartsWith(C,"_cell_length_b"))A=parseFloat(C.split(b)[1]);else if(c.stringStartsWith(C,"_cell_length_c"))B=parseFloat(C.split(b)[1]);else if(c.stringStartsWith(C,"_cell_angle_alpha"))h=f.PI*parseFloat(C.split(b)[1])/180;else if(c.stringStartsWith(C,"_cell_angle_beta"))F=f.PI*parseFloat(C.split(b)[1])/180;else if(c.stringStartsWith(C,
-"_cell_angle_gamma"))D=f.PI*parseFloat(C.split(b)[1])/180;else if(c.stringStartsWith(C,"_symmetry_space_group_name_H-M"))E=C.split(m)[1];else if(c.stringStartsWith(C,"loop_")){for(var J={fields:[],lines:[]},M=!1;void 0!==(C=z.shift())&&!c.stringStartsWith(C=C.replace(j,""),"loop_")&&0<C.length;)if(c.stringStartsWith(C,"_")){if(M)break;J.fields=J.fields.concat(C.split(n).filter(p))}else M=!0,J.lines.push(C);if(0!==z.length&&(c.stringStartsWith(C,"loop_")||c.stringStartsWith(C,"_")))H=!1;-1!==J.fields.indexOf("_symmetry_equiv_pos_as_xyz")||
--1!==J.fields.indexOf("_space_group_symop_operation_xyz")?I=J:-1!==J.fields.indexOf("_atom_site_label")?G=J:-1!==J.fields.indexOf("_geom_bond_atom_site_label_1")&&(L=J)}C=x;h=(f.cos(h)-f.cos(D)*f.cos(F))/f.sin(D);h=[C,0,0,0,A*f.cos(D),A*f.sin(D),0,0,B*f.cos(F),B*h,B*f.sqrt(1-f.pow(f.cos(F),2)-h*h),0,0,0,0,1];if(G){J=H=x=z=B=-1;D=0;for(F=G.fields.length;D<F;D++)C=G.fields[D],"_atom_site_type_symbol"===C?B=D:"_atom_site_label"===C?z=D:"_atom_site_fract_x"===C?x=D:"_atom_site_fract_y"===C?H=D:"_atom_site_fract_z"===
-C&&(J=D);D=0;for(F=G.lines.length;D<F;D++)C=G.lines[D],A=C.split(n).filter(p),C=new e.Atom(A[-1===B?z:B].split(k)[0],parseFloat(A[x]),parseFloat(A[H]),parseFloat(A[J])),y.atoms.push(C),-1!==z&&(C.cifId=A[z],C.cifPart=0)}if(I&&!L){D=A=0;for(F=I.fields.length;D<F;D++)if(C=I.fields[D],"_symmetry_equiv_pos_as_xyz"===C||"_space_group_symop_operation_xyz"===C)A=D;H=u[E];z=[];D=0;for(F=I.lines.length;D<F;D++){C=I.lines[D].split(v).filter(p);for(var J=l(C[A]),M=l(C[A+1]),N=l(C[A+2]),E=0,x=y.atoms.length;E<
-x;E++){C=y.atoms[E];var Q=C.x*J[1]+C.y*J[2]+C.z*J[3]+J[0],K=C.x*M[1]+C.y*M[2]+C.z*M[3]+M[0],P=C.x*N[1]+C.y*N[2]+C.z*N[3]+N[0];G=new e.Atom(C.label,Q,K,P);z.push(G);void 0!==C.cifId&&(G.cifId=C.cifId,G.cifPart=D+1);if(H){G=0;for(B=H.length;G<B;G++){var O=H[G],O=new e.Atom(C.label,Q+O[0],K+O[1],P+O[2]);z.push(O);void 0!==C.cifId&&(O.cifId=C.cifId,O.cifPart=D+1)}}}}D=0;for(F=z.length;D<F;D++){for(C=z[D];1<=C.x;)C.x--;for(;0>C.x;)C.x++;for(;1<=C.y;)C.y--;for(;0>C.y;)C.y++;for(;1<=C.z;)C.z--;for(;0>C.z;)C.z++}G=
-[];D=0;for(F=z.length;D<F;D++){B=!1;C=z[D];E=0;for(x=y.atoms.length;E<x;E++)if(1E-4>y.atoms[E].distance3D(C)){B=!0;break}if(!B){E=0;for(x=G.length;E<x;E++)if(1E-4>G[E].distance3D(C)){B=!0;break}B||G.push(C)}}y.atoms=y.atoms.concat(G)}F=[];for(D=0;D<g;D++)for(E=0;E<t;E++)for(G=0;G<w;G++)if(!(0===D&&0===E&&0===G)){B=0;for(A=y.atoms.length;B<A;B++)C=y.atoms[B],z=new e.Atom(C.label,C.x+D,C.y+E,C.z+G),F.push(z),void 0!==C.cifId&&(z.cifId=C.cifId,z.cifPart=C.cifPart+(I?I.lines.length:0)+D+10*E+100*G)}y.atoms=
-y.atoms.concat(F);D=0;for(F=y.atoms.length;D<F;D++)C=y.atoms[D],I=d.multiplyVec3(h,[C.x,C.y,C.z]),C.x=I[0],C.y=I[1],C.z=I[2];if(L){z=I=-1;D=0;for(F=L.fields.length;D<F;D++)C=L.fields[D],"_geom_bond_atom_site_label_1"===C?I=D:"_geom_bond_atom_site_label_2"===C&&(z=D);G=0;for(B=L.lines.length;G<B;G++){A=L.lines[G].split(n).filter(p);C=A[I];A=A[z];D=0;for(F=y.atoms.length;D<F;D++)for(E=D+1;E<F;E++){x=y.atoms[D];H=y.atoms[E];if(x.cifPart!==H.cifPart)break;(x.cifId===C&&H.cifId===A||x.cifId===A&&H.cifId===
-C)&&y.bonds.push(new e.Bond(x,H))}}}else(new a.informatics.BondDeducer).deduceCovalentBonds(y,1);g=[-g/2,-t/2,-w/2];y.unitCellVectors={o:d.multiplyVec3(h,g,[]),x:d.multiplyVec3(h,[g[0]+1,g[1],g[2]]),y:d.multiplyVec3(h,[g[0],g[1]+1,g[2]]),z:d.multiplyVec3(h,[g[0],g[1],g[2]+1]),xy:d.multiplyVec3(h,[g[0]+1,g[1]+1,g[2]]),xz:d.multiplyVec3(h,[g[0]+1,g[1],g[2]+1]),yz:d.multiplyVec3(h,[g[0],g[1]+1,g[2]+1]),xyz:d.multiplyVec3(h,[g[0]+1,g[1]+1,g[2]+1])};return y};var t=new g.CIFInterpreter;a.readCIF=function(a,
-b,c,d){return t.read(a,b,c,d)}})(ChemDoodle,ChemDoodle.extensions,ChemDoodle.io,ChemDoodle.structures,Math,mat4,vec3);
-(function(a,c,g,e){g.MOLInterpreter=function(){};var f=g.MOLInterpreter.prototype=new g._Interpreter;f.read=function(d,b){b||(b=a.default_bondLength_2D);var f=new e.Molecule;if(!d)return f;for(var g=d.split("\n"),j=g[3],h=parseInt(j.substring(0,3)),j=parseInt(j.substring(3,6)),k=0;k<h;k++){var p=g[4+k];f.atoms[k]=new e.Atom(p.substring(31,34),parseFloat(p.substring(0,10))*b,(1===b?1:-1)*parseFloat(p.substring(10,20))*b,parseFloat(p.substring(20,30))*b);var u=parseInt(p.substring(34,36));0!==u&&c[f.atoms[k].label]&&
-(f.atoms[k].mass=c[f.atoms[k].label].mass+u);switch(parseInt(p.substring(36,39))){case 1:f.atoms[k].charge=3;break;case 2:f.atoms[k].charge=2;break;case 3:f.atoms[k].charge=1;break;case 5:f.atoms[k].charge=-1;break;case 6:f.atoms[k].charge=-2;break;case 7:f.atoms[k].charge=-3}}for(k=0;k<j;k++){var p=g[4+h+k],l=parseInt(p.substring(6,9)),u=parseInt(p.substring(9,12));if(3<l)switch(l){case 4:l=1.5;break;default:l=1}p=new e.Bond(f.atoms[parseInt(p.substring(0,3))-1],f.atoms[parseInt(p.substring(3,6))-
-1],l);switch(u){case 3:p.stereo=e.Bond.STEREO_AMBIGUOUS;break;case 1:p.stereo=e.Bond.STEREO_PROTRUDING;break;case 6:p.stereo=e.Bond.STEREO_RECESSED}f.bonds[k]=p}return f};f.write=function(d){var b=[];b.push("Molecule from ChemDoodle Web Components\n\nhttp://www.ichemlabs.com\n");b.push(this.fit(d.atoms.length.toString(),3));b.push(this.fit(d.bonds.length.toString(),3));b.push("  0  0  0  0            999 V2000\n");for(var f=d.getCenter(),g=0,j=d.atoms.length;g<j;g++){var h=d.atoms[g],k=" 0";if(-1!==
-h.mass&&c[h.label]){var p=h.mass-c[h.label].mass;5>p&&-4<p&&(k=(-1<p?" ":"")+p)}p="  0";if(0!==h.charge)switch(h.charge){case 3:p="  1";break;case 2:p="  2";break;case 1:p="  3";break;case -1:p="  5";break;case -2:p="  6";break;case -3:p="  7"}b.push(this.fit(((h.x-f.x)/a.default_bondLength_2D).toFixed(4),10));b.push(this.fit((-(h.y-f.y)/a.default_bondLength_2D).toFixed(4),10));b.push(this.fit((h.z/a.default_bondLength_2D).toFixed(4),10));b.push(" ");b.push(this.fit(h.label,3,!0));b.push(k);b.push(p);
-b.push("  0  0  0  0\n")}g=0;for(j=d.bonds.length;g<j;g++){h=d.bonds[g];f=0;h.stereo===e.Bond.STEREO_AMBIGUOUS?f=3:h.stereo===e.Bond.STEREO_PROTRUDING?f=1:h.stereo===e.Bond.STEREO_RECESSED&&(f=6);b.push(this.fit((d.atoms.indexOf(h.a1)+1).toString(),3));b.push(this.fit((d.atoms.indexOf(h.a2)+1).toString(),3));h=h.bondOrder;if(1.5==h)h=4;else if(3<h||0!=h%1)h=1;b.push(this.fit(h,3));b.push("  ");b.push(f);b.push("     0  0\n")}b.push("M  END");return b.join("")};var d=new g.MOLInterpreter;a.readMOL=
-function(a,b){return d.read(a,b)};a.writeMOL=function(a){return d.write(a)}})(ChemDoodle,ChemDoodle.ELEMENT,ChemDoodle.io,ChemDoodle.structures);
-(function(a,c,g,e,f,d,n){function b(a,b,c,d,f){for(var e=0,g=b.length;e<g;e++){var m=b[e];if(m.id===c&&d>=m.start&&d<=m.end){f?a.helix=!0:a.sheet=!0;d+1===m.end&&(a.arrow=!0);break}}}g.PDBInterpreter=function(){};var m=g.PDBInterpreter.prototype=new g._Interpreter;m.calculateRibbonDistances=!1;m.deduceResidueBonds=!1;m.read=function(j,h){var k=new e.Molecule;k.chains=[];if(!j)return k;var g=j.split("\n");h||(h=1);for(var m=[],l=[],t,o=[],v=[],q=[],w=0,y=g.length;w<y;w++){var z=g[w];if(c.stringStartsWith(z,
-"HELIX"))m.push({id:z.substring(19,20),start:parseInt(z.substring(21,25)),end:parseInt(z.substring(33,37))});else if(c.stringStartsWith(z,"SHEET"))l.push({id:z.substring(21,22),start:parseInt(z.substring(22,26)),end:parseInt(z.substring(33,37))});else if(c.stringStartsWith(z,"ATOM")){var x=z.substring(16,17);if(" "===x||"A"===x){x=d(z.substring(76,78));if(0===x.length){var A=d(z.substring(12,14));"HD"===A?x="H":0<A.length&&(x=1<A.length?A.charAt(0)+A.substring(1).toLowerCase():A)}A=new e.Atom(x,parseFloat(z.substring(30,
-38))*h,parseFloat(z.substring(38,46))*h,parseFloat(z.substring(46,54))*h);A.hetatm=!1;v.push(A);var B=parseInt(z.substring(22,26));if(0===o.length)for(x=0;2>x;x++){var F=new e.Residue(-1);F.cp1=A;F.cp2=A;o.push(F)}B!==Number.NaN&&o[o.length-1].resSeq!==B&&(x=new e.Residue(B),x.name=d(z.substring(17,20)),3===x.name.length?x.name=x.name.substring(0,1)+x.name.substring(1).toLowerCase():2===x.name.length&&"D"===x.name.charAt(0)&&(x.name=x.name.substring(1)),o.push(x),F=z.substring(21,22),b(x,m,F,B,!0),
-b(x,l,F,B,!1));z=d(z.substring(12,16));x=o[o.length-1];if("CA"===z||"P"===z||"O5'"===z)x.cp1||(x.cp1=A);else if("N3"===z&&("C"===x.name||"U"===x.name||"T"===x.name)||"N1"===z&&("A"===x.name||"G"===x.name))x.cp3=A;else if("C2"===z)x.cp4=A;else if("C4"===z&&("C"===x.name||"U"===x.name||"T"===x.name)||"C6"===z&&("A"===x.name||"G"===x.name))x.cp5=A;else if("O"===z||"C6"===z&&("C"===x.name||"U"===x.name||"T"===x.name)||"N9"===z){if(!o[o.length-1].cp2){if("C6"===z||"N9"===z)t=A;x.cp2=A}}else"C"===z&&(t=
-A)}}else if(c.stringStartsWith(z,"HETATM"))x=d(z.substring(76,78)),0===x.length&&(x=d(z.substring(12,16))),1<x.length&&(x=x.substring(0,1)+x.substring(1).toLowerCase()),x=new e.Atom(x,parseFloat(z.substring(30,38))*h,parseFloat(z.substring(38,46))*h,parseFloat(z.substring(46,54))*h),x.hetatm=!0,"HOH"===d(z.substring(17,20))&&(x.isWater=!0),k.atoms.push(x),q[parseInt(d(z.substring(6,11)))]=x;else if(c.stringStartsWith(z,"CONECT")){if(x=parseInt(d(z.substring(6,11))),q[x]){A=q[x];for(B=0;4>B;B++)if(x=
-d(z.substring(11+5*B,16+5*B)),0!==x.length&&(x=parseInt(x),q[x])){for(var F=q[x],D=!1,x=0,E=k.bonds.length;x<E;x++){var I=k.bonds[x];if(I.a1===A&&I.a2===F||I.a1===F&&I.a2===A){D=!0;break}}D||k.bonds.push(new e.Bond(A,F))}}}else if(c.stringStartsWith(z,"TER"))this.endChain(k,o,t,v),o=[];else if(c.stringStartsWith(z,"ENDMDL"))break}this.endChain(k,o,t,v);0===k.bonds.size&&(new a.informatics.BondDeducer).deduceCovalentBonds(k,h);if(this.deduceResidueBonds){w=0;for(y=v.length;w<y;w++){g=n.min(y,w+20);
-for(x=w+1;x<g;x++)m=v[w],l=v[x],m.distance3D(l)<1.1*(f[m.label].covalentRadius+f[l.label].covalentRadius)&&k.bonds.push(new e.Bond(m,l,1))}}k.atoms=k.atoms.concat(v);this.calculateRibbonDistances&&this.calculateDistances(k,v);return k};m.endChain=function(a,b,c,d){if(0<b.length){var f=b[b.length-1];f.cp1||(f.cp1=d[d.length-2]);f.cp2||(f.cp2=d[d.length-1]);for(d=0;4>d;d++)f=new e.Residue(-1),f.cp1=c,f.cp2=b[b.length-1].cp2,b.push(f);a.chains.push(b)}};m.calculateDistances=function(a,b){for(var c=[],
-d=0,f=a.atoms.length;d<f;d++){var e=a.atoms[d];e.hetatm&&(e.isWater||c.push(e))}d=0;for(f=b.length;d<f;d++)if(e=b[d],e.closestDistance=Number.POSITIVE_INFINITY,0===c.length)e.closestDistance=0;else for(var g=0,m=c.length;g<m;g++)e.closestDistance=Math.min(e.closestDistance,e.distance3D(c[g]))};var v=new g.PDBInterpreter;a.readPDB=function(a,b){return v.read(a,b)}})(ChemDoodle,ChemDoodle.extensions,ChemDoodle.io,ChemDoodle.structures,ChemDoodle.ELEMENT,jQuery.trim,Math);
-(function(a,c,g,e,f,d){var n={"@":0,A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,a:-1,b:-2,c:-3,d:-4,e:-5,f:-6,g:-7,h:-8,i:-9},b={"%":0,J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,j:-1,k:-2,l:-3,m:-4,n:-5,o:-6,p:-7,q:-8,r:-9},m={S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8,s:9};g.JCAMPInterpreter=function(){};f=g.JCAMPInterpreter.prototype=new g._Interpreter;f.convertHZ2PPM=!1;f.read=function(a){this.isBreak=function(a){return void 0!==n[a]||void 0!==b[a]||void 0!==m[a]||" "===a||"-"===a||"+"===a};this.getValue=function(a,c){var d=
-a.charAt(0),f=a.substring(1);return void 0!==n[d]?parseFloat(n[d]+f):void 0!==b[d]?parseFloat(b[d]+f)+c:parseFloat(f)};var f=new e.Spectrum;if(void 0===a||0===a.length)return f;a=a.split("\n");for(var k=[],g,v,l,t,o=1,r=1,q=1,w=-1,y=-1,z=-1,x=!0,A=!1,B=0,F=a.length;B<F;B++){var D=d(a[B]),E=D.indexOf("$$");-1!==E&&(D=D.substring(0,E));if(0===k.length||!c.stringStartsWith(a[B],"##"))0!==k.length&&k.push("\n"),k.push(d(D));else if(E=k.join(""),x&&100>E.length&&f.metadata.push(E),k=[D],c.stringStartsWith(E,
-"##TITLE\x3d"))f.title=d(E.substring(8));else if(c.stringStartsWith(E,"##XUNITS\x3d"))f.xUnit=d(E.substring(9)),this.convertHZ2PPM&&"HZ"===f.xUnit.toUpperCase()&&(f.xUnit="PPM",A=!0);else if(c.stringStartsWith(E,"##YUNITS\x3d"))f.yUnit=d(E.substring(9));else if(!c.stringStartsWith(E,"##XYPAIRS\x3d"))if(c.stringStartsWith(E,"##FIRSTX\x3d"))v=parseFloat(d(E.substring(9)));else if(c.stringStartsWith(E,"##LASTX\x3d"))g=parseFloat(d(E.substring(8)));else if(c.stringStartsWith(E,"##FIRSTY\x3d"))l=parseFloat(d(E.substring(9)));
-else if(c.stringStartsWith(E,"##NPOINTS\x3d"))t=parseFloat(d(E.substring(10)));else if(c.stringStartsWith(E,"##XFACTOR\x3d"))o=parseFloat(d(E.substring(10)));else if(c.stringStartsWith(E,"##YFACTOR\x3d"))r=parseFloat(d(E.substring(10)));else if(c.stringStartsWith(E,"##DELTAX\x3d"))w=parseFloat(d(E.substring(9)));else if(c.stringStartsWith(E,"##.OBSERVE FREQUENCY\x3d"))this.convertHZ2PPM&&(q=parseFloat(d(E.substring(21))));else if(c.stringStartsWith(E,"##.SHIFT REFERENCE\x3d"))this.convertHZ2PPM&&
-(z=E.substring(19).split(","),y=parseInt(d(z[2])),z=parseFloat(d(z[3])));else if(c.stringStartsWith(E,"##XYDATA\x3d")){A||(q=1);var D=x=!1,E=E.split("\n"),I=(g-v)/(t-1);if(-1!==w)for(var G=1,L=E.length;G<L;G++)if("|"===E[G].charAt(0)){I=w;break}for(var C=v-I,H=l,J=0,M,G=1,L=E.length;G<L;G++){for(var N=[],C=d(E[G]),k=[],Q=!1,K=0,P=C.length;K<P;K++)this.isBreak(C.charAt(K))?(0<k.length&&!(1===k.length&&" "===k[0])&&N.push(k.join("")),k=[C.charAt(K)]):"|"===C.charAt(K)?Q=!0:k.push(C.charAt(K));N.push(k.join(""));
-C=parseFloat(N[0])*o-I;K=1;for(P=N.length;K<P;K++)if(H=N[K],void 0!==m[H.charAt(0)])for(var O=parseInt(m[H.charAt(0)]+H.substring(1))-1,S=0;S<O;S++)C+=I,J=this.getValue(M,J),H=J*r,R++,f.data[f.data.length-1]=new e.Point(C/q,H);else void 0!==n[H.charAt(0)]&&D?(H=this.getValue(H,J)*r,Q&&(C+=I,f.data.push(new e.Point(C/q,H)))):(D=void 0!==b[H.charAt(0)],M=H,C+=I,J=this.getValue(H,J),H=J*r,R++,f.data.push(new e.Point(C/q,H)))}if(-1!==y){D=z-f.data[y-1].x;B=0;for(F=f.data.length;B<F;B++)f.data[B].x+=D}}else if(c.stringStartsWith(E,
-"##PEAK TABLE\x3d")){x=!1;f.continuous=!1;for(var E=E.split("\n"),R=0,G=1,L=E.length;G<L;G++){D=E[G].split(/[\s,]+/);R+=D.length/2;K=0;for(P=D.length;K+1<P;K+=2)f.data.push(new e.Point(parseFloat(d(D[K])),parseFloat(d(D[K+1]))))}}}f.setup();return f};var v=new g.JCAMPInterpreter;v.convertHZ2PPM=!0;a.readJCAMP=function(a){return v.read(a)}})(ChemDoodle,ChemDoodle.extensions,ChemDoodle.io,ChemDoodle.structures,jQuery,jQuery.trim);
-(function(a,c,g,e,f){c.JSONInterpreter=function(){};var d=c.JSONInterpreter.prototype;d.contentTo=function(a,c){for(var d=0,f=0,e=0,k=a.length;e<k;e++){for(var g=a[e],n=0,l=g.atoms.length;n<l;n++)g.atoms[n].tmpid="a"+d++;n=0;for(l=g.bonds.length;n<l;n++)g.bonds[n].tmpid="b"+f++}e=d=0;for(k=c.length;e<k;e++)c[e].tmpid="s"+d++;d={};if(a&&0<a.length){d.m=[];e=0;for(k=a.length;e<k;e++)d.m.push(this.molTo(a[e]))}if(c&&0<c.length){d.s=[];e=0;for(k=c.length;e<k;e++)d.s.push(this.shapeTo(c[e]))}e=0;for(k=
-a.length;e<k;e++){g=a[e];n=0;for(l=g.atoms.length;n<l;n++)g.atoms[n].tmpid=void 0;n=0;for(l=g.bonds.length;n<l;n++)g.bonds[n].tmpid=void 0}e=0;for(k=c.length;e<k;e++)c[e].tmpid=void 0;return d};d.contentFrom=function(a){var c={molecules:[],shapes:[]};if(a.m)for(var d=0,f=a.m.length;d<f;d++)c.molecules.push(this.molFrom(a.m[d]));if(a.s){d=0;for(f=a.s.length;d<f;d++)c.shapes.push(this.shapeFrom(a.s[d],c.molecules))}d=0;for(f=c.molecules.length;d<f;d++){a=c.molecules[d];for(var e=0,k=a.atoms.length;e<
-k;e++)a.atoms[e].tmpid=void 0;e=0;for(k=a.bonds.length;e<k;e++)a.bonds[e].tmpid=void 0}d=0;for(f=c.shapes.length;d<f;d++)c.shapes[d].tmpid=void 0;return c};d.molTo=function(a){for(var c={a:[]},d=0,f=a.atoms.length;d<f;d++){var e=a.atoms[d],k={x:e.x,y:e.y};e.tmpid&&(k.i=e.tmpid);"C"!==e.label&&(k.l=e.label);0!==e.z&&(k.z=e.z);0!==e.charge&&(k.c=e.charge);-1!==e.mass&&(k.m=e.mass);0!==e.numRadical&&(k.r=e.numRadical);0!==e.numLonePair&&(k.p=e.numLonePair);e.any&&(k.q=!0);-1!==e.rgroup&&(k.rg=e.rgroup);
-c.a.push(k)}if(0<a.bonds.length){c.b=[];d=0;for(f=a.bonds.length;d<f;d++)e=a.bonds[d],k={b:a.atoms.indexOf(e.a1),e:a.atoms.indexOf(e.a2)},e.tmpid&&(k.i=e.tmpid),1!==e.bondOrder&&(k.o=e.bondOrder),e.stereo!==g.Bond.STEREO_NONE&&(k.s=e.stereo),c.b.push(k)}return c};d.molFrom=function(a){for(var c=new g.Molecule,d=0,f=a.a.length;d<f;d++){var e=a.a[d],k=new g.Atom(e.l?e.l:"C",e.x,e.y);e.i&&(k.tmpid=e.i);e.z&&(k.z=e.z);e.c&&(k.charge=e.c);e.m&&(k.mass=e.m);e.r&&(k.numRadical=e.r);e.p&&(k.numLonePair=e.p);
-e.q&&(k.any=!0);e.rg&&(k.rgroup=e.rg);void 0!==e.p_h&&(k.hetatm=e.p_h);void 0!==e.p_w&&(k.isWater=e.p_w);void 0!==e.p_d&&(k.closestDistance=e.p_d);c.atoms.push(k)}if(a.b){d=0;for(f=a.b.length;d<f;d++)e=a.b[d],k=new g.Bond(c.atoms[e.b],c.atoms[e.e],void 0===e.o?1:e.o),e.i&&(k.tmpid=e.i),e.s&&(k.stereo=e.s),c.bonds.push(k)}return c};d.shapeTo=function(a){var c={};a.tmpid&&(c.i=a.tmpid);a instanceof e.Line?(c.t="Line",c.x1=a.p1.x,c.y1=a.p1.y,c.x2=a.p2.x,c.y2=a.p2.y,c.a=a.arrowType):a instanceof e.Pusher?
-(c.t="Pusher",c.o1=a.o1.tmpid,c.o2=a.o2.tmpid,1!==a.numElectron&&(c.e=a.numElectron)):a instanceof e.Bracket&&(c.t="Bracket",c.x1=a.p1.x,c.y1=a.p1.y,c.x2=a.p2.x,c.y2=a.p2.y,0!==a.charge&&(c.c=a.charge),0!==a.mult&&(c.m=a.mult),0!==a.repeat&&(c.r=a.repeat));return c};d.shapeFrom=function(a,c){var d;if("Line"===a.t)d=new e.Line(new g.Point(a.x1,a.y1),new g.Point(a.x2,a.y2)),d.arrowType=a.a;else if("Pusher"===a.t){var f,h;d=0;for(var k=c.length;d<k;d++){for(var n=c[d],u=0,l=n.atoms.length;u<l;u++){var t=
-n.atoms[u];t.tmpid===a.o1?f=t:t.tmpid===a.o2&&(h=t)}u=0;for(l=n.bonds.length;u<l;u++)t=n.bonds[u],t.tmpid===a.o1?f=t:t.tmpid===a.o2&&(h=t)}d=new e.Pusher(f,h);a.e&&(d.numElectron=a.e)}else"Bracket"===a.t&&(d=new e.Bracket(new g.Point(a.x1,a.y1),new g.Point(a.x2,a.y2)),void 0!==a.c&&(d.charge=a.c),void 0!==a.m&&(d.mult=a.m),void 0!==a.r&&(d.repeat=a.r));return d};d.pdbFrom=function(a){var c=this.molFrom(a.mol);c.findRings=!1;c.fromJSON=!0;c.chains=this.chainsFrom(a.ribbons);return c};d.chainsFrom=
-function(a){for(var c=[],d=0,f=a.cs.length;d<f;d++){for(var e=a.cs[d],k=[],n=0,u=e.length;n<u;n++){var l=e[n],t=new g.Residue;t.name=l.n;t.cp1=new g.Atom("",l.x1,l.y1,l.z1);t.cp2=new g.Atom("",l.x2,l.y2,l.z2);l.x3&&(t.cp3=new g.Atom("",l.x3,l.y3,l.z3),t.cp4=new g.Atom("",l.x4,l.y4,l.z4),t.cp5=new g.Atom("",l.x5,l.y5,l.z5));t.helix=l.h;t.sheet=l.s;t.arrow=l.a;k.push(t)}c.push(k)}return c};var n=new c.JSONInterpreter;a.readJSON=function(a){var c;try{c=f.parse(a)}catch(d){return}if(c)return c.m||c.s?
-n.contentFrom(c):c.a?{molecules:[n.molFrom(c)],shapes:[]}:{molecules:[],shapes:[]}};a.writeJSON=function(a,c){return f.stringify(n.contentTo(a,c))}})(ChemDoodle,ChemDoodle.io,ChemDoodle.structures,ChemDoodle.structures.d2,JSON);
-(function(a,c,g){c.RXNInterpreter=function(){};var e=c.RXNInterpreter.prototype=new c._Interpreter;e.read=function(c,f){f||(f=a.default_bondLength_2D);var b=[],e;if(c){e=c.split("$MOL\n");for(var v=e[0].split("\n")[4],j=parseInt(v.substring(0,3)),v=parseInt(v.substring(3,6)),h=1,k=0,p=0,u=j+v;p<u;p++){b[p]=a.readMOL(e[h],f);var l=b[p].getBounds(),l=l.maxX-l.minX,k=k-(l+40);h++}p=0;for(u=j;p<u;p++){var l=b[p].getBounds(),l=l.maxX-l.minX,h=b[p].getCenter(),t=0;for(e=b[p].atoms.length;t<e;t++){var o=
-b[p].atoms[t];o.x+=k+l/2-h.x;o.y-=h.y}k+=l+40}e=new g.d2.Line(new g.Point(k,0),new g.Point(k+40,0));k+=80;p=j;for(u=j+v;p<u;p++){l=b[p].getBounds();l=l.maxX-l.minX;h=b[p].getCenter();for(t=0;t<b[p].atoms.length;t++)o=b[p].atoms[t],o.x+=k+l/2-h.x,o.y-=h.y;k+=l+40}}else b.push(new g.Molecule),e=new g.d2.Line(new g.Point(-20,0),new g.Point(20,0));e.arrowType=g.d2.Line.ARROW_SYNTHETIC;return{molecules:b,shapes:[e]}};e.write=function(c,f){var b=[[],[]],e=void 0;if(c&&f){v=0;for(j=f.length;v<j;v++)if(f[v]instanceof
-g.d2.Line){e=f[v].getPoints();break}if(!e)return"";for(var v=0,j=c.length;v<j;v++)c[v].getCenter().x<e[1].x?b[0].push(c[v]):b[1].push(c[v]);e=[];e.push("$RXN\nReaction from ChemDoodle Web Components\n\nhttp://www.ichemlabs.com\n");e.push(this.fit(b[0].length.toString(),3));e.push(this.fit(b[1].length.toString(),3));e.push("\n");for(v=0;2>v;v++)for(var j=0,h=b[v].length;j<h;j++)e.push("$MOL\n"),e.push(a.writeMOL(b[v][j])),e.push("\n");return e.join("")}};var f=new c.RXNInterpreter;a.readRXN=function(a,
-c){return f.read(a,c)};a.writeRXN=function(a,c){return f.write(a,c)}})(ChemDoodle,ChemDoodle.io,ChemDoodle.structures);
-(function(a,c,g,e,f,d){e.XYZInterpreter=function(){};c=e.XYZInterpreter.prototype=new e._Interpreter;c.deduceCovalentBonds=!0;c.read=function(b){var c=new f.Molecule;if(!b)return c;b=b.split("\n");for(var e=parseInt(d(b[0])),j=0;j<e;j++){var h=b[j+2].split(/\s+/g);c.atoms[j]=new f.Atom(isNaN(h[0])?h[0]:g[parseInt(h[0])-1],parseFloat(h[1]),parseFloat(h[2]),parseFloat(h[3]))}this.deduceCovalentBonds&&(new a.informatics.BondDeducer).deduceCovalentBonds(c,1);return c};var n=new e.XYZInterpreter;a.readXYZ=
-function(a){return n.read(a)}})(ChemDoodle,ChemDoodle.ELEMENT,ChemDoodle.SYMBOLS,ChemDoodle.io,ChemDoodle.structures,jQuery.trim);
-ChemDoodle.monitor=function(a,c,g){var e={CANVAS_DRAGGING:void 0,CANVAS_OVER:void 0,ALT:!1,SHIFT:!1,META:!1};a.supports_touch()||c(g).ready(function(){c(g).mousemove(function(a){e.CANVAS_DRAGGING&&e.CANVAS_DRAGGING.drag&&(e.CANVAS_DRAGGING.prehandleEvent(a),e.CANVAS_DRAGGING.drag(a))});c(g).mouseup(function(a){e.CANVAS_DRAGGING&&e.CANVAS_DRAGGING!==e.CANVAS_OVER&&e.CANVAS_DRAGGING.mouseup&&(e.CANVAS_DRAGGING.prehandleEvent(a),e.CANVAS_DRAGGING.mouseup(a));e.CANVAS_DRAGGING=void 0});c(g).keydown(function(a){e.SHIFT=
-a.shiftKey;e.ALT=a.altKey;e.META=a.metaKey||a.ctrlKey;var c=e.CANVAS_OVER;e.CANVAS_DRAGGING&&(c=e.CANVAS_DRAGGING);c&&c.keydown&&(c.prehandleEvent(a),c.keydown(a))});c(g).keypress(function(a){var c=e.CANVAS_OVER;e.CANVAS_DRAGGING&&(c=e.CANVAS_DRAGGING);c&&c.keypress&&(c.prehandleEvent(a),c.keypress(a))});c(g).keyup(function(a){e.SHIFT=a.shiftKey;e.ALT=a.altKey;e.META=a.metaKey||a.ctrlKey;var c=e.CANVAS_OVER;e.CANVAS_DRAGGING&&(c=e.CANVAS_DRAGGING);c&&c.keyup&&(c.prehandleEvent(a),c.keyup(a))})});
-return e}(ChemDoodle.featureDetection,jQuery,document);
-(function(a,c,g,e,f,d,n,b,m,v){a._Canvas=function(){};var j=a._Canvas.prototype;j.molecules=void 0;j.shapes=void 0;j.emptyMessage=void 0;j.image=void 0;j.repaint=function(){if(!this.test){var a=m.getElementById(this.id);if(a.getContext){var b=a.getContext("2d");1!==this.pixelRatio&&a.width===this.width&&(a.width=this.width*this.pixelRatio,a.height=this.height*this.pixelRatio,b.scale(this.pixelRatio,this.pixelRatio));this.image?b.drawImage(this.image,0,0):(this.specs.backgroundColor&&this.bgCache!==
-a.style.backgroundColor&&(a.style.backgroundColor=this.specs.backgroundColor,this.bgCache=a.style.backgroundColor),b.fillStyle=this.specs.backgroundColor,b.fillRect(0,0,this.width,this.height));if(this.innerRepaint)this.innerRepaint(b);else if(0!==this.molecules.length||0!==this.shapes.length){b.save();b.translate(this.width/2,this.height/2);b.rotate(this.specs.rotateAngle);b.scale(this.specs.scale,this.specs.scale);b.translate(-this.width/2,-this.height/2);for(var a=0,c=this.molecules.length;a<c;a++)this.molecules[a].check(!0),
-this.molecules[a].draw(b,this.specs);a=0;for(c=this.shapes.length;a<c;a++)this.shapes[a].draw(b,this.specs);b.restore()}else this.emptyMessage&&(b.fillStyle="#737683",b.textAlign="center",b.textBaseline="middle",b.font="18px Helvetica, Verdana, Arial, Sans-serif",b.fillText(this.emptyMessage,this.width/2,this.height/2));this.drawChildExtras&&this.drawChildExtras(b)}}};j.resize=function(b,c){var e=d("#"+this.id);e.attr({width:b,height:c});e.css("width",b);e.css("height",c);this.width=b;this.height=
-c;if(a._Canvas3D&&this instanceof a._Canvas3D)this.gl.viewport(0,0,b,c),this.setupScene();else if(0<this.molecules.length){this.center();for(var e=0,f=this.molecules.length;e<f;e++)this.molecules[e].check()}this.repaint()};j.setBackgroundImage=function(a){this.image=new Image;var b=this;this.image.onload=function(){b.repaint()};this.image.src=a};j.loadMolecule=function(b){this.clear();this.molecules.push(b);this.center();a._Canvas3D&&this instanceof a._Canvas3D||b.check();this.afterLoadContent&&this.afterLoadContent();
-this.repaint()};j.loadContent=function(b,c){this.molecules=b?b:[];this.shapes=c?c:[];this.center();if(!(a._Canvas3D&&this instanceof a._Canvas3D))for(var d=0,e=this.molecules.length;d<e;d++)this.molecules[d].check();this.afterLoadContent&&this.afterLoadContent();this.repaint()};j.addMolecule=function(b){this.molecules.push(b);a._Canvas3D&&this instanceof a._Canvas3D||b.check();this.repaint()};j.removeMolecule=function(a){this.molecules=d.grep(this.molecules,function(b){return b!==a});this.repaint()};
-j.getMolecule=function(){return 0<this.molecules.length?this.molecules[0]:void 0};j.getMolecules=function(){return this.molecules};j.addShape=function(a){this.shapes.push(a);this.repaint()};j.removeShape=function(a){this.shapes=d.grep(this.shapes,function(b){return b!==a});this.repaint()};j.getShapes=function(){return this.shapes};j.clear=function(){this.molecules=[];this.shapes=[];this.specs.scale=1;this.repaint()};j.center=function(){for(var a=this.getContentBounds(),c=new f.Point((this.width-a.minX-
-a.maxX)/2,(this.height-a.minY-a.maxY)/2),d=0,e=this.molecules.length;d<e;d++)for(var g=this.molecules[d],j=0,m=g.atoms.length;j<m;j++)g.atoms[j].add(c);d=0;for(e=this.shapes.length;d<e;d++){g=this.shapes[d].getPoints();j=0;for(m=g.length;j<m;j++)g[j].add(c)}this.specs.scale=1;c=a.maxX-a.minX;a=a.maxY-a.minY;if(c>this.width||a>this.height)this.specs.scale=0.85*b.min(this.width/c,this.height/a)};j.bondExists=function(a,b){for(var c=0,d=this.molecules.length;c<d;c++)for(var e=this.molecules[c],f=0,g=
-e.bonds.length;f<g;f++){var j=e.bonds[f];if(j.contains(a)&&j.contains(b))return!0}return!1};j.getBond=function(a,b){for(var c=0,d=this.molecules.length;c<d;c++)for(var e=this.molecules[c],f=0,g=e.bonds.length;f<g;f++){var j=e.bonds[f];if(j.contains(a)&&j.contains(b))return j}};j.getMoleculeByAtom=function(a){for(var b=0,c=this.molecules.length;b<c;b++){var d=this.molecules[b];if(-1!==d.atoms.indexOf(a))return d}};j.getAllAtoms=function(){for(var a=[],b=0,c=this.molecules.length;b<c;b++)a=a.concat(this.molecules[b].atoms);
-return a};j.getAllPoints=function(){for(var a=[],b=0,c=this.molecules.length;b<c;b++)a=a.concat(this.molecules[b].atoms);b=0;for(c=this.shapes.length;b<c;b++)a=a.concat(this.shapes[b].getPoints());return a};j.getContentBounds=function(){for(var a=new g.Bounds,b=0,c=this.molecules.length;b<c;b++)a.expand(this.molecules[b].getBounds());b=0;for(c=this.shapes.length;b<c;b++)a.expand(this.shapes[b].getBounds());return a};j.create=function(g,j,p){this.id=g;this.width=j;this.height=p;this.molecules=[];this.shapes=
-[];if(m.getElementById(g)){var u=d("#"+g);j?u.attr("width",j):this.width=u.attr("width");p?u.attr("height",p):this.height=u.attr("height");u.attr("class","ChemDoodleWebComponent")}else{if(!a.featureDetection.supports_canvas_text()&&n.msie&&"6"<=n.version){m.writeln('\x3cdiv style\x3d"border: 1px solid black;" width\x3d"'+j+'" height\x3d"'+p+'"\x3ePlease install \x3ca href\x3d"http://code.google.com/chrome/chromeframe/"\x3eGoogle Chrome Frame\x3c/a\x3e, then restart Internet Explorer.\x3c/div\x3e');
-return}m.writeln('\x3ccanvas class\x3d"ChemDoodleWebComponent" id\x3d"'+g+'" width\x3d"'+j+'" height\x3d"'+p+'" alt\x3d"ChemDoodle Web Component"\x3eThis browser does not support HTML5/Canvas.\x3c/canvas\x3e')}g=d("#"+g);g.css("width",this.width);g.css("height",this.height);this.pixelRatio=v.devicePixelRatio?v.devicePixelRatio:1;this.specs=new f.VisualSpecifications;var l=this;c.supports_touch()?(g.bind("touchstart",function(a){var b=(new Date).getTime();if(!c.supports_gesture()&&2===a.originalEvent.touches.length){var d=
-a.originalEvent.touches,e=new f.Point(d[0].pageX,d[0].pageY),d=new f.Point(d[1].pageX,d[1].pageY);l.implementedGestureDist=e.distance(d);l.implementedGestureAngle=e.angle(d);l.gesturestart&&(l.prehandleEvent(a),l.gesturestart(a))}l.lastTouch&&1===a.originalEvent.touches.length&&500>b-l.lastTouch?l.dbltap?(l.prehandleEvent(a),l.dbltap(a)):l.dblclick?(l.prehandleEvent(a),l.dblclick(a)):l.touchstart?(l.prehandleEvent(a),l.touchstart(a)):l.mousedown&&(l.prehandleEvent(a),l.mousedown(a)):l.touchstart?
-(l.prehandleEvent(a),l.touchstart(a),this.hold&&clearTimeout(this.hold),this.touchhold&&(this.hold=setTimeout(function(){l.touchhold(a)},1E3))):l.mousedown&&(l.prehandleEvent(a),l.mousedown(a));l.lastTouch=b}),g.bind("touchmove",function(a){this.hold&&(clearTimeout(this.hold),this.hold=void 0);if(!c.supports_gesture()&&2===a.originalEvent.touches.length&&l.gesturechange){var d=a.originalEvent.touches,e=new f.Point(d[0].pageX,d[0].pageY),g=new f.Point(d[1].pageX,d[1].pageY),d=e.distance(g),e=e.angle(g);
-a.originalEvent.scale=d/l.implementedGestureDist;a.originalEvent.rotation=180*(l.implementedGestureAngle-e)/b.PI;l.prehandleEvent(a);l.gesturechange(a)}if(1<a.originalEvent.touches.length&&l.multitouchmove){e=a.originalEvent.touches.length;l.prehandleEvent(a);d=new f.Point(-a.offset.left*e,-a.offset.top*e);for(g=0;g<e;g++)d.x+=a.originalEvent.changedTouches[g].pageX,d.y+=a.originalEvent.changedTouches[g].pageY;d.x/=e;d.y/=e;a.p=d;l.multitouchmove(a,e)}else l.touchmove?(l.prehandleEvent(a),l.touchmove(a)):
-l.drag&&(l.prehandleEvent(a),l.drag(a))}),g.bind("touchend",function(a){this.hold&&(clearTimeout(this.hold),this.hold=void 0);!c.supports_gesture()&&l.implementedGestureDist&&(l.implementedGestureDist=void 0,l.implementedGestureAngle=void 0,l.gestureend&&(l.prehandleEvent(a),l.gestureend(a)));l.touchend?(l.prehandleEvent(a),l.touchend(a)):l.mouseup&&(l.prehandleEvent(a),l.mouseup(a));250>(new Date).getTime()-l.lastTouch&&(l.tap?(l.prehandleEvent(a),l.tap(a)):l.click&&(l.prehandleEvent(a),l.click(a)))}),
-g.bind("gesturestart",function(a){l.gesturestart&&(l.prehandleEvent(a),l.gesturestart(a))}),g.bind("gesturechange",function(a){l.gesturechange&&(l.prehandleEvent(a),l.gesturechange(a))}),g.bind("gestureend",function(a){l.gestureend&&(l.prehandleEvent(a),l.gestureend(a))})):(g.click(function(a){switch(a.which){case 1:l.click&&(l.prehandleEvent(a),l.click(a));break;case 2:l.middleclick&&(l.prehandleEvent(a),l.middleclick(a));break;case 3:l.rightclick&&(l.prehandleEvent(a),l.rightclick(a))}}),g.dblclick(function(a){l.dblclick&&
-(l.prehandleEvent(a),l.dblclick(a))}),g.mousedown(function(a){switch(a.which){case 1:e.CANVAS_DRAGGING=l;l.mousedown&&(l.prehandleEvent(a),l.mousedown(a));break;case 2:l.middlemousedown&&(l.prehandleEvent(a),l.middlemousedown(a));break;case 3:l.rightmousedown&&(l.prehandleEvent(a),l.rightmousedown(a))}}),g.mousemove(function(a){!e.CANVAS_DRAGGING&&l.mousemove&&(l.prehandleEvent(a),l.mousemove(a))}),g.mouseout(function(a){e.CANVAS_OVER=void 0;l.mouseout&&(l.prehandleEvent(a),l.mouseout(a))}),g.mouseover(function(a){e.CANVAS_OVER=
-l;l.mouseover&&(l.prehandleEvent(a),l.mouseover(a))}),g.mouseup(function(a){switch(a.which){case 1:l.mouseup&&(l.prehandleEvent(a),l.mouseup(a));break;case 2:l.middlemouseup&&(l.prehandleEvent(a),l.middlemouseup(a));break;case 3:l.rightmouseup&&(l.prehandleEvent(a),l.rightmouseup(a))}}),g.mousewheel(function(a,b){l.mousewheel&&(l.prehandleEvent(a),l.mousewheel(a,b))}));this.subCreate&&this.subCreate()};j.prehandleEvent=function(a){a.originalEvent.changedTouches&&(a.pageX=a.originalEvent.changedTouches[0].pageX,
-a.pageY=a.originalEvent.changedTouches[0].pageY);a.preventDefault();a.offset=d("#"+this.id).offset();a.p=new f.Point(a.pageX-a.offset.left,a.pageY-a.offset.top)}})(ChemDoodle,ChemDoodle.featureDetection,ChemDoodle.math,ChemDoodle.monitor,ChemDoodle.structures,jQuery,jQuery.browser,Math,document,window);
-(function(a){a._AnimatorCanvas=function(a,g,e){a&&this.create(a,g,e)};a=a._AnimatorCanvas.prototype=new a._Canvas;a.timeout=33;a.startAnimation=function(){this.stopAnimation();this.lastTime=(new Date).getTime();var a=this;this.nextFrame&&(this.handle=setInterval(function(){var g=(new Date).getTime();a.nextFrame(g-a.lastTime);a.repaint();a.lastTime=g},this.timeout))};a.stopAnimation=function(){this.handle&&(clearInterval(this.handle),this.handle=void 0)};a.isRunning=function(){return void 0!==this.handle}})(ChemDoodle);
-(function(a,c){a.FileCanvas=function(a,e,f,d){a&&this.create(a,e,f);c.writeln('\x3cbr\x3e\x3cform name\x3d"FileForm" enctype\x3d"multipart/form-data" method\x3d"POST" action\x3d"'+d+'" target\x3d"HiddenFileFrame"\x3e\x3cinput type\x3d"file" name\x3d"f" /\x3e\x3cinput type\x3d"submit" name\x3d"submitbutton" value\x3d"Show File" /\x3e\x3c/form\x3e\x3ciframe id\x3d"HFF-'+a+'" name\x3d"HiddenFileFrame" height\x3d"0" width\x3d"0" style\x3d"display:none;" onLoad\x3d"GetMolFromFrame(\'HFF-'+a+"', "+a+')"\x3e\x3c/iframe\x3e');
-this.emptyMessage="Click below to load file";this.repaint()};a.FileCanvas.prototype=new a._Canvas})(ChemDoodle,document);
-(function(a){a.HyperlinkCanvas=function(a,g,e,f,d,n){a&&this.create(a,g,e);this.urlOrFunction=f;this.color=d?d:"blue";this.size=n?n:2};a=a.HyperlinkCanvas.prototype=new a._Canvas;a.openInNewWindow=!0;a.hoverImage=void 0;a.drawChildExtras=function(a){this.e&&(this.hoverImage?a.drawImage(this.hoverImage,0,0):(a.strokeStyle=this.color,a.lineWidth=2*this.size,a.strokeRect(0,0,this.width,this.height)))};a.setHoverImage=function(a){this.hoverImage=new Image;this.hoverImage.src=a};a.click=function(){this.e=
-void 0;this.repaint();this.urlOrFunction instanceof Function?this.urlOrFunction():this.openInNewWindow?window.open(this.urlOrFunction):location.href=this.urlOrFunction};a.mouseout=function(){this.e=void 0;this.repaint()};a.mouseover=function(a){this.e=a;this.repaint()}})(ChemDoodle);
-(function(a,c,g,e){a.MolGrabberCanvas=function(a,c,n){a&&this.create(a,c,n);c=[];c.push('\x3cbr\x3e\x3cinput type\x3d"text" id\x3d"');c.push(a);c.push('_query" size\x3d"32" value\x3d"" /\x3e');c.push("\x3cbr\x3e\x3cnobr\x3e");c.push('\x3cselect id\x3d"');c.push(a);c.push('_select"\x3e');c.push('\x3coption value\x3d"chemexper"\x3eChemExper');c.push('\x3coption value\x3d"chemspider"\x3eChemSpider');c.push('\x3coption value\x3d"pubchem" selected\x3ePubChem');c.push("\x3c/select\x3e");c.push('\x3cbutton id\x3d"');
-c.push(a);c.push('_submit"\x3eShow Molecule\x3c/button\x3e');c.push("\x3c/nobr\x3e");e.getElementById(a);g("#"+a).after(c.join(""));var b=this;g("#"+a+"_submit").click(function(){b.search()});g("#"+a+"_query").keypress(function(a){13===a.which&&b.search()});this.emptyMessage="Enter search term below";this.repaint()};a=a.MolGrabberCanvas.prototype=new a._Canvas;a.setSearchTerm=function(a){g("#"+this.id+"_query").val(a);this.search()};a.search=function(){this.emptyMessage="Searching...";this.clear();
-var a=this;c.getMoleculeFromDatabase(g("#"+this.id+"_query").val(),{database:g("#"+this.id+"_select").val()},function(c){a.loadMolecule(c)})}})(ChemDoodle,ChemDoodle.iChemLabs,jQuery,document);
-(function(a,c,g){var e=[],f=[1,0,0],d=[0,1,0],n=[0,0,1];a.RotatorCanvas=function(a,c,d,e){a&&this.create(a,c,d);this.rotate3D=e};a=a.RotatorCanvas.prototype=new a._AnimatorCanvas;c=c.PI/15;a.xIncrement=c;a.yIncrement=c;a.zIncrement=c;a.nextFrame=function(a){if(0===this.molecules.length&&0===this.shapes.length)this.stopAnimation();else if(a/=1E3,this.rotate3D){g.identity(e);g.rotate(e,this.xIncrement*a,f);g.rotate(e,this.yIncrement*a,d);g.rotate(e,this.zIncrement*a,n);a=0;for(var c=this.molecules.length;a<
-c;a++){for(var v=this.molecules[a],j=0,h=v.atoms.length;j<h;j++){var k=v.atoms[j],p=[k.x-this.width/2,k.y-this.height/2,k.z];g.multiplyVec3(e,p);k.x=p[0]+this.width/2;k.y=p[1]+this.height/2;k.z=p[2]}j=0;for(h=v.rings.length;j<h;j++)v.rings[j].center=v.rings[j].getCenter();this.specs.atoms_display&&this.specs.atoms_circles_2D&&v.sortAtomsByZ();this.specs.bonds_display&&this.specs.bonds_clearOverlaps_2D&&v.sortBondsByZ()}a=0;for(c=this.shapes.length;a<c;a++){v=this.shapes[a].getPoints();j=0;for(h=v.length;j<
-h;j++)k=v[j],p=[k.x-this.width/2,k.y-this.height/2,0],g.multiplyVec3(e,p),k.x=p[0]+this.width/2,k.y=p[1]+this.height/2}}else this.specs.rotateAngle+=this.zIncrement*a};a.dblclick=function(){this.isRunning()?this.stopAnimation():this.startAnimation()}})(ChemDoodle,Math,mat4);
-(function(a,c){a.SlideshowCanvas=function(a,c,d){a&&this.create(a,c,d)};var g=a.SlideshowCanvas.prototype=new a._AnimatorCanvas;g.frames=[];g.curIndex=0;g.timeout=5E3;g.alpha=0;g.innerHandle=void 0;g.phase=0;g.drawChildExtras=function(a){var f=c.getRGB(this.specs.backgroundColor,255);a.fillStyle="rgba("+f[0]+", "+f[1]+", "+f[2]+", "+this.alpha+")";a.fillRect(0,0,this.width,this.height)};g.nextFrame=function(){if(0===this.frames.length)this.stopAnimation();else{this.phase=0;var a=this,c=1;this.innerHandle=
-setInterval(function(){a.alpha=c/15;a.repaint();15===c&&a.breakInnerHandle();c++},33)}};g.breakInnerHandle=function(){this.innerHandle&&(clearInterval(this.innerHandle),this.innerHandle=void 0);if(0===this.phase){this.curIndex++;this.curIndex>this.frames.length-1&&(this.curIndex=0);this.alpha=1;var a=this.frames[this.curIndex];this.loadContent(a.mols,a.shapes);this.phase=1;var c=this,d=1;this.innerHandle=setInterval(function(){c.alpha=(15-d)/15;c.repaint();15===d&&c.breakInnerHandle();d++},33)}else 1===
-this.phase&&(this.alpha=0,this.repaint())};g.addFrame=function(a,c){0===this.frames.length&&this.loadContent(a,c);this.frames.push({mols:a,shapes:c})}})(ChemDoodle,ChemDoodle.math);
-(function(a,c,g,e,f){a.TransformCanvas=function(a,c,b,e){a&&this.create(a,c,b);this.rotate3D=e};a=a.TransformCanvas.prototype=new a._Canvas;a.lastPoint=void 0;a.rotationMultMod=1.3;a.lastPinchScale=1;a.lastGestureRotate=0;a.mousedown=function(a){this.lastPoint=a.p};a.dblclick=function(){this.center();this.repaint()};a.drag=function(a){if(!this.lastPoint.multi){if(c.ALT){var n=new g.Point(a.p.x,a.p.y);n.sub(this.lastPoint);for(var b=0,m=this.molecules.length;b<m;b++){for(var v=this.molecules[b],j=
-0,h=v.atoms.length;j<h;j++)v.atoms[j].add(n);v.check()}b=0;for(m=this.shapes.length;b<m;b++){v=this.shapes[b].getPoints();j=0;for(h=v.length;j<h;j++)v[j].add(n)}this.lastPoint=a.p}else if(!0===this.rotate3D){h=e.max(this.width/4,this.height/4);j=(a.p.x-this.lastPoint.x)/h*this.rotationMultMod;h=-(a.p.y-this.lastPoint.y)/h*this.rotationMultMod;n=[];f.identity(n);f.rotate(n,h,[1,0,0]);f.rotate(n,j,[0,1,0]);b=0;for(m=this.molecules.length;b<m;b++){v=this.molecules[b];j=0;for(h=v.atoms.length;j<h;j++)b=
-v.atoms[j],m=[b.x-this.width/2,b.y-this.height/2,b.z],f.multiplyVec3(n,m),b.x=m[0]+this.width/2,b.y=m[1]+this.height/2,b.z=m[2];b=0;for(m=v.rings.length;b<m;b++)v.rings[b].center=v.rings[b].getCenter();this.lastPoint=a.p;this.specs.atoms_display&&this.specs.atoms_circles_2D&&v.sortAtomsByZ();this.specs.bonds_display&&this.specs.bonds_clearOverlaps_2D&&v.sortBondsByZ()}}else h=new g.Point(this.width/2,this.height/2),j=h.angle(this.lastPoint),h=h.angle(a.p),this.specs.rotateAngle-=h-j,this.lastPoint=
-a.p;this.repaint()}};a.mousewheel=function(a,c){this.specs.scale+=c/50;0.01>this.specs.scale&&(this.specs.scale=0.01);this.repaint()};a.multitouchmove=function(a,c){if(2===c)if(this.lastPoint.multi){var b=new g.Point(a.p.x,a.p.y);b.sub(this.lastPoint);for(var e=0,f=this.molecules.length;e<f;e++){for(var j=this.molecules[e],h=0,k=j.atoms.length;h<k;h++)j.atoms[h].add(b);j.check()}e=0;for(f=this.shapes.length;e<f;e++){j=this.shapes[e].getPoints();h=0;for(k=j.length;h<k;h++)j[h].add(b)}this.lastPoint=
-a.p;this.lastPoint.multi=!0;this.repaint()}else this.lastPoint=a.p,this.lastPoint.multi=!0};a.gesturechange=function(a){0!==a.originalEvent.scale-this.lastPinchScale&&(this.specs.scale*=a.originalEvent.scale/this.lastPinchScale,0.01>this.specs.scale&&(this.specs.scale=0.01),this.lastPinchScale=a.originalEvent.scale);if(0!==this.lastGestureRotate-a.originalEvent.rotation){for(var c=(this.lastGestureRotate-a.originalEvent.rotation)/180*j.PI,b=new g.Point(this.width/2,this.height/2),e=0,f=this.molecules.length;e<
-f;e++){for(var j=this.molecules[e],h=0,k=j.atoms.length;h<k;h++){var p=j.atoms[h],u=b.distance(p),l=b.angle(p)+c;p.x=b.x+u*j.cos(l);p.y=b.y-u*j.sin(l)}j.check()}this.lastGestureRotate=a.originalEvent.rotation}this.repaint()};a.gestureend=function(){this.lastPinchScale=1;this.lastGestureRotate=0}})(ChemDoodle,ChemDoodle.monitor,ChemDoodle.structures,Math,mat4);(function(a){a.ViewerCanvas=function(a,g,e){a&&this.create(a,g,e)};a.ViewerCanvas.prototype=new a._Canvas})(ChemDoodle);
-(function(a){a._SpectrumCanvas=function(a,g,e){a&&this.create(a,g,e)};a=a._SpectrumCanvas.prototype=new a._Canvas;a.spectrum=void 0;a.emptyMessage="No Spectrum Loaded or Recognized";a.loadMolecule=void 0;a.getMolecule=void 0;a.innerRepaint=function(a){this.spectrum&&0<this.spectrum.data.length?this.spectrum.draw(a,this.specs,this.width,this.height):this.emptyMessage&&(a.fillStyle="#737683",a.textAlign="center",a.textBaseline="middle",a.font="18px Helvetica, Verdana, Arial, Sans-serif",a.fillText(this.emptyMessage,
-this.width/2,this.height/2))};a.loadSpectrum=function(a){this.spectrum=a;this.repaint()};a.getSpectrum=function(){return this.spectrum};a.getSpectrumCoordinates=function(a,g){return spectrum.getInternalCoordinates(a,g,this.width,this.height)}})(ChemDoodle,document);(function(a){a.ObserverCanvas=function(a,g,e){a&&this.create(a,g,e)};a.ObserverCanvas.prototype=new a._SpectrumCanvas})(ChemDoodle);
-(function(a){a.OverlayCanvas=function(a,g,e){a&&this.create(a,g,e)};a=a.OverlayCanvas.prototype=new a._SpectrumCanvas;a.overlaySpectra=[];a.superRepaint=a.innerRepaint;a.innerRepaint=function(a){this.superRepaint(a);if(this.spectrum&&0<this.spectrum.data.length)for(var g=0,e=this.overlaySpectra.length;g<e;g++){var f=this.overlaySpectra[g];f&&0<f.data.length&&(f.minX=this.spectrum.minX,f.maxX=this.spectrum.maxX,f.drawPlot(a,this.specs,this.width,this.height,this.spectrum.memory.offsetTop,this.spectrum.memory.offsetLeft,
-this.spectrum.memory.offsetBottom))}};a.addSpectrum=function(a){this.spectrum?this.overlaySpectra.push(a):this.spectrum=a}})(ChemDoodle);
-(function(a,c,g){a.PerspectiveCanvas=function(a,c,e){a&&this.create(a,c,e)};var e=a.PerspectiveCanvas.prototype=new a._SpectrumCanvas;e.dragRange=void 0;e.rescaleYAxisOnZoom=!0;e.lastPinchScale=1;e.mousedown=function(c){this.dragRange=new a.structures.Point(c.p.x,c.p.x)};e.mouseup=function(a){this.dragRange&&this.dragRange.x!==this.dragRange.y&&(this.dragRange.multi||(a=this.spectrum.zoom(this.dragRange.x,a.p.x,this.width,this.rescaleYAxisOnZoom),this.rescaleYAxisOnZoom&&(this.specs.scale=a)),this.dragRange=
-void 0,this.repaint())};e.drag=function(a){this.dragRange&&(this.dragRange.multi?this.dragRange=void 0:(c.SHIFT&&(this.spectrum.translate(a.p.x-this.dragRange.x,this.width),this.dragRange.x=a.p.x),this.dragRange.y=a.p.x),this.repaint())};e.drawChildExtras=function(a){if(this.dragRange){var c=g.min(this.dragRange.x,this.dragRange.y),e=g.max(this.dragRange.x,this.dragRange.y);a.strokeStyle="gray";a.lineStyle=1;a.beginPath();for(a.moveTo(c,this.height/2);c<=e;c++)5>c%10?a.lineTo(c,g.round(this.height/
-2)):a.moveTo(c,g.round(this.height/2));a.stroke()}};e.mousewheel=function(a,c){this.specs.scale+=c/10;0.01>this.specs.scale&&(this.specs.scale=0.01);this.repaint()};e.dblclick=function(){this.spectrum.setup();this.specs.scale=1;this.repaint()};e.multitouchmove=function(c,d){2===d&&(!this.dragRange||!this.dragRange.multi?(this.dragRange=new a.structures.Point(c.p.x,c.p.x),this.dragRange.multi=!0):(this.spectrum.translate(c.p.x-this.dragRange.x,this.width),this.dragRange.x=c.p.x,this.dragRange.y=c.p.x,
-this.repaint()))};e.gesturechange=function(a){this.specs.scale*=a.originalEvent.scale/this.lastPinchScale;0.01>this.specs.scale&&(this.specs.scale=0.01);this.lastPinchScale=a.originalEvent.scale;this.repaint()};e.gestureend=function(){this.lastPinchScale=1}})(ChemDoodle,ChemDoodle.monitor,Math);
-(function(a,c,g){a.SeekerCanvas=function(a,c,e,b){a&&this.create(a,c,e);this.seekType=b};var e=a.SeekerCanvas.prototype=new a._SpectrumCanvas;e.superRepaint=e.innerRepaint;e.innerRepaint=function(e){this.superRepaint(e);if(this.spectrum&&0<this.spectrum.data.length&&this.p){var d,n;if(this.seekType===a.SeekerCanvas.SEEK_POINTER)d=this.p,n=this.spectrum.getInternalCoordinates(d.x,d.y);else if(this.seekType===a.SeekerCanvas.SEEK_PLOT||this.seekType===a.SeekerCanvas.SEEK_PEAK){n=this.seekType===a.SeekerCanvas.SEEK_PLOT?
-this.spectrum.getClosestPlotInternalCoordinates(this.p.x):this.spectrum.getClosestPeakInternalCoordinates(this.p.x);if(!n)return;d={x:this.spectrum.getTransformedX(n.x,this.specs,this.width,this.spectrum.memory.offsetLeft),y:this.spectrum.getTransformedY(n.y/100,this.specs,this.height,this.spectrum.memory.offsetBottom,this.spectrum.memory.offsetTop)}}e.fillStyle="white";e.strokeStyle=this.specs.plots_color;e.lineWidth=this.specs.plots_width;e.beginPath();e.arc(d.x,d.y,3,0,2*g.PI,!1);e.fill();e.stroke();
-e.font=c.getFontString(this.specs.text_font_size,this.specs.text_font_families);e.textAlign="left";e.textBaseline="bottom";n="x:"+n.x.toFixed(3)+", y:"+n.y.toFixed(3);var b=d.x+3,m=e.measureText(n).width;b+m>this.width-2&&(b-=6+m);d=d.y;0>d-this.specs.text_font_size-2&&(d+=this.specs.text_font_size);e.fillRect(b,d-this.specs.text_font_size,m,this.specs.text_font_size);e.fillStyle="black";e.fillText(n,b,d)}};e.mouseout=function(){this.p=void 0;this.repaint()};e.mousemove=function(a){this.p={x:a.p.x-
-2,y:a.p.y-3};this.repaint()};e.touchstart=function(a){this.mousemove(a)};e.touchmove=function(a){this.mousemove(a)};e.touchend=function(a){this.mouseout(a)};a.SeekerCanvas.SEEK_POINTER="pointer";a.SeekerCanvas.SEEK_PLOT="plot";a.SeekerCanvas.SEEK_PEAK="peak"})(ChemDoodle,ChemDoodle.extensions,Math);
-(function(a,c,g,e,f,d,n,b,m,v,j){a._Canvas3D=function(a,b,c){a&&this.create(a,b,c)};var h=a._Canvas3D.prototype=new a._Canvas;h.rotationMatrix=void 0;h.translationMatrix=void 0;h.lastPoint=void 0;h.emptyMessage="WebGL is Unavailable!";h.afterLoadContent=function(){for(var a=new g.Bounds,b=0,c=this.molecules.length;b<c;b++)a.expand(this.molecules[b].getBounds3D());var d=j.dist([a.maxX,a.maxY,a.maxZ],[a.minX,a.minY,a.minZ])/2+1.5,b=45,c=Math.tan(b/360*Math.PI)/0.8;this.depth=d/c;var c=n.max(this.depth-
-d,0.1),d=this.depth+d,e=this.gl.canvas.clientWidth/this.gl.canvas.clientHeight;1>e&&(b/=e);this.specs.projectionOrthoWidth_3D=2*(Math.tan(b/360*Math.PI)*this.depth)*e;this.specs.projectionPerspectiveVerticalFieldOfView_3D=b;this.specs.projectionFrontCulling_3D=c;this.specs.projectionBackCulling_3D=d;this.specs.projectionWidthHeightRatio_3D=e;this.translationMatrix=m.translate(m.identity([]),[0,0,-this.depth]);this.maxDimension=n.max(a.maxX-a.minX,a.maxY-a.minY);this.setupScene()};h.setViewDistance=
-function(a){this.specs.projectionPerspectiveVerticalFieldOfView_3D=g.clamp(this.specs.projectionPerspectiveVerticalFieldOfView_3D/a,0.1,179.9);this.specs.projectionOrthoWidth_3D=2*(n.tan(this.specs.projectionPerspectiveVerticalFieldOfView_3D/360*Math.PI)*this.depth)*this.specs.projectionWidthHeightRatio_3D;this.updateScene()};h.repaint=function(){if(this.gl){this.gl.clear(this.gl.COLOR_BUFFER_BIT|this.gl.DEPTH_BUFFER_BIT);this.gl.modelViewMatrix=m.multiply(this.translationMatrix,this.rotationMatrix,
-[]);this.gl.rotationMatrix=this.rotationMatrix;var a=this.gl.getUniformLocation(this.gl.program,"u_projection_matrix");this.gl.uniformMatrix4fv(a,!1,this.gl.projectionMatrix);this.gl.fogging.setMode(this.specs.fog_mode_3D);for(var b=0,c=this.molecules.length;b<c;b++)this.molecules[b].render(this.gl,this.specs);b=0;for(c=this.shapes.length;b<c;b++)this.shapes[b].render(this.gl,this.specs);this.specs.compass_display&&(this.gl.uniformMatrix4fv(a,!1,this.compass.projectionMatrix),this.compass.render(this.gl,
-this.specs));a=this.gl.shaderText;this.gl.useProgram(this.gl.programLabel);this.gl.enable(this.gl.BLEND);this.gl.blendFuncSeparate(this.gl.SRC_ALPHA,this.gl.ONE_MINUS_SRC_ALPHA,this.gl.ONE,this.gl.ONE_MINUS_SRC_ALPHA);this.gl.depthMask(!1);this.gl.enableVertexAttribArray(a.vertexPositionAttribute);this.gl.enableVertexAttribArray(a.vertexTexCoordAttribute);this.gl.enableVertexAttribArray(a.vertexTranslationAttribute);this.gl.enableVertexAttribArray(a.vertexZDepthAttribute);this.specs.atoms_displayLabels_3D&&
-this.label3D.render(this.gl,this.specs,this.getMolecules());this.specs.compass_display&&this.specs.compass_displayText_3D&&this.compass.renderText(this.gl);this.gl.disableVertexAttribArray(a.vertexPositionAttribute);this.gl.disableVertexAttribArray(a.vertexTexCoordAttribute);this.gl.disableVertexAttribArray(a.vertexTranslationAttribute);this.gl.disableVertexAttribArray(a.vertexZDepthAttribute);this.gl.disable(this.gl.BLEND);this.gl.depthMask(!0);this.gl.useProgram(this.gl.program);this.gl.enableVertexAttribArray(this.gl.shader.vertexPositionAttribute);
-this.gl.enableVertexAttribArray(this.gl.shader.vertexNormalAttribute);this.gl.flush()}};h.pick=function(a,b){if(this.gl){var c=this.gl;m.multiply(this.translationMatrix,this.rotationMatrix,this.gl.modelViewMatrix);this.gl.rotationMatrix=this.rotationMatrix;var d=this.gl.getUniformLocation(this.gl.program,"u_projection_matrix");this.gl.uniformMatrix4fv(d,!1,this.gl.projectionMatrix);return this.picker.pick(c,this.molecules,this.specs,a,this.height-b)}};h.center=function(){b.getElementById(this.id);
-for(var a=new e.Atom,c=0,d=this.molecules.length;c<d;c++){var f=this.molecules[c];a.add3D(f.getCenter3D())}a.x/=this.molecules.length;a.y/=this.molecules.length;c=0;for(d=this.molecules.length;c<d;c++){for(var f=this.molecules[c],g=0,j=f.atoms.length;g<j;g++)f.atoms[g].sub3D(a);if(f.chains&&f.fromJSON){g=0;for(j=f.chains.length;g<j;g++)for(var h=f.chains[g],m=0,n=h.length;m<n;m++){var v=h[m];v.cp1.sub3D(a);v.cp2.sub3D(a);v.cp3&&(v.cp3.sub3D(a),v.cp4.sub3D(a),v.cp5.sub3D(a))}}}};h.subCreate=function(){try{var a=
-b.getElementById(this.id);this.gl=a.getContext("webgl");this.gl||(this.gl=a.getContext("experimental-webgl"))}catch(c){}this.gl?(this.rotationMatrix=m.identity([]),this.translationMatrix=m.identity([]),this.gl.viewport(0,0,this.width,this.height),this.gl.program=this.gl.createProgram(),this.gl.shader=new f.Shader,this.gl.shader.init(this.gl),this.gl.programLabel=this.gl.createProgram(),this.gl.shaderText=new f.TextShader,this.gl.shaderText.init(this.gl),this.setupScene()):this.displayMessage()};a._Canvas.prototype.displayMessage=
-function(){var a=b.getElementById(this.id);a.getContext&&(a=a.getContext("2d"),this.specs.backgroundColor&&(a.fillStyle=this.specs.backgroundColor,a.fillRect(0,0,this.width,this.height)),this.emptyMessage&&(a.fillStyle="#737683",a.textAlign="center",a.textBaseline="middle",a.font="18px Helvetica, Verdana, Arial, Sans-serif",a.fillText(this.emptyMessage,this.width/2,this.height/2)))};h.setupScene=function(){if(this.gl){var b=g.getRGB(this.specs.backgroundColor,1);this.gl.clearColor(b[0],b[1],b[2],
-1);this.gl.clearDepth(1);this.gl.enable(this.gl.DEPTH_TEST);this.gl.depthFunc(this.gl.LEQUAL);this.specs.cullBackFace_3D&&this.gl.enable(this.gl.CULL_FACE);this.gl.sphereBuffer=new f.Sphere(1,this.specs.atoms_resolution_3D,this.specs.atoms_resolution_3D);this.gl.starBuffer=new f.Star;this.gl.cylinderBuffer=new f.Cylinder(1,1,this.specs.bonds_resolution_3D);this.gl.pillBuffer=new f.Pill(this.specs.bonds_pillDiameter_3D/2,this.specs.bonds_pillHeight_3D,this.specs.bonds_pillLatitudeResolution_3D,this.specs.bonds_pillLongitudeResolution_3D);
-this.gl.lineBuffer=new f.Line;this.gl.arrowBuffer=new f.Arrow(0.3,this.specs.compass_resolution_3D);this.label3D=new f.Label;this.label3D.init(this.gl,this.specs);for(var h=0,u=this.molecules.length;h<u;h++)if(b=this.molecules[h],b.labelMesh instanceof f.TextMesh||(b.labelMesh=new f.TextMesh,b.labelMesh.init(this.gl)),b.unitCellVectors&&(b.unitCell=new f.UnitCell(b.unitCellVectors)),b.chains){b.ribbons=[];b.cartoons=[];b.tubes=[];for(var l=0,t=b.chains.length;l<t;l++){var o=b.chains[l],r=2<o.length&&
-d[o[2].name]&&"#BEA06E"===d[o[2].name].aminoColor;if(0<o.length&&!o[0].lineSegments){for(var q=0,w=o.length-1;q<w;q++)o[q].setup(o[q+1].cp1,r?1:this.specs.proteins_horizontalResolution);if(!r){q=1;for(w=o.length-1;q<w;q++)c.vec3AngleFrom(o[q-1].D,o[q].D)>n.PI/2&&(o[q].guidePointsSmall.reverse(),o[q].guidePointsLarge.reverse(),j.scale(o[q].D,-1))}q=1;for(w=o.length-3;q<w;q++)o[q].computeLineSegments(o[q-1],o[q+1],o[q+2],!r,r?this.specs.nucleics_verticalResolution:this.specs.proteins_verticalResolution);
-o.pop();o.pop();o.pop();o.shift()}var q=g.hsl2rgb(1===t?0.5:l/t,1,0.5),y="rgb("+q[0]+","+q[1]+","+q[2]+")";o.chainColor=y;if(r)q=new f.Tube(o,this.specs.nucleics_tubeThickness,this.specs.nucleics_tubeResolution_3D),q.chainColor=y,b.tubes.push(q);else{r={front:new f.Ribbon(o,this.specs.proteins_ribbonThickness,!1),back:new f.Ribbon(o,-this.specs.proteins_ribbonThickness,!1)};r.front.chainColor=y;r.back.chainColor=y;q=0;for(w=r.front.segments.length;q<w;q++)r.front.segments[q].chainColor=y;q=0;for(w=
-r.back.segments.length;q<w;q++)r.back.segments[q].chainColor=y;b.ribbons.push(r);o={front:new f.Ribbon(o,this.specs.proteins_ribbonThickness,!0),back:new f.Ribbon(o,-this.specs.proteins_ribbonThickness,!0)};o.front.chainColor=y;o.back.chainColor=y;q=0;for(w=o.front.segments.length;q<w;q++)o.front.segments[q].chainColor=y;q=0;for(w=o.back.segments.length;q<w;q++)o.back.segments[q].chainColor=y;q=0;for(w=o.front.cartoonSegments.length;q<w;q++)o.front.cartoonSegments[q].chainColor=y;q=0;for(w=o.back.cartoonSegments.length;q<
-w;q++)o.back.cartoonSegments[q].chainColor=y;b.cartoons.push(o)}}}this.label3D.updateVerticesBuffer(this.gl,this.getMolecules(),this.specs);if(this instanceof a.MovieCanvas3D&&this.frames){q=0;for(w=this.frames.length;q<w;q++){h=this.frames[q];l=0;for(t=h.mols.length;l<t;l++)b=h.mols[l],b.labelMesh instanceof e.d3.TextMesh||(b.labelMesh=new e.d3.TextMesh,b.labelMesh.init(this.gl));this.label3D.updateVerticesBuffer(this.gl,h.mols,this.specs)}}this.gl.lighting=new f.Light(this.specs.lightDiffuseColor_3D,
-this.specs.lightSpecularColor_3D,this.specs.lightDirection_3D);this.gl.lighting.lightScene(this.gl);this.gl.material=new f.Material(this.gl);this.gl.fogging=new f.Fog(this.gl);this.gl.fogging.setTempParameter(this.specs.fog_color_3D||this.specs.backgroundColor,this.specs.fog_start_3D,this.specs.fog_end_3D,this.specs.fog_density_3D);this.compass=new f.Compass(this.gl,this.specs);b=this.width/this.height;this.specs.projectionWidthHeightRatio_3D&&(b=this.specs.projectionWidthHeightRatio_3D);this.gl.projectionMatrix=
-this.specs.projectionPerspective_3D?m.perspective(this.specs.projectionPerspectiveVerticalFieldOfView_3D,b,this.specs.projectionFrontCulling_3D,this.specs.projectionBackCulling_3D):m.ortho(-this.specs.projectionOrthoWidth_3D/2,this.specs.projectionOrthoWidth_3D/2,-this.specs.projectionOrthoWidth_3D/2/b,this.specs.projectionOrthoWidth_3D/2/b,this.specs.projectionFrontCulling_3D,this.specs.projectionBackCulling_3D);b=this.gl.getUniformLocation(this.gl.program,"u_projection_matrix");this.gl.uniformMatrix4fv(b,
-!1,this.gl.projectionMatrix);var z=this.gl.getUniformLocation(this.gl.program,"u_model_view_matrix"),x=this.gl.getUniformLocation(this.gl.program,"u_normal_matrix");this.gl.setMatrixUniforms=function(a){this.uniformMatrix4fv(z,!1,a);a=v.transpose(m.toInverseMat3(a,[]));this.uniformMatrix3fv(x,!1,a)};this.picker=new f.Picker;this.picker.init(this.gl);this.picker.setDimension(this.gl,this.width,this.height)}};h.mousedown=function(a){this.lastPoint=a.p};h.rightmousedown=function(a){this.lastPoint=a.p};
-h.drag=function(b){if(a.monitor.ALT){var c=new e.Point(b.p.x,b.p.y);c.sub(this.lastPoint);var d=n.tan(this.specs.projectionPerspectiveVerticalFieldOfView_3D/360*n.PI),d=this.depth/(this.height/2/d);m.translate(this.translationMatrix,[c.x*d,-c.y*d,0])}else d=b.p.x-this.lastPoint.x,c=b.p.y-this.lastPoint.y,d=m.rotate(m.identity([]),d*n.PI/180,[0,1,0]),m.rotate(d,c*n.PI/180,[1,0,0]),this.rotationMatrix=m.multiply(d,this.rotationMatrix);this.lastPoint=b.p;this.repaint()};h.mousewheel=function(a,b){var c=
-this.specs.projectionPerspectiveVerticalFieldOfView_3D+b;this.specs.projectionPerspectiveVerticalFieldOfView_3D=0.1>c?0.1:179.9<c?179.9:c;this.specs.projectionOrthoWidth_3D=2*(Math.tan(this.specs.projectionPerspectiveVerticalFieldOfView_3D/360*Math.PI)*this.depth)*this.specs.projectionWidthHeightRatio_3D;this.updateScene()};h.updateScene=function(){this.gl.fogging.setTempParameter(this.specs.fog_color_3D||this.specs.backgroundColor,this.specs.fog_start_3D,this.specs.fog_end_3D,this.specs.fog_density_3D);
-var a=this.width/this.height;this.specs.projectionWidthHeightRatio_3D&&(a=this.specs.projectionWidthHeightRatio_3D);this.gl.projectionMatrix=this.specs.projectionPerspective_3D?m.perspective(this.specs.projectionPerspectiveVerticalFieldOfView_3D,a,this.specs.projectionFrontCulling_3D,this.specs.projectionBackCulling_3D):m.ortho(-this.specs.projectionOrthoWidth_3D/2,this.specs.projectionOrthoWidth_3D/2,-this.specs.projectionOrthoWidth_3D/2/a,this.specs.projectionOrthoWidth_3D/2/a,this.specs.projectionFrontCulling_3D,
-this.specs.projectionBackCulling_3D);this.repaint()}})(ChemDoodle,ChemDoodle.extensions,ChemDoodle.math,ChemDoodle.structures,ChemDoodle.structures.d3,ChemDoodle.RESIDUE,Math,document,mat4,mat3,vec3,window);
-(function(a,c,g,e){a.MolGrabberCanvas3D=function(a,c,n){a&&this.create(a,c,n);c=[];c.push('\x3cbr\x3e\x3cinput type\x3d"text" id\x3d"');c.push(a);c.push('_query" size\x3d"32" value\x3d"" /\x3e');c.push("\x3cbr\x3e\x3cnobr\x3e");c.push('\x3cselect id\x3d"');c.push(a);c.push('_select"\x3e');c.push('\x3coption value\x3d"pubchem" selected\x3ePubChem');c.push("\x3c/select\x3e");c.push('\x3cbutton id\x3d"');c.push(a);c.push('_submit"\x3eShow Molecule\x3c/button\x3e');c.push("\x3c/nobr\x3e");e.writeln(c.join(""));
-var b=this;g("#"+a+"_submit").click(function(){b.search()});g("#"+a+"_query").keypress(function(a){13===a.which&&b.search()})};a=a.MolGrabberCanvas3D.prototype=new a._Canvas3D;a.setSearchTerm=function(a){g("#"+this.id+"_query").val(a);this.search()};a.search=function(){var a=this;c.getMoleculeFromDatabase(g("#"+this.id+"_query").val(),{database:g("#"+this.id+"_select").val(),dimension:3},function(c){a.loadMolecule(c)})}})(ChemDoodle,ChemDoodle.iChemLabs,jQuery,document);
-(function(a,c){a.MovieCanvas3D=function(a,c,d){a&&this.create(a,c,d);this.frames=[]};a.MovieCanvas3D.PLAY_ONCE=0;a.MovieCanvas3D.PLAY_LOOP=1;a.MovieCanvas3D.PLAY_SPRING=2;var g=a.MovieCanvas3D.prototype=new a._Canvas3D;g.timeout=50;g.frameNumber=0;g.playMode=2;g.reverse=!1;g.startAnimation=a._AnimatorCanvas.prototype.startAnimation;g.stopAnimation=a._AnimatorCanvas.prototype.stopAnimation;g.isRunning=a._AnimatorCanvas.prototype.isRunning;g.dblclick=a.RotatorCanvas.prototype.dblclick;g.nextFrame=function(){var a=
-this.frames[this.frameNumber];this.molecules=a.mols;this.shapes=a.shapes;2===this.playMode&&this.reverse?(this.frameNumber--,0>this.frameNumber&&(this.frameNumber=1,this.reverse=!1)):(this.frameNumber++,this.frameNumber>=this.frames.length&&(2===this.playMode?(this.frameNumber-=2,this.reverse=!0):(this.frameNumber=0,0===this.playMode&&this.stopAnimation())))};g.center=function(){for(var a=new c.Atom,f=this.frames[0],d=0,g=f.mols.length;d<g;d++)a.add3D(f.mols[d].getCenter3D());a.x/=f.mols.length;a.y/=
-f.mols.length;f=new c.Atom;f.sub3D(a);for(var a=0,b=this.frames.length;a<b;a++)for(var m=this.frames[a],d=0,g=m.mols.length;d<g;d++)for(var v=m.mols[d],j=0,h=v.atoms.length;j<h;j++)v.atoms[j].add3D(f)};g.addFrame=function(a,c){this.frames.push({mols:a,shapes:c})}})(ChemDoodle,ChemDoodle.structures);
-(function(a,c,g){var e=[],f=[1,0,0],d=[0,1,0],n=[0,0,1];a.RotatorCanvas3D=function(a,b,c){a&&this.create(a,b,c)};var b=a.RotatorCanvas3D.prototype=new a._Canvas3D;b.timeout=33;c=c.PI/15;b.xIncrement=c;b.yIncrement=c;b.zIncrement=c;b.startAnimation=a._AnimatorCanvas.prototype.startAnimation;b.stopAnimation=a._AnimatorCanvas.prototype.stopAnimation;b.isRunning=a._AnimatorCanvas.prototype.isRunning;b.dblclick=a.RotatorCanvas.prototype.dblclick;b.mousedown=void 0;b.rightmousedown=void 0;b.drag=void 0;
-b.mousewheel=void 0;b.nextFrame=function(a){0===this.molecules.length&&0===this.shapes.length?this.stopAnimation():(g.identity(e),a/=1E3,g.rotate(e,this.xIncrement*a,f),g.rotate(e,this.yIncrement*a,d),g.rotate(e,this.zIncrement*a,n),g.multiply(this.rotationMatrix,e))}})(ChemDoodle,Math,mat4);(function(a){a.TransformCanvas3D=function(a,g,e){a&&this.create(a,g,e)};a.TransformCanvas3D.prototype=new a._Canvas3D})(ChemDoodle);
-(function(a){a.ViewerCanvas3D=function(a,g,e){a&&this.create(a,g,e)};a=a.ViewerCanvas3D.prototype=new a._Canvas3D;a.mousedown=void 0;a.rightmousedown=void 0;a.drag=void 0;a.mousewheel=void 0})(ChemDoodle);
-(function(a,c,g){function e(a,c,b,e){this.element=a;this.x=c;this.y=b;this.dimension=e}a.PeriodicTableCanvas=function(a,c){this.padding=5;a&&this.create(a,18*c+2*this.padding,10*c+2*this.padding);this.cellDimension=c?c:20;this.setupTable();this.repaint()};var f=a.PeriodicTableCanvas.prototype=new a._Canvas;f.loadMolecule=void 0;f.getMolecule=void 0;f.getHoveredElement=function(){if(this.hovered)return this.hovered.element};f.innerRepaint=function(a){for(var c=0,b=this.cells.length;c<b;c++)this.drawCell(a,
-this.specs,this.cells[c]);this.hovered&&this.drawCell(a,this.specs,this.hovered);this.selected&&this.drawCell(a,this.specs,this.selected)};f.setupTable=function(){this.cells=[];for(var c=this.padding,f=this.padding,b=0,g=0,v=a.SYMBOLS.length;g<v;g++){18===b&&(b=0,f+=this.cellDimension,c=this.padding);var j=a.ELEMENT[a.SYMBOLS[g]];if(2===j.atomicNumber)c+=16*this.cellDimension,b+=16;else if(5===j.atomicNumber||13===j.atomicNumber)c+=10*this.cellDimension,b+=10;if((58>j.atomicNumber||71<j.atomicNumber&&
-90>j.atomicNumber||103<j.atomicNumber)&&113>j.atomicNumber)this.cells.push(new e(j,c,f,this.cellDimension)),c+=this.cellDimension,b++}f+=2*this.cellDimension;c=3*this.cellDimension+this.padding;for(g=57;104>g;g++)if(j=a.ELEMENT[a.SYMBOLS[g]],90===j.atomicNumber&&(f+=this.cellDimension,c=3*this.cellDimension+this.padding),58<=j.atomicNumber&&71>=j.atomicNumber||90<=j.atomicNumber&&103>=j.atomicNumber)this.cells.push(new e(j,c,f,this.cellDimension)),c+=this.cellDimension};f.drawCell=function(a,e,b){var f=
-a.createRadialGradient(b.x+b.dimension/3,b.y+b.dimension/3,1.5*b.dimension,b.x+b.dimension/3,b.y+b.dimension/3,b.dimension/10);f.addColorStop(0,"#000000");f.addColorStop(0.7,b.element.jmolColor);f.addColorStop(1,"#FFFFFF");a.fillStyle=f;c.contextRoundRect(a,b.x,b.y,b.dimension,b.dimension,b.dimension/8);if(b===this.hovered||b===this.selected)a.lineWidth=2,a.strokeStyle="#c10000",a.stroke(),a.fillStyle="white";a.fill();a.font=c.getFontString(e.text_font_size,e.text_font_families);a.fillStyle=e.text_color;
-a.textAlign="center";a.textBaseline="middle";a.fillText(b.element.symbol,b.x+b.dimension/2,b.y+b.dimension/2)};f.click=function(){this.hovered&&(this.selected=this.hovered,this.repaint())};f.mousemove=function(a){var c=a.p.x;a=a.p.y;this.hovered=void 0;for(var b=0,e=this.cells.length;b<e;b++){var f=this.cells[b];if(g.isBetween(c,f.x,f.x+f.dimension)&&g.isBetween(a,f.y,f.y+f.dimension)){this.hovered=f;break}}this.repaint()};f.mouseout=function(){this.hovered=void 0;this.repaint()}})(ChemDoodle,ChemDoodle.extensions,
-ChemDoodle.math,document);(function(a,c,g){a.png={};a.png.create=function(a){g.open(c.getElementById(a.id).toDataURL("image/png"))}})(ChemDoodle.io,document,window);(function(a,c){a.file={};a.file.content=function(a,e){c.get(a,"",e)}})(ChemDoodle.io,jQuery);
-(function(a,c,g,e,f){c.SERVER_URL="http://ichemlabs.cloud.chemdoodle.com/icl_cdc_v050000/WebHQ";c.inRelay=!1;c.asynchronous=!0;c.INFO={userAgent:navigator.userAgent,v_cwc:a.getVersion(),v_jQuery:f.version,v_jQuery_ui:f.ui?f.ui.version:"N/A"};var d=new g.JSONInterpreter;c._contactServer=function(a,b,d,e,g){this.inRelay?alert("Already connecting to the server, please wait for the first request to finish."):(c.inRelay=!0,f.ajax({dataType:"text",type:"POST",data:JSON.stringify({call:a,content:b,options:d,
-info:c.INFO}),url:this.SERVER_URL,success:function(a){c.inRelay=!1;a=JSON.parse(a);a.message&&alert(a.message);e&&(a.content&&!a.stop)&&e(a.content);a.stop&&g&&g()},error:function(){c.inRelay=!1;alert("Call failed. Please try again. If you continue to see this message, please contact iChemLabs customer support.");g&&g()},xhrFields:{withCredentials:!0},async:c.asynchronous}))};c.authenticate=function(a,b,c,d){this._contactServer("authenticate",{credential:a},b,function(a){c(a)},d)};c.calculate=function(a,
-b,c,e){this._contactServer("calculate",{mol:d.molTo(a)},b,function(a){c(a)},e)};c.generateImage=function(a,b,c,e){this._contactServer("generateImage",{mol:d.molTo(a)},b,function(a){c(a.link)},e)};c.generateIUPACName=function(a,b,c,e){this._contactServer("generateIUPACName",{mol:d.molTo(a)},b,function(a){c(a.iupac)},e)};c.getAd=function(a,b){this._contactServer("getAd",{},{},function(b){a(b.image_url,b.target_url)},b)};c.getMoleculeFromContent=function(a,b,c,e){this._contactServer("getMoleculeFromContent",
-{content:a},b,function(a){for(var b=!1,e=0,f=a.mol.a.length;e<f;e++)if(0!==a.mol.a[e].z){b=!0;break}if(b){e=0;for(f=a.mol.a.length;e<f;e++)a.mol.a[e].x/=20,a.mol.a[e].y/=20,a.mol.a[e].z/=20}c(d.molFrom(a.mol))},e)};c.getMoleculeFromDatabase=function(a,b,c,e){this._contactServer("getMoleculeFromDatabase",{query:a},b,function(a){if(3===b.dimension)for(var e=0,f=a.mol.a.length;e<f;e++)a.mol.a[e].x/=20,a.mol.a[e].y/=-20,a.mol.a[e].z/=20;c(d.molFrom(a.mol))},e)};c.getOptimizedPDBStructure=function(a,b,
-c,f){this._contactServer("getOptimizedPDBStructure",{id:a},b,function(a){var b;b=a.mol?d.molFrom(a.mol):new e.Molecule;b.chains=d.chainsFrom(a.ribbons);b.fromJSON=!0;c(b)},f)};c.getZeoliteFromIZA=function(a,b,c,d){this._contactServer("getZeoliteFromIZA",{query:a},b,function(a){c(ChemDoodle.readCIF(a.cif,b.xSuper,b.ySuper,b.zSuper))},d)};c.isGraphIsomorphism=function(a,b,c,e,f){this._contactServer("isGraphIsomorphism",{arrow:d.molTo(a),target:d.molTo(b)},c,function(a){e(a.value)},f)};c.isSubgraphIsomorphism=
-function(a,b,c,e,f){this._contactServer("isSubgraphIsomorphism",{arrow:d.molTo(a),target:d.molTo(b)},c,function(a){e(a.value)},f)};c.kekulize=function(a,b,c,e){this._contactServer("kekulize",{mol:d.molTo(a)},b,function(a){c(d.molFrom(a.mol))},e)};c.optimize=function(a,b,c,e){this._contactServer("optimize",{mol:d.molTo(a)},b,function(e){e=d.molFrom(e.mol);if(2===b.dimension){for(var f=0,g=e.atoms.length;f<g;f++)a.atoms[f].x=e.atoms[f].x,a.atoms[f].y=e.atoms[f].y;c()}else if(3===b.dimension){f=0;for(g=
-e.atoms.length;f<g;f++)e.atoms[f].x/=20,e.atoms[f].y/=-20,e.atoms[f].z/=20;c(e)}},e)};c.readIUPACName=function(a,b,c,e){this._contactServer("readIUPACName",{iupac:a},b,function(a){c(d.molFrom(a.mol))},e)};c.readSMILES=function(a,b,c,e){this._contactServer("readSMILES",{smiles:a},b,function(a){c(d.molFrom(a.mol))},e)};c.saveFile=function(a,b,c,e){this._contactServer("saveFile",{mol:d.molTo(a)},b,function(a){c(a.link)},e)};c.simulate13CNMR=function(c,b,e,f){b.nucleus="C";b.isotope=13;this._contactServer("simulateNMR",
-{mol:d.molTo(c)},b,function(b){e(a.readJCAMP(b.jcamp))},f)};c.simulate1HNMR=function(c,b,e,f){b.nucleus="H";b.isotope=1;this._contactServer("simulateNMR",{mol:d.molTo(c)},b,function(b){e(a.readJCAMP(b.jcamp))},f)};c.simulateMassParentPeak=function(c,b,e,f){this._contactServer("simulateMassParentPeak",{mol:d.molTo(c)},b,function(b){e(a.readJCAMP(b.jcamp))},f)};c.writeSMILES=function(a,b,c,e){this._contactServer("writeSMILES",{mol:d.molTo(a)},b,function(a){c(a.smiles)},e)};c.version=function(a,b,c){this._contactServer("version",
-{},a,function(a){b(a.value)},c)}})(ChemDoodle,ChemDoodle.iChemLabs,ChemDoodle.io,ChemDoodle.structures,jQuery);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 2934 $
+//  $Author: kevin $
+//  $LastChangedDate: 2010-12-08 20:53:47 -0500 (Wed, 08 Dec 2010) $
+//
+var ChemDoodle = (function() {
+  'use strict';
+  var c = {};
+
+  c.structures = {};
+  c.structures.d2 = {};
+  c.structures.d3 = {};
+  c.iChemLabs = {};
+  c.informatics = {};
+  c.io = {};
+
+  var VERSION = '5.2.3';
+
+  c.getVersion = function() {
+    return VERSION;
+  };
+
+  return c;
+
+})();
+//
+//  Copyright 2006-2010 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4401 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-06-08 12:26:27 -0400 (Sat, 08 Jun 2013) $
+//
+
+ChemDoodle.extensions = (function(structures, v3, m) {
+  'use strict';
+  var ext = {};
+
+  ext.stringStartsWith = function(str, match) {
+    return str.slice(0, match.length) === match;
+  };
+
+  ext.vec3AngleFrom = function(v1, v2) {
+    var length1 = v3.length(v1);
+    var length2 = v3.length(v2);
+    var dot = v3.dot(v1, v2);
+    var cosine = dot / length1 / length2;
+    return m.acos(cosine);
+  };
+
+  ext.contextHashTo = function(ctx, xs, ys, xt, yt, width, spacing) {
+    var travelled = 0;
+    var dist = new structures.Point(xs, ys).distance(new structures.Point(xt, yt));
+    var space = false;
+    var lastX = xs;
+    var lastY = ys;
+    var difX = xt - xs;
+    var difY = yt - ys;
+    while (travelled < dist) {
+      if (space) {
+        if (travelled + spacing > dist) {
+          ctx.moveTo(xt, yt);
+          break;
+        } else {
+          var percent = spacing / dist;
+          lastX += percent * difX;
+          lastY += percent * difY;
+          ctx.moveTo(lastX, lastY);
+          travelled += spacing;
+        }
+      } else {
+        if (travelled + width > dist) {
+          ctx.lineTo(xt, yt);
+          break;
+        } else {
+          var percent = width / dist;
+          lastX += percent * difX;
+          lastY += percent * difY;
+          ctx.lineTo(lastX, lastY);
+          travelled += width;
+        }
+      }
+      space = !space;
+    }
+  };
+
+  ext.contextRoundRect = function(ctx, x, y, width, height, radius) {
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+  };
+
+  ext.contextEllipse = function(ctx, x, y, w, h) {
+    var kappa = .5522848;
+    var ox = (w / 2) * kappa;
+    var oy = (h / 2) * kappa;
+    var xe = x + w;
+    var ye = y + h;
+    var xm = x + w / 2;
+    var ym = y + h / 2;
+
+    ctx.beginPath();
+    ctx.moveTo(x, ym);
+    ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
+    ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
+    ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+    ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
+    ctx.closePath();
+  };
+
+  ext.getFontString = function(size, families, bold, italic) {
+    var sb = [];
+    if (bold) {
+      sb.push('bold ');
+    }
+    if (italic) {
+      sb.push('italic ');
+    }
+    sb.push(size + 'px ');
+    for ( var i = 0, ii = families.length; i < ii; i++) {
+      var use = families[i];
+      if (use.indexOf(' ') !== -1) {
+        use = '"' + use + '"';
+      }
+      sb.push((i !== 0 ? ',' : '') + use);
+    }
+    return sb.join('');
+  };
+
+  return ext;
+
+})(ChemDoodle.structures, vec3, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4459 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-08-06 14:09:43 -0400 (Tue, 06 Aug 2013) $
+//
+
+ChemDoodle.math = (function(extensions, structures, m) {
+  'use strict';
+  var pack = {};
+
+  var namedColors = {
+    'aliceblue' : '#f0f8ff',
+    'antiquewhite' : '#faebd7',
+    'aqua' : '#00ffff',
+    'aquamarine' : '#7fffd4',
+    'azure' : '#f0ffff',
+    'beige' : '#f5f5dc',
+    'bisque' : '#ffe4c4',
+    'black' : '#000000',
+    'blanchedalmond' : '#ffebcd',
+    'blue' : '#0000ff',
+    'blueviolet' : '#8a2be2',
+    'brown' : '#a52a2a',
+    'burlywood' : '#deb887',
+    'cadetblue' : '#5f9ea0',
+    'chartreuse' : '#7fff00',
+    'chocolate' : '#d2691e',
+    'coral' : '#ff7f50',
+    'cornflowerblue' : '#6495ed',
+    'cornsilk' : '#fff8dc',
+    'crimson' : '#dc143c',
+    'cyan' : '#00ffff',
+    'darkblue' : '#00008b',
+    'darkcyan' : '#008b8b',
+    'darkgoldenrod' : '#b8860b',
+    'darkgray' : '#a9a9a9',
+    'darkgreen' : '#006400',
+    'darkkhaki' : '#bdb76b',
+    'darkmagenta' : '#8b008b',
+    'darkolivegreen' : '#556b2f',
+    'darkorange' : '#ff8c00',
+    'darkorchid' : '#9932cc',
+    'darkred' : '#8b0000',
+    'darksalmon' : '#e9967a',
+    'darkseagreen' : '#8fbc8f',
+    'darkslateblue' : '#483d8b',
+    'darkslategray' : '#2f4f4f',
+    'darkturquoise' : '#00ced1',
+    'darkviolet' : '#9400d3',
+    'deeppink' : '#ff1493',
+    'deepskyblue' : '#00bfff',
+    'dimgray' : '#696969',
+    'dodgerblue' : '#1e90ff',
+    'firebrick' : '#b22222',
+    'floralwhite' : '#fffaf0',
+    'forestgreen' : '#228b22',
+    'fuchsia' : '#ff00ff',
+    'gainsboro' : '#dcdcdc',
+    'ghostwhite' : '#f8f8ff',
+    'gold' : '#ffd700',
+    'goldenrod' : '#daa520',
+    'gray' : '#808080',
+    'green' : '#008000',
+    'greenyellow' : '#adff2f',
+    'honeydew' : '#f0fff0',
+    'hotpink' : '#ff69b4',
+    'indianred ' : '#cd5c5c',
+    'indigo ' : '#4b0082',
+    'ivory' : '#fffff0',
+    'khaki' : '#f0e68c',
+    'lavender' : '#e6e6fa',
+    'lavenderblush' : '#fff0f5',
+    'lawngreen' : '#7cfc00',
+    'lemonchiffon' : '#fffacd',
+    'lightblue' : '#add8e6',
+    'lightcoral' : '#f08080',
+    'lightcyan' : '#e0ffff',
+    'lightgoldenrodyellow' : '#fafad2',
+    'lightgrey' : '#d3d3d3',
+    'lightgreen' : '#90ee90',
+    'lightpink' : '#ffb6c1',
+    'lightsalmon' : '#ffa07a',
+    'lightseagreen' : '#20b2aa',
+    'lightskyblue' : '#87cefa',
+    'lightslategray' : '#778899',
+    'lightsteelblue' : '#b0c4de',
+    'lightyellow' : '#ffffe0',
+    'lime' : '#00ff00',
+    'limegreen' : '#32cd32',
+    'linen' : '#faf0e6',
+    'magenta' : '#ff00ff',
+    'maroon' : '#800000',
+    'mediumaquamarine' : '#66cdaa',
+    'mediumblue' : '#0000cd',
+    'mediumorchid' : '#ba55d3',
+    'mediumpurple' : '#9370d8',
+    'mediumseagreen' : '#3cb371',
+    'mediumslateblue' : '#7b68ee',
+    'mediumspringgreen' : '#00fa9a',
+    'mediumturquoise' : '#48d1cc',
+    'mediumvioletred' : '#c71585',
+    'midnightblue' : '#191970',
+    'mintcream' : '#f5fffa',
+    'mistyrose' : '#ffe4e1',
+    'moccasin' : '#ffe4b5',
+    'navajowhite' : '#ffdead',
+    'navy' : '#000080',
+    'oldlace' : '#fdf5e6',
+    'olive' : '#808000',
+    'olivedrab' : '#6b8e23',
+    'orange' : '#ffa500',
+    'orangered' : '#ff4500',
+    'orchid' : '#da70d6',
+    'palegoldenrod' : '#eee8aa',
+    'palegreen' : '#98fb98',
+    'paleturquoise' : '#afeeee',
+    'palevioletred' : '#d87093',
+    'papayawhip' : '#ffefd5',
+    'peachpuff' : '#ffdab9',
+    'peru' : '#cd853f',
+    'pink' : '#ffc0cb',
+    'plum' : '#dda0dd',
+    'powderblue' : '#b0e0e6',
+    'purple' : '#800080',
+    'red' : '#ff0000',
+    'rosybrown' : '#bc8f8f',
+    'royalblue' : '#4169e1',
+    'saddlebrown' : '#8b4513',
+    'salmon' : '#fa8072',
+    'sandybrown' : '#f4a460',
+    'seagreen' : '#2e8b57',
+    'seashell' : '#fff5ee',
+    'sienna' : '#a0522d',
+    'silver' : '#c0c0c0',
+    'skyblue' : '#87ceeb',
+    'slateblue' : '#6a5acd',
+    'slategray' : '#708090',
+    'snow' : '#fffafa',
+    'springgreen' : '#00ff7f',
+    'steelblue' : '#4682b4',
+    'tan' : '#d2b48c',
+    'teal' : '#008080',
+    'thistle' : '#d8bfd8',
+    'tomato' : '#ff6347',
+    'turquoise' : '#40e0d0',
+    'violet' : '#ee82ee',
+    'wheat' : '#f5deb3',
+    'white' : '#ffffff',
+    'whitesmoke' : '#f5f5f5',
+    'yellow' : '#ffff00',
+    'yellowgreen' : '#9acd32'
+  };
+
+  pack.angleBetweenLargest = function(angles) {
+    if (angles.length === 0) {
+      return {
+        angle : 0,
+        largest : m.PI * 2
+      };
+    }
+    if (angles.length === 1) {
+      return {
+        angle : angles[0] + m.PI,
+        largest : m.PI * 2
+      };
+    }
+    var largest = 0;
+    var angle = 0;
+    var index = -1;
+    for ( var i = 0, ii = angles.length - 1; i < ii; i++) {
+      var dif = angles[i + 1] - angles[i];
+      if (dif > largest) {
+        largest = dif;
+        angle = (angles[i + 1] + angles[i]) / 2;
+        index = i;
+      }
+    }
+    var last = angles[0] + m.PI * 2 - angles[angles.length - 1];
+    if (last > largest) {
+      angle = angles[0] - last / 2;
+      largest = last;
+      if (angle < 0) {
+        angle += m.PI * 2;
+      }
+      index = angles.length - 1;
+    }
+    return {
+      angle : angle,
+      largest : largest
+    };
+  };
+
+  pack.isBetween = function(x, left, right) {
+    if (left > right) {
+      var tmp = left;
+      left = right;
+      right = tmp;
+    }
+    return x >= left && x <= right;
+  };
+
+  pack.getRGB = function(color, multiplier) {
+    var err = [ 0, 0, 0 ];
+    if (namedColors[color.toLowerCase()]) {
+      color = namedColors[color.toLowerCase()];
+    }
+    if (color.charAt(0) === '#') {
+      if (color.length === 4) {
+        color = '#' + color.charAt(1) + color.charAt(1) + color.charAt(2) + color.charAt(2) + color.charAt(3) + color.charAt(3);
+      }
+      return [ parseInt(color.substring(1, 3), 16) / 255.0 * multiplier, parseInt(color.substring(3, 5), 16) / 255.0 * multiplier, parseInt(color.substring(5, 7), 16) / 255.0 * multiplier ];
+    } else if (extensions.stringStartsWith(color, 'rgb')) {
+      var cs = color.replace(/rgb\(|\)/g, '').split(',');
+      if (cs.length !== 3) {
+        return err;
+      }
+      return [ parseInt(cs[0]) / 255.0 * multiplier, parseInt(cs[1]) / 255.0 * multiplier, parseInt(cs[2]) / 255.0 * multiplier ];
+    }
+    return err;
+  };
+
+  pack.idx2color = function(value) {
+    var hex = value.toString(16);
+
+    // add '0' padding
+    for ( var i = 0, ii = 6 - hex.length; i < ii; i++) {
+      hex = "0" + hex;
+    }
+
+    return "#" + hex;
+  };
+
+  pack.distanceFromPointToLineInclusive = function(p, l1, l2) {
+    var length = l1.distance(l2);
+    var angle = l1.angle(l2);
+    var angleDif = m.PI / 2 - angle;
+    var newAngleP = l1.angle(p) + angleDif;
+    var pDist = l1.distance(p);
+    var pcopRot = new structures.Point(pDist * m.cos(newAngleP), -pDist * m.sin(newAngleP));
+    if (pack.isBetween(-pcopRot.y, 0, length)) {
+      return m.abs(pcopRot.x);
+    }
+    return -1;
+  };
+
+  pack.calculateDistanceInterior = function(to, from, r) {
+    if (this.isBetween(from.x, r.x, r.x + r.w) && this.isBetween(from.y, r.y, r.y + r.w)) {
+      return to.distance(from);
+    }
+    // calculates the distance that a line needs to remove from itself to be
+    // outside that rectangle
+    var lines = [];
+    // top
+    lines.push({
+      x1 : r.x,
+      y1 : r.y,
+      x2 : r.x + r.w,
+      y2 : r.y
+    });
+    // bottom
+    lines.push({
+      x1 : r.x,
+      y1 : r.y + r.h,
+      x2 : r.x + r.w,
+      y2 : r.y + r.h
+    });
+    // left
+    lines.push({
+      x1 : r.x,
+      y1 : r.y,
+      x2 : r.x,
+      y2 : r.y + r.h
+    });
+    // right
+    lines.push({
+      x1 : r.x + r.w,
+      y1 : r.y,
+      x2 : r.x + r.w,
+      y2 : r.y + r.h
+    });
+
+    var intersections = [];
+    for ( var i = 0; i < 4; i++) {
+      var l = lines[i];
+      var p = this.intersectLines(from.x, from.y, to.x, to.y, l.x1, l.y1, l.x2, l.y2);
+      if (p) {
+        intersections.push(p);
+      }
+    }
+    if (intersections.length === 0) {
+      return 0;
+    }
+    var max = 0;
+    for ( var i = 0, ii = intersections.length; i < ii; i++) {
+      var p = intersections[i];
+      var dx = to.x - p.x;
+      var dy = to.y - p.y;
+      max = m.max(max, m.sqrt(dx * dx + dy * dy));
+    }
+    return max;
+  };
+
+  pack.intersectLines = function(ax, ay, bx, by, cx, cy, dx, dy) {
+    // calculate the direction vectors
+    bx -= ax;
+    by -= ay;
+    dx -= cx;
+    dy -= cy;
+
+    // are they parallel?
+    var denominator = by * dx - bx * dy;
+    if (denominator === 0) {
+      return false;
+    }
+
+    // calculate point of intersection
+    var r = (dy * (ax - cx) - dx * (ay - cy)) / denominator;
+    var s = (by * (ax - cx) - bx * (ay - cy)) / denominator;
+    if ((s >= 0) && (s <= 1) && (r >= 0) && (r <= 1)) {
+      return {
+        x : (ax + r * bx),
+        y : (ay + r * by)
+      };
+    } else {
+      return false;
+    }
+  };
+
+  pack.hsl2rgb = function(h, s, l) {
+    var hue2rgb = function(p, q, t) {
+      if (t < 0) {
+        t += 1;
+      } else if (t > 1) {
+        t -= 1;
+      }
+      if (t < 1 / 6) {
+        return p + (q - p) * 6 * t;
+      } else if (t < 1 / 2) {
+        return q;
+      } else if (t < 2 / 3) {
+        return p + (q - p) * (2 / 3 - t) * 6;
+      }
+      return p;
+    };
+    var r, g, b;
+    if (s === 0) {
+      r = g = b = l; // achromatic
+    } else {
+      var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      var p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1 / 3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1 / 3);
+    }
+    return [ r * 255, g * 255, b * 255 ];
+  };
+
+  pack.isPointInPoly = function(poly, pt) {
+    for ( var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i) {
+      ((poly[i].y <= pt.y && pt.y < poly[j].y) || (poly[j].y <= pt.y && pt.y < poly[i].y)) && (pt.x < (poly[j].x - poly[i].x) * (pt.y - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x) && (c = !c);
+    }
+    return c;
+  };
+
+  pack.clamp = function(value, min, max) {
+    return value < min ? min : value > max ? max : value;
+  };
+
+  return pack;
+
+})(ChemDoodle.extensions, ChemDoodle.structures, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3469 $
+//  $Author: kevin $
+//  $LastChangedDate: 2012-01-21 10:01:03 -0500 (Sat, 21 Jan 2012) $
+//
+
+(function(math, m) {
+  'use strict';
+  math.Bounds = function() {
+  };
+  var _ = math.Bounds.prototype;
+  _.minX = _.minY = _.minZ = Infinity;
+  _.maxX = _.maxY = _.maxZ = -Infinity;
+  _.expand = function(x1, y1, x2, y2) {
+    if (x1 instanceof math.Bounds) {
+      // only need to compare min and max since bounds already has
+      // them ordered
+      this.minX = m.min(this.minX, x1.minX);
+      this.minY = m.min(this.minY, x1.minY);
+      this.maxX = m.max(this.maxX, x1.maxX);
+      this.maxY = m.max(this.maxY, x1.maxY);
+      if(x1.maxZ!==Infinity){
+        this.minZ = m.min(this.minZ, x1.minZ);
+        this.maxZ = m.max(this.maxZ, x1.maxZ);
+      }
+    } else {
+      this.minX = m.min(this.minX, x1);
+      this.maxX = m.max(this.maxX, x1);
+      this.minY = m.min(this.minY, y1);
+      this.maxY = m.max(this.maxY, y1);
+      // these two values could be 0, so check if undefined
+      if (x2 !== undefined && y2 !== undefined) {
+        this.minX = m.min(this.minX, x2);
+        this.maxX = m.max(this.maxX, x2);
+        this.minY = m.min(this.minY, y2);
+        this.maxY = m.max(this.maxY, y2);
+      }
+    }
+  };
+  _.expand3D = function(x1, y1, z1, x2, y2, z2) {
+    this.minX = m.min(this.minX, x1);
+    this.maxX = m.max(this.maxX, x1);
+    this.minY = m.min(this.minY, y1);
+    this.maxY = m.max(this.maxY, y1);
+    this.minZ = m.min(this.minZ, z1);
+    this.maxZ = m.max(this.maxZ, z1);
+    // these two values could be 0, so check if undefined
+    if (x2 !== undefined && y2 !== undefined && z2 !== undefined) {
+      this.minX = m.min(this.minX, x2);
+      this.maxX = m.max(this.maxX, x2);
+      this.minY = m.min(this.minY, y2);
+      this.maxY = m.max(this.maxY, y2);
+      this.minZ = m.min(this.minZ, z2);
+      this.maxZ = m.max(this.maxZ, z2);
+    }
+  };
+
+})(ChemDoodle.math, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3469 $
+//  $Author: kevin $
+//  $LastChangedDate: 2012-01-21 10:01:03 -0500 (Sat, 21 Jan 2012) $
+//
+
+/**
+ * jsBezier-0.5
+ *
+ * Copyright (c) 2010 - 2011 Simon Porritt (simon.porritt@gmail.com)
+ *
+ * licensed under the MIT license.
+ *
+ * a set of Bezier curve functions that deal with Beziers, used by jsPlumb, and
+ * perhaps useful for other people. These functions work with Bezier curves of
+ * arbitrary degree.
+ *  - functions are all in the 'jsBezier' namespace.
+ *  - all input points should be in the format {x:.., y:..}. all output points
+ * are in this format too.
+ *  - all input curves should be in the format [ {x:.., y:..}, {x:.., y:..},
+ * {x:.., y:..}, {x:.., y:..} ]
+ *  - 'location' as used as an input here refers to a decimal in the range 0-1
+ * inclusive, which indicates a point some proportion along the length of the
+ * curve. location as output has the same format and meaning.
+ *
+ *
+ * Function List: --------------
+ *
+ * distanceFromCurve(point, curve)
+ *
+ * Calculates the distance that the given point lies from the given Bezier. Note
+ * that it is computed relative to the center of the Bezier, so if you have
+ * stroked the curve with a wide pen you may wish to take that into account! The
+ * distance returned is relative to the values of the curve and the point - it
+ * will most likely be pixels.
+ *
+ * gradientAtPoint(curve, location)
+ *
+ * Calculates the gradient to the curve at the given location, as a decimal
+ * between 0 and 1 inclusive.
+ *
+ * gradientAtPointAlongCurveFrom (curve, location)
+ *
+ * Calculates the gradient at the point on the given curve that is 'distance'
+ * units from location.
+ *
+ * nearestPointOnCurve(point, curve)
+ *
+ * Calculates the nearest point to the given point on the given curve. The
+ * return value of this is a JS object literal, containing both the point's
+ * coordinates and also the 'location' of the point (see above), for example: {
+ * point:{x:551,y:150}, location:0.263365 }.
+ *
+ * pointOnCurve(curve, location)
+ *
+ * Calculates the coordinates of the point on the given Bezier curve at the
+ * given location.
+ *
+ * pointAlongCurveFrom(curve, location, distance)
+ *
+ * Calculates the coordinates of the point on the given curve that is 'distance'
+ * units from location. 'distance' should be in the same coordinate space as
+ * that used to construct the Bezier curve. For an HTML Canvas usage, for
+ * example, distance would be a measure of pixels.
+ *
+ * locationAlongCurveFrom(curve, location, distance)
+ *
+ * Calculates the location on the given curve that is 'distance' units from
+ * location. 'distance' should be in the same coordinate space as that used to
+ * construct the Bezier curve. For an HTML Canvas usage, for example, distance
+ * would be a measure of pixels.
+ *
+ * perpendicularToCurveAt(curve, location, length, distance)
+ *
+ * Calculates the perpendicular to the given curve at the given location. length
+ * is the length of the line you wish for (it will be centered on the point at
+ * 'location'). distance is optional, and allows you to specify a point along
+ * the path from the given location as the center of the perpendicular returned.
+ * The return value of this is an array of two points: [ {x:...,y:...},
+ * {x:...,y:...} ].
+ *
+ *
+ */
+
+(function(math) {
+  'use strict';
+  function sgn(x) {
+    return x == 0 ? 0 : x > 0 ? 1 : -1;
+  }
+
+  var Vectors = {
+    subtract : function(v1, v2) {
+      return {
+        x : v1.x - v2.x,
+        y : v1.y - v2.y
+      };
+    },
+    dotProduct : function(v1, v2) {
+      return (v1.x * v2.x) + (v1.y * v2.y);
+    },
+    square : function(v) {
+      return Math.sqrt((v.x * v.x) + (v.y * v.y));
+    },
+    scale : function(v, s) {
+      return {
+        x : v.x * s,
+        y : v.y * s
+      };
+    }
+  },
+
+  maxRecursion = 64, flatnessTolerance = Math.pow(2.0, -maxRecursion - 1);
+
+  /**
+   * Calculates the distance that the point lies from the curve.
+   *
+   * @param point
+   *            a point in the form {x:567, y:3342}
+   * @param curve
+   *            a Bezier curve in the form [{x:..., y:...}, {x:..., y:...},
+   *            {x:..., y:...}, {x:..., y:...}]. note that this is currently
+   *            hardcoded to assume cubiz beziers, but would be better off
+   *            supporting any degree.
+   * @return a JS object literal containing location and distance, for
+   *         example: {location:0.35, distance:10}. Location is analogous to
+   *         the location argument you pass to the pointOnPath function: it is
+   *         a ratio of distance travelled along the curve. Distance is the
+   *         distance in pixels from the point to the curve.
+   */
+  var _distanceFromCurve = function(point, curve) {
+    var candidates = [], w = _convertToBezier(point, curve), degree = curve.length - 1, higherDegree = (2 * degree) - 1, numSolutions = _findRoots(w, higherDegree, candidates, 0), v = Vectors.subtract(point, curve[0]), dist = Vectors.square(v), t = 0.0;
+
+    for ( var i = 0; i < numSolutions; i++) {
+      v = Vectors.subtract(point, _bezier(curve, degree, candidates[i], null, null));
+      var newDist = Vectors.square(v);
+      if (newDist < dist) {
+        dist = newDist;
+        t = candidates[i];
+      }
+    }
+    v = Vectors.subtract(point, curve[degree]);
+    newDist = Vectors.square(v);
+    if (newDist < dist) {
+      dist = newDist;
+      t = 1.0;
+    }
+    return {
+      location : t,
+      distance : dist
+    };
+  };
+  /**
+   * finds the nearest point on the curve to the given point.
+   */
+  var _nearestPointOnCurve = function(point, curve) {
+    var td = _distanceFromCurve(point, curve);
+    return {
+      point : _bezier(curve, curve.length - 1, td.location, null, null),
+      location : td.location
+    };
+  };
+  var _convertToBezier = function(point, curve) {
+    var degree = curve.length - 1, higherDegree = (2 * degree) - 1, c = [], d = [], cdTable = [], w = [], z = [ [ 1.0, 0.6, 0.3, 0.1 ], [ 0.4, 0.6, 0.6, 0.4 ], [ 0.1, 0.3, 0.6, 1.0 ] ];
+
+    for ( var i = 0; i <= degree; i++)
+      c[i] = Vectors.subtract(curve[i], point);
+    for ( var i = 0; i <= degree - 1; i++) {
+      d[i] = Vectors.subtract(curve[i + 1], curve[i]);
+      d[i] = Vectors.scale(d[i], 3.0);
+    }
+    for ( var row = 0; row <= degree - 1; row++) {
+      for ( var column = 0; column <= degree; column++) {
+        if (!cdTable[row])
+          cdTable[row] = [];
+        cdTable[row][column] = Vectors.dotProduct(d[row], c[column]);
+      }
+    }
+    for (i = 0; i <= higherDegree; i++) {
+      if (!w[i])
+        w[i] = [];
+      w[i].y = 0.0;
+      w[i].x = parseFloat(i) / higherDegree;
+    }
+    var n = degree, m = degree - 1;
+    for ( var k = 0; k <= n + m; k++) {
+      var lb = Math.max(0, k - m), ub = Math.min(k, n);
+      for (i = lb; i <= ub; i++) {
+        var j = k - i;
+        w[i + j].y += cdTable[j][i] * z[j][i];
+      }
+    }
+    return w;
+  };
+  /**
+   * counts how many roots there are.
+   */
+  var _findRoots = function(w, degree, t, depth) {
+    var left = [], right = [], left_count, right_count, left_t = [], right_t = [];
+
+    switch (_getCrossingCount(w, degree)) {
+    case 0: {
+      return 0;
+    }
+    case 1: {
+      if (depth >= maxRecursion) {
+        t[0] = (w[0].x + w[degree].x) / 2.0;
+        return 1;
+      }
+      if (_isFlatEnough(w, degree)) {
+        t[0] = _computeXIntercept(w, degree);
+        return 1;
+      }
+      break;
+    }
+    }
+    _bezier(w, degree, 0.5, left, right);
+    left_count = _findRoots(left, degree, left_t, depth + 1);
+    right_count = _findRoots(right, degree, right_t, depth + 1);
+    for ( var i = 0; i < left_count; i++)
+      t[i] = left_t[i];
+    for ( var i = 0; i < right_count; i++)
+      t[i + left_count] = right_t[i];
+    return (left_count + right_count);
+  };
+  var _getCrossingCount = function(curve, degree) {
+    var n_crossings = 0, sign, old_sign;
+    sign = old_sign = sgn(curve[0].y);
+    for ( var i = 1; i <= degree; i++) {
+      sign = sgn(curve[i].y);
+      if (sign != old_sign)
+        n_crossings++;
+      old_sign = sign;
+    }
+    return n_crossings;
+  };
+  var _isFlatEnough = function(curve, degree) {
+    var error, intercept_1, intercept_2, left_intercept, right_intercept, a, b, c, det, dInv, a1, b1, c1, a2, b2, c2;
+    a = curve[0].y - curve[degree].y;
+    b = curve[degree].x - curve[0].x;
+    c = curve[0].x * curve[degree].y - curve[degree].x * curve[0].y;
+
+    var max_distance_above = 0.0, max_distance_below = 0.0;
+
+    for ( var i = 1; i < degree; i++) {
+      var value = a * curve[i].x + b * curve[i].y + c;
+      if (value > max_distance_above)
+        max_distance_above = value;
+      else if (value < max_distance_below)
+        max_distance_below = value;
+    }
+
+    a1 = 0.0;
+    b1 = 1.0;
+    c1 = 0.0;
+    a2 = a;
+    b2 = b;
+    c2 = c - max_distance_above;
+    det = a1 * b2 - a2 * b1;
+    dInv = 1.0 / det;
+    intercept_1 = (b1 * c2 - b2 * c1) * dInv;
+    a2 = a;
+    b2 = b;
+    c2 = c - max_distance_below;
+    det = a1 * b2 - a2 * b1;
+    dInv = 1.0 / det;
+    intercept_2 = (b1 * c2 - b2 * c1) * dInv;
+    left_intercept = Math.min(intercept_1, intercept_2);
+    right_intercept = Math.max(intercept_1, intercept_2);
+    error = right_intercept - left_intercept;
+    return (error < flatnessTolerance) ? 1 : 0;
+  };
+  var _computeXIntercept = function(curve, degree) {
+    var XLK = 1.0, YLK = 0.0, XNM = curve[degree].x - curve[0].x, YNM = curve[degree].y - curve[0].y, XMK = curve[0].x - 0.0, YMK = curve[0].y - 0.0, det = XNM * YLK - YNM * XLK, detInv = 1.0 / det, S = (XNM * YMK - YNM * XMK) * detInv;
+    return 0.0 + XLK * S;
+  };
+  var _bezier = function(curve, degree, t, left, right) {
+    var temp = [ [] ];
+    for ( var j = 0; j <= degree; j++)
+      temp[0][j] = curve[j];
+    for ( var i = 1; i <= degree; i++) {
+      for ( var j = 0; j <= degree - i; j++) {
+        if (!temp[i])
+          temp[i] = [];
+        if (!temp[i][j])
+          temp[i][j] = {};
+        temp[i][j].x = (1.0 - t) * temp[i - 1][j].x + t * temp[i - 1][j + 1].x;
+        temp[i][j].y = (1.0 - t) * temp[i - 1][j].y + t * temp[i - 1][j + 1].y;
+      }
+    }
+    if (left != null)
+      for (j = 0; j <= degree; j++)
+        left[j] = temp[j][0];
+    if (right != null)
+      for (j = 0; j <= degree; j++)
+        right[j] = temp[degree - j][j];
+
+    return (temp[degree][0]);
+  };
+
+  var _curveFunctionCache = {};
+  var _getCurveFunctions = function(order) {
+    var fns = _curveFunctionCache[order];
+    if (!fns) {
+      fns = [];
+      var f_term = function() {
+        return function(t) {
+          return Math.pow(t, order);
+        };
+      }, l_term = function() {
+        return function(t) {
+          return Math.pow((1 - t), order);
+        };
+      }, c_term = function(c) {
+        return function(t) {
+          return c;
+        };
+      }, t_term = function() {
+        return function(t) {
+          return t;
+        };
+      }, one_minus_t_term = function() {
+        return function(t) {
+          return 1 - t;
+        };
+      }, _termFunc = function(terms) {
+        return function(t) {
+          var p = 1;
+          for ( var i = 0; i < terms.length; i++)
+            p = p * terms[i](t);
+          return p;
+        };
+      };
+
+      fns.push(new f_term()); // first is t to the power of the curve
+                  // order
+      for ( var i = 1; i < order; i++) {
+        var terms = [ new c_term(order) ];
+        for ( var j = 0; j < (order - i); j++)
+          terms.push(new t_term());
+        for ( var j = 0; j < i; j++)
+          terms.push(new one_minus_t_term());
+        fns.push(new _termFunc(terms));
+      }
+      fns.push(new l_term()); // last is (1-t) to the power of the curve
+                  // order
+
+      _curveFunctionCache[order] = fns;
+    }
+
+    return fns;
+  };
+
+  /**
+   * calculates a point on the curve, for a Bezier of arbitrary order.
+   *
+   * @param curve
+   *            an array of control points, eg [{x:10,y:20}, {x:50,y:50},
+   *            {x:100,y:100}, {x:120,y:100}]. For a cubic bezier this should
+   *            have four points.
+   * @param location
+   *            a decimal indicating the distance along the curve the point
+   *            should be located at. this is the distance along the curve as
+   *            it travels, taking the way it bends into account. should be a
+   *            number from 0 to 1, inclusive.
+   */
+  var _pointOnPath = function(curve, location) {
+    var cc = _getCurveFunctions(curve.length - 1), _x = 0, _y = 0;
+    for ( var i = 0; i < curve.length; i++) {
+      _x = _x + (curve[i].x * cc[i](location));
+      _y = _y + (curve[i].y * cc[i](location));
+    }
+
+    return {
+      x : _x,
+      y : _y
+    };
+  };
+
+  var _dist = function(p1, p2) {
+    return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+  };
+
+  /**
+   * finds the point that is 'distance' along the path from 'location'. this
+   * method returns both the x,y location of the point and also its 'location'
+   * (proportion of travel along the path); the method below -
+   * _pointAlongPathFrom - calls this method and just returns the point.
+   */
+  var _pointAlongPath = function(curve, location, distance) {
+    var prev = _pointOnPath(curve, location), tally = 0, curLoc = location, direction = distance > 0 ? 1 : -1, cur = null;
+
+    while (tally < Math.abs(distance)) {
+      curLoc += (0.005 * direction);
+      cur = _pointOnPath(curve, curLoc);
+      tally += _dist(cur, prev);
+      prev = cur;
+    }
+    return {
+      point : cur,
+      location : curLoc
+    };
+  };
+
+  var _length = function(curve) {
+    var prev = _pointOnPath(curve, 0), tally = 0, curLoc = 0, direction = 1, cur = null;
+
+    while (curLoc < 1) {
+      curLoc += (0.005 * direction);
+      cur = _pointOnPath(curve, curLoc);
+      tally += _dist(cur, prev);
+      prev = cur;
+    }
+    return tally;
+  };
+
+  /**
+   * finds the point that is 'distance' along the path from 'location'.
+   */
+  var _pointAlongPathFrom = function(curve, location, distance) {
+    return _pointAlongPath(curve, location, distance).point;
+  };
+
+  /**
+   * finds the location that is 'distance' along the path from 'location'.
+   */
+  var _locationAlongPathFrom = function(curve, location, distance) {
+    return _pointAlongPath(curve, location, distance).location;
+  };
+
+  /**
+   * returns the gradient of the curve at the given location, which is a
+   * decimal between 0 and 1 inclusive.
+   *
+   * thanks // http://bimixual.org/AnimationLibrary/beziertangents.html
+   */
+  var _gradientAtPoint = function(curve, location) {
+    var p1 = _pointOnPath(curve, location), p2 = _pointOnPath(curve.slice(0, curve.length - 1), location), dy = p2.y - p1.y, dx = p2.x - p1.x;
+    return dy == 0 ? Infinity : Math.atan(dy / dx);
+  };
+
+  /**
+   * returns the gradient of the curve at the point which is 'distance' from
+   * the given location. if this point is greater than location 1, the
+   * gradient at location 1 is returned. if this point is less than location
+   * 0, the gradient at location 0 is returned.
+   */
+  var _gradientAtPointAlongPathFrom = function(curve, location, distance) {
+    var p = _pointAlongPath(curve, location, distance);
+    if (p.location > 1)
+      p.location = 1;
+    if (p.location < 0)
+      p.location = 0;
+    return _gradientAtPoint(curve, p.location);
+  };
+
+  /**
+   * calculates a line that is 'length' pixels long, perpendicular to, and
+   * centered on, the path at 'distance' pixels from the given location. if
+   * distance is not supplied, the perpendicular for the given location is
+   * computed (ie. we set distance to zero).
+   */
+  var _perpendicularToPathAt = function(curve, location, length, distance) {
+    distance = distance == null ? 0 : distance;
+    var p = _pointAlongPath(curve, location, distance), m = _gradientAtPoint(curve, p.location), _theta2 = Math.atan(-1 / m), y = length / 2 * Math.sin(_theta2), x = length / 2 * Math.cos(_theta2);
+    return [ {
+      x : p.point.x + x,
+      y : p.point.y + y
+    }, {
+      x : p.point.x - x,
+      y : p.point.y - y
+    } ];
+  };
+
+  ChemDoodle.math.jsBezier = {
+    distanceFromCurve : _distanceFromCurve,
+    gradientAtPoint : _gradientAtPoint,
+    gradientAtPointAlongCurveFrom : _gradientAtPointAlongPathFrom,
+    nearestPointOnCurve : _nearestPointOnCurve,
+    pointOnCurve : _pointOnPath,
+    pointAlongCurveFrom : _pointAlongPathFrom,
+    perpendicularToCurveAt : _perpendicularToPathAt,
+    locationAlongCurveFrom : _locationAlongPathFrom,
+    getLength : _length
+  };
+})(ChemDoodle.math);
+//
+//  Copyright 2006-2010 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4404 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-06-09 18:47:35 -0400 (Sun, 09 Jun 2013) $
+//
+
+ChemDoodle.featureDetection = (function(iChemLabs, q, document, window) {
+  'use strict';
+  var features = {};
+
+  features.supports_canvas = function() {
+    return !!document.createElement('canvas').getContext;
+  };
+
+  features.supports_canvas_text = function() {
+    if (!features.supports_canvas()) {
+      return false;
+    }
+    var dummy_canvas = document.createElement('canvas');
+    var context = dummy_canvas.getContext('2d');
+    return typeof context.fillText === 'function';
+  };
+
+  features.supports_webgl = function() {
+    var dummy_canvas = document.createElement('canvas');
+    try {
+      if (dummy_canvas.getContext('webgl')) {
+        return true;
+      }
+      if (dummy_canvas.getContext('experimental-webgl')) {
+        return true;
+      }
+    } catch (b) {
+    }
+    return false;
+  };
+
+  features.supports_xhr2 = function() {
+    return q.support.cors;
+  };
+
+  features.supports_touch = function() {
+    // check the mobile os so we don't interfere with hybrid pcs
+    return 'ontouchstart' in window && navigator.userAgent.match(/iPhone|iPad|iPod|Android|BlackBerry|BB10/i);
+  };
+
+  features.supports_gesture = function() {
+    return 'ongesturestart' in window;
+  };
+
+  return features;
+
+})(ChemDoodle.iChemLabs, jQuery, document, window);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4459 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-08-06 14:09:43 -0400 (Tue, 06 Aug 2013) $
+//
+
+// all symbols
+ChemDoodle.SYMBOLS = [ 'H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar', 'K', 'Ca', 'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 'Ga', 'Ge', 'As', 'Se', 'Br', 'Kr', 'Rb', 'Sr', 'Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd', 'Ag', 'Cd', 'In', 'Sn', 'Sb', 'Te', 'I', 'Xe', 'Cs', 'Ba', 'La', 'Ce', 'Pr', 'Nd', 'Pm', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy', 'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Hf', 'Ta', 'W', 'Re', 'Os', 'Ir', 'Pt', 'Au', 'Hg', 'Tl',
+    'Pb', 'Bi', 'Po', 'At', 'Rn', 'Fr', 'Ra', 'Ac', 'Th', 'Pa', 'U', 'Np', 'Pu', 'Am', 'Cm', 'Bk', 'Cf', 'Es', 'Fm', 'Md', 'No', 'Lr', 'Rf', 'Db', 'Sg', 'Bh', 'Hs', 'Mt', 'Ds', 'Rg', 'Cn', 'Uut', 'Uuq', 'Uup', 'Uuh', 'Uus', 'Uuo' ];
+
+ChemDoodle.ELEMENT = (function(SYMBOLS) {
+  'use strict';
+  var E = [];
+
+  function Element(symbol, name, atomicNumber, addH, color, covalentRadius, vdWRadius, valency, mass) {
+    this.symbol = symbol;
+    this.name = name;
+    this.atomicNumber = atomicNumber;
+    this.addH = addH;
+    this.jmolColor = this.pymolColor = color;
+    this.covalentRadius = covalentRadius;
+    this.vdWRadius = vdWRadius;
+    this.valency = valency;
+    this.mass = mass;
+  }
+
+  E.H = new Element('H', 'Hydrogen', 1, false, '#FFFFFF', 0.31, 1.2, 1, 1);
+  E.He = new Element('He', 'Helium', 2, false, '#D9FFFF', 0.28, 1.4, 0, 4);
+  E.Li = new Element('Li', 'Lithium', 3, false, '#CC80FF', 1.28, 1.82, 1, 7);
+  E.Be = new Element('Be', 'Beryllium', 4, false, '#C2FF00', 0.96, 0, 2, 9);
+  E.B = new Element('B', 'Boron', 5, true, '#FFB5B5', 0.84, 0, 3, 11);
+  E.C = new Element('C', 'Carbon', 6, true, '#909090', 0.76, 1.7, 4, 12);
+  E.N = new Element('N', 'Nitrogen', 7, true, '#3050F8', 0.71, 1.55, 3, 14);
+  E.O = new Element('O', 'Oxygen', 8, true, '#FF0D0D', 0.66, 1.52, 2, 16);
+  E.F = new Element('F', 'Fluorine', 9, true, '#90E050', 0.57, 1.47, 1, 19);
+  E.Ne = new Element('Ne', 'Neon', 10, false, '#B3E3F5', 0.58, 1.54, 0, 20);
+  E.Na = new Element('Na', 'Sodium', 11, false, '#AB5CF2', 1.66, 2.27, 1, 23);
+  E.Mg = new Element('Mg', 'Magnesium', 12, false, '#8AFF00', 1.41, 1.73, 0, 24);
+  E.Al = new Element('Al', 'Aluminum', 13, false, '#BFA6A6', 1.21, 0, 0, 27);
+  E.Si = new Element('Si', 'Silicon', 14, true, '#F0C8A0', 1.11, 2.1, 4, 28);
+  E.P = new Element('P', 'Phosphorus', 15, true, '#FF8000', 1.07, 1.8, 3, 31);
+  E.S = new Element('S', 'Sulfur', 16, true, '#FFFF30', 1.05, 1.8, 2, 32);
+  E.Cl = new Element('Cl', 'Chlorine', 17, true, '#1FF01F', 1.02, 1.75, 1, 35);
+  E.Ar = new Element('Ar', 'Argon', 18, false, '#80D1E3', 1.06, 1.88, 0, 40);
+  E.K = new Element('K', 'Potassium', 19, false, '#8F40D4', 2.03, 2.75, 0, 39);
+  E.Ca = new Element('Ca', 'Calcium', 20, false, '#3DFF00', 1.76, 0, 0, 40);
+  E.Sc = new Element('Sc', 'Scandium', 21, false, '#E6E6E6', 1.7, 0, 0, 45);
+  E.Ti = new Element('Ti', 'Titanium', 22, false, '#BFC2C7', 1.6, 0, 1, 48);
+  E.V = new Element('V', 'Vanadium', 23, false, '#A6A6AB', 1.53, 0, 1, 51);
+  E.Cr = new Element('Cr', 'Chromium', 24, false, '#8A99C7', 1.39, 0, 2, 52);
+  E.Mn = new Element('Mn', 'Manganese', 25, false, '#9C7AC7', 1.39, 0, 3, 55);
+  E.Fe = new Element('Fe', 'Iron', 26, false, '#E06633', 1.32, 0, 2, 56);
+  E.Co = new Element('Co', 'Cobalt', 27, false, '#F090A0', 1.26, 0, 1, 59);
+  E.Ni = new Element('Ni', 'Nickel', 28, false, '#50D050', 1.24, 1.63, 1, 58);
+  E.Cu = new Element('Cu', 'Copper', 29, false, '#C88033', 1.32, 1.4, 0, 63);
+  E.Zn = new Element('Zn', 'Zinc', 30, false, '#7D80B0', 1.22, 1.39, 0, 64);
+  E.Ga = new Element('Ga', 'Gallium', 31, false, '#C28F8F', 1.22, 1.87, 0, 69);
+  E.Ge = new Element('Ge', 'Germanium', 32, false, '#668F8F', 1.2, 0, 4, 74);
+  E.As = new Element('As', 'Arsenic', 33, true, '#BD80E3', 1.19, 1.85, 3, 75);
+  E.Se = new Element('Se', 'Selenium', 34, true, '#FFA100', 1.2, 1.9, 2, 80);
+  E.Br = new Element('Br', 'Bromine', 35, true, '#A62929', 1.2, 1.85, 1, 79);
+  E.Kr = new Element('Kr', 'Krypton', 36, false, '#5CB8D1', 1.16, 2.02, 0, 84);
+  E.Rb = new Element('Rb', 'Rubidium', 37, false, '#702EB0', 2.2, 0, 0, 85);
+  E.Sr = new Element('Sr', 'Strontium', 38, false, '#00FF00', 1.95, 0, 0, 88);
+  E.Y = new Element('Y', 'Yttrium', 39, false, '#94FFFF', 1.9, 0, 0, 89);
+  E.Zr = new Element('Zr', 'Zirconium', 40, false, '#94E0E0', 1.75, 0, 0, 90);
+  E.Nb = new Element('Nb', 'Niobium', 41, false, '#73C2C9', 1.64, 0, 1, 93);
+  E.Mo = new Element('Mo', 'Molybdenum', 42, false, '#54B5B5', 1.54, 0, 2, 98);
+  E.Tc = new Element('Tc', 'Technetium', 43, false, '#3B9E9E', 1.47, 0, 3, 0);
+  E.Ru = new Element('Ru', 'Ruthenium', 44, false, '#248F8F', 1.46, 0, 2, 102);
+  E.Rh = new Element('Rh', 'Rhodium', 45, false, '#0A7D8C', 1.42, 0, 1, 103);
+  E.Pd = new Element('Pd', 'Palladium', 46, false, '#006985', 1.39, 1.63, 0, 106);
+  E.Ag = new Element('Ag', 'Silver', 47, false, '#C0C0C0', 1.45, 1.72, 0, 107);
+  E.Cd = new Element('Cd', 'Cadmium', 48, false, '#FFD98F', 1.44, 1.58, 0, 114);
+  E.In = new Element('In', 'Indium', 49, false, '#A67573', 1.42, 1.93, 0, 115);
+  E.Sn = new Element('Sn', 'Tin', 50, false, '#668080', 1.39, 2.17, 4, 120);
+  E.Sb = new Element('Sb', 'Antimony', 51, false, '#9E63B5', 1.39, 0, 3, 121);
+  E.Te = new Element('Te', 'Tellurium', 52, true, '#D47A00', 1.38, 2.06, 2, 130);
+  E.I = new Element('I', 'Iodine', 53, true, '#940094', 1.39, 1.98, 1, 127);
+  E.Xe = new Element('Xe', 'Xenon', 54, false, '#429EB0', 1.4, 2.16, 0, 132);
+  E.Cs = new Element('Cs', 'Cesium', 55, false, '#57178F', 2.44, 0, 0, 133);
+  E.Ba = new Element('Ba', 'Barium', 56, false, '#00C900', 2.15, 0, 0, 138);
+  E.La = new Element('La', 'Lanthanum', 57, false, '#70D4FF', 2.07, 0, 0, 139);
+  E.Ce = new Element('Ce', 'Cerium', 58, false, '#FFFFC7', 2.04, 0, 0, 140);
+  E.Pr = new Element('Pr', 'Praseodymium', 59, false, '#D9FFC7', 2.03, 0, 0, 141);
+  E.Nd = new Element('Nd', 'Neodymium', 60, false, '#C7FFC7', 2.01, 0, 0, 142);
+  E.Pm = new Element('Pm', 'Promethium', 61, false, '#A3FFC7', 1.99, 0, 0, 0);
+  E.Sm = new Element('Sm', 'Samarium', 62, false, '#8FFFC7', 1.98, 0, 0, 152);
+  E.Eu = new Element('Eu', 'Europium', 63, false, '#61FFC7', 1.98, 0, 0, 153);
+  E.Gd = new Element('Gd', 'Gadolinium', 64, false, '#45FFC7', 1.96, 0, 0, 158);
+  E.Tb = new Element('Tb', 'Terbium', 65, false, '#30FFC7', 1.94, 0, 0, 159);
+  E.Dy = new Element('Dy', 'Dysprosium', 66, false, '#1FFFC7', 1.92, 0, 0, 164);
+  E.Ho = new Element('Ho', 'Holmium', 67, false, '#00FF9C', 1.92, 0, 0, 165);
+  E.Er = new Element('Er', 'Erbium', 68, false, '#00E675', 1.89, 0, 0, 166);
+  E.Tm = new Element('Tm', 'Thulium', 69, false, '#00D452', 1.9, 0, 0, 169);
+  E.Yb = new Element('Yb', 'Ytterbium', 70, false, '#00BF38', 1.87, 0, 0, 174);
+  E.Lu = new Element('Lu', 'Lutetium', 71, false, '#00AB24', 1.87, 0, 0, 175);
+  E.Hf = new Element('Hf', 'Hafnium', 72, false, '#4DC2FF', 1.75, 0, 0, 180);
+  E.Ta = new Element('Ta', 'Tantalum', 73, false, '#4DA6FF', 1.7, 0, 1, 181);
+  E.W = new Element('W', 'Tungsten', 74, false, '#2194D6', 1.62, 0, 2, 184);
+  E.Re = new Element('Re', 'Rhenium', 75, false, '#267DAB', 1.51, 0, 3, 187);
+  E.Os = new Element('Os', 'Osmium', 76, false, '#266696', 1.44, 0, 2, 192);
+  E.Ir = new Element('Ir', 'Iridium', 77, false, '#175487', 1.41, 0, 3, 193);
+  E.Pt = new Element('Pt', 'Platinum', 78, false, '#D0D0E0', 1.36, 1.75, 0, 195);
+  E.Au = new Element('Au', 'Gold', 79, false, '#FFD123', 1.36, 1.66, 1, 197);
+  E.Hg = new Element('Hg', 'Mercury', 80, false, '#B8B8D0', 1.32, 1.55, 0, 202);
+  E.Tl = new Element('Tl', 'Thallium', 81, false, '#A6544D', 1.45, 1.96, 0, 205);
+  E.Pb = new Element('Pb', 'Lead', 82, false, '#575961', 1.46, 2.02, 4, 208);
+  E.Bi = new Element('Bi', 'Bismuth', 83, false, '#9E4FB5', 1.48, 0, 3, 209);
+  E.Po = new Element('Po', 'Polonium', 84, false, '#AB5C00', 1.4, 0, 2, 0);
+  E.At = new Element('At', 'Astatine', 85, true, '#754F45', 1.5, 0, 1, 0);
+  E.Rn = new Element('Rn', 'Radon', 86, false, '#428296', 1.5, 0, 0, 0);
+  E.Fr = new Element('Fr', 'Francium', 87, false, '#420066', 2.6, 0, 0, 0);
+  E.Ra = new Element('Ra', 'Radium', 88, false, '#007D00', 2.21, 0, 0, 0);
+  E.Ac = new Element('Ac', 'Actinium', 89, false, '#70ABFA', 2.15, 0, 0, 0);
+  E.Th = new Element('Th', 'Thorium', 90, false, '#00BAFF', 2.06, 0, 0, 232);
+  E.Pa = new Element('Pa', 'Protactinium', 91, false, '#00A1FF', 2, 0, 0, 231);
+  E.U = new Element('U', 'Uranium', 92, false, '#008FFF', 1.96, 1.86, 0, 238);
+  E.Np = new Element('Np', 'Neptunium', 93, false, '#0080FF', 1.9, 0, 0, 0);
+  E.Pu = new Element('Pu', 'Plutonium', 94, false, '#006BFF', 1.87, 0, 0, 0);
+  E.Am = new Element('Am', 'Americium', 95, false, '#545CF2', 1.8, 0, 0, 0);
+  E.Cm = new Element('Cm', 'Curium', 96, false, '#785CE3', 1.69, 0, 0, 0);
+  E.Bk = new Element('Bk', 'Berkelium', 97, false, '#8A4FE3', 0, 0, 0, 0);
+  E.Cf = new Element('Cf', 'Californium', 98, false, '#A136D4', 0, 0, 0, 0);
+  E.Es = new Element('Es', 'Einsteinium', 99, false, '#B31FD4', 0, 0, 0, 0);
+  E.Fm = new Element('Fm', 'Fermium', 100, false, '#B31FBA', 0, 0, 0, 0);
+  E.Md = new Element('Md', 'Mendelevium', 101, false, '#B30DA6', 0, 0, 0, 0);
+  E.No = new Element('No', 'Nobelium', 102, false, '#BD0D87', 0, 0, 0, 0);
+  E.Lr = new Element('Lr', 'Lawrencium', 103, false, '#C70066', 0, 0, 0, 0);
+  E.Rf = new Element('Rf', 'Rutherfordium', 104, false, '#CC0059', 0, 0, 0, 0);
+  E.Db = new Element('Db', 'Dubnium', 105, false, '#D1004F', 0, 0, 0, 0);
+  E.Sg = new Element('Sg', 'Seaborgium', 106, false, '#D90045', 0, 0, 0, 0);
+  E.Bh = new Element('Bh', 'Bohrium', 107, false, '#E00038', 0, 0, 0, 0);
+  E.Hs = new Element('Hs', 'Hassium', 108, false, '#E6002E', 0, 0, 0, 0);
+  E.Mt = new Element('Mt', 'Meitnerium', 109, false, '#EB0026', 0, 0, 0, 0);
+  E.Ds = new Element('Ds', 'Darmstadtium', 110, false, '#000000', 0, 0, 0, 0);
+  E.Rg = new Element('Rg', 'Roentgenium', 111, false, '#000000', 0, 0, 0, 0);
+  E.Cn = new Element('Cn', 'Copernicium', 112, false, '#000000', 0, 0, 0, 0);
+  E.Uut = new Element('Uut', 'Ununtrium', 113, false, '#000000', 0, 0, 0, 0);
+  E.Uuq = new Element('Uuq', 'Ununquadium', 114, false, '#000000', 0, 0, 0, 0);
+  E.Uup = new Element('Uup', 'Ununpentium', 115, false, '#000000', 0, 0, 0, 0);
+  E.Uuh = new Element('Uuh', 'Ununhexium', 116, false, '#000000', 0, 0, 0, 0);
+  E.Uus = new Element('Uus', 'Ununseptium', 117, false, '#000000', 0, 0, 0, 0);
+  E.Uuo = new Element('Uuo', 'Ununoctium', 118, false, '#000000', 0, 0, 0, 0);
+
+  E.H.pymolColor = '#E6E6E6';
+  E.C.pymolColor = '#33FF33';
+  E.N.pymolColor = '#3333FF';
+  E.O.pymolColor = '#FF4D4D';
+  E.F.pymolColor = '#B3FFFF';
+  E.S.pymolColor = '#E6C640';
+
+  return E;
+
+})(ChemDoodle.SYMBOLS);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3008 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-01-07 21:28:00 -0500 (Fri, 07 Jan 2011) $
+//
+ChemDoodle.RESIDUE = (function() {
+  'use strict';
+  var R = [];
+
+  function Residue(symbol, name, polar, aminoColor, shapelyColor) {
+    this.symbol = symbol;
+    this.name = name;
+    this.polar = polar;
+    this.aminoColor = aminoColor;
+    this.shapelyColor = shapelyColor;
+  }
+
+  R.Ala = new Residue('Ala', 'Alanine', false, '#C8C8C8', '#8CFF8C');
+  R.Arg = new Residue('Arg', 'Arginine', true, '#145AFF', '#00007C');
+  R.Asn = new Residue('Asn', 'Asparagine', true, '#00DCDC', '#FF7C70');
+  R.Asp = new Residue('Asp', 'Aspartic Acid', true, '#E60A0A', '#A00042');
+  R.Cys = new Residue('Cys', 'Cysteine', true, '#E6E600', '#FFFF70');
+  R.Gln = new Residue('Gln', 'Glutamine', true, '#00DCDC', '#FF4C4C');
+  R.Glu = new Residue('Glu', 'Glutamic Acid', true, '#E60A0A', '#660000');
+  R.Gly = new Residue('Gly', 'Glycine', false, '#EBEBEB', '#FFFFFF');
+  R.His = new Residue('His', 'Histidine', true, '#8282D2', '#7070FF');
+  R.Ile = new Residue('Ile', 'Isoleucine', false, '#0F820F', '#004C00');
+  R.Leu = new Residue('Leu', 'Leucine', false, '#0F820F', '#455E45');
+  R.Lys = new Residue('Lys', 'Lysine', true, '#145AFF', '#4747B8');
+  R.Met = new Residue('Met', 'Methionine', false, '#E6E600', '#B8A042');
+  R.Phe = new Residue('Phe', 'Phenylalanine', false, '#3232AA', '#534C52');
+  R.Pro = new Residue('Pro', 'Proline', false, '#DC9682', '#525252');
+  R.Ser = new Residue('Ser', 'Serine', true, '#FA9600', '#FF7042');
+  R.Thr = new Residue('Thr', 'Threonine', true, '#FA9600', '#B84C00');
+  R.Trp = new Residue('Trp', 'Tryptophan', true, '#B45AB4', '#4F4600');
+  R.Tyr = new Residue('Tyr', 'Tyrosine', true, '#3232AA', '#8C704C');
+  R.Val = new Residue('Val', 'Valine', false, '#0F820F', '#FF8CFF');
+  R.Asx = new Residue('Asx', 'Asparagine/Aspartic Acid', true, '#FF69B4', '#FF00FF');
+  R.Glx = new Residue('Glx', 'Glutamine/Glutamic Acid', true, '#FF69B4', '#FF00FF');
+  R['*'] = new Residue('*', 'Other', false, '#BEA06E', '#FF00FF');
+  R.A = new Residue('A', 'Adenine', false, '#BEA06E', '#A0A0FF');
+  R.G = new Residue('G', 'Guanine', false, '#BEA06E', '#FF7070');
+  R.I = new Residue('I', '', false, '#BEA06E', '#80FFFF');
+  R.C = new Residue('C', 'Cytosine', false, '#BEA06E', '#FF8C4B');
+  R.T = new Residue('T', 'Thymine', false, '#BEA06E', '#A0FFA0');
+  R.U = new Residue('U', 'Uracil', false, '#BEA06E', '#FF8080');
+
+  return R;
+
+})();
+//
+//  Copyright 2006-2010 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(structures) {
+  'use strict';
+  /*
+   * Creates a new Queue. A Queue is a first-in-first-out (FIFO) data
+   * structure. Functions of the Queue object allow elements to be
+   * enthis.queued and dethis.queued, the first element to be obtained without
+   * dequeuing, and for the current size of the Queue and empty/non-empty
+   * status to be obtained.
+   */
+  structures.Queue = function() {
+    // the list of elements, initialised to the empty array
+    this.queue = [];
+  };
+  var _ = structures.Queue.prototype;
+
+  // the amount of space at the front of the this.queue, initialised to zero
+  _.queueSpace = 0;
+
+  /*
+   * Returns the size of this Queue. The size of a Queue is equal to the
+   * number of elements that have been enthis.queued minus the number of
+   * elements that have been dethis.queued.
+   */
+  _.getSize = function() {
+
+    // return the number of elements in the this.queue
+    return this.queue.length - this.queueSpace;
+
+  };
+
+  /*
+   * Returns true if this Queue is empty, and false otherwise. A Queue is
+   * empty if the number of elements that have been enthis.queued equals the
+   * number of elements that have been dethis.queued.
+   */
+  _.isEmpty = function() {
+
+    // return true if the this.queue is empty, and false otherwise
+    return this.queue.length === 0;
+
+  };
+
+  /*
+   * Enthis.queues the specified element in this Queue. The parameter is:
+   *
+   * element - the element to enthis.queue
+   */
+  _.enqueue = function(element) {
+    this.queue.push(element);
+  };
+
+  /*
+   * Dethis.queues an element from this Queue. The oldest element in this
+   * Queue is removed and returned. If this Queue is empty then undefined is
+   * returned.
+   */
+  _.dequeue = function() {
+
+    // initialise the element to return to be undefined
+    var element;
+
+    // check whether the this.queue is empty
+    if (this.queue.length) {
+
+      // fetch the oldest element in the this.queue
+      element = this.queue[this.queueSpace];
+
+      // update the amount of space and check whether a shift should
+      // occur
+      if (++this.queueSpace * 2 >= this.queue.length) {
+
+        // set the this.queue equal to the non-empty portion of the
+        // this.queue
+        this.queue = this.queue.slice(this.queueSpace);
+
+        // reset the amount of space at the front of the this.queue
+        this.queueSpace = 0;
+
+      }
+
+    }
+
+    // return the removed element
+    return element;
+
+  };
+
+  /*
+   * Returns the oldest element in this Queue. If this Queue is empty then
+   * undefined is returned. This function returns the same value as the
+   * dethis.queue function, but does not remove the returned element from this
+   * Queue.
+   */
+  _.getOldestElement = function() {
+
+    // initialise the element to return to be undefined
+    var element;
+
+    // if the this.queue is not element then fetch the oldest element in the
+    // this.queue
+    if (this.queue.length) {
+      element = this.queue[this.queueSpace];
+    }
+
+    // return the oldest element
+    return element;
+  };
+
+})(ChemDoodle.structures);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(structures, m) {
+  'use strict';
+  structures.Point = function(x, y) {
+    this.x = x ? x : 0;
+    this.y = y ? y : 0;
+  };
+  var _ = structures.Point.prototype;
+  _.sub = function(p) {
+    this.x -= p.x;
+    this.y -= p.y;
+  };
+  _.add = function(p) {
+    this.x += p.x;
+    this.y += p.y;
+  };
+  _.distance = function(p) {
+    var dx = p.x - this.x;
+    var dy = p.y - this.y;
+    return m.sqrt(dx * dx + dy * dy);
+  };
+  _.angleForStupidCanvasArcs = function(p) {
+    var dx = p.x - this.x;
+    var dy = p.y - this.y;
+    var angle = 0;
+    // Calculate angle
+    if (dx === 0) {
+      if (dy === 0) {
+        angle = 0;
+      } else if (dy > 0) {
+        angle = m.PI / 2;
+      } else {
+        angle = 3 * m.PI / 2;
+      }
+    } else if (dy === 0) {
+      if (dx > 0) {
+        angle = 0;
+      } else {
+        angle = m.PI;
+      }
+    } else {
+      if (dx < 0) {
+        angle = m.atan(dy / dx) + m.PI;
+      } else if (dy < 0) {
+        angle = m.atan(dy / dx) + 2 * m.PI;
+      } else {
+        angle = m.atan(dy / dx);
+      }
+    }
+    while (angle < 0) {
+      angle += m.PI * 2;
+    }
+    angle = angle % (m.PI * 2);
+    return angle;
+  };
+  _.angle = function(p) {
+    // y is upside down to account for inverted canvas
+    var dx = p.x - this.x;
+    var dy = this.y - p.y;
+    var angle = 0;
+    // Calculate angle
+    if (dx === 0) {
+      if (dy === 0) {
+        angle = 0;
+      } else if (dy > 0) {
+        angle = m.PI / 2;
+      } else {
+        angle = 3 * m.PI / 2;
+      }
+    } else if (dy === 0) {
+      if (dx > 0) {
+        angle = 0;
+      } else {
+        angle = m.PI;
+      }
+    } else {
+      if (dx < 0) {
+        angle = m.atan(dy / dx) + m.PI;
+      } else if (dy < 0) {
+        angle = m.atan(dy / dx) + 2 * m.PI;
+      } else {
+        angle = m.atan(dy / dx);
+      }
+    }
+    while (angle < 0) {
+      angle += m.PI * 2;
+    }
+    angle = angle % (m.PI * 2);
+    return angle;
+  };
+
+})(ChemDoodle.structures, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4459 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-08-06 14:09:43 -0400 (Tue, 06 Aug 2013) $
+//
+
+(function(ELEMENT, extensions, math, structures, m, m4) {
+  'use strict';
+  structures.Atom = function(label, x, y, z) {
+    this.label = label ? label.replace(/\s/g, '') : 'C';
+    if (!ELEMENT[this.label]) {
+      this.label = 'C';
+    }
+    this.x = x ? x : 0;
+    this.y = y ? y : 0;
+    this.z = z ? z : 0;
+  };
+  var _ = structures.Atom.prototype = new structures.Point(0, 0);
+  _.charge = 0;
+  _.numLonePair = 0;
+  _.numRadical = 0;
+  _.mass = -1;
+  _.coordinationNumber = 0;
+  _.bondNumber = 0;
+  _.angleOfLeastInterference = 0;
+  _.isHidden = false;
+  _.altLabel = undefined;
+  _.any = false;
+  _.rgroup = -1;
+  _.isLone = false;
+  _.isHover = false;
+  _.isSelected = false;
+  _.add3D = function(p) {
+    this.x += p.x;
+    this.y += p.y;
+    this.z += p.z;
+  };
+  _.sub3D = function(p) {
+    this.x -= p.x;
+    this.y -= p.y;
+    this.z -= p.z;
+  };
+  _.distance3D = function(p) {
+    var dx = p.x - this.x;
+    var dy = p.y - this.y;
+    var dz = p.z - this.z;
+    return m.sqrt(dx * dx + dy * dy + dz * dz);
+  };
+  _.draw = function(ctx, specs) {
+    if (this.isLassoed) {
+      var grd = ctx.createRadialGradient(this.x - 1, this.y - 1, 0, this.x, this.y, 7);
+      grd.addColorStop(0, 'rgba(212, 99, 0, 0)');
+      grd.addColorStop(0.7, 'rgba(212, 99, 0, 0.8)');
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, 5, 0, m.PI * 2, false);
+      ctx.fill();
+    }
+    this.textBounds = [];
+    if (this.specs) {
+      specs = this.specs;
+    }
+    var font = extensions.getFontString(specs.atoms_font_size_2D, specs.atoms_font_families_2D, specs.atoms_font_bold_2D, specs.atoms_font_italic_2D);
+    ctx.font = font;
+    ctx.fillStyle = this.getElementColor(specs.atoms_useJMOLColors, specs.atoms_usePYMOLColors, specs.atoms_color, 2);
+    var hAngle;
+    if (this.isLone && !specs.atoms_displayAllCarbonLabels_2D || specs.atoms_circles_2D) {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, specs.atoms_circleDiameter_2D / 2, 0, m.PI * 2, false);
+      ctx.fill();
+      if (specs.atoms_circleBorderWidth_2D > 0) {
+        ctx.lineWidth = specs.atoms_circleBorderWidth_2D;
+        ctx.strokeStyle = 'black';
+        ctx.stroke(this.x, this.y, 0, m.PI * 2, specs.atoms_circleDiameter_2D / 2);
+      }
+    } else if (this.isLabelVisible(specs)) {
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      // keep check to undefined here as dev may set altLabel to empty
+      // string
+      if (this.altLabel !== undefined) {
+        // altLabel can be 0, so check if undefined
+        ctx.fillText(this.altLabel, this.x, this.y);
+        var symbolWidth = ctx.measureText(this.altLabel).width;
+        this.textBounds.push({
+          x : this.x - symbolWidth / 2,
+          y : this.y - specs.atoms_font_size_2D / 2 + 1,
+          w : symbolWidth,
+          h : specs.atoms_font_size_2D - 2
+        });
+      } else if (this.any) {
+        ctx.font = extensions.getFontString(specs.atoms_font_size_2D + 5, specs.atoms_font_families_2D, true);
+        ctx.fillText('*', this.x + 1, this.y + 3);
+        var symbolWidth = ctx.measureText('*').width;
+        this.textBounds.push({
+          x : this.x - symbolWidth / 2,
+          y : this.y - specs.atoms_font_size_2D / 2 + 1,
+          w : symbolWidth,
+          h : specs.atoms_font_size_2D - 2
+        });
+      } else if (this.rgroup !== -1) {
+        var rlabel = 'R' + this.rgroup;
+        ctx.fillText(rlabel, this.x, this.y);
+        var symbolWidth = ctx.measureText(rlabel).width;
+        this.textBounds.push({
+          x : this.x - symbolWidth / 2,
+          y : this.y - specs.atoms_font_size_2D / 2 + 1,
+          w : symbolWidth,
+          h : specs.atoms_font_size_2D - 2
+        });
+      } else {
+        ctx.fillText(this.label, this.x, this.y);
+        var symbolWidth = ctx.measureText(this.label).width;
+        this.textBounds.push({
+          x : this.x - symbolWidth / 2,
+          y : this.y - specs.atoms_font_size_2D / 2 + 1,
+          w : symbolWidth,
+          h : specs.atoms_font_size_2D - 2
+        });
+        // mass
+        var massWidth = 0;
+        if (this.mass !== -1) {
+          var subFont = extensions.getFontString(specs.atoms_font_size_2D * .7, specs.atoms_font_families_2D, specs.atoms_font_bold_2D, specs.atoms_font_italic_2D);
+          var fontSave = ctx.font;
+          ctx.font = extensions.getFontString(specs.atoms_font_size_2D * .7, specs.atoms_font_families_2D, specs.atoms_font_bold_2D, specs.atoms_font_italic_2D);
+          massWidth = ctx.measureText(this.mass).width;
+          ctx.fillText(this.mass, this.x - massWidth - .5, this.y - specs.atoms_font_size_2D / 2 + 1);
+          this.textBounds.push({
+            x : this.x - symbolWidth / 2 - massWidth - .5,
+            y : this.y - (specs.atoms_font_size_2D * 1.7) / 2 + 1,
+            w : massWidth,
+            h : specs.atoms_font_size_2D / 2 - 1
+          });
+          ctx.font = fontSave;
+        }
+        // implicit hydrogens
+        var chargeOffset = symbolWidth / 2;
+        var numHs = this.getImplicitHydrogenCount();
+        if (specs.atoms_implicitHydrogens_2D && numHs > 0) {
+          hAngle = 0;
+          var hWidth = ctx.measureText('H').width;
+          var moveCharge = true;
+          if (numHs > 1) {
+            var xoffset = symbolWidth / 2 + hWidth / 2;
+            var yoffset = 0;
+            var subFont = extensions.getFontString(specs.atoms_font_size_2D * .8, specs.atoms_font_families_2D, specs.atoms_font_bold_2D, specs.atoms_font_italic_2D);
+            ctx.font = subFont;
+            var numWidth = ctx.measureText(numHs).width;
+            if (this.bondNumber === 1) {
+              if (this.angleOfLeastInterference > m.PI / 2 && this.angleOfLeastInterference < 3 * m.PI / 2) {
+                xoffset = -symbolWidth / 2 - numWidth - hWidth / 2 - massWidth / 2;
+                moveCharge = false;
+                hAngle = m.PI;
+              }
+            } else {
+              if (this.angleOfLeastInterference <= m.PI / 4) {
+                // default
+              } else if (this.angleOfLeastInterference < 3 * m.PI / 4) {
+                xoffset = 0;
+                yoffset = -specs.atoms_font_size_2D * .9;
+                if (this.charge !== 0) {
+                  yoffset -= specs.atoms_font_size_2D * .3;
+                }
+                moveCharge = false;
+                hAngle = m.PI / 2;
+              } else if (this.angleOfLeastInterference <= 5 * m.PI / 4) {
+                xoffset = -symbolWidth / 2 - numWidth - hWidth / 2 - massWidth / 2;
+                moveCharge = false;
+                hAngle = m.PI;
+              } else if (this.angleOfLeastInterference < 7 * m.PI / 4) {
+                xoffset = 0;
+                yoffset = specs.atoms_font_size_2D * .9;
+                moveCharge = false;
+                hAngle = 3 * m.PI / 2;
+              }
+            }
+            ctx.font = font;
+            ctx.fillText('H', this.x + xoffset, this.y + yoffset);
+            ctx.font = subFont;
+            ctx.fillText(numHs, this.x + xoffset + hWidth / 2 + numWidth / 2, this.y + yoffset + specs.atoms_font_size_2D * .3);
+            this.textBounds.push({
+              x : this.x + xoffset - hWidth / 2,
+              y : this.y + yoffset - specs.atoms_font_size_2D / 2 + 1,
+              w : hWidth,
+              h : specs.atoms_font_size_2D - 2
+            });
+            this.textBounds.push({
+              x : this.x + xoffset + hWidth / 2,
+              y : this.y + yoffset + specs.atoms_font_size_2D * .3 - specs.atoms_font_size_2D / 2 + 1,
+              w : numWidth,
+              h : specs.atoms_font_size_2D * .8 - 2
+            });
+          } else {
+            var xoffset = symbolWidth / 2 + hWidth / 2;
+            var yoffset = 0;
+            if (this.bondNumber === 1) {
+              if (this.angleOfLeastInterference > m.PI / 2 && this.angleOfLeastInterference < 3 * m.PI / 2) {
+                xoffset = -symbolWidth / 2 - hWidth / 2 - massWidth / 2;
+                hAngle = m.PI;
+              }
+            } else {
+              if (this.angleOfLeastInterference <= m.PI / 4) {
+                // default
+              } else if (this.angleOfLeastInterference < 3 * m.PI / 4) {
+                xoffset = 0;
+                yoffset = -specs.atoms_font_size_2D * .9;
+                moveCharge = false;
+                hAngle = m.PI / 2;
+              } else if (this.angleOfLeastInterference <= 5 * m.PI / 4) {
+                xoffset = -symbolWidth / 2 - hWidth / 2 - massWidth / 2;
+                moveCharge = false;
+                hAngle = m.PI;
+              } else if (this.angleOfLeastInterference < 7 * m.PI / 4) {
+                xoffset = 0;
+                yoffset = specs.atoms_font_size_2D * .9;
+                moveCharge = false;
+                hAngle = 3 * m.PI / 2;
+              }
+            }
+            ctx.fillText('H', this.x + xoffset, this.y + yoffset);
+            this.textBounds.push({
+              x : this.x + xoffset - hWidth / 2,
+              y : this.y + yoffset - specs.atoms_font_size_2D / 2 + 1,
+              w : hWidth,
+              h : specs.atoms_font_size_2D - 2
+            });
+          }
+          if (moveCharge) {
+            chargeOffset += hWidth;
+          }
+          // adjust the angles metadata to account for hydrogen
+          // placement
+          /*
+           * this.angles.push(hAngle); var angleData =
+           * math.angleBetweenLargest(this.angles);
+           * this.angleOfLeastInterference = angleData.angle % (m.PI *
+           * 2); this.largestAngle = angleData.largest;
+           */
+        }
+        // charge
+        if (this.charge !== 0) {
+          var s = this.charge.toFixed(0);
+          if (s === '1') {
+            s = '+';
+          } else if (s === '-1') {
+            s = '\u2013';
+          } else if (extensions.stringStartsWith(s, '-')) {
+            s = s.substring(1) + '\u2013';
+          } else {
+            s += '+';
+          }
+          var chargeWidth = ctx.measureText(s).width;
+          chargeOffset += chargeWidth / 2;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.font = extensions.getFontString(m.floor(specs.atoms_font_size_2D * .8), specs.atoms_font_families_2D, specs.atoms_font_bold_2D, specs.atoms_font_italic_2D);
+          ctx.fillText(s, this.x + chargeOffset - 1, this.y - specs.atoms_font_size_2D / 2 + 1);
+          this.textBounds.push({
+            x : this.x + chargeOffset - chargeWidth / 2 - 1,
+            y : this.y - (specs.atoms_font_size_2D * 1.8) / 2 + 5,
+            w : chargeWidth,
+            h : specs.atoms_font_size_2D / 2 - 1
+          });
+        }
+      }
+    }
+    if (this.numLonePair > 0 || this.numRadical > 0) {
+      ctx.fillStyle = 'black';
+      var as = this.angles.slice(0);
+      var ali = this.angleOfLeastInterference;
+      var la = this.largestAngle;
+      if (hAngle !== undefined) {
+        // have to check for undefined here as this number can be 0
+        as.push(hAngle);
+        as.sort();
+        var angleData = math.angleBetweenLargest(as);
+        ali = angleData.angle % (m.PI * 2);
+        la = angleData.largest;
+      }
+      var things = [];
+      for ( var i = 0; i < this.numLonePair; i++) {
+        things.push({
+          t : 2
+        });
+      }
+      for ( var i = 0; i < this.numRadical; i++) {
+        things.push({
+          t : 1
+        });
+      }
+      if (hAngle === undefined && m.abs(la - 2 * m.PI / as.length) < m.PI / 60) {
+        var mid = m.ceil(things.length / as.length);
+        for ( var i = 0, ii = things.length; i < ii; i += mid, ali += la) {
+          this.drawElectrons(ctx, specs, things.slice(i, m.min(things.length, i + mid)), ali, la, hAngle);
+        }
+      } else {
+        this.drawElectrons(ctx, specs, things, ali, la, hAngle);
+      }
+    }
+    // for debugging atom label dimensions
+    // ctx.strokeStyle = 'red'; for(var i = 0, ii =
+    // this.textBounds.length;i<ii; i++){ var r = this.textBounds[i];
+    // ctx.beginPath();ctx.rect(r.x, r.y, r.w, r.h); ctx.stroke(); }
+
+  };
+  _.drawElectrons = function(ctx, specs, things, angle, largest, hAngle) {
+    var segment = largest / (things.length + (this.bonds.length === 0 && hAngle === undefined ? 0 : 1));
+    var angleStart = angle - largest / 2 + segment;
+    for ( var i = 0; i < things.length; i++) {
+      var t = things[i];
+      var angle = angleStart + i * segment;
+      var p1x = this.x + Math.cos(angle) * specs.atoms_lonePairDistance_2D;
+      var p1y = this.y - Math.sin(angle) * specs.atoms_lonePairDistance_2D;
+      if (t.t === 2) {
+        var perp = angle + Math.PI / 2;
+        var difx = Math.cos(perp) * specs.atoms_lonePairSpread_2D / 2;
+        var dify = -Math.sin(perp) * specs.atoms_lonePairSpread_2D / 2;
+        ctx.beginPath();
+        ctx.arc(p1x + difx, p1y + dify, specs.atoms_lonePairDiameter_2D, 0, m.PI * 2, false);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(p1x - difx, p1y - dify, specs.atoms_lonePairDiameter_2D, 0, m.PI * 2, false);
+        ctx.fill();
+      } else if (t.t === 1) {
+        ctx.beginPath();
+        ctx.arc(p1x, p1y, specs.atoms_lonePairDiameter_2D, 0, m.PI * 2, false);
+        ctx.fill();
+      }
+    }
+  };
+  _.drawDecorations = function(ctx) {
+    if (this.isHover || this.isSelected) {
+      ctx.strokeStyle = this.isHover ? '#885110' : '#0060B2';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      var radius = this.isHover ? 7 : 15;
+      ctx.arc(this.x, this.y, radius, 0, m.PI * 2, false);
+      ctx.stroke();
+    }
+    if (this.isOverlap) {
+      ctx.strokeStyle = '#C10000';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, 7, 0, m.PI * 2, false);
+      ctx.stroke();
+    }
+  };
+  _.render = function(gl, specs, noColor) {
+    if (this.specs) {
+      specs = this.specs;
+    }
+    var transform = m4.translate(gl.modelViewMatrix, [ this.x, this.y, this.z ], []);
+    var radius = specs.atoms_useVDWDiameters_3D ? ELEMENT[this.label].vdWRadius * specs.atoms_vdwMultiplier_3D : specs.atoms_sphereDiameter_3D / 2;
+    if (radius === 0) {
+      radius = 1;
+    }
+    m4.scale(transform, [ radius, radius, radius ]);
+
+    // colors
+    if (!noColor) {
+      var color = specs.atoms_color;
+      if (specs.atoms_useJMOLColors) {
+        color = ELEMENT[this.label].jmolColor;
+      } else if (specs.atoms_usePYMOLColors) {
+        color = ELEMENT[this.label].pymolColor;
+      }
+      gl.material.setDiffuseColor(color);
+    }
+
+    // render
+    gl.setMatrixUniforms(transform);
+    var buffer = this.renderAsStar ? gl.starBuffer : gl.sphereBuffer;
+    gl.drawElements(gl.TRIANGLES, buffer.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+  };
+  _.isLabelVisible = function(specs) {
+    if (specs.atoms_displayAllCarbonLabels_2D) {
+      // show all carbons
+      return true;
+    }
+    if (this.label !== 'C') {
+      // not a carbon
+      return true;
+    }
+    if (this.altLabel) {
+      // there is an alternative label
+      return true;
+    }
+    if (this.any || this.rgroup !== -1) {
+      // this is a query atom
+      return true;
+    }
+    if (this.mass !== -1 || this.charge !== 0) {
+      // an isotope or charge designation, so label must be shown
+      return true;
+    }
+    if (specs.atoms_showAttributedCarbons_2D && (this.numRadical !== 0 || this.numLonePair !== 0)) {
+      // there are attributes and we want to show the associated label
+      return true;
+    }
+    if (this.isHidden && specs.atoms_showHiddenCarbons_2D) {
+      // if it is hidden and we want to show them
+      return true;
+    }
+    if (specs.atoms_displayTerminalCarbonLabels_2D && this.bondNumber === 1) {
+      // if it is terminal and we want to show them
+      return true;
+    }
+    return false;
+  };
+  _.getImplicitHydrogenCount = function() {
+    if (this.label === 'H' || !ELEMENT[this.label] || !ELEMENT[this.label].addH) {
+      return 0;
+    }
+    var valence = ELEMENT[this.label].valency;
+    var dif = valence - this.coordinationNumber;
+    if (this.numRadical > 0) {
+      dif = m.max(0, dif - this.numRadical);
+    }
+    if (this.charge > 0) {
+      var vdif = 4 - valence;
+      if (this.charge <= vdif) {
+        dif += this.charge;
+      } else {
+        dif = 4 - this.coordinationNumber - this.charge + vdif;
+      }
+    } else {
+      dif += this.charge;
+    }
+    return dif < 0 ? 0 : m.floor(dif);
+  };
+  _.getBounds = function() {
+    var bounds = new math.Bounds();
+    bounds.expand(this.x, this.y);
+    if (this.textBounds) {
+      for ( var i = 0, ii = this.textBounds.length; i < ii; i++) {
+        var tb = this.textBounds[i];
+        bounds.expand(tb.x, tb.y, tb.x + tb.w, tb.y + tb.h);
+      }
+    }
+    return bounds;
+  };
+  _.getBounds3D = function() {
+    var bounds = new math.Bounds();
+    bounds.expand3D(this.x, this.y, this.z);
+    return bounds;
+  };
+  /**
+   * Get Color by atom element.
+   *
+   * @param {boolean} useJMOLColors
+   * @param {boolean} usePYMOLColors
+   * @param {string} color The default color
+   * @param {number} dim The render dimension
+   * @return {string} The atom element color
+   */
+  _.getElementColor = function(useJMOLColors, usePYMOLColors, color, dim) {
+    if(dim==2 && this.any || this.rgroup !== -1){
+      return color;
+    }
+    if (useJMOLColors) {
+      color = ELEMENT[this.label].jmolColor;
+    } else if (usePYMOLColors) {
+      color = ELEMENT[this.label].pymolColor;
+    }
+    return color;
+  };
+
+})(ChemDoodle.ELEMENT, ChemDoodle.extensions, ChemDoodle.math, ChemDoodle.structures, Math, mat4);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4500 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-09-06 14:28:15 -0400 (Fri, 06 Sep 2013) $
+//
+
+(function(ELEMENT, extensions, structures, math, m, m4, v3) {
+  'use strict';
+  structures.Bond = function(a1, a2, bondOrder) {
+    this.a1 = a1;
+    this.a2 = a2;
+    // bondOrder can be 0, so need to check against undefined
+    this.bondOrder = bondOrder !== undefined ? bondOrder : 1;
+  };
+  structures.Bond.STEREO_NONE = 'none';
+  structures.Bond.STEREO_PROTRUDING = 'protruding';
+  structures.Bond.STEREO_RECESSED = 'recessed';
+  structures.Bond.STEREO_AMBIGUOUS = 'ambiguous';
+  var _ = structures.Bond.prototype;
+  _.stereo = structures.Bond.STEREO_NONE;
+  _.isHover = false;
+  _.ring = undefined;
+  _.getCenter = function() {
+    return new structures.Point((this.a1.x + this.a2.x) / 2, (this.a1.y + this.a2.y) / 2);
+  };
+  _.getLength = function() {
+    return this.a1.distance(this.a2);
+  };
+  _.getLength3D = function() {
+    return this.a1.distance3D(this.a2);
+  };
+  _.contains = function(a) {
+    return a === this.a1 || a === this.a2;
+  };
+  _.getNeighbor = function(a) {
+    if (a === this.a1) {
+      return this.a2;
+    } else if (a === this.a2) {
+      return this.a1;
+    }
+    return undefined;
+  };
+  _.draw = function(ctx, specs) {
+    if (this.a1.x === this.a2.x && this.a1.y === this.a2.y) {
+      // return, as there is nothing to render, will only cause fill
+      // overflows
+      return;
+    }
+    if (this.specs) {
+      specs = this.specs;
+    }
+    var x1 = this.a1.x;
+    var x2 = this.a2.x;
+    var y1 = this.a1.y;
+    var y2 = this.a2.y;
+    var dist = this.a1.distance(this.a2);
+    var difX = x2 - x1;
+    var difY = y2 - y1;
+    if (this.a1.isLassoed && this.a2.isLassoed) {
+      var grd = ctx.createLinearGradient(x1, y1, x2, y2);
+      grd.addColorStop(0, 'rgba(212, 99, 0, 0)');
+      grd.addColorStop(0.5, 'rgba(212, 99, 0, 0.8)');
+      grd.addColorStop(1, 'rgba(212, 99, 0, 0)');
+      var useDist = 2.5;
+      var perpendicular = this.a1.angle(this.a2) + m.PI / 2;
+      var mcosp = m.cos(perpendicular);
+      var msinp = m.sin(perpendicular);
+      var cx1 = x1 - mcosp * useDist;
+      var cy1 = y1 + msinp * useDist;
+      var cx2 = x1 + mcosp * useDist;
+      var cy2 = y1 - msinp * useDist;
+      var cx3 = x2 + mcosp * useDist;
+      var cy3 = y2 - msinp * useDist;
+      var cx4 = x2 - mcosp * useDist;
+      var cy4 = y2 + msinp * useDist;
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.moveTo(cx1, cy1);
+      ctx.lineTo(cx2, cy2);
+      ctx.lineTo(cx3, cy3);
+      ctx.lineTo(cx4, cy4);
+      ctx.closePath();
+      ctx.fill();
+    }
+    if (specs.atoms_display && !specs.atoms_circles_2D && this.a1.isLabelVisible(specs) && this.a1.textBounds) {
+      var distShrink = 0;
+      for ( var i = 0, ii = this.a1.textBounds.length; i < ii; i++) {
+        distShrink = Math.max(distShrink, math.calculateDistanceInterior(this.a1, this.a2, this.a1.textBounds[i]));
+      }
+      distShrink += specs.bonds_atomLabelBuffer_2D;
+      var perc = distShrink / dist;
+      x1 += difX * perc;
+      y1 += difY * perc;
+    }
+    if (specs.atoms_display && !specs.atoms_circles_2D && this.a2.isLabelVisible(specs) && this.a2.textBounds) {
+      var distShrink = 0;
+      for ( var i = 0, ii = this.a2.textBounds.length; i < ii; i++) {
+        distShrink = Math.max(distShrink, math.calculateDistanceInterior(this.a2, this.a1, this.a2.textBounds[i]));
+      }
+      distShrink += specs.bonds_atomLabelBuffer_2D;
+      var perc = distShrink / dist;
+      x2 -= difX * perc;
+      y2 -= difY * perc;
+    }
+    if (specs.bonds_clearOverlaps_2D) {
+      var xs = x1 + difX * .15;
+      var ys = y1 + difY * .15;
+      var xf = x2 - difX * .15;
+      var yf = y2 - difY * .15;
+      ctx.strokeStyle = specs.backgroundColor;
+      ctx.lineWidth = specs.bonds_width_2D + specs.bonds_overlapClearWidth_2D * 2;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(xs, ys);
+      ctx.lineTo(xf, yf);
+      ctx.closePath();
+      ctx.stroke();
+    }
+    ctx.strokeStyle = specs.bonds_color;
+    ctx.fillStyle = specs.bonds_color;
+    ctx.lineWidth = specs.bonds_width_2D;
+    ctx.lineCap = specs.bonds_ends_2D;
+    if (specs.bonds_useJMOLColors || specs.bonds_usePYMOLColors) {
+      var linearGradient = ctx.createLinearGradient(x1, y1, x2, y2);
+      var color1 = this.a1.getElementColor(specs.bonds_useJMOLColors, specs.bonds_usePYMOLColors, specs.atoms_color, 2);
+      var color2 = this.a2.getElementColor(specs.bonds_useJMOLColors, specs.bonds_usePYMOLColors, specs.atoms_color, 2);
+      linearGradient.addColorStop(0, color1);
+      if (!specs.bonds_colorGradient) {
+        linearGradient.addColorStop(0.5, color1);
+        linearGradient.addColorStop(0.51, color2);
+      }
+      linearGradient.addColorStop(1, color2);
+      ctx.strokeStyle = linearGradient;
+      ctx.fillStyle = linearGradient;
+    }
+    switch (this.bondOrder) {
+    case 0:
+      var dx = x2 - x1;
+      var dy = y2 - y1;
+      var innerDist = m.sqrt(dx * dx + dy * dy);
+      var num = m.floor(innerDist / specs.bonds_dotSize_2D);
+      var remainder = (innerDist - (num - 1) * specs.bonds_dotSize_2D) / 2;
+      if (num % 2 === 1) {
+        remainder += specs.bonds_dotSize_2D / 4;
+      } else {
+        remainder -= specs.bonds_dotSize_2D / 4;
+        num += 2;
+      }
+      num /= 2;
+      var angle = this.a1.angle(this.a2);
+      var xs = x1 + remainder * Math.cos(angle);
+      var ys = y1 - remainder * Math.sin(angle);
+      ctx.beginPath();
+      for ( var i = 0; i < num; i++) {
+        ctx.arc(xs, ys, specs.bonds_dotSize_2D / 2, 0, m.PI * 2, false);
+        xs += 2 * specs.bonds_dotSize_2D * Math.cos(angle);
+        ys -= 2 * specs.bonds_dotSize_2D * Math.sin(angle);
+      }
+      ctx.fill();
+      break;
+    case 0.5:
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      extensions.contextHashTo(ctx, x1, y1, x2, y2, specs.bonds_hashSpacing_2D, specs.bonds_hashSpacing_2D);
+      ctx.stroke();
+      break;
+    case 1:
+      if (this.stereo === structures.Bond.STEREO_PROTRUDING || this.stereo === structures.Bond.STEREO_RECESSED) {
+        var thinSpread = specs.bonds_width_2D / 2;
+        var useDist = this.a1.distance(this.a2) * specs.bonds_wedgeThickness_2D / 2;
+        var perpendicular = this.a1.angle(this.a2) + m.PI / 2;
+        var mcosp = m.cos(perpendicular);
+        var msinp = m.sin(perpendicular);
+        var cx1 = x1 - mcosp * thinSpread;
+        var cy1 = y1 + msinp * thinSpread;
+        var cx2 = x1 + mcosp * thinSpread;
+        var cy2 = y1 - msinp * thinSpread;
+        var cx3 = x2 + mcosp * useDist;
+        var cy3 = y2 - msinp * useDist;
+        var cx4 = x2 - mcosp * useDist;
+        var cy4 = y2 + msinp * useDist;
+        ctx.beginPath();
+        ctx.moveTo(cx1, cy1);
+        ctx.lineTo(cx2, cy2);
+        ctx.lineTo(cx3, cy3);
+        ctx.lineTo(cx4, cy4);
+        ctx.closePath();
+        if (this.stereo === structures.Bond.STEREO_PROTRUDING) {
+          ctx.fill();
+        } else {
+          ctx.save();
+          ctx.clip();
+          ctx.lineWidth = useDist * 2;
+          ctx.lineCap = 'butt';
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          extensions.contextHashTo(ctx, x1, y1, x2, y2, specs.bonds_hashWidth_2D, specs.bonds_hashSpacing_2D);
+          ctx.stroke();
+          ctx.restore();
+        }
+      } else if (this.stereo === structures.Bond.STEREO_AMBIGUOUS) {
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        var curves = m.floor(m.sqrt(difX * difX + difY * difY) / specs.bonds_wavyLength_2D);
+        var x = x1;
+        var y = y1;
+        var perpendicular = this.a1.angle(this.a2) + m.PI / 2;
+        var mcosp = m.cos(perpendicular);
+        var msinp = m.sin(perpendicular);
+
+        var curveX = difX / curves;
+        var curveY = difY / curves;
+        var cpx1, cpx2, cpy1, cpy2;
+        for ( var i = 0, ii = curves; i < ii; i++) {
+          x += curveX;
+          y += curveY;
+          cpx1 = specs.bonds_wavyLength_2D * mcosp + x - curveX * 0.5;
+          cpy1 = specs.bonds_wavyLength_2D * -msinp + y - curveY * 0.5;
+          cpx2 = specs.bonds_wavyLength_2D * -mcosp + x - curveX * 0.5;
+          cpy2 = specs.bonds_wavyLength_2D * msinp + y - curveY * 0.5;
+          if (i % 2 === 0) {
+            ctx.quadraticCurveTo(cpx1, cpy1, x, y);
+          } else {
+            ctx.quadraticCurveTo(cpx2, cpy2, x, y);
+          }
+        }
+        ctx.stroke();
+        break;
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      }
+      break;
+    case 1.5:
+    case 2:
+      if (this.stereo === structures.Bond.STEREO_AMBIGUOUS) {
+        var useDist = this.a1.distance(this.a2) * specs.bonds_saturationWidth_2D / 2;
+        var perpendicular = this.a1.angle(this.a2) + m.PI / 2;
+        var mcosp = m.cos(perpendicular);
+        var msinp = m.sin(perpendicular);
+        var cx1 = x1 - mcosp * useDist;
+        var cy1 = y1 + msinp * useDist;
+        var cx2 = x1 + mcosp * useDist;
+        var cy2 = y1 - msinp * useDist;
+        var cx3 = x2 + mcosp * useDist;
+        var cy3 = y2 - msinp * useDist;
+        var cx4 = x2 - mcosp * useDist;
+        var cy4 = y2 + msinp * useDist;
+        ctx.beginPath();
+        ctx.moveTo(cx1, cy1);
+        ctx.lineTo(cx3, cy3);
+        ctx.moveTo(cx2, cy2);
+        ctx.lineTo(cx4, cy4);
+        ctx.stroke();
+      } else if (!specs.bonds_symmetrical_2D && (this.ring || this.a1.label === 'C' && this.a2.label === 'C')) {
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        var clip = 0;
+        var dist = this.a1.distance(this.a2);
+        var angle = this.a1.angle(this.a2);
+        var perpendicular = angle + m.PI / 2;
+        var useDist = dist * specs.bonds_saturationWidth_2D;
+        var clipAngle = specs.bonds_saturationAngle_2D;
+        if (clipAngle < m.PI / 2) {
+          clip = -(useDist / m.tan(clipAngle));
+        }
+        if (m.abs(clip) < dist / 2) {
+          var xuse1 = x1 - m.cos(angle) * clip;
+          var xuse2 = x2 + m.cos(angle) * clip;
+          var yuse1 = y1 + m.sin(angle) * clip;
+          var yuse2 = y2 - m.sin(angle) * clip;
+          var mcosp = m.cos(perpendicular);
+          var msinp = m.sin(perpendicular);
+          var cx1 = xuse1 - mcosp * useDist;
+          var cy1 = yuse1 + msinp * useDist;
+          var cx2 = xuse1 + mcosp * useDist;
+          var cy2 = yuse1 - msinp * useDist;
+          var cx3 = xuse2 - mcosp * useDist;
+          var cy3 = yuse2 + msinp * useDist;
+          var cx4 = xuse2 + mcosp * useDist;
+          var cy4 = yuse2 - msinp * useDist;
+          var flip = !this.ring || (this.ring.center.angle(this.a1) > this.ring.center.angle(this.a2) && !(this.ring.center.angle(this.a1) - this.ring.center.angle(this.a2) > m.PI) || (this.ring.center.angle(this.a1) - this.ring.center.angle(this.a2) < -m.PI));
+          if (flip) {
+            ctx.moveTo(cx1, cy1);
+            if (this.bondOrder === 2) {
+              ctx.lineTo(cx3, cy3);
+            } else {
+              extensions.contextHashTo(ctx, cx1, cy1, cx3, cy3, specs.bonds_hashSpacing_2D, specs.bonds_hashSpacing_2D);
+            }
+          } else {
+            ctx.moveTo(cx2, cy2);
+            if (this.bondOrder === 2) {
+              ctx.lineTo(cx4, cy4);
+            } else {
+              extensions.contextHashTo(ctx, cx2, cy2, cx4, cy4, specs.bonds_hashSpacing_2D, specs.bonds_hashSpacing_2D);
+            }
+          }
+          ctx.stroke();
+        }
+      } else {
+        var useDist = this.a1.distance(this.a2) * specs.bonds_saturationWidth_2D / 2;
+        var perpendicular = this.a1.angle(this.a2) + m.PI / 2;
+        var mcosp = m.cos(perpendicular);
+        var msinp = m.sin(perpendicular);
+        var cx1 = x1 - mcosp * useDist;
+        var cy1 = y1 + msinp * useDist;
+        var cx2 = x1 + mcosp * useDist;
+        var cy2 = y1 - msinp * useDist;
+        var cx3 = x2 + mcosp * useDist;
+        var cy3 = y2 - msinp * useDist;
+        var cx4 = x2 - mcosp * useDist;
+        var cy4 = y2 + msinp * useDist;
+        ctx.beginPath();
+        ctx.moveTo(cx1, cy1);
+        ctx.lineTo(cx4, cy4);
+        ctx.moveTo(cx2, cy2);
+        if (this.bondOrder === 2) {
+          ctx.lineTo(cx3, cy3);
+        } else {
+          extensions.contextHashTo(ctx, cx2, cy2, cx3, cy3, specs.bonds_hashSpacing_2D, specs.bonds_hashSpacing_2D);
+        }
+        ctx.stroke();
+      }
+      break;
+    case 3:
+      var useDist = this.a1.distance(this.a2) * specs.bonds_saturationWidth_2D;
+      var perpendicular = this.a1.angle(this.a2) + m.PI / 2;
+      var mcosp = m.cos(perpendicular);
+      var msinp = m.sin(perpendicular);
+      var cx1 = x1 - mcosp * useDist;
+      var cy1 = y1 + msinp * useDist;
+      var cx2 = x1 + mcosp * useDist;
+      var cy2 = y1 - msinp * useDist;
+      var cx3 = x2 + mcosp * useDist;
+      var cy3 = y2 - msinp * useDist;
+      var cx4 = x2 - mcosp * useDist;
+      var cy4 = y2 + msinp * useDist;
+      ctx.beginPath();
+      ctx.moveTo(cx1, cy1);
+      ctx.lineTo(cx4, cy4);
+      ctx.moveTo(cx2, cy2);
+      ctx.lineTo(cx3, cy3);
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+      break;
+    }
+  };
+  _.drawDecorations = function(ctx) {
+    if (this.isHover || this.isSelected) {
+      var pi2 = 2 * m.PI;
+      var angle = (this.a1.angleForStupidCanvasArcs(this.a2) + m.PI / 2) % pi2;
+      ctx.strokeStyle = this.isHover ? '#885110' : '#0060B2';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      var angleTo = (angle + m.PI) % pi2;
+      angleTo = angleTo % (m.PI * 2);
+      ctx.arc(this.a1.x, this.a1.y, 7, angle, angleTo, false);
+      ctx.stroke();
+      ctx.beginPath();
+      angle += m.PI;
+      angleTo = (angle + m.PI) % pi2;
+      ctx.arc(this.a2.x, this.a2.y, 7, angle, angleTo, false);
+      ctx.stroke();
+    }
+  };
+  /**
+   *
+   * @param {WegGLRenderingContext} gl
+   * @param {structures.VisualSpecifications} specs
+   * @param {boolean} asSegments Using cylinder/solid line or segmented pills/dashed line
+   * @return {void}
+   */
+  _.render = function(gl, specs, asSegments) {
+    if (this.specs) {
+      specs = this.specs;
+    }
+    // this is the elongation vector for the cylinder
+    var height = this.a1.distance3D(this.a2);
+    if (height === 0) {
+      // if there is no height, then no point in rendering this bond,
+      // just return
+      return;
+    }
+
+    // scale factor for cylinder/pill radius.
+    // when scale pill, the cap will affected too.
+    var radiusScale = specs.bonds_cylinderDiameter_3D / 2;
+
+    // atom1 color and atom2 color
+    var a1Color = specs.bonds_color;
+    var a2Color;
+
+    // transform to the atom as well as the opposite atom (for Jmol and
+    // PyMOL
+    // color splits)
+    var transform = m4.translate(gl.modelViewMatrix, [ this.a1.x, this.a1.y, this.a1.z ], []);
+    var transformOpposite;
+
+    // vector from atom1 to atom2
+    var a2b = [ this.a2.x - this.a1.x, this.a2.y - this.a1.y, this.a2.z - this.a1.z ];
+
+    // calculate the rotation
+    var y = [ 0, 1, 0 ];
+    var ang = 0;
+    var axis;
+    if (this.a1.x === this.a2.x && this.a1.z === this.a2.z) {
+      axis = [ 0, 0, 1 ];
+      if (this.a2.y < this.a1.y) {
+        ang = m.PI;
+      }
+    } else {
+      ang = extensions.vec3AngleFrom(y, a2b);
+      axis = v3.cross(y, a2b, []);
+    }
+
+
+    var useJMOLColors = specs.bonds_useJMOLColors;
+    var usePYMOLColors = specs.bonds_usePYMOLColors;
+
+    // the specs will use JMol or PyMol color are
+    // - Line
+    // - Stick
+    // - Wireframe
+    if (useJMOLColors || usePYMOLColors) {
+
+      a1Color = this.a1.getElementColor(useJMOLColors, usePYMOLColors, a1Color);
+      a2Color = this.a2.getElementColor(useJMOLColors, usePYMOLColors, specs.bonds_color);
+
+      // the transformOpposite will use for split color.
+      // just make it splited if the color different.
+      if(a1Color != a2Color) {
+        transformOpposite = m4.translate(gl.modelViewMatrix, [ this.a2.x, this.a2.y, this.a2.z ], []);
+      }
+    }
+
+    // calculate the translations for unsaturated bonds.
+    // represenattio use saturatedCross are
+    // - Line
+    // - Wireframe
+    // - Ball and Stick
+    // just Stick will set bonds_showBondOrders_3D to false
+    var others = [ 0 ];
+    var saturatedCross;
+
+    if(asSegments) { // block for draw bond as segmented line/pill
+
+      if (specs.bonds_showBondOrders_3D && this.bondOrder > 1) {
+
+        // The "0.5" part set here,
+        // the other part (1) will render as cylinder
+        others = [/*-specs.bonds_cylinderDiameter_3D, */ specs.bonds_cylinderDiameter_3D];
+
+        var z = [ 0, 0, 1 ];
+        var inverse = m4.inverse(gl.rotationMatrix, []);
+        m4.multiplyVec3(inverse, z);
+        saturatedCross = v3.cross(a2b, z, []);
+        v3.normalize(saturatedCross);
+      }
+
+      var segmentScale = 1;
+
+      var spaceBetweenPill = specs.bonds_pillSpacing_3D;
+
+      var pillHeight = specs.bonds_pillHeight_3D;
+
+      if(this.bondOrder == 0) {
+
+        if(specs.bonds_renderAsLines_3D) {
+          pillHeight = spaceBetweenPill;
+        } else {
+          pillHeight = specs.bonds_pillDiameter_3D;
+
+          // Detect Ball and Stick representation
+          if(pillHeight < specs.bonds_cylinderDiameter_3D) {
+            pillHeight /= 2;
+          }
+
+          segmentScale = pillHeight / 2;
+          height /= segmentScale;
+          spaceBetweenPill /= segmentScale / 2;
+        }
+
+      }
+
+      // total space need for one pill, iclude the space.
+      var totalSpaceForPill = pillHeight + spaceBetweenPill;
+
+      // segmented pills for one bond.
+      var totalPillsPerBond = height / totalSpaceForPill;
+
+      // segmented one unit pill for one bond
+      var pillsPerBond = m.floor(totalPillsPerBond);
+
+      var extraSegmentedSpace = height - totalSpaceForPill * pillsPerBond;
+
+      var paddingSpace = (spaceBetweenPill + specs.bonds_pillDiameter_3D + extraSegmentedSpace) / 2;
+
+      // pillSegmentsLength will change if both atom1 and atom2 color used for rendering
+      var pillSegmentsLength = pillsPerBond;
+
+      if(transformOpposite) {
+        // floor will effected for odd pills, because one pill at the center
+        // will replace with splited pills
+        pillSegmentsLength = m.floor(pillsPerBond / 2);
+      }
+
+      // render bonds
+      for ( var i = 0, ii = others.length; i < ii; i++) {
+        var transformUse = m4.set(transform, []);
+
+        if (others[i] !== 0) {
+          m4.translate(transformUse, v3.scale(saturatedCross, others[i], []));
+        }
+        if (ang !== 0) {
+          m4.rotate(transformUse, ang, axis);
+        }
+
+        if(segmentScale != 1) {
+          m4.scale(transformUse, [ segmentScale, segmentScale, segmentScale ]);
+        }
+
+        // colors
+        if(a1Color) gl.material.setDiffuseColor(a1Color);
+
+        m4.translate(transformUse, [0, paddingSpace, 0]);
+
+        for(var j = 0; j < pillSegmentsLength; j++) {
+
+          if (specs.bonds_renderAsLines_3D) {
+            if(this.bondOrder == 0) {
+              gl.setMatrixUniforms(transformUse);
+              gl.drawArrays(gl.POINTS, 0, 1);
+            } else {
+              m4.scale(transformUse, [1, pillHeight, 1]);
+
+              gl.setMatrixUniforms(transformUse);
+              gl.drawArrays(gl.LINES, 0, gl.lineBuffer.vertexPositionBuffer.numItems);
+
+              m4.scale(transformUse, [1, 1/pillHeight, 1]);
+            }
+          } else {
+            gl.setMatrixUniforms(transformUse);
+            if(this.bondOrder == 0) {
+              gl.drawElements(gl.TRIANGLES, gl.sphereBuffer.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+            } else {
+              gl.drawElements(gl.TRIANGLES, gl.pillBuffer.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+            }
+          }
+
+          m4.translate(transformUse, [0, totalSpaceForPill, 0]);
+        }
+
+
+        // if rendering segmented pill use atom1 and atom2 color
+        if (transformOpposite) {
+          // parameter for calculate splited pills
+          var scaleY, halfOneMinScaleY;
+
+          if (specs.bonds_renderAsLines_3D) {
+            scaleY = pillHeight;
+            // if(this.bondOrder != 0) {
+            //  scaleY -= spaceBetweenPill;
+            // }
+            scaleY /= 2;
+            halfOneMinScaleY = 0;
+          } else {
+            scaleY = 2/3;
+            halfOneMinScaleY = (1 - scaleY) / 2;
+          }
+
+          // if count of pills per bound is odd,
+          // then draw the splited pills of atom1
+          if(pillsPerBond % 2 != 0) {
+
+            m4.scale(transformUse, [1, scaleY, 1]);
+
+            gl.setMatrixUniforms(transformUse);
+
+            if (specs.bonds_renderAsLines_3D) {
+
+              if(this.bondOrder == 0) {
+                gl.drawArrays(gl.POINTS, 0, 1);
+              } else {
+                gl.drawArrays(gl.LINES, 0, gl.lineBuffer.vertexPositionBuffer.numItems);
+              }
+
+            } else {
+
+              if(this.bondOrder == 0) {
+                gl.drawElements(gl.TRIANGLES, gl.sphereBuffer.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+              } else {
+                gl.drawElements(gl.TRIANGLES, gl.pillBuffer.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+              }
+
+            }
+
+            m4.translate(transformUse, [0, totalSpaceForPill * (1 + halfOneMinScaleY), 0]);
+
+            m4.scale(transformUse, [1, 1/scaleY, 1]);
+          }
+
+          // prepare to render the atom2
+
+          m4.set(transformOpposite, transformUse);
+          if (others[i] !== 0) {
+            m4.translate(transformUse, v3.scale(saturatedCross, others[i], []));
+          }
+          // don't check for 0 here as that means it should be rotated
+          // by PI, but PI will be negated
+          m4.rotate(transformUse, ang + m.PI, axis);
+
+          if(segmentScale != 1) {
+            m4.scale(transformUse, [ segmentScale, segmentScale, segmentScale ]);
+          }
+
+          // colors
+          if(a2Color) gl.material.setDiffuseColor(a2Color);
+
+          m4.translate(transformUse, [0, paddingSpace, 0]);
+
+
+          // draw the remain pills which use the atom2 color
+          for(var j = 0; j < pillSegmentsLength; j++) {
+
+            if (specs.bonds_renderAsLines_3D) {
+              if(this.bondOrder == 0) {
+                gl.setMatrixUniforms(transformUse);
+                gl.drawArrays(gl.POINTS, 0, 1);
+              } else {
+                m4.scale(transformUse, [1, pillHeight, 1]);
+
+                gl.setMatrixUniforms(transformUse);
+                gl.drawArrays(gl.LINES, 0, gl.lineBuffer.vertexPositionBuffer.numItems);
+
+                m4.scale(transformUse, [1, 1/pillHeight, 1]);
+              }
+            } else {
+              gl.setMatrixUniforms(transformUse);
+              if(this.bondOrder == 0) {
+                gl.drawElements(gl.TRIANGLES, gl.sphereBuffer.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+              } else {
+                gl.drawElements(gl.TRIANGLES, gl.pillBuffer.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+              }
+            }
+
+            m4.translate(transformUse, [0, totalSpaceForPill, 0]);
+          }
+
+          // draw the splited center pills of atom2
+          if(pillsPerBond % 2 != 0) {
+
+            m4.scale(transformUse, [1, scaleY, 1]);
+
+            gl.setMatrixUniforms(transformUse);
+
+            if (specs.bonds_renderAsLines_3D) {
+
+              if(this.bondOrder == 0) {
+                gl.drawArrays(gl.POINTS, 0, 1);
+              } else {
+                gl.drawArrays(gl.LINES, 0, gl.lineBuffer.vertexPositionBuffer.numItems);
+              }
+
+            } else {
+
+              if(this.bondOrder == 0) {
+                gl.drawElements(gl.TRIANGLES, gl.sphereBuffer.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+              } else {
+                gl.drawElements(gl.TRIANGLES, gl.pillBuffer.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+              }
+
+            }
+
+            m4.translate(transformUse, [0, totalSpaceForPill * (1 + halfOneMinScaleY), 0]);
+
+            m4.scale(transformUse, [1, 1/scaleY, 1]);
+          }
+        }
+      }
+    } else {
+      // calculate the translations for unsaturated bonds.
+      // represenation that use saturatedCross are
+      // - Line
+      // - Wireframe
+      // - Ball and Stick
+      // just Stick will set bonds_showBondOrders_3D to false
+      if (specs.bonds_showBondOrders_3D) {
+
+        switch (this.bondOrder) {
+        // the 0 and 0.5 bond order will draw as segmented pill.
+        // so we not set that here.
+        // case 0:
+        // case 0.5: break;
+
+        case 1.5:
+          // The "1" part set here,
+          // the other part (0.5) will render as segmented pill
+          others = [ -specs.bonds_cylinderDiameter_3D /*, specs.bonds_cylinderDiameter_3D */];
+          break;
+        case 2:
+          others = [ -specs.bonds_cylinderDiameter_3D, specs.bonds_cylinderDiameter_3D ];
+          break;
+        case 3:
+          others = [ -1.2 * specs.bonds_cylinderDiameter_3D, 0, 1.2 * specs.bonds_cylinderDiameter_3D ];
+          break;
+        }
+
+        // saturatedCross just need for need for bondorder greather than 1
+        if(this.bondOrder > 1) {
+          var z = [ 0, 0, 1 ];
+          var inverse = m4.inverse(gl.rotationMatrix, []);
+          m4.multiplyVec3(inverse, z);
+          saturatedCross = v3.cross(a2b, z, []);
+          v3.normalize(saturatedCross);
+        }
+      }
+      // for Stick representation, we just change the cylinder radius
+      else {
+
+        switch (this.bondOrder) {
+        case 0:
+          radiusScale *= 0.25;
+          break;
+        case 0.5:
+        case 1.5:
+          radiusScale *= 0.5;
+          break;
+        }
+      }
+
+
+      // if transformOpposite is set, the it mean the color must be splited.
+      // so the heigh of cylinder will be half.
+      // one half for atom1 color the other for atom2 color
+      if(transformOpposite) {
+        height /= 2;
+      }
+
+      // Radius of cylinder already defined when initialize cylinder mesh,
+      // so at this rate, the scale just needed for Y to strech
+      // cylinder to bond length (height) and X and Z for radius.
+      var scaleVector = [ radiusScale, height, radiusScale ];
+
+      // render bonds
+      for ( var i = 0, ii = others.length; i < ii; i++) {
+        var transformUse = m4.set(transform, []);
+        if (others[i] !== 0) {
+          m4.translate(transformUse, v3.scale(saturatedCross, others[i], []));
+        }
+        if (ang !== 0) {
+          m4.rotate(transformUse, ang, axis);
+        }
+        m4.scale(transformUse, scaleVector);
+
+        // colors
+        if(a1Color) gl.material.setDiffuseColor(a1Color);
+
+        // render
+        gl.setMatrixUniforms(transformUse);
+        if (specs.bonds_renderAsLines_3D) {
+          gl.drawArrays(gl.LINES, 0, gl.lineBuffer.vertexPositionBuffer.numItems);
+        } else {
+          gl.drawArrays(gl.TRIANGLE_STRIP, 0, gl.cylinderBuffer.vertexPositionBuffer.numItems);
+        }
+
+        // if transformOpposite is set, then a2Color also shoudl be seted as well.
+        if (transformOpposite) {
+
+          m4.set(transformOpposite, transformUse);
+          if (others[i] !== 0) {
+            m4.translate(transformUse, v3.scale(saturatedCross, others[i], []));
+          }
+          // don't check for 0 here as that means it should be rotated
+          // by PI, but PI will be negated
+          m4.rotate(transformUse, ang + m.PI, axis);
+          m4.scale(transformUse, scaleVector);
+
+          // colors
+          if(a2Color) gl.material.setDiffuseColor(a2Color);
+
+          // render
+          gl.setMatrixUniforms(transformUse);
+          if (specs.bonds_renderAsLines_3D) {
+            gl.drawArrays(gl.LINES, 0, gl.lineBuffer.vertexPositionBuffer.numItems);
+          } else {
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, gl.cylinderBuffer.vertexPositionBuffer.numItems);
+          }
+        }
+
+      }
+    }
+  };
+  /**
+   *
+   * @param {WegGLRenderingContext} gl
+   * @param {structures.VisualSpecifications} specs
+   * @return {void}
+   */
+  _.renderPicker = function(gl, specs) {
+
+    // gl.cylinderBuffer.bindBuffers(gl);
+    // gl.material.setDiffuseColor(
+    //  this.bondOrder == 0   ? '#FF0000' : // merah
+    //  this.bondOrder == 0.5 ? '#FFFF00' : // kuning
+    //  this.bondOrder == 1   ? '#FF00FF' : // ungu
+    //  this.bondOrder == 1.5 ? '#00FF00' : // hijau
+    //  this.bondOrder == 2   ? '#00FFFF' : // cyan
+    //  this.bondOrder == 3   ? '#0000FF' : // biru
+    //  '#FFFFFF');
+    // gl.material.setAlpha(1);
+
+
+    if (this.specs) {
+      specs = this.specs;
+    }
+    // this is the elongation vector for the cylinder
+    var height = this.a1.distance3D(this.a2);
+    if (height === 0) {
+      // if there is no height, then no point in rendering this bond,
+      // just return
+      return;
+    }
+
+    // scale factor for cylinder/pill radius.
+    // when scale pill, the cap will affected too.
+    var radiusScale = specs.bonds_cylinderDiameter_3D / 2;
+
+    // transform to the atom as well as the opposite atom (for Jmol and
+    // PyMOL
+    // color splits)
+    var transform = m4.translate(gl.modelViewMatrix, [ this.a1.x, this.a1.y, this.a1.z ], []);
+
+    // vector from atom1 to atom2
+    var a2b = [ this.a2.x - this.a1.x, this.a2.y - this.a1.y, this.a2.z - this.a1.z ];
+
+    // calculate the rotation
+    var y = [ 0, 1, 0 ];
+    var ang = 0;
+    var axis;
+    if (this.a1.x === this.a2.x && this.a1.z === this.a2.z) {
+      axis = [ 0, 0, 1 ];
+      if (this.a2.y < this.a1.y) {
+        ang = m.PI;
+      }
+    } else {
+      ang = extensions.vec3AngleFrom(y, a2b);
+      axis = v3.cross(y, a2b, []);
+    }
+
+    // calculate the translations for unsaturated bonds.
+    // represenattio use saturatedCross are
+    // - Line
+    // - WIreframe
+    // - Ball and Stick
+    // just Stick will set bonds_showBondOrders_3D to false
+    var others = [ 0 ];
+    var saturatedCross;
+
+    if (specs.bonds_showBondOrders_3D) {
+
+      if (specs.bonds_renderAsLines_3D) {
+
+        switch (this.bondOrder) {
+
+        case 1.5:
+        case 2:
+          others = [ -specs.bonds_cylinderDiameter_3D, specs.bonds_cylinderDiameter_3D ];
+          break;
+        case 3:
+          others = [ -1.2 * specs.bonds_cylinderDiameter_3D, 0, 1.2 * specs.bonds_cylinderDiameter_3D ];
+          break;
+        }
+
+        // saturatedCross just need for need for bondorder greather than 1
+        if(this.bondOrder > 1) {
+          var z = [ 0, 0, 1 ];
+          var inverse = m4.inverse(gl.rotationMatrix, []);
+          m4.multiplyVec3(inverse, z);
+          saturatedCross = v3.cross(a2b, z, []);
+          v3.normalize(saturatedCross);
+        }
+
+      } else {
+
+        switch (this.bondOrder) {
+        case 1.5:
+        case 2:
+          radiusScale *= 3;
+          break;
+        case 3:
+          radiusScale *= 3.4;
+          break;
+        }
+
+      }
+
+    } else {
+      // this is for Stick repersentation because Stick not have bonds_showBondOrders_3D
+
+      switch (this.bondOrder) {
+
+      case 0:
+        radiusScale *= 0.25;
+        break;
+      case 0.5:
+      case 1.5:
+        radiusScale *= 0.5;
+        break;
+      }
+
+    }
+
+    // Radius of cylinder already defined when initialize cylinder mesh,
+    // so at this rate, the scale just needed for Y to strech
+    // cylinder to bond length (height) and X and Z for radius.
+    var scaleVector = [ radiusScale, height, radiusScale ];
+
+    // render bonds
+    for ( var i = 0, ii = others.length; i < ii; i++) {
+      var transformUse = m4.set(transform, []);
+      if (others[i] !== 0) {
+        m4.translate(transformUse, v3.scale(saturatedCross, others[i], []));
+      }
+      if (ang !== 0) {
+        m4.rotate(transformUse, ang, axis);
+      }
+      m4.scale(transformUse, scaleVector);
+
+      // render
+      gl.setMatrixUniforms(transformUse);
+      if (specs.bonds_renderAsLines_3D) {
+        gl.drawArrays(gl.LINES, 0, gl.lineBuffer.vertexPositionBuffer.numItems);
+      } else {
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, gl.cylinderBuffer.vertexPositionBuffer.numItems);
+      }
+
+    }
+  };
+
+})(ChemDoodle.ELEMENT, ChemDoodle.extensions, ChemDoodle.structures, ChemDoodle.math, Math, mat4, vec3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(structures, m) {
+  'use strict';
+  structures.Ring = function() {
+    this.atoms = [];
+    this.bonds = [];
+  };
+  var _ = structures.Ring.prototype;
+  _.center = undefined;
+  _.setupBonds = function() {
+    for ( var i = 0, ii = this.bonds.length; i < ii; i++) {
+      this.bonds[i].ring = this;
+    }
+    this.center = this.getCenter();
+  };
+  _.getCenter = function() {
+    var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+      minX = m.min(this.atoms[i].x, minX);
+      minY = m.min(this.atoms[i].y, minY);
+      maxX = m.max(this.atoms[i].x, maxX);
+      maxY = m.max(this.atoms[i].y, maxY);
+    }
+    return new structures.Point((maxX + minX) / 2, (maxY + minY) / 2);
+  };
+
+})(ChemDoodle.structures, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4459 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-08-06 14:09:43 -0400 (Tue, 06 Aug 2013) $
+//
+
+(function(c, math, structures, RESIDUE, m) {
+  'use strict';
+  structures.Molecule = function() {
+    this.atoms = [];
+    this.bonds = [];
+    this.rings = [];
+  };
+  var _ = structures.Molecule.prototype;
+  // this can be an extensive algorithm for large molecules, you may want
+  // to turn this off
+  _.findRings = true;
+  _.draw = function(ctx, specs) {
+    if (this.specs) {
+      specs = this.specs;
+    }
+    // draw
+    // need this weird render of atoms before and after, just in case
+    // circles are rendered, as those should be on top
+    if (specs.atoms_display && !specs.atoms_circles_2D) {
+      for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+        this.atoms[i].draw(ctx, specs);
+      }
+    }
+    if (specs.bonds_display) {
+      for ( var i = 0, ii = this.bonds.length; i < ii; i++) {
+        this.bonds[i].draw(ctx, specs);
+      }
+    }
+    if (specs.atoms_display && specs.atoms_circles_2D) {
+      for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+        this.atoms[i].draw(ctx, specs);
+      }
+    }
+  };
+  _.render = function(gl, specs) {
+    // uncomment this to render the picking frame
+    // return this.renderPickFrame(gl, specs, []);
+    if (this.specs) {
+      specs = this.specs;
+    }
+    // check explicitly if it is undefined here, since hetatm is a
+    // boolean that can be true or false, as long as it is set, it is
+    // macro
+    var isMacro = this.atoms.length > 0 && this.atoms[0].hetatm !== undefined;
+    if (isMacro) {
+      if (specs.macro_displayBonds) {
+        if (this.bonds.length > 0) {
+          if (specs.bonds_renderAsLines_3D && !this.residueSpecs || this.residueSpecs && this.residueSpecs.bonds_renderAsLines_3D) {
+            gl.lineWidth(this.residueSpecs ? this.residueSpecs.bonds_width_2D : specs.bonds_width_2D);
+            gl.lineBuffer.bindBuffers(gl);
+          } else {
+            gl.cylinderBuffer.bindBuffers(gl);
+          }
+          // colors
+          gl.material.setTempColors(specs.bonds_materialAmbientColor_3D, undefined, specs.bonds_materialSpecularColor_3D, specs.bonds_materialShininess_3D);
+        }
+        for ( var i = 0, ii = this.bonds.length; i < ii; i++) {
+          var b = this.bonds[i];
+          // closestDistance may be 0, so check if undefined
+          if (!b.a1.hetatm && (specs.macro_atomToLigandDistance === -1 || (b.a1.closestDistance !== undefined && specs.macro_atomToLigandDistance >= b.a1.closestDistance && specs.macro_atomToLigandDistance >= b.a2.closestDistance))) {
+            b.render(gl, this.residueSpecs ? this.residueSpecs : specs);
+          }
+        }
+      }
+      if (specs.macro_displayAtoms) {
+        if (this.atoms.length > 0) {
+          gl.sphereBuffer.bindBuffers(gl);
+          // colors
+          gl.material.setTempColors(specs.atoms_materialAmbientColor_3D, undefined, specs.atoms_materialSpecularColor_3D, specs.atoms_materialShininess_3D);
+        }
+        for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+          var a = this.atoms[i];
+          // closestDistance may be 0, so check if undefined
+          if (!a.hetatm && (specs.macro_atomToLigandDistance === -1 || (a.closestDistance !== undefined && specs.macro_atomToLigandDistance >= a.closestDistance))) {
+            a.render(gl, this.residueSpecs ? this.residueSpecs : specs);
+          }
+        }
+      }
+    }
+    if (specs.bonds_display) {
+      // Array for Half Bonds. It is needed because Half Bonds use the
+      // pill buffer.
+      var asPills = [];
+      // Array for 0 bond order.
+      var asSpheres = [];
+      if (this.bonds.length > 0) {
+        if (specs.bonds_renderAsLines_3D) {
+          gl.lineWidth(specs.bonds_width_2D);
+          gl.lineBuffer.bindBuffers(gl);
+        } else {
+          gl.cylinderBuffer.bindBuffers(gl);
+        }
+        // colors
+        gl.material.setTempColors(specs.bonds_materialAmbientColor_3D, undefined, specs.bonds_materialSpecularColor_3D, specs.bonds_materialShininess_3D);
+      }
+      for ( var i = 0, ii = this.bonds.length; i < ii; i++) {
+        var b = this.bonds[i];
+        if (!isMacro || b.a1.hetatm) {
+          // Check if render as segmented pill will used.
+          if (specs.bonds_showBondOrders_3D) {
+            if (b.bondOrder == 0) {
+              // 0 bond order
+              asSpheres.push(b);
+            } else if (b.bondOrder == 0.5) {
+              // 0.5 bond order
+              asPills.push(b);
+            } else {
+              if (b.bondOrder == 1.5) {
+                // For 1.5 bond order, the "1" part will render
+                // as cylinder, and the "0.5" part will render
+                // as segmented pills
+                asPills.push(b);
+              }
+              b.render(gl, specs);
+            }
+          } else {
+            // this will render the Stick representation
+            b.render(gl, specs);
+          }
+
+        }
+      }
+      // Render the Half Bond
+      if (asPills.length > 0) {
+        // if bonds_renderAsLines_3D is true, then lineBuffer will
+        // binded.
+        // so in here we just need to check if we need to change
+        // the binding buffer to pillBuffer or not.
+        if (!specs.bonds_renderAsLines_3D) {
+          gl.pillBuffer.bindBuffers(gl);
+        }
+        for ( var i = 0, ii = asPills.length; i < ii; i++) {
+          asPills[i].render(gl, specs, true);
+        }
+      }
+      // Render zero bond order
+      if (asSpheres.length > 0) {
+        // if bonds_renderAsLines_3D is true, then lineBuffer will
+        // binded.
+        // so in here we just need to check if we need to change
+        // the binding buffer to pillBuffer or not.
+        if (!specs.bonds_renderAsLines_3D) {
+          gl.sphereBuffer.bindBuffers(gl);
+        }
+        for ( var i = 0, ii = asSpheres.length; i < ii; i++) {
+          asSpheres[i].render(gl, specs, true);
+        }
+      }
+    }
+    if (specs.atoms_display) {
+      for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+        var a = this.atoms[i];
+        a.bondNumber = 0;
+        a.renderAsStar = false;
+      }
+      for ( var i = 0, ii = this.bonds.length; i < ii; i++) {
+        var b = this.bonds[i];
+        b.a1.bondNumber++;
+        b.a2.bondNumber++;
+      }
+      if (this.atoms.length > 0) {
+        gl.sphereBuffer.bindBuffers(gl);
+        // colors
+        gl.material.setTempColors(specs.atoms_materialAmbientColor_3D, undefined, specs.atoms_materialSpecularColor_3D, specs.atoms_materialShininess_3D);
+      }
+      var asStars = [];
+      for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+        var a = this.atoms[i];
+        if (!isMacro || (a.hetatm && (specs.macro_showWater || !a.isWater))) {
+          if (specs.atoms_nonBondedAsStars_3D && a.bondNumber === 0) {
+            a.renderAsStar = true;
+            asStars.push(a);
+          } else {
+            a.render(gl, specs);
+          }
+        }
+      }
+      if (asStars.length > 0) {
+        gl.starBuffer.bindBuffers(gl);
+        for ( var i = 0, ii = asStars.length; i < ii; i++) {
+          asStars[i].render(gl, specs);
+        }
+      }
+    }
+    if (this.chains) {
+      // set up the model view matrix, since it won't be modified
+      // for macromolecules
+      gl.setMatrixUniforms(gl.modelViewMatrix);
+      // render chains
+      if (specs.proteins_displayRibbon) {
+        // proteins
+        // colors
+        gl.material.setTempColors(specs.proteins_materialAmbientColor_3D, undefined, specs.proteins_materialSpecularColor_3D, specs.proteins_materialShininess_3D);
+        for ( var j = 0, jj = this.ribbons.length; j < jj; j++) {
+          if (specs.proteins_useShapelyColors || specs.proteins_useAminoColors || specs.proteins_usePolarityColors) {
+            var use = specs.proteins_ribbonCartoonize ? this.cartoons[j] : this.ribbons[j];
+            use.front.bindBuffers(gl);
+            for ( var i = 0, ii = use.front.segments.length; i < ii; i++) {
+              use.front.segments[i].render(gl, specs);
+            }
+            use.back.bindBuffers(gl);
+            for ( var i = 0, ii = use.back.segments.length; i < ii; i++) {
+              use.back.segments[i].render(gl, specs);
+            }
+          } else {
+            if (specs.proteins_ribbonCartoonize) {
+              var use = this.cartoons[j];
+              use.front.bindBuffers(gl);
+              for ( var i = 0, ii = use.front.cartoonSegments.length; i < ii; i++) {
+                use.front.cartoonSegments[i].render(gl, specs);
+              }
+              use.back.bindBuffers(gl);
+              for ( var i = 0, ii = use.back.cartoonSegments.length; i < ii; i++) {
+                use.back.cartoonSegments[i].render(gl, specs);
+              }
+            } else {
+              var use = this.ribbons[j];
+              use.front.render(gl, specs);
+              use.back.render(gl, specs);
+            }
+          }
+        }
+      }
+      if (specs.proteins_displayBackbone) {
+        if (!this.alphaCarbonTrace) {
+          // cache the alpha carbon trace
+          this.alphaCarbonTrace = {
+            nodes : [],
+            edges : []
+          };
+          for ( var j = 0, jj = this.chains.length; j < jj; j++) {
+            var rs = this.chains[j];
+            var isNucleotide = rs.length > 2 && RESIDUE[rs[2].name] && RESIDUE[rs[2].name].aminoColor === '#BEA06E';
+            if (!isNucleotide && rs.length > 0) {
+              for ( var i = 1, ii = rs.length - 2; i < ii; i++) {
+                var n = rs[i].cp1;
+                n.chainColor = rs.chainColor;
+                this.alphaCarbonTrace.nodes.push(n);
+                var b = new structures.Bond(rs[i].cp1, rs[i + 1].cp1);
+                b.residueName = rs[i].name;
+                b.chainColor = rs.chainColor;
+                this.alphaCarbonTrace.edges.push(b);
+                if (i === rs.length - 3) {
+                  n = rs[i + 1].cp1;
+                  n.chainColor = rs.chainColor;
+                  this.alphaCarbonTrace.nodes.push(n);
+                }
+              }
+            }
+          }
+        }
+        if (this.alphaCarbonTrace.nodes.length > 0) {
+          var traceSpecs = new structures.VisualSpecifications();
+          traceSpecs.atoms_display = true;
+          traceSpecs.bonds_display = true;
+          traceSpecs.atoms_sphereDiameter_3D = specs.proteins_backboneThickness;
+          traceSpecs.bonds_cylinderDiameter_3D = specs.proteins_backboneThickness;
+          traceSpecs.bonds_useJMOLColors = false;
+          traceSpecs.atoms_color = specs.proteins_backboneColor;
+          traceSpecs.bonds_color = specs.proteins_backboneColor;
+          traceSpecs.atoms_useVDWDiameters_3D = false;
+          // colors
+          gl.material.setTempColors(specs.proteins_materialAmbientColor_3D, undefined, specs.proteins_materialSpecularColor_3D, specs.proteins_materialShininess_3D);
+          gl.material.setDiffuseColor(specs.proteins_backboneColor);
+          for ( var i = 0, ii = this.alphaCarbonTrace.nodes.length; i < ii; i++) {
+            var n = this.alphaCarbonTrace.nodes[i];
+            if (specs.macro_colorByChain) {
+              traceSpecs.atoms_color = n.chainColor;
+            }
+            gl.sphereBuffer.bindBuffers(gl);
+            n.render(gl, traceSpecs);
+          }
+          for ( var i = 0, ii = this.alphaCarbonTrace.edges.length; i < ii; i++) {
+            var e = this.alphaCarbonTrace.edges[i];
+            var color;
+            var r = RESIDUE[e.residueName] ? RESIDUE[e.residueName] : RESIDUE['*'];
+            if (specs.macro_colorByChain) {
+              color = e.chainColor;
+            } else if (specs.proteins_useShapelyColors) {
+              color = r.shapelyColor;
+            } else if (specs.proteins_useAminoColors) {
+              color = r.aminoColor;
+            } else if (specs.proteins_usePolarityColors) {
+              if (r.polar) {
+                color = '#C10000';
+              } else {
+                color = '#FFFFFF';
+              }
+            }
+            if (color) {
+              traceSpecs.bonds_color = color;
+            }
+            gl.cylinderBuffer.bindBuffers(gl);
+            e.render(gl, traceSpecs);
+          }
+        }
+      }
+      if (specs.nucleics_display) {
+        // nucleic acids
+        // colors
+        gl.material.setTempColors(specs.nucleics_materialAmbientColor_3D, undefined, specs.nucleics_materialSpecularColor_3D, specs.nucleics_materialShininess_3D);
+        for ( var j = 0, jj = this.tubes.length; j < jj; j++) {
+          gl.setMatrixUniforms(gl.modelViewMatrix);
+          var use = this.tubes[j];
+          use.render(gl, specs);
+        }
+      }
+    }
+    if (specs.crystals_displayUnitCell && this.unitCell) {
+      gl.setMatrixUniforms(gl.modelViewMatrix);
+      this.unitCell.bindBuffers(gl);
+      // colors
+      gl.material.setDiffuseColor(specs.crystals_unitCellColor);
+      gl.lineWidth(specs.crystals_unitCellLineWidth);
+      // render
+      gl.drawElements(gl.LINES, this.unitCell.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+    }
+    if (this.surface && specs.surfaces_display) {
+      gl.setMatrixUniforms(gl.modelViewMatrix);
+      // gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+      // gl.enable(gl.BLEND);
+      // gl.disable(gl.DEPTH_TEST);
+      this.surface.bindBuffers(gl);
+      gl.material.setTempColors(specs.surfaces_materialAmbientColor_3D, specs.surfaces_color, specs.surfaces_materialSpecularColor_3D, specs.surfaces_materialShininess_3D);
+      // gl.material.setAlpha(.2);
+      if (specs.surfaces_style === 'Dot') {
+        gl.drawArrays(gl.POINTS, 0, this.surface.vertexPositionBuffer.numItems);
+        // } else if (specs.surfaces_style === 'Mesh') {
+        // gl.drawElements(gl.LINES,
+        // this.surface.vertexIndexBuffer.numItems,
+        // gl.UNSIGNED_SHORT, 0);
+      } else {
+        gl.drawElements(gl.TRIANGLES, this.surface.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+      }
+      // gl.disable(gl.BLEND);
+      // gl.enable(gl.DEPTH_TEST);
+    }
+  };
+  _.renderPickFrame = function(gl, specs, objects) {
+    if (this.specs) {
+      specs = this.specs;
+    }
+    var isMacro = this.atoms.length > 0 && this.atoms[0].hetatm !== undefined;
+    if (specs.bonds_display) {
+      if (this.bonds.length > 0) {
+        if (specs.bonds_renderAsLines_3D) {
+          gl.lineWidth(specs.bonds_width_2D);
+          gl.lineBuffer.bindBuffers(gl);
+        } else {
+          gl.cylinderBuffer.bindBuffers(gl);
+        }
+      }
+      for ( var i = 0, ii = this.bonds.length; i < ii; i++) {
+        var b = this.bonds[i];
+        if (!isMacro || b.a1.hetatm) {
+          gl.material.setDiffuseColor(math.idx2color(objects.length));
+          b.renderPicker(gl, specs);
+          objects.push(b);
+        }
+      }
+    }
+    if (specs.atoms_display) {
+      for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+        var a = this.atoms[i];
+        a.bondNumber = 0;
+        a.renderAsStar = false;
+      }
+      for ( var i = 0, ii = this.bonds.length; i < ii; i++) {
+        var b = this.bonds[i];
+        b.a1.bondNumber++;
+        b.a2.bondNumber++;
+      }
+      if (this.atoms.length > 0) {
+        gl.sphereBuffer.bindBuffers(gl);
+      }
+      var asStars = [];
+      for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+        var a = this.atoms[i];
+        if (!isMacro || (a.hetatm && (specs.macro_showWater || !a.isWater))) {
+          if (specs.atoms_nonBondedAsStars_3D && a.bondNumber === 0) {
+            a.renderAsStar = true;
+            asStars.push(a);
+          } else {
+            gl.material.setDiffuseColor(math.idx2color(objects.length));
+            a.render(gl, specs, true);
+            objects.push(a);
+          }
+        }
+      }
+      if (asStars.length > 0) {
+        gl.starBuffer.bindBuffers(gl);
+        for ( var i = 0, ii = asStars.length; i < ii; i++) {
+          var a = asStars[i];
+          gl.material.setDiffuseColor(math.idx2color(objects.length));
+          a.render(gl, specs, true);
+          objects.push(a);
+        }
+      }
+    }
+  };
+  _.getCenter3D = function() {
+    if (this.atoms.length === 1) {
+      return new structures.Atom('C', this.atoms[0].x, this.atoms[0].y, this.atoms[0].z);
+    }
+    var minX = Infinity, minY = Infinity, minZ = Infinity;
+    var maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
+    if (this.chains) {
+      // residues
+      for ( var i = 0, ii = this.chains.length; i < ii; i++) {
+        var chain = this.chains[i];
+        for ( var j = 0, jj = chain.length; j < jj; j++) {
+          var residue = chain[j];
+          minX = m.min(residue.cp1.x, residue.cp2.x, minX);
+          minY = m.min(residue.cp1.y, residue.cp2.y, minY);
+          minZ = m.min(residue.cp1.z, residue.cp2.z, minZ);
+          maxX = m.max(residue.cp1.x, residue.cp2.x, maxX);
+          maxY = m.max(residue.cp1.y, residue.cp2.y, maxY);
+          maxZ = m.max(residue.cp1.z, residue.cp2.z, maxZ);
+        }
+      }
+    }
+    for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+      minX = m.min(this.atoms[i].x, minX);
+      minY = m.min(this.atoms[i].y, minY);
+      minZ = m.min(this.atoms[i].z, minZ);
+      maxX = m.max(this.atoms[i].x, maxX);
+      maxY = m.max(this.atoms[i].y, maxY);
+      maxZ = m.max(this.atoms[i].z, maxZ);
+    }
+    return new structures.Atom('C', (maxX + minX) / 2, (maxY + minY) / 2, (maxZ + minZ) / 2);
+  };
+  _.getCenter = function() {
+    if (this.atoms.length === 1) {
+      return new structures.Point(this.atoms[0].x, this.atoms[0].y);
+    }
+    var minX = Infinity, minY = Infinity;
+    var maxX = -Infinity, maxY = -Infinity;
+    for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+      minX = m.min(this.atoms[i].x, minX);
+      minY = m.min(this.atoms[i].y, minY);
+      maxX = m.max(this.atoms[i].x, maxX);
+      maxY = m.max(this.atoms[i].y, maxY);
+    }
+    return new structures.Point((maxX + minX) / 2, (maxY + minY) / 2);
+  };
+  _.getDimension = function() {
+    if (this.atoms.length === 1) {
+      return new structures.Point(0, 0);
+    }
+    var minX = Infinity, minY = Infinity;
+    var maxX = -Infinity, maxY = -Infinity;
+    if (this.chains) {
+      for ( var i = 0, ii = this.chains.length; i < ii; i++) {
+        var chain = this.chains[i];
+        for ( var j = 0, jj = chain.length; j < jj; j++) {
+          var residue = chain[j];
+          minX = m.min(residue.cp1.x, residue.cp2.x, minX);
+          minY = m.min(residue.cp1.y, residue.cp2.y, minY);
+          maxX = m.max(residue.cp1.x, residue.cp2.x, maxX);
+          maxY = m.max(residue.cp1.y, residue.cp2.y, maxY);
+        }
+      }
+      minX -= 30;
+      minY -= 30;
+      maxX += 30;
+      maxY += 30;
+    }
+    for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+      minX = m.min(this.atoms[i].x, minX);
+      minY = m.min(this.atoms[i].y, minY);
+      maxX = m.max(this.atoms[i].x, maxX);
+      maxY = m.max(this.atoms[i].y, maxY);
+    }
+    return new structures.Point(maxX - minX, maxY - minY);
+  };
+  _.check = function(force) {
+    // using force improves efficiency, so changes will not be checked
+    // until a render occurs
+    // you can force a check by sending true to this function after
+    // calling check with a false
+    if (force && this.doChecks) {
+      // only check if the number of bonds has changed
+      if (this.findRings) {
+        if (this.bonds.length - this.atoms.length !== this.fjNumCache) {
+          // find rings
+          this.rings = new c.informatics.SSSRFinder(this).rings;
+          for ( var i = 0, ii = this.bonds.length; i < ii; i++) {
+            this.bonds[i].ring = undefined;
+          }
+          for ( var i = 0, ii = this.rings.length; i < ii; i++) {
+            this.rings[i].setupBonds();
+          }
+        } else {
+          // update rings if any
+          for ( var i = 0, ii = this.rings.length; i < ii; i++) {
+            var r = this.rings[i];
+            r.center = r.getCenter();
+          }
+        }
+      }
+      // find lones
+      for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+        this.atoms[i].isLone = false;
+        if (this.atoms[i].label === 'C') {
+          var counter = 0;
+          for ( var j = 0, jj = this.bonds.length; j < jj; j++) {
+            if (this.bonds[j].a1 === this.atoms[i] || this.bonds[j].a2 === this.atoms[i]) {
+              counter++;
+            }
+          }
+          if (counter === 0) {
+            this.atoms[i].isLone = true;
+          }
+        }
+      }
+      // sort
+      var sort = false;
+      for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+        if (this.atoms[i].z !== 0) {
+          sort = true;
+        }
+      }
+      if (sort) {
+        this.sortAtomsByZ();
+        this.sortBondsByZ();
+      }
+      // setup metadata
+      this.setupMetaData();
+      this.atomNumCache = this.atoms.length;
+      this.bondNumCache = this.bonds.length;
+      // fj number cache doesnt care if there are separate molecules,
+      // as the change will signal a need to check for rings; the
+      // accuracy doesn't matter
+      this.fjNumCache = this.bonds.length - this.atoms.length;
+    }
+    this.doChecks = !force;
+  };
+  _.getAngles = function(a) {
+    var angles = [];
+    for ( var i = 0, ii = this.bonds.length; i < ii; i++) {
+      if (this.bonds[i].contains(a)) {
+        angles.push(a.angle(this.bonds[i].getNeighbor(a)));
+      }
+    }
+    angles.sort();
+    return angles;
+  };
+  _.getCoordinationNumber = function(bs) {
+    var coordinationNumber = 0;
+    for ( var i = 0, ii = bs.length; i < ii; i++) {
+      coordinationNumber += bs[i].bondOrder;
+    }
+    return coordinationNumber;
+  };
+  _.getBonds = function(a) {
+    var bonds = [];
+    for ( var i = 0, ii = this.bonds.length; i < ii; i++) {
+      if (this.bonds[i].contains(a)) {
+        bonds.push(this.bonds[i]);
+      }
+    }
+    return bonds;
+  };
+  _.sortAtomsByZ = function() {
+    for ( var i = 1, ii = this.atoms.length; i < ii; i++) {
+      var index = i;
+      while (index > 0 && this.atoms[index].z < this.atoms[index - 1].z) {
+        var hold = this.atoms[index];
+        this.atoms[index] = this.atoms[index - 1];
+        this.atoms[index - 1] = hold;
+        index--;
+      }
+    }
+  };
+  _.sortBondsByZ = function() {
+    for ( var i = 1, ii = this.bonds.length; i < ii; i++) {
+      var index = i;
+      while (index > 0 && (this.bonds[index].a1.z + this.bonds[index].a2.z) < (this.bonds[index - 1].a1.z + this.bonds[index - 1].a2.z)) {
+        var hold = this.bonds[index];
+        this.bonds[index] = this.bonds[index - 1];
+        this.bonds[index - 1] = hold;
+        index--;
+      }
+    }
+  };
+  _.setupMetaData = function() {
+    var center = this.getCenter();
+    for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+      var a = this.atoms[i];
+      a.bonds = this.getBonds(a);
+      a.angles = this.getAngles(a);
+      a.isHidden = a.bonds.length === 2 && m.abs(m.abs(a.angles[1] - a.angles[0]) - m.PI) < m.PI / 30 && a.bonds[0].bondOrder === a.bonds[1].bondOrder;
+      var angleData = math.angleBetweenLargest(a.angles);
+      a.angleOfLeastInterference = angleData.angle % (m.PI * 2);
+      a.largestAngle = angleData.largest;
+      a.coordinationNumber = this.getCoordinationNumber(a.bonds);
+      a.bondNumber = a.bonds.length;
+      a.molCenter = center;
+    }
+    for ( var i = 0, ii = this.bonds.length; i < ii; i++) {
+      var b = this.bonds[i];
+      b.molCenter = center;
+    }
+  };
+  _.scaleToAverageBondLength = function(length) {
+    var avBondLength = this.getAverageBondLength();
+    if (avBondLength !== 0) {
+      var scale = length / avBondLength;
+      for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+        this.atoms[i].x *= scale;
+        this.atoms[i].y *= scale;
+      }
+    }
+  };
+  _.getAverageBondLength = function() {
+    if (this.bonds.length === 0) {
+      return 0;
+    }
+    var tot = 0;
+    for ( var i = 0, ii = this.bonds.length; i < ii; i++) {
+      tot += this.bonds[i].getLength();
+    }
+    tot /= this.bonds.length;
+    return tot;
+  };
+  _.getBounds = function() {
+    var bounds = new math.Bounds();
+    for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+      bounds.expand(this.atoms[i].getBounds());
+    }
+    if (this.chains) {
+      for ( var i = 0, ii = this.chains.length; i < ii; i++) {
+        var chain = this.chains[i];
+        for ( var j = 0, jj = chain.length; j < jj; j++) {
+          var residue = chain[j];
+          bounds.expand(residue.cp1.x, residue.cp1.y);
+          bounds.expand(residue.cp2.x, residue.cp2.y);
+        }
+      }
+      bounds.minX -= 30;
+      bounds.minY -= 30;
+      bounds.maxX += 30;
+      bounds.maxY += 30;
+    }
+    return bounds;
+  };
+  _.getBounds3D = function() {
+    var bounds = new math.Bounds();
+    for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+      bounds.expand(this.atoms[i].getBounds3D());
+    }
+    if (this.chains) {
+      for ( var i = 0, ii = this.chains.length; i < ii; i++) {
+        var chain = this.chains[i];
+        for ( var j = 0, jj = chain.length; j < jj; j++) {
+          var residue = chain[j];
+          bounds.expand3D(residue.cp1.x, residue.cp1.y, residue.cp1.z);
+          bounds.expand3D(residue.cp2.x, residue.cp2.y, residue.cp2.z);
+        }
+      }
+    }
+    return bounds;
+  };
+
+})(ChemDoodle, ChemDoodle.math, ChemDoodle.structures, ChemDoodle.RESIDUE, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3078 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-02-06 18:27:15 -0500 (Sun, 06 Feb 2011) $
+//
+
+(function(structures, m, m4, v3) {
+  'use strict';
+  var SB;
+  var lastVerticalResolution = -1;
+
+  function setupMatrices(verticalResolution) {
+    var n2 = verticalResolution * verticalResolution;
+    var n3 = verticalResolution * verticalResolution * verticalResolution;
+    var S = [ 6 / n3, 0, 0, 0, 6 / n3, 2 / n2, 0, 0, 1 / n3, 1 / n2, 1 / verticalResolution, 0, 0, 0, 0, 1 ];
+    var Bm = [ -1 / 6, 1 / 2, -1 / 2, 1 / 6, 1 / 2, -1, 1 / 2, 0, -1 / 2, 0, 1 / 2, 0, 1 / 6, 2 / 3, 1 / 6, 0 ];
+    SB = m4.multiply(Bm, S, []);
+    lastVerticalResolution = verticalResolution;
+  }
+
+  structures.Residue = function(resSeq) {
+    // number of vertical slashes per segment
+    this.resSeq = resSeq;
+  };
+  var _ = structures.Residue.prototype;
+  _.setup = function(nextAlpha, horizontalResolution) {
+    this.horizontalResolution = horizontalResolution;
+    // define plane
+    var A = [ nextAlpha.x - this.cp1.x, nextAlpha.y - this.cp1.y, nextAlpha.z - this.cp1.z ];
+    var B = [ this.cp2.x - this.cp1.x, this.cp2.y - this.cp1.y, this.cp2.z - this.cp1.z ];
+    var C = v3.cross(A, B, []);
+    this.D = v3.cross(C, A, []);
+    v3.normalize(C);
+    v3.normalize(this.D);
+    // generate guide coordinates
+    // guides for the narrow parts of the ribbons
+    this.guidePointsSmall = [];
+    // guides for the wide parts of the ribbons
+    this.guidePointsLarge = [];
+    var P = [ (nextAlpha.x + this.cp1.x) / 2, (nextAlpha.y + this.cp1.y) / 2, (nextAlpha.z + this.cp1.z) / 2 ];
+    if (this.helix) {
+      // expand helices
+      v3.scale(C, 1.5);
+      v3.add(P, C);
+    }
+    this.guidePointsSmall[0] = new structures.Atom('', P[0] - this.D[0] / 2, P[1] - this.D[1] / 2, P[2] - this.D[2] / 2);
+    for ( var i = 1; i < horizontalResolution; i++) {
+      this.guidePointsSmall[i] = new structures.Atom('', this.guidePointsSmall[0].x + this.D[0] * i / horizontalResolution, this.guidePointsSmall[0].y + this.D[1] * i / horizontalResolution, this.guidePointsSmall[0].z + this.D[2] * i / horizontalResolution);
+    }
+    v3.scale(this.D, 4);
+    this.guidePointsLarge[0] = new structures.Atom('', P[0] - this.D[0] / 2, P[1] - this.D[1] / 2, P[2] - this.D[2] / 2);
+    for ( var i = 1; i < horizontalResolution; i++) {
+      this.guidePointsLarge[i] = new structures.Atom('', this.guidePointsLarge[0].x + this.D[0] * i / horizontalResolution, this.guidePointsLarge[0].y + this.D[1] * i / horizontalResolution, this.guidePointsLarge[0].z + this.D[2] * i / horizontalResolution);
+    }
+  };
+  _.getGuidePointSet = function(type) {
+    if (type === 0) {
+      return this.helix || this.sheet ? this.guidePointsLarge : this.guidePointsSmall;
+    } else if (type === 1) {
+      return this.guidePointsSmall;
+    } else if (type === 2) {
+      return this.guidePointsLarge;
+    }
+  };
+  _.computeLineSegments = function(b1, a3, a4, doCartoon, verticalResolution) {
+    if (verticalResolution !== lastVerticalResolution) {
+      setupMatrices(verticalResolution);
+    }
+    this.split = a3.helix !== this.helix || a3.sheet !== this.sheet;
+    this.lineSegments = this.innerCompute(0, b1, a3, a4, false, verticalResolution);
+    if (doCartoon) {
+      this.lineSegmentsCartoon = this.innerCompute(a3.helix || a3.sheet ? 2 : 1, b1, a3, a4, true, verticalResolution);
+    }
+  };
+  _.innerCompute = function(set, b1, a3, a4, useArrows, verticalResolution) {
+    var segments = [];
+    var use = this.getGuidePointSet(set);
+    var useb1 = b1.getGuidePointSet(set);
+    var usea3 = a3.getGuidePointSet(set);
+    var usea4 = a4.getGuidePointSet(set);
+    for ( var l = 0, ll = this.guidePointsLarge.length; l < ll; l++) {
+      var G = [ useb1[l].x, useb1[l].y, useb1[l].z, 1, use[l].x, use[l].y, use[l].z, 1, usea3[l].x, usea3[l].y, usea3[l].z, 1, usea4[l].x, usea4[l].y, usea4[l].z, 1 ];
+      var M = m4.multiply(G, SB, []);
+      var strand = [];
+      for ( var k = 0; k < verticalResolution; k++) {
+        for ( var i = 3; i > 0; i--) {
+          for ( var j = 0; j < 4; j++) {
+            M[i * 4 + j] += M[(i - 1) * 4 + j];
+          }
+        }
+        strand[k] = new structures.Atom('', M[12] / M[15], M[13] / M[15], M[14] / M[15]);
+      }
+      segments[l] = strand;
+    }
+    if (useArrows && this.arrow) {
+      for ( var i = 0, ii = verticalResolution; i < ii; i++) {
+        var mult = 1.5 - 1.3 * i / verticalResolution;
+        var mid = m.floor(this.horizontalResolution / 2);
+        var center = segments[mid];
+        for ( var j = 0, jj = segments.length; j < jj; j++) {
+          if (j !== mid) {
+            var o = center[i];
+            var f = segments[j][i];
+            var vec = [ f.x - o.x, f.y - o.y, f.z - o.z ];
+            v3.scale(vec, mult);
+            f.x = o.x + vec[0];
+            f.y = o.y + vec[1];
+            f.z = o.z + vec[2];
+          }
+        }
+      }
+    }
+    return segments;
+  };
+
+})(ChemDoodle.structures, Math, mat4, vec3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4402 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-06-08 14:47:08 -0400 (Sat, 08 Jun 2013) $
+//
+
+(function(extensions, structures, math, q, m) {
+  'use strict';
+  structures.Spectrum = function() {
+    this.data = [];
+    this.metadata = [];
+    this.dataDisplay = [];
+    this.memory = {
+      offsetTop : 0,
+      offsetLeft : 0,
+      offsetBottom : 0,
+      flipXAxis : false,
+      scale : 1,
+      width : 0,
+      height : 0
+    };
+  };
+  var _ = structures.Spectrum.prototype;
+  _.title = undefined;
+  _.xUnit = undefined;
+  _.yUnit = undefined;
+  _.continuous = true;
+  _.integrationSensitivity = 0.01;
+  _.draw = function(ctx, specs, width, height) {
+    if (this.specs) {
+      specs = this.specs;
+    }
+    var offsetTop = 5;
+    var offsetLeft = 0;
+    var offsetBottom = 0;
+    // draw decorations
+    ctx.fillStyle = specs.text_color;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'alphabetic';
+    ctx.font = extensions.getFontString(specs.text_font_size, specs.text_font_families);
+    if (this.xUnit) {
+      offsetBottom += specs.text_font_size;
+      ctx.fillText(this.xUnit, width / 2, height - 2);
+    }
+    if (this.yUnit && specs.plots_showYAxis) {
+      offsetLeft += specs.text_font_size;
+      ctx.save();
+      ctx.translate(specs.text_font_size, height / 2);
+      ctx.rotate(-m.PI / 2);
+      ctx.fillText(this.yUnit, 0, 0);
+      ctx.restore();
+    }
+    if (this.title) {
+      offsetTop += specs.text_font_size;
+      ctx.fillText(this.title, width / 2, specs.text_font_size);
+    }
+    // draw ticks
+    offsetBottom += 5 + specs.text_font_size;
+    if (specs.plots_showYAxis) {
+      offsetLeft += 5 + ctx.measureText('1000').width;
+    }
+    if (specs.plots_showGrid) {
+      ctx.strokeStyle = specs.plots_gridColor;
+      ctx.lineWidth = specs.plots_gridLineWidth;
+      ctx.strokeRect(offsetLeft, offsetTop, width - offsetLeft, height - offsetBottom - offsetTop);
+    }
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    var span = this.maxX - this.minX;
+    var t = span / 100;
+    var major = .001;
+    while (major < t || span / major > 25) {
+      major *= 10;
+    }
+    var counter = 0;
+    var overlapX = specs.plots_flipXAxis ? width : 0;
+    for ( var i = m.round(this.minX / major) * major; i <= this.maxX; i += major / 2) {
+      var x = this.getTransformedX(i, specs, width, offsetLeft);
+      if (x > offsetLeft) {
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 1;
+        if (counter % 2 === 0) {
+          ctx.beginPath();
+          ctx.moveTo(x, height - offsetBottom);
+          ctx.lineTo(x, height - offsetBottom + 2);
+          ctx.stroke();
+          var s = i.toFixed(5);
+          while (s.charAt(s.length - 1) === '0') {
+            s = s.substring(0, s.length - 1);
+          }
+          if (s.charAt(s.length - 1) === '.') {
+            s = s.substring(0, s.length - 1);
+          }
+          // do this to avoid label overlap
+          var numWidth = ctx.measureText(s).width;
+          if (specs.plots_flipXAxis) {
+            numWidth *= -1;
+          }
+          var ls = x - numWidth / 2;
+          if (specs.plots_flipXAxis ? ls < overlapX : ls > overlapX) {
+            ctx.fillText(s, x, height - offsetBottom + 2);
+            overlapX = x + numWidth / 2;
+          }
+          if (specs.plots_showGrid) {
+            ctx.strokeStyle = specs.plots_gridColor;
+            ctx.lineWidth = specs.plots_gridLineWidth;
+            ctx.beginPath();
+            ctx.moveTo(x, height - offsetBottom);
+            ctx.lineTo(x, offsetTop);
+            ctx.stroke();
+          }
+        } else {
+          ctx.beginPath();
+          ctx.moveTo(x, height - offsetBottom);
+          ctx.lineTo(x, height - offsetBottom + 2);
+          ctx.stroke();
+        }
+      }
+      counter++;
+    }
+    if (specs.plots_showYAxis || specs.plots_showGrid) {
+      var spany = 1 / specs.scale;
+      var counter = 0;
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      for ( var i = 0; i <= 10; i++) {
+        var yval = spany / 10 * i;
+        var y = offsetTop + (height - offsetBottom - offsetTop) * (1 - yval * specs.scale);
+        if (specs.plots_showGrid) {
+          ctx.strokeStyle = specs.plots_gridColor;
+          ctx.lineWidth = specs.plots_gridLineWidth;
+          ctx.beginPath();
+          ctx.moveTo(offsetLeft, y);
+          ctx.lineTo(width, y);
+          ctx.stroke();
+        }
+        if (specs.plots_showYAxis) {
+          ctx.strokeStyle = 'black';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(offsetLeft, y);
+          ctx.lineTo(offsetLeft - 3, y);
+          ctx.stroke();
+          var val = yval * 100;
+          var cutoff = m.max(0, 3 - m.floor(val).toString().length);
+          var s = val.toFixed(cutoff);
+          if (cutoff > 0) {
+            while (s.charAt(s.length - 1) === '0') {
+              s = s.substring(0, s.length - 1);
+            }
+          }
+          if (s.charAt(s.length - 1) === '.') {
+            s = s.substring(0, s.length - 1);
+          }
+          ctx.fillText(s, offsetLeft - 3, y);
+        }
+      }
+    }
+    // draw axes
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    // draw x axis
+    ctx.moveTo(width, height - offsetBottom);
+    ctx.lineTo(offsetLeft, height - offsetBottom);
+    // draw y axis
+    if (specs.plots_showYAxis) {
+      ctx.lineTo(offsetLeft, offsetTop);
+    }
+    ctx.stroke();
+    // draw metadata
+    if (this.dataDisplay.length > 0) {
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      var mcount = 0;
+      for ( var i = 0, ii = this.dataDisplay.length; i < ii; i++) {
+        if (this.dataDisplay[i].value) {
+          ctx.fillText([ this.dataDisplay[i].display, ': ', this.dataDisplay[i].value ].join(''), offsetLeft + 10, offsetTop + 10 + mcount * (specs.text_font_size + 5));
+          mcount++;
+        } else if (this.dataDisplay[i].tag) {
+          for ( var j = 0, jj = this.metadata.length; j < jj; j++) {
+            if (extensions.stringStartsWith(this.metadata[j], this.dataDisplay[i].tag)) {
+              var draw = this.metadata[j];
+              if (this.dataDisplay[i].display) {
+                var index = this.metadata[j].indexOf('=');
+                draw = [ this.dataDisplay[i].display, ': ', index > -1 ? this.metadata[j].substring(index + 2) : this.metadata[j] ].join('');
+              }
+              ctx.fillText(draw, offsetLeft + 10, offsetTop + 10 + mcount * (specs.text_font_size + 5));
+              mcount++;
+              break;
+            }
+          }
+        }
+      }
+    }
+    this.drawPlot(ctx, specs, width, height, offsetTop, offsetLeft, offsetBottom);
+    this.memory.offsetTop = offsetTop;
+    this.memory.offsetLeft = offsetLeft;
+    this.memory.offsetBottom = offsetBottom;
+    this.memory.flipXAxis = specs.plots_flipXAxis;
+    this.memory.scale = specs.scale;
+    this.memory.width = width;
+    this.memory.height = height;
+  };
+  _.drawPlot = function(ctx, specs, width, height, offsetTop, offsetLeft, offsetBottom) {
+    if (this.specs) {
+      specs = this.specs;
+    }
+    ctx.strokeStyle = specs.plots_color;
+    ctx.lineWidth = specs.plots_width;
+    var integration = [];
+    ctx.beginPath();
+    if (this.continuous) {
+      var started = false;
+      var counter = 0;
+      for ( var i = 0, ii = this.data.length; i < ii; i++) {
+        var x = this.getTransformedX(this.data[i].x, specs, width, offsetLeft);
+        if (x >= offsetLeft && x < width) {
+          var y = this.getTransformedY(this.data[i].y, specs, height, offsetBottom, offsetTop);
+          if (specs.plots_showIntegration && m.abs(this.data[i].y) > this.integrationSensitivity) {
+            integration.push(new structures.Point(this.data[i].x, this.data[i].y));
+          }
+          if (!started) {
+            ctx.moveTo(x, y);
+            started = true;
+          }
+          ctx.lineTo(x, y);
+          counter++;
+          if (counter % 1000 === 0) {
+            // segment the path to avoid crashing safari on mac
+            // os x
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+          }
+        } else if (started) {
+          break;
+        }
+      }
+    } else {
+      for ( var i = 0, ii = this.data.length; i < ii; i++) {
+        var x = this.getTransformedX(this.data[i].x, specs, width, offsetLeft);
+        if (x >= offsetLeft && x < width) {
+          ctx.moveTo(x, height - offsetBottom);
+          ctx.lineTo(x, this.getTransformedY(this.data[i].y, specs, height, offsetBottom, offsetTop));
+        }
+      }
+    }
+    ctx.stroke();
+    if (specs.plots_showIntegration && integration.length > 1) {
+      ctx.strokeStyle = specs.plots_integrationColor;
+      ctx.lineWidth = specs.plots_integrationLineWidth;
+      ctx.beginPath();
+      var ascending = integration[1].x > integration[0].x;
+      var max;
+      if (this.flipXAxis && !ascending || !this.flipXAxis && ascending) {
+        for ( var i = integration.length - 2; i >= 0; i--) {
+          integration[i].y = integration[i].y + integration[i + 1].y;
+        }
+        max = integration[0].y;
+      } else {
+        for ( var i = 1, ii = integration.length; i < ii; i++) {
+          integration[i].y = integration[i].y + integration[i - 1].y;
+        }
+        max = integration[integration.length - 1].y;
+      }
+      for ( var i = 0, ii = integration.length; i < ii; i++) {
+        var x = this.getTransformedX(integration[i].x, specs, width, offsetLeft);
+        var y = this.getTransformedY(integration[i].y / specs.scale / max, specs, height, offsetBottom, offsetTop);
+        if (i === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+      ctx.stroke();
+    }
+  };
+  _.getTransformedY = function(y, specs, height, offsetBottom, offsetTop) {
+    return offsetTop + (height - offsetBottom - offsetTop) * (1 - y * specs.scale);
+  };
+  _.getInverseTransformedY = function(y) {
+    // can only be called after a render when memory is set, this
+    // function doesn't make sense without a render first anyway
+    return (1 - (y - this.memory.offsetTop) / (this.memory.height - this.memory.offsetBottom - this.memory.offsetTop)) / this.memory.scale * 100;
+  };
+  _.getTransformedX = function(x, specs, width, offsetLeft) {
+    var returning = offsetLeft + (x - this.minX) / (this.maxX - this.minX) * (width - offsetLeft);
+    if (specs.plots_flipXAxis) {
+      returning = width + offsetLeft - returning;
+    }
+    return returning;
+  };
+  _.getInverseTransformedX = function(x) {
+    // can only be called after a render when memory is set, this
+    // function doesn't make sense without a render first anyway
+    if (this.memory.flipXAxis) {
+      x = this.memory.width + this.memory.offsetLeft - x;
+    }
+    return (x - this.memory.offsetLeft) * (this.maxX - this.minX) / (this.memory.width - this.memory.offsetLeft) + this.minX;
+  };
+  _.setup = function() {
+    var xmin = Number.MAX_VALUE;
+    var xmax = Number.MIN_VALUE;
+    var ymax = Number.MIN_VALUE;
+    for ( var i = 0, ii = this.data.length; i < ii; i++) {
+      xmin = m.min(xmin, this.data[i].x);
+      xmax = m.max(xmax, this.data[i].x);
+      ymax = m.max(ymax, this.data[i].y);
+    }
+    if (this.continuous) {
+      this.minX = xmin;
+      this.maxX = xmax;
+    } else {
+      this.minX = xmin - 1;
+      this.maxX = xmax + 1;
+    }
+    for ( var i = 0, ii = this.data.length; i < ii; i++) {
+      this.data[i].y /= ymax;
+    }
+  };
+  _.zoom = function(pixel1, pixel2, width, rescaleY) {
+    var p1 = this.getInverseTransformedX(pixel1);
+    var p2 = this.getInverseTransformedX(pixel2);
+    this.minX = m.min(p1, p2);
+    this.maxX = m.max(p1, p2);
+    if (rescaleY) {
+      var ymax = Number.MIN_VALUE;
+      for ( var i = 0, ii = this.data.length; i < ii; i++) {
+        if (math.isBetween(this.data[i].x, this.minX, this.maxX)) {
+          ymax = m.max(ymax, this.data[i].y);
+        }
+      }
+      return 1 / ymax;
+    }
+  };
+  _.translate = function(dif, width) {
+    var dist = dif / (width - this.memory.offsetLeft) * (this.maxX - this.minX) * (this.memory.flipXAxis ? 1 : -1);
+    this.minX += dist;
+    this.maxX += dist;
+  };
+  _.alertMetadata = function() {
+    alert(this.metadata.join('\n'));
+  };
+  _.getInternalCoordinates = function(x, y) {
+    return new ChemDoodle.structures.Point(this.getInverseTransformedX(x), this.getInverseTransformedY(y));
+  };
+  _.getClosestPlotInternalCoordinates = function(x) {
+    var xtl = this.getInverseTransformedX(x - 1);
+    var xtr = this.getInverseTransformedX(x + 1);
+    if (xtl > xtr) {
+      var temp = xtl;
+      xtl = xtr;
+      xtr = temp;
+    }
+    var highest = -1;
+    var max = -Infinity;
+    var inRange = false;
+    for ( var i = 0, ii = this.data.length; i < ii; i++) {
+      var p = this.data[i];
+      if (math.isBetween(p.x, xtl, xtr)) {
+        if (p.y > max) {
+          inRange = true;
+          max = p.y;
+          highest = i;
+        }
+      } else if (inRange) {
+        break;
+      }
+    }
+    if (highest === -1) {
+      return undefined;
+    }
+    var p = this.data[highest];
+    return new ChemDoodle.structures.Point(p.x, p.y * 100);
+  };
+  _.getClosestPeakInternalCoordinates = function(x) {
+    var xt = this.getInverseTransformedX(x);
+    var closest = 0;
+    var dif = Infinity;
+    for ( var i = 0, ii = this.data.length; i < ii; i++) {
+      var sub = m.abs(this.data[i].x - xt);
+      if (sub <= dif) {
+        dif = sub;
+        closest = i;
+      } else {
+        break;
+      }
+    }
+    var highestLeft = highestRight = closest;
+    var maxLeft = maxRight = this.data[closest].y;
+    for ( var i = closest + 1, ii = this.data.length; i < ii; i++) {
+      if (this.data[i].y + .05 > maxRight) {
+        maxRight = this.data[i].y;
+        highestRight = i;
+      } else {
+        break;
+      }
+    }
+    for ( var i = closest - 1; i >= 0; i--) {
+      if (this.data[i].y + .05 > maxLeft) {
+        maxLeft = this.data[i].y;
+        highestLeft = i;
+      } else {
+        break;
+      }
+    }
+    var p = this.data[highestLeft - closest > highestRight - closest ? highestRight : highestLeft];
+    return new ChemDoodle.structures.Point(p.x, p.y * 100);
+  };
+
+})(ChemDoodle.extensions, ChemDoodle.structures, ChemDoodle.math, jQuery, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3385 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-09-18 11:40:07 -0400 (Sun, 18 Sep 2011) $
+//
+
+(function(math, d2, m) {
+  'use strict';
+  d2._Shape = function() {
+  };
+  var _ = d2._Shape.prototype;
+  _.drawDecorations = function(ctx, specs) {
+    if (this.isHover) {
+      var ps = this.getPoints();
+      for ( var i = 0, ii = ps.length; i < ii; i++) {
+        var p = ps[i];
+        this.drawAnchor(ctx, specs, p, p === this.hoverPoint);
+      }
+    }
+  };
+  _.getBounds = function() {
+    var bounds = new math.Bounds();
+    var ps = this.getPoints();
+    for ( var i = 0, ii = ps.length; i < ii; i++) {
+      var p = ps[i];
+      bounds.expand(p.x, p.y);
+    }
+    return bounds;
+  };
+  _.drawAnchor = function(ctx, specs, p, hovered) {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(m.PI / 4);
+    ctx.scale(1 / specs.scale, 1 / specs.scale);
+    var boxRadius = 4;
+    var innerRadius = boxRadius / 2;
+
+    ctx.beginPath();
+    ctx.moveTo(-boxRadius, -boxRadius);
+    ctx.lineTo(boxRadius, -boxRadius);
+    ctx.lineTo(boxRadius, boxRadius);
+    ctx.lineTo(-boxRadius, boxRadius);
+    ctx.closePath();
+    if (hovered) {
+      ctx.fillStyle = '#885110';
+    } else {
+      ctx.fillStyle = 'white';
+    }
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(-boxRadius, -innerRadius);
+    ctx.lineTo(-boxRadius, -boxRadius);
+    ctx.lineTo(-innerRadius, -boxRadius);
+    ctx.moveTo(innerRadius, -boxRadius);
+    ctx.lineTo(boxRadius, -boxRadius);
+    ctx.lineTo(boxRadius, -innerRadius);
+    ctx.moveTo(boxRadius, innerRadius);
+    ctx.lineTo(boxRadius, boxRadius);
+    ctx.lineTo(innerRadius, boxRadius);
+    ctx.moveTo(-innerRadius, boxRadius);
+    ctx.lineTo(-boxRadius, boxRadius);
+    ctx.lineTo(-boxRadius, innerRadius);
+    ctx.moveTo(-boxRadius, -innerRadius);
+
+    ctx.strokeStyle = 'rgba(0,0,0,.2)';
+    ctx.lineWidth = 5;
+    ctx.stroke();
+    ctx.strokeStyle = 'blue';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.restore();
+  };
+
+})(ChemDoodle.math, ChemDoodle.structures.d2, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3462 $
+//  $Author: kevin $
+//  $LastChangedDate: 2012-01-05 15:33:29 -0500 (Thu, 05 Jan 2012) $
+//
+
+(function(extensions, math, structures, d2, m) {
+  'use strict';
+  d2.Bracket = function(p1, p2) {
+    this.p1 = p1 ? p1 : new structures.Point();
+    this.p2 = p2 ? p2 : new structures.Point();
+  };
+  var _ = d2.Bracket.prototype = new d2._Shape();
+  _.charge = 0;
+  _.mult = 0;
+  _.repeat = 0;
+  _.draw = function(ctx, specs) {
+    var minX = m.min(this.p1.x, this.p2.x);
+    var maxX = m.max(this.p1.x, this.p2.x);
+    var minY = m.min(this.p1.y, this.p2.y);
+    var maxY = m.max(this.p1.y, this.p2.y);
+    var w = maxX - minX;
+    var h = maxY - minY;
+    var lip = h / 10;
+    ctx.beginPath();
+    ctx.moveTo(minX + lip, minY);
+    ctx.lineTo(minX, minY);
+    ctx.lineTo(minX, maxY);
+    ctx.lineTo(minX + lip, maxY);
+    ctx.moveTo(maxX - lip, maxY);
+    ctx.lineTo(maxX, maxY);
+    ctx.lineTo(maxX, minY);
+    ctx.lineTo(maxX - lip, minY);
+    if (this.isLassoed) {
+      var grd = ctx.createLinearGradient(this.p1.x, this.p1.y, this.p2.x, this.p2.y);
+      grd.addColorStop(0, 'rgba(212, 99, 0, 0)');
+      grd.addColorStop(0.5, 'rgba(212, 99, 0, 0.8)');
+      grd.addColorStop(1, 'rgba(212, 99, 0, 0)');
+      ctx.lineWidth = specs.shapes_lineWidth_2D + 5;
+      ctx.strokeStyle = grd;
+      ctx.lineJoin = 'miter';
+      ctx.lineCap = 'square';
+      ctx.stroke();
+    }
+    ctx.strokeStyle = specs.shapes_color;
+    ctx.lineWidth = specs.shapes_lineWidth_2D;
+    ctx.lineJoin = 'miter';
+    ctx.lineCap = 'butt';
+    ctx.stroke();
+    if (this.charge !== 0) {
+      ctx.fillStyle = specs.text_color;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'alphabetic';
+      ctx.font = extensions.getFontString(specs.text_font_size, specs.text_font_families);
+      var s = this.charge.toFixed(0);
+      if (s === '1') {
+        s = '+';
+      } else if (s === '-1') {
+        s = '\u2013';
+      } else if (extensions.stringStartsWith(s, '-')) {
+        s = s.substring(1) + '\u2013';
+      } else {
+        s += '+';
+      }
+      ctx.fillText(s, maxX + 5, minY + 5);
+    }
+    if (this.mult !== 0) {
+      ctx.fillStyle = specs.text_color;
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      ctx.font = extensions.getFontString(specs.text_font_size, specs.text_font_families);
+      ctx.fillText(this.mult.toFixed(0), minX - 5, minY + h / 2);
+    }
+    if (this.repeat !== 0) {
+      ctx.fillStyle = specs.text_color;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      ctx.font = extensions.getFontString(specs.text_font_size, specs.text_font_families);
+      var s = this.repeat.toFixed(0);
+      ctx.fillText(s, maxX + 5, maxY - 5);
+    }
+  };
+  _.getPoints = function() {
+    return [ this.p1, this.p2 ];
+  };
+  _.isOver = function(p, barrier) {
+    return math.isBetween(p.x, this.p1.x, this.p2.x) && math.isBetween(p.y, this.p1.y, this.p2.y);
+  };
+
+})(ChemDoodle.extensions, ChemDoodle.math, ChemDoodle.structures, ChemDoodle.structures.d2, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3462 $
+//  $Author: kevin $
+//  $LastChangedDate: 2012-01-05 15:33:29 -0500 (Thu, 05 Jan 2012) $
+//
+
+(function(math, structures, d2, m) {
+  'use strict';
+  d2.Line = function(p1, p2) {
+    this.p1 = p1 ? p1 : new structures.Point();
+    this.p2 = p2 ? p2 : new structures.Point();
+  };
+  d2.Line.ARROW_SYNTHETIC = 'synthetic';
+  d2.Line.ARROW_RETROSYNTHETIC = 'retrosynthetic';
+  d2.Line.ARROW_RESONANCE = 'resonance';
+  d2.Line.ARROW_EQUILIBRIUM = 'equilibrium';
+  var _ = d2.Line.prototype = new d2._Shape();
+  _.arrowType = undefined;
+  _.topText = undefined;
+  _.bottomText = undefined;
+  _.draw = function(ctx, specs) {
+    if (this.isLassoed) {
+      var grd = ctx.createLinearGradient(this.p1.x, this.p1.y, this.p2.x, this.p2.y);
+      grd.addColorStop(0, 'rgba(212, 99, 0, 0)');
+      grd.addColorStop(0.5, 'rgba(212, 99, 0, 0.8)');
+      grd.addColorStop(1, 'rgba(212, 99, 0, 0)');
+      var useDist = 2.5;
+      var perpendicular = this.p1.angle(this.p2) + m.PI / 2;
+      var mcosp = m.cos(perpendicular);
+      var msinp = m.sin(perpendicular);
+      var cx1 = this.p1.x - mcosp * useDist;
+      var cy1 = this.p1.y + msinp * useDist;
+      var cx2 = this.p1.x + mcosp * useDist;
+      var cy2 = this.p1.y - msinp * useDist;
+      var cx3 = this.p2.x + mcosp * useDist;
+      var cy3 = this.p2.y - msinp * useDist;
+      var cx4 = this.p2.x - mcosp * useDist;
+      var cy4 = this.p2.y + msinp * useDist;
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.moveTo(cx1, cy1);
+      ctx.lineTo(cx2, cy2);
+      ctx.lineTo(cx3, cy3);
+      ctx.lineTo(cx4, cy4);
+      ctx.closePath();
+      ctx.fill();
+    }
+    ctx.strokeStyle = specs.shapes_color;
+    ctx.fillStyle = specs.shapes_color;
+    ctx.lineWidth = specs.shapes_lineWidth_2D;
+    ctx.lineJoin = 'miter';
+    ctx.lineCap = 'butt';
+    if (this.p1.x !== this.p2.x || this.p1.y !== this.p2.y) {
+      // only render if the points are different, otherwise this will
+      // cause fill overflows
+      if (this.arrowType === d2.Line.ARROW_RETROSYNTHETIC) {
+        var r2 = m.sqrt(2) * 2;
+        var useDist = specs.shapes_arrowLength_2D / r2;
+        var angle = this.p1.angle(this.p2);
+        var perpendicular = angle + m.PI / 2;
+        var retract = specs.shapes_arrowLength_2D / r2;
+        var mcosa = m.cos(angle);
+        var msina = m.sin(angle);
+        var mcosp = m.cos(perpendicular);
+        var msinp = m.sin(perpendicular);
+        var cx1 = this.p1.x - mcosp * useDist;
+        var cy1 = this.p1.y + msinp * useDist;
+        var cx2 = this.p1.x + mcosp * useDist;
+        var cy2 = this.p1.y - msinp * useDist;
+        var cx3 = this.p2.x + mcosp * useDist - mcosa * retract;
+        var cy3 = this.p2.y - msinp * useDist + msina * retract;
+        var cx4 = this.p2.x - mcosp * useDist - mcosa * retract;
+        var cy4 = this.p2.y + msinp * useDist + msina * retract;
+        var ax1 = this.p2.x + mcosp * useDist * 2 - mcosa * retract * 2;
+        var ay1 = this.p2.y - msinp * useDist * 2 + msina * retract * 2;
+        var ax2 = this.p2.x - mcosp * useDist * 2 - mcosa * retract * 2;
+        var ay2 = this.p2.y + msinp * useDist * 2 + msina * retract * 2;
+        ctx.beginPath();
+        ctx.moveTo(cx2, cy2);
+        ctx.lineTo(cx3, cy3);
+        ctx.moveTo(ax1, ay1);
+        ctx.lineTo(this.p2.x, this.p2.y);
+        ctx.lineTo(ax2, ay2);
+        ctx.moveTo(cx4, cy4);
+        ctx.lineTo(cx1, cy1);
+        ctx.stroke();
+      } else if (this.arrowType === d2.Line.ARROW_EQUILIBRIUM) {
+        var r2 = m.sqrt(2) * 2;
+        var useDist = specs.shapes_arrowLength_2D / r2 / 2;
+        var angle = this.p1.angle(this.p2);
+        var perpendicular = angle + m.PI / 2;
+        var retract = specs.shapes_arrowLength_2D * 2 / m.sqrt(3);
+        var mcosa = m.cos(angle);
+        var msina = m.sin(angle);
+        var mcosp = m.cos(perpendicular);
+        var msinp = m.sin(perpendicular);
+        var cx1 = this.p1.x - mcosp * useDist;
+        var cy1 = this.p1.y + msinp * useDist;
+        var cx2 = this.p1.x + mcosp * useDist;
+        var cy2 = this.p1.y - msinp * useDist;
+        var cx3 = this.p2.x + mcosp * useDist;
+        var cy3 = this.p2.y - msinp * useDist;
+        var cx4 = this.p2.x - mcosp * useDist;
+        var cy4 = this.p2.y + msinp * useDist;
+        ctx.beginPath();
+        ctx.moveTo(cx2, cy2);
+        ctx.lineTo(cx3, cy3);
+        ctx.moveTo(cx4, cy4);
+        ctx.lineTo(cx1, cy1);
+        ctx.stroke();
+        // right arrow
+        var rx1 = cx3 - mcosa * retract * .8;
+        var ry1 = cy3 + msina * retract * .8;
+        var ax1 = cx3 + mcosp * specs.shapes_arrowLength_2D / 3 - mcosa * retract;
+        var ay1 = cy3 - msinp * specs.shapes_arrowLength_2D / 3 + msina * retract;
+        ctx.beginPath();
+        ctx.moveTo(cx3, cy3);
+        ctx.lineTo(ax1, ay1);
+        ctx.lineTo(rx1, ry1);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        // left arrow
+        rx1 = cx1 + mcosa * retract * .8;
+        ry1 = cy1 - msina * retract * .8;
+        ax1 = cx1 - mcosp * specs.shapes_arrowLength_2D / 3 + mcosa * retract;
+        ay1 = cy1 + msinp * specs.shapes_arrowLength_2D / 3 - msina * retract;
+        ctx.beginPath();
+        ctx.moveTo(cx1, cy1);
+        ctx.lineTo(ax1, ay1);
+        ctx.lineTo(rx1, ry1);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      } else if (this.arrowType === d2.Line.ARROW_SYNTHETIC) {
+        var angle = this.p1.angle(this.p2);
+        var perpendicular = angle + m.PI / 2;
+        var retract = specs.shapes_arrowLength_2D * 2 / m.sqrt(3);
+        var mcosa = m.cos(angle);
+        var msina = m.sin(angle);
+        var mcosp = m.cos(perpendicular);
+        var msinp = m.sin(perpendicular);
+        ctx.beginPath();
+        ctx.moveTo(this.p1.x, this.p1.y);
+        ctx.lineTo(this.p2.x - mcosa * retract / 2, this.p2.y + msina * retract / 2);
+        ctx.stroke();
+        var rx1 = this.p2.x - mcosa * retract * .8;
+        var ry1 = this.p2.y + msina * retract * .8;
+        var ax1 = this.p2.x + mcosp * specs.shapes_arrowLength_2D / 3 - mcosa * retract;
+        var ay1 = this.p2.y - msinp * specs.shapes_arrowLength_2D / 3 + msina * retract;
+        var ax2 = this.p2.x - mcosp * specs.shapes_arrowLength_2D / 3 - mcosa * retract;
+        var ay2 = this.p2.y + msinp * specs.shapes_arrowLength_2D / 3 + msina * retract;
+        ctx.beginPath();
+        ctx.moveTo(this.p2.x, this.p2.y);
+        ctx.lineTo(ax2, ay2);
+        ctx.lineTo(rx1, ry1);
+        ctx.lineTo(ax1, ay1);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      } else if (this.arrowType === d2.Line.ARROW_RESONANCE) {
+        var angle = this.p1.angle(this.p2);
+        var perpendicular = angle + m.PI / 2;
+        var retract = specs.shapes_arrowLength_2D * 2 / m.sqrt(3);
+        var mcosa = m.cos(angle);
+        var msina = m.sin(angle);
+        var mcosp = m.cos(perpendicular);
+        var msinp = m.sin(perpendicular);
+        ctx.beginPath();
+        ctx.moveTo(this.p1.x + mcosa * retract / 2, this.p1.y - msina * retract / 2);
+        ctx.lineTo(this.p2.x - mcosa * retract / 2, this.p2.y + msina * retract / 2);
+        ctx.stroke();
+        // right arrow
+        var rx1 = this.p2.x - mcosa * retract * .8;
+        var ry1 = this.p2.y + msina * retract * .8;
+        var ax1 = this.p2.x + mcosp * specs.shapes_arrowLength_2D / 3 - mcosa * retract;
+        var ay1 = this.p2.y - msinp * specs.shapes_arrowLength_2D / 3 + msina * retract;
+        var ax2 = this.p2.x - mcosp * specs.shapes_arrowLength_2D / 3 - mcosa * retract;
+        var ay2 = this.p2.y + msinp * specs.shapes_arrowLength_2D / 3 + msina * retract;
+        ctx.beginPath();
+        ctx.moveTo(this.p2.x, this.p2.y);
+        ctx.lineTo(ax2, ay2);
+        ctx.lineTo(rx1, ry1);
+        ctx.lineTo(ax1, ay1);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        // left arrow
+        rx1 = this.p1.x + mcosa * retract * .8;
+        ry1 = this.p1.y - msina * retract * .8;
+        ax1 = this.p1.x - mcosp * specs.shapes_arrowLength_2D / 3 + mcosa * retract;
+        ay1 = this.p1.y + msinp * specs.shapes_arrowLength_2D / 3 - msina * retract;
+        ax2 = this.p1.x + mcosp * specs.shapes_arrowLength_2D / 3 + mcosa * retract;
+        ay2 = this.p1.y - msinp * specs.shapes_arrowLength_2D / 3 - msina * retract;
+        ctx.beginPath();
+        ctx.moveTo(this.p1.x, this.p1.y);
+        ctx.lineTo(ax2, ay2);
+        ctx.lineTo(rx1, ry1);
+        ctx.lineTo(ax1, ay1);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(this.p1.x, this.p1.y);
+        ctx.lineTo(this.p2.x, this.p2.y);
+        ctx.stroke();
+      }
+      if(this.topText){
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(this.topText, (this.p1.x+this.p2.x)/2, this.p1.y-5);
+      }
+      if(this.bottomText){
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        ctx.fillText(this.bottomText, (this.p1.x+this.p2.x)/2, this.p1.y+5);
+      }
+    }
+  };
+  _.getPoints = function() {
+    return [ this.p1, this.p2 ];
+  };
+  _.isOver = function(p, barrier) {
+    var dist = math.distanceFromPointToLineInclusive(p, this.p1, this.p2);
+    return dist !== -1 && dist < barrier;
+  };
+
+})(ChemDoodle.math, ChemDoodle.structures, ChemDoodle.structures.d2, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3462 $
+//  $Author: kevin $
+//  $LastChangedDate: 2012-01-05 15:33:29 -0500 (Thu, 05 Jan 2012) $
+//
+
+(function(math, jsb, structures, d2, m) {
+  'use strict';
+  var getPossibleAngles = function(o) {
+    var as = [];
+    if (o instanceof structures.Atom) {
+      if (o.bondNumber === 0) {
+        as.push(m.PI);
+      } else if (o.angles) {
+        if (o.angles.length === 1) {
+          as.push(o.angles[0] + m.PI);
+        } else {
+          for ( var i = 1, ii = o.angles.length; i < ii; i++) {
+            as.push(o.angles[i - 1] + (o.angles[i] - o.angles[i - 1]) / 2);
+          }
+          var firstIncreased = o.angles[0] + m.PI * 2;
+          var last = o.angles[o.angles.length - 1];
+          as.push(last + (firstIncreased - last) / 2);
+        }
+        if (o.largestAngle > m.PI) {
+          // always use angle of least interfearence if it is greater
+          // than 120
+          as = [ o.angleOfLeastInterference ];
+        }
+        if (o.bonds) {
+          // point up towards a carbonyl
+          for ( var i = 0, ii = o.bonds.length; i < ii; i++) {
+            var b = o.bonds[i];
+            if (b.bondOrder === 2) {
+              var n = b.getNeighbor(o);
+              if (n.label === 'O') {
+                as = [ n.angle(o) ];
+                break;
+              }
+            }
+          }
+        }
+      }
+    } else {
+      var angle = o.a1.angle(o.a2);
+      as.push(angle + m.PI / 2);
+      as.push(angle + 3 * m.PI / 2);
+    }
+    for ( var i = 0, ii = as.length; i < ii; i++) {
+      while (as[i] > m.PI * 2) {
+        as[i] -= m.PI * 2;
+      }
+      while (as[i] < 0) {
+        as[i] += m.PI * 2;
+      }
+    }
+    return as;
+  };
+  var getPullBack = function(o, specs) {
+    var pullback = 3;
+    if (o instanceof structures.Atom) {
+      if (o.isLabelVisible(specs)) {
+        pullback = 8;
+      }
+      if (o.charge !== 0 || o.numRadical !== 0 || o.numLonePair !== 0) {
+        pullback = 13;
+      }
+    } else if (o instanceof structures.Point) {
+      // this is the midpoint of a bond forming pusher
+      pullback = 0;
+    } else {
+      if (o.bondOrder > 1) {
+        pullback = 5;
+      }
+    }
+    return pullback;
+  };
+  var drawPusher = function(ctx, specs, o1, o2, p1, c1, c2, p2, numElectron, caches) {
+    var angle1 = c1.angle(p1);
+    var angle2 = c2.angle(p2);
+    var perpendicular = angle1 + m.PI / 2;
+    var mcosa = m.cos(angle1);
+    var msina = m.sin(angle1);
+    // pull back from start
+    var pullBack = getPullBack(o1, specs);
+    p1.x -= mcosa * pullBack;
+    p1.y += msina * pullBack;
+    // arrow
+    var perpendicular = angle2 + m.PI / 2;
+    var retract = specs.shapes_arrowLength_2D * 2 / m.sqrt(3);
+    var mcosa = m.cos(angle2);
+    var msina = m.sin(angle2);
+    var mcosp = m.cos(perpendicular);
+    var msinp = m.sin(perpendicular);
+    p2.x -= mcosa * 5;
+    p2.y += msina * 5;
+    var nap = new structures.Point(p2.x, p2.y);
+    // pull back from end
+    pullBack = getPullBack(o2, specs) / 3;
+    nap.x -= mcosa * pullBack;
+    nap.y += msina * pullBack;
+    p2.x -= mcosa * (retract * 0.8 + pullBack);
+    p2.y += msina * (retract * 0.8 + pullBack);
+    var rx1 = nap.x - mcosa * retract * 0.8;
+    var ry1 = nap.y + msina * retract * 0.8;
+    var a1 = new structures.Point(nap.x + mcosp * specs.shapes_arrowLength_2D / 3 - mcosa * retract, nap.y - msinp * specs.shapes_arrowLength_2D / 3 + msina * retract);
+    var a2 = new structures.Point(nap.x - mcosp * specs.shapes_arrowLength_2D / 3 - mcosa * retract, nap.y + msinp * specs.shapes_arrowLength_2D / 3 + msina * retract);
+    var include1 = true, include2 = true;
+    if (numElectron === 1) {
+      if (a1.distance(c1) > a2.distance(c1)) {
+        include2 = false;
+      } else {
+        include1 = false;
+      }
+    }
+    ctx.beginPath();
+    ctx.moveTo(nap.x, nap.y);
+    if (include2) {
+      ctx.lineTo(a2.x, a2.y);
+    }
+    ctx.lineTo(rx1, ry1);
+    if (include1) {
+      ctx.lineTo(a1.x, a1.y);
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    // bezier
+    ctx.beginPath();
+    ctx.moveTo(p1.x, p1.y);
+    ctx.bezierCurveTo(c1.x, c1.y, c2.x, c2.y, p2.x, p2.y);
+    ctx.stroke();
+    caches.push([ p1, c1, c2, p2 ]);
+  };
+
+  d2.Pusher = function(o1, o2, numElectron) {
+    this.o1 = o1;
+    this.o2 = o2;
+    this.numElectron = numElectron ? numElectron : 1;
+  };
+  var _ = d2.Pusher.prototype = new d2._Shape();
+  _.drawDecorations = function(ctx, specs) {
+    if (this.isHover) {
+      var p1 = this.o1 instanceof structures.Atom ? new structures.Point(this.o1.x, this.o1.y) : this.o1.getCenter();
+      var p2 = this.o2 instanceof structures.Atom ? new structures.Point(this.o2.x, this.o2.y) : this.o2.getCenter();
+      var ps = [ p1, p2 ];
+      for ( var i = 0, ii = ps.length; i < ii; i++) {
+        var p = ps[i];
+        this.drawAnchor(ctx, specs, p, p === this.hoverPoint);
+      }
+    }
+  };
+  _.draw = function(ctx, specs) {
+    if (this.o1 && this.o2) {
+      ctx.strokeStyle = specs.shapes_color;
+      ctx.fillStyle = specs.shapes_color;
+      ctx.lineWidth = specs.shapes_lineWidth_2D;
+      ctx.lineJoin = 'miter';
+      ctx.lineCap = 'butt';
+      var p1 = this.o1 instanceof structures.Atom ? new structures.Point(this.o1.x, this.o1.y) : this.o1.getCenter();
+      var p2 = this.o2 instanceof structures.Atom ? new structures.Point(this.o2.x, this.o2.y) : this.o2.getCenter();
+      var controlDist = 35;
+      var as1 = getPossibleAngles(this.o1);
+      var as2 = getPossibleAngles(this.o2);
+      var c1, c2;
+      var minDif = Infinity;
+      for ( var i = 0, ii = as1.length; i < ii; i++) {
+        for ( var j = 0, jj = as2.length; j < jj; j++) {
+          var c1c = new structures.Point(p1.x + controlDist * m.cos(as1[i]), p1.y - controlDist * m.sin(as1[i]));
+          var c2c = new structures.Point(p2.x + controlDist * m.cos(as2[j]), p2.y - controlDist * m.sin(as2[j]));
+          var dif = c1c.distance(c2c);
+          if (dif < minDif) {
+            minDif = dif;
+            c1 = c1c;
+            c2 = c2c;
+          }
+        }
+      }
+      this.caches = [];
+      if (this.numElectron === -1) {
+        var dist = p1.distance(p2)/2;
+        var angle = p1.angle(p2);
+        var perp = angle+m.PI/2;
+        var mcosa = m.cos(angle);
+        var msina = m.sin(angle);
+        var m1 = new structures.Point(p1.x+(dist-1)*mcosa, p1.y-(dist-1)*msina);
+        var cm1 = new structures.Point(m1.x+m.cos(perp+m.PI/6)*controlDist, m1.y - m.sin(perp+m.PI/6)*controlDist);
+        var m2 = new structures.Point(p1.x+(dist+1)*mcosa, p1.y-(dist+1)*msina);
+        var cm2 = new structures.Point(m2.x+m.cos(perp-m.PI/6)*controlDist, m2.y - m.sin(perp-m.PI/6)*controlDist);
+        drawPusher(ctx, specs, this.o1, m1, p1, c1, cm1, m1, 1, this.caches);
+        drawPusher(ctx, specs, this.o2, m2, p2, c2, cm2, m2, 1, this.caches);
+      } else {
+        if (math.intersectLines(p1.x, p1.y, c1.x, c1.y, p2.x, p2.y, c2.x, c2.y)) {
+          var tmp = c1;
+          c1 = c2;
+          c2 = tmp;
+        }
+        // try to clean up problems, like loops
+        var angle1 = c1.angle(p1);
+        var angle2 = c2.angle(p2);
+        var angleDif = (m.max(angle1, angle2) - m.min(angle1, angle2));
+        if (m.abs(angleDif - m.PI) < .001 && this.o1.molCenter === this.o2.molCenter) {
+          // in the case where the control tangents are parallel
+          angle1 += m.PI / 2;
+          angle2 -= m.PI / 2;
+          c1.x = p1.x + controlDist * m.cos(angle1 + m.PI);
+          c1.y = p1.y - controlDist * m.sin(angle1 + m.PI);
+          c2.x = p2.x + controlDist * m.cos(angle2 + m.PI);
+          c2.y = p2.y - controlDist * m.sin(angle2 + m.PI);
+        }
+        drawPusher(ctx, specs, this.o1, this.o2, p1, c1, c2, p2, this.numElectron, this.caches);
+      }
+    }
+  };
+  _.getPoints = function() {
+    return [];
+  };
+  _.isOver = function(p, barrier) {
+    for ( var i = 0, ii = this.caches.length; i < ii; i++) {
+      var r = jsb.distanceFromCurve(p, this.caches[i]);
+      if (r.distance < barrier) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+})(ChemDoodle.math, ChemDoodle.math.jsBezier, ChemDoodle.structures, ChemDoodle.structures.d2, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3385 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-09-18 11:40:07 -0400 (Sun, 18 Sep 2011) $
+//
+
+(function(d3, m) {
+  'use strict';
+  d3._Mesh = function() {
+  };
+  var _ = d3._Mesh.prototype;
+  _.storeData = function(positionData, normalData, indexData) {
+    this.positionData = positionData;
+    this.normalData = normalData;
+    this.indexData = indexData;
+  };
+  _.setupBuffers = function(gl) {
+    this.vertexPositionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.positionData), gl.STATIC_DRAW);
+    this.vertexPositionBuffer.itemSize = 3;
+    this.vertexPositionBuffer.numItems = this.positionData.length / 3;
+
+    this.vertexNormalBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexNormalBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.normalData), gl.STATIC_DRAW);
+    this.vertexNormalBuffer.itemSize = 3;
+    this.vertexNormalBuffer.numItems = this.normalData.length / 3;
+
+    if (this.indexData) {
+      this.vertexIndexBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.vertexIndexBuffer);
+      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.indexData), gl.STATIC_DRAW);
+      this.vertexIndexBuffer.itemSize = 1;
+      this.vertexIndexBuffer.numItems = this.indexData.length;
+    }
+
+    if (this.partitions) {
+      for ( var i = 0, ii = this.partitions.length; i < ii; i++) {
+        var p = this.partitions[i];
+        var buffers = this.generateBuffers(gl, p.positionData, p.normalData, p.indexData);
+        p.vertexPositionBuffer = buffers[0];
+        p.vertexNormalBuffer = buffers[1];
+        p.vertexIndexBuffer = buffers[2];
+      }
+    }
+  };
+  _.generateBuffers = function(gl, positionData, normalData, indexData) {
+    var vertexPositionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positionData), gl.STATIC_DRAW);
+    vertexPositionBuffer.itemSize = 3;
+    vertexPositionBuffer.numItems = positionData.length / 3;
+
+    var vertexNormalBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexNormalBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normalData), gl.STATIC_DRAW);
+    vertexNormalBuffer.itemSize = 3;
+    vertexNormalBuffer.numItems = normalData.length / 3;
+
+    var vertexIndexBuffer;
+    if (indexData) {
+      vertexIndexBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, vertexIndexBuffer);
+      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indexData), gl.STATIC_DRAW);
+      vertexIndexBuffer.itemSize = 1;
+      vertexIndexBuffer.numItems = indexData.length;
+    }
+
+    return [ vertexPositionBuffer, vertexNormalBuffer, vertexIndexBuffer ];
+  };
+  _.bindBuffers = function(gl) {
+    if (!this.vertexPositionBuffer) {
+      this.setupBuffers(gl);
+    }
+    // positions
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
+    gl.vertexAttribPointer(gl.shader.vertexPositionAttribute, this.vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    // normals
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexNormalBuffer);
+    gl.vertexAttribPointer(gl.shader.vertexNormalAttribute, this.vertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    if (this.vertexIndexBuffer) {
+      // indexes
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.vertexIndexBuffer);
+    }
+  };
+
+})(ChemDoodle.structures.d3, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(d3, m) {
+  'use strict';
+  d3.Arrow = function(radius, longitudeBands) {
+    var positionData = [];
+    var normalData = [];
+
+    for ( var longNumber = 0; longNumber <= longitudeBands; longNumber++) {
+      var theta = longNumber * 2 * m.PI / longitudeBands;
+      var sinTheta = m.sin(theta);
+      var cosTheta = m.cos(theta);
+
+      var x = cosTheta;
+      var y = sinTheta;
+      var z = 0;
+
+      normalData.push(
+      // base cylinder
+      0, 0, -1, 0, 0, -1,
+      // cylinder
+      x, y, 0, x, y, 0,
+      // base cone
+      0, 0, -1, 0, 0, -1,
+      // cone
+      x, y, 1, x, y, 1);
+
+      positionData.push(
+      // base cylinder
+      0, 0, 0, radius * x, radius * y, 0,
+      // cylinder
+      radius * x, radius * y, 0, radius * x, radius * y, 2,
+      // base cone
+      radius * x, radius * y, 2, radius * x * 2, radius * y * 2, 2,
+      // cone
+      radius * x * 2, radius * y * 2, 2, 0, 0, 3);
+    }
+
+    var indexData = [];
+    for ( var i = 0; i < longitudeBands; i++) {
+      var offset = i * 8;
+      for ( var j = 0, jj = 7; j < jj; j++) {
+        var first = j + offset;
+        var second = first + 1;
+        var third = first + jj + 2;
+        var forth = third - 1;
+        indexData.push(first, third, second, third, first, forth);
+      }
+    }
+
+    this.storeData(positionData, normalData, indexData);
+  };
+  var _ = d3.Arrow.prototype = new d3._Mesh();
+  _.getLength = function() {
+    return 3;
+  };
+
+})(ChemDoodle.structures.d3, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(d3, m, m4) {
+  'use strict';
+  d3.Compass = function(gl, specs) {
+    // setup text X Y Z
+    this.textImage = new d3.TextImage();
+    this.textImage.init(gl);
+    this.textImage.updateFont(gl, specs.text_font_size, specs.text_font_families, specs.text_font_bold, specs.text_font_italic, specs.text_font_stroke_3D);
+
+    this.textMesh = new d3.TextMesh();
+    this.textMesh.init(gl);
+
+    var screenRatioHeight = specs.compass_size_3D / gl.canvas.clientHeight;
+
+    var height = gl.arrowBuffer.getLength() / screenRatioHeight;
+    var tanTheta = m.tan(specs.projectionPerspectiveVerticalFieldOfView_3D / 360 * m.PI);
+    var depth = height / tanTheta;
+    var near = m.max(depth - height, 0.1);
+    var far = depth + height;
+
+    // var near = 0.1;
+    // var far = 10000;
+
+    var aspec = gl.canvas.clientWidth / gl.canvas.clientHeight;
+
+    var deltaX = -(gl.canvas.clientWidth - specs.compass_size_3D) / 2 + this.textImage.charHeight;
+    var deltaY = -(gl.canvas.clientHeight - specs.compass_size_3D) / 2 + this.textImage.charHeight;
+
+    var fnProjection, z;
+
+    if (specs.projectionPerspective_3D) {
+      z = near;
+      fnProjection = m4.frustum;
+    } else {
+      z = depth;
+      fnProjection = m4.ortho;
+    }
+
+    var nearRatio = z / gl.canvas.clientHeight * 2 * tanTheta;
+    var x = deltaX * nearRatio;
+    var y = deltaY * nearRatio;
+    var top = tanTheta * z;
+    var bottom = -top;
+    var left = aspec * bottom;
+    var right = aspec * top;
+
+    this.projectionMatrix = fnProjection(left - x, right - x, bottom - y, top - y, near, far);
+    this.translationMatrix = m4.translate(m4.identity([]), [ 0, 0, -depth ]);
+
+    // vertex data for X Y Z text label
+    var vertexData = {
+      position : [],
+      texCoord : [],
+      translation : [],
+      zDepth : []
+    };
+
+    this.textImage.pushVertexData('X', [ 3.5, 0, 0 ], 0, vertexData);
+    this.textImage.pushVertexData('Y', [ 0, 3.5, 0 ], 0, vertexData);
+    this.textImage.pushVertexData('Z', [ 0, 0, 3.5 ], 0, vertexData);
+
+    this.textMesh.storeData(gl, vertexData.position, vertexData.texCoord, vertexData.translation, vertexData.zDepth);
+  };
+
+  var _ = d3.Compass.prototype;
+  _.renderArrow = function(gl, color, mvMatrix) {
+    gl.material.setDiffuseColor(color);
+    gl.setMatrixUniforms(mvMatrix);
+    gl.drawElements(gl.TRIANGLES, gl.arrowBuffer.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+  };
+  _.render = function(gl, specs) {
+    gl.arrowBuffer.bindBuffers(gl);
+    gl.material.setTempColors(specs.bonds_materialAmbientColor_3D, undefined, specs.bonds_materialSpecularColor_3D, specs.bonds_materialShininess_3D);
+
+    var modelMatrix = m4.multiply(this.translationMatrix, gl.rotationMatrix, []);
+    var angle = m.PI / 2;
+
+    // compass not need Fogging effect (and other effect)
+    gl.fogging.setMode(0);
+
+    // x - axis
+    this.renderArrow(gl, specs.compass_axisXColor_3D, m4.rotateY(modelMatrix, angle, []));
+
+    // y-axis
+    this.renderArrow(gl, specs.compass_axisYColor_3D, m4.rotateX(modelMatrix, -angle, []));
+
+    // z-axis
+    this.renderArrow(gl, specs.compass_axisZColor_3D, modelMatrix);
+  };
+  _.renderText = function(gl) {
+    var modelMatrix = m4.multiply(this.translationMatrix, gl.rotationMatrix, []);
+    gl.shaderText.setUniforms(gl, modelMatrix, this.projectionMatrix);
+    this.textImage.useTexture(gl);
+    this.textMesh.render(gl);
+  };
+
+})(ChemDoodle.structures.d3, Math, mat4);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(d3, m) {
+  'use strict';
+  d3.Cylinder = function(radius, height, bands) {
+    var positionData = [];
+    var normalData = [];
+    for ( var i = 0; i < bands; i++) {
+      var theta = i * 2 * m.PI / bands;
+      var cosTheta = m.cos(theta);
+      var sinTheta = m.sin(theta);
+      normalData.push(cosTheta, 0, sinTheta);
+      positionData.push(radius * cosTheta, 0, radius * sinTheta);
+      normalData.push(cosTheta, 0, sinTheta);
+      positionData.push(radius * cosTheta, height, radius * sinTheta);
+    }
+    normalData.push(1, 0, 0);
+    positionData.push(radius, 0, 0);
+    normalData.push(1, 0, 0);
+    positionData.push(radius, height, 0);
+
+    this.storeData(positionData, normalData);
+  };
+  d3.Cylinder.prototype = new d3._Mesh();
+
+})(ChemDoodle.structures.d3, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(math, d3, v3) {
+  'use strict';
+
+  d3.Fog = function(gl) {
+    this.gl = gl;
+    var prefix = 'u_fog.';
+    this.mUL = gl.getUniformLocation(gl.program, prefix + 'mode');
+    this.cUL = gl.getUniformLocation(gl.program, prefix + 'color');
+    this.sUL = gl.getUniformLocation(gl.program, prefix + 'start');
+    this.eUL = gl.getUniformLocation(gl.program, prefix + 'end');
+    this.dUL = gl.getUniformLocation(gl.program, prefix + 'density');
+  };
+
+  var _ = d3.Fog.prototype;
+  _.setTempParameter = function(color, fogStart, fogEnd, density) {
+    if (!this.cCache || this.cCache !== color) {
+      this.cCache = color;
+      var cs = math.getRGB(color, 1);
+      this.gl.uniform3f(this.cUL, cs[0], cs[1], cs[2]);
+    }
+    if (!this.sCache || this.sCache !== fogStart) {
+      this.sCache = fogStart;
+      this.gl.uniform1f(this.sUL, fogStart);
+    }
+    if (!this.eCache || this.eCache !== fogEnd) {
+      this.eCache = fogEnd;
+      this.gl.uniform1f(this.eUL, fogEnd);
+    }
+    if (!this.dCache || this.dCache !== density) {
+      this.dCache = density;
+      this.gl.uniform1f(this.dUL, density);
+    }
+  };
+  _.setMode = function(mode) {
+    if (!this.mCache || this.mCache !== mode) {
+      this.mCache = mode;
+      this.gl.uniform1i(this.mUL, mode);
+    }
+  };
+})(ChemDoodle.math, ChemDoodle.structures.d3, vec3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3994 $
+//  $Author: kevin $
+//  $LastChangedDate: 2012-12-13 18:52:20 -0500 (Thu, 13 Dec 2012) $
+//
+
+(function(ELEMENT, d3) {
+
+  d3.Label = function() {
+    this.textImage = new d3.TextImage();
+  };
+  var _ = d3.Label.prototype;
+  _.init = function(gl, specs) {
+    this.textImage.init(gl);
+    this.textImage.updateFont(gl, specs.atoms_font_size_2D, specs.atoms_font_families_2D, specs.atoms_font_bold_2D, specs.atoms_font_italic_2D, specs.text_font_stroke_3D);
+  };
+  _.updateVerticesBuffer = function(gl, molecules, specs) {
+    for ( var i = 0, ii = molecules.length; i < ii; i++) {
+      var molecule = molecules[i];
+      var moleculeLabel = molecule.labelMesh;
+      var atoms = molecule.atoms;
+      var textImage = this.textImage;
+      var vertexData = {
+        position : [],
+        texCoord : [],
+        translation : [],
+        zDepth : []
+      };
+
+      var isMacro = atoms.length > 0 && atoms[0].hetatm != undefined;
+
+      for ( var j = 0, jj = atoms.length; j < jj; j++) {
+        var atom = atoms[j];
+
+        var atomLabel = atom.label;
+        var zDepth = 0.05;
+
+        // Sphere or Ball and Stick
+        if (specs.atoms_useVDWDiameters_3D) {
+          var add = ELEMENT[atomLabel].vdWRadius * specs.atoms_vdwMultiplier_3D;
+          if (add === 0) {
+            add = 1;
+          }
+          zDepth += add;
+        }
+        // if Stick or Wireframe
+        else if (specs.atoms_sphereDiameter_3D) {
+          zDepth += specs.atoms_sphereDiameter_3D / 2 * 1.5;
+        }
+
+        if (isMacro) {
+          if (!atom.hetatm) {
+            if (!specs.macro_displayAtoms) {
+              continue;
+            }
+          } else if (atom.isWater) {
+            if (!specs.macro_showWaters) {
+              continue;
+            }
+          }
+        }
+
+        textImage.pushVertexData(atomLabel, [ atom.x, atom.y, atom.z ], zDepth, vertexData);
+
+      }
+
+      var chains = molecule.chains;
+
+      if (chains && (specs.proteins_displayRibbon || specs.proteins_displayBackbone)) {
+
+        for ( var j = 0, jj = chains.length; j < jj; j++) {
+          var chain = chains[j];
+
+          for ( var k = 0, kk = chain.length; k < kk; k++) {
+            var residue = chain[k];
+
+            if (residue.name) {
+              var atom = residue.cp1;
+              textImage.pushVertexData(residue.name, [ atom.x, atom.y, atom.z ], 2, vertexData);
+            }
+          }
+        }
+
+      }
+
+      moleculeLabel.storeData(gl, vertexData.position, vertexData.texCoord, vertexData.translation, vertexData.zDepth);
+
+    }
+  };
+  _.render = function(gl, specs, molecules) {
+    // use projection for shader text.
+    gl.shaderText.setUniforms(gl, gl.modelViewMatrix, gl.projectionMatrix);
+
+    this.textImage.useTexture(gl);
+    for ( var i = 0, ii = molecules.length; i < ii; i++) {
+      if (molecules[i].labelMesh) {
+        molecules[i].labelMesh.render(gl);
+      }
+    }
+  };
+
+})(ChemDoodle.ELEMENT, ChemDoodle.structures.d3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4401 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-06-08 12:26:27 -0400 (Sat, 08 Jun 2013) $
+//
+
+(function(d3, m) {
+  'use strict';
+  d3.Sphere = function(radius, latitudeBands, longitudeBands) {
+    var positionData = [];
+    var normalData = [];
+    for ( var latNumber = 0; latNumber <= latitudeBands; latNumber++) {
+      var theta = latNumber * m.PI / latitudeBands;
+      var sinTheta = m.sin(theta);
+      var cosTheta = m.cos(theta);
+
+      for ( var longNumber = 0; longNumber <= longitudeBands; longNumber++) {
+        var phi = longNumber * 2 * m.PI / longitudeBands;
+        var sinPhi = m.sin(phi);
+        var cosPhi = m.cos(phi);
+
+        var x = cosPhi * sinTheta;
+        var y = cosTheta;
+        var z = sinPhi * sinTheta;
+
+        normalData.push(x, y, z);
+        positionData.push(radius * x, radius * y, radius * z);
+      }
+    }
+
+    var indexData = [];
+    longitudeBands += 1;
+    for ( var latNumber = 0; latNumber < latitudeBands; latNumber++) {
+      for ( var longNumber = 0; longNumber < longitudeBands; longNumber++) {
+        var first = (latNumber * longitudeBands) + (longNumber % longitudeBands);
+        var second = first + longitudeBands;
+        indexData.push(first, first + 1, second);
+        if (longNumber < longitudeBands - 1) {
+          indexData.push(second, first + 1, second + 1);
+        }
+      }
+    }
+
+    this.storeData(positionData, normalData, indexData);
+  };
+  d3.Sphere.prototype = new d3._Mesh();
+
+})(ChemDoodle.structures.d3, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3078 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-02-06 18:27:15 -0500 (Sun, 06 Feb 2011) $
+//
+
+(function(RESIDUE, d3, m, v3) {
+  'use strict';
+  var loadPartition = function(gl, p) {
+    // positions
+    gl.bindBuffer(gl.ARRAY_BUFFER, p.vertexPositionBuffer);
+    gl.vertexAttribPointer(gl.shader.vertexPositionAttribute, p.vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    // normals
+    gl.bindBuffer(gl.ARRAY_BUFFER, p.vertexNormalBuffer);
+    gl.vertexAttribPointer(gl.shader.vertexNormalAttribute, p.vertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    // indexes
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, p.vertexIndexBuffer);
+  };
+
+  function SubRibbon(entire, name, indexes, pi) {
+    this.entire = entire;
+    this.name = name;
+    this.indexes = indexes;
+    this.pi = pi;
+  }
+  var _2 = SubRibbon.prototype;
+  _2.getColor = function(specs) {
+    if (specs.macro_colorByChain) {
+      return this.chainColor;
+    } else if (this.name) {
+      return this.getResidueColor(RESIDUE[this.name] ? this.name : '*', specs);
+    } else if (this.helix) {
+      return this.entire.front ? specs.proteins_ribbonCartoonHelixPrimaryColor : specs.proteins_ribbonCartoonHelixSecondaryColor;
+    } else if (this.sheet) {
+      return specs.proteins_ribbonCartoonSheetColor;
+    } else {
+      return this.entire.front ? specs.proteins_primaryColor : specs.proteins_secondaryColor;
+    }
+  };
+  _2.getResidueColor = function(name, specs) {
+    var r = RESIDUE[name];
+    if (specs.proteins_useShapelyColors) {
+      return r.shapelyColor;
+    } else if (specs.proteins_useAminoColors) {
+      return r.aminoColor;
+    } else if (specs.proteins_usePolarityColors) {
+      if (r.polar) {
+        return '#C10000';
+      } else {
+        return '#FFFFFF';
+      }
+    }
+    return '#FFFFFF';
+  };
+  _2.render = function(gl, specs) {
+    if (this.entire.partitions && this.pi !== this.entire.partitions.lastRender) {
+      loadPartition(gl, this.entire.partitions[this.pi]);
+      this.entire.partitions.lastRender = this.pi;
+    }
+    if (!this.vertexIndexBuffer) {
+      this.vertexIndexBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.vertexIndexBuffer);
+      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.indexes), gl.STATIC_DRAW);
+      this.vertexIndexBuffer.itemSize = 1;
+      this.vertexIndexBuffer.numItems = this.indexes.length;
+    }
+    // indexes
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.vertexIndexBuffer);
+    // colors
+    gl.material.setDiffuseColor(this.getColor(specs));
+    // render
+    gl.drawElements(gl.TRIANGLES, this.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+  };
+
+  d3.Ribbon = function(chain, offset, cartoon) {
+    // ribbon meshes build front to back, not side to side, so keep this in
+    // mind
+    var lineSegmentNum = chain[0].lineSegments.length;
+    var lineSegmentLength = chain[0].lineSegments[0].length;
+    this.partitions = [];
+    this.partitions.lastRender = 0;
+    var currentPartition;
+    this.front = offset > 0;
+    // calculate vertex and normal points
+    for ( var i = 0, ii = chain.length - 1; i < ii; i++) {
+      if (!currentPartition || currentPartition.positionData.length > 65000) {
+        if (this.partitions.length > 0) {
+          i--;
+        }
+        currentPartition = {
+          count : 0,
+          positionData : [],
+          normalData : [],
+          indexData : []
+        };
+        this.partitions.push(currentPartition);
+      }
+      var residue = chain[i];
+      currentPartition.count++;
+      for ( var j = 0; j < lineSegmentNum; j++) {
+        var lineSegment = cartoon ? residue.lineSegmentsCartoon[j] : residue.lineSegments[j];
+        var doSide1 = j === 0;
+        var doSide2 = false;
+        for ( var k = 0; k < lineSegmentLength; k++) {
+          var a = lineSegment[k];
+          // normals
+          var abovei = i;
+          var abovek = k + 1;
+          if (i === chain.length - 2 && k === lineSegmentLength - 1) {
+            abovek--;
+          } else if (k === lineSegmentLength - 1) {
+            abovei++;
+            abovek = 0;
+          }
+          var above = cartoon ? chain[abovei].lineSegmentsCartoon[j][abovek] : chain[abovei].lineSegments[j][abovek];
+          var negate = false;
+          var nextj = j + 1;
+          if (j === lineSegmentNum - 1) {
+            nextj -= 2;
+            negate = true;
+          }
+          var side = cartoon ? residue.lineSegmentsCartoon[nextj][k] : residue.lineSegments[nextj][k];
+          var toAbove = [ above.x - a.x, above.y - a.y, above.z - a.z ];
+          var toSide = [ side.x - a.x, side.y - a.y, side.z - a.z ];
+          var normal = v3.cross(toAbove, toSide, []);
+          // positions
+          if (k === 0) {
+            // tip
+            v3.normalize(toAbove);
+            v3.scale(toAbove, -1);
+            currentPartition.normalData.push(toAbove[0], toAbove[1], toAbove[2]);
+            currentPartition.positionData.push(a.x, a.y, a.z);
+          }
+          if (doSide1 || doSide2) {
+            // sides
+            v3.normalize(toSide);
+            v3.scale(toSide, -1);
+            currentPartition.normalData.push(toSide[0], toSide[1], toSide[2]);
+            currentPartition.positionData.push(a.x, a.y, a.z);
+            if (doSide1 && k === lineSegmentLength - 1) {
+              doSide1 = false;
+              k = -1;
+            }
+          } else {
+            // center strips
+            v3.normalize(normal);
+            if (negate && !this.front || !negate && this.front) {
+              v3.scale(normal, -1);
+            }
+            currentPartition.normalData.push(normal[0], normal[1], normal[2]);
+            v3.scale(normal, m.abs(offset));
+            currentPartition.positionData.push(a.x + normal[0], a.y + normal[1], a.z + normal[2]);
+            if (j === lineSegmentNum - 1 && k === lineSegmentLength - 1) {
+              doSide2 = true;
+              k = -1;
+            }
+          }
+          if (k === -1 || k === lineSegmentLength - 1) {
+            // end
+            v3.normalize(toAbove);
+            currentPartition.normalData.push(toAbove[0], toAbove[1], toAbove[2]);
+            currentPartition.positionData.push(a.x, a.y, a.z);
+          }
+        }
+      }
+    }
+
+    // build mesh connectivity
+    // add 2 to lineSegmentNum and lineSegmentLength to account for sides
+    // and ends
+    lineSegmentNum += 2;
+    lineSegmentLength += 2;
+    if (cartoon) {
+      this.cartoonSegments = [];
+    }
+    this.segments = [];
+    for ( var n = 0, nn = this.partitions.length; n < nn; n++) {
+      var currentPartition = this.partitions[n];
+      var cartoonSegmentIndexData;
+      if (cartoon) {
+        cartoonSegmentIndexData = [];
+      }
+      for ( var i = 0, ii = currentPartition.count - 1; i < ii; i++) {
+        var chainIndex = i;
+        for ( var j = 0; j < n; j++) {
+          chainIndex += this.partitions[j].count - 1;
+        }
+        var c = chain[chainIndex];
+        if (i > 0 && cartoon && c.split) {
+          var sr = new SubRibbon(this, undefined, cartoonSegmentIndexData, n);
+          if (c.helix) {
+            sr.helix = true;
+          }
+          if (c.sheet) {
+            sr.sheet = true;
+          }
+          this.cartoonSegments.push(sr);
+          cartoonSegmentIndexData = [];
+        }
+        var residueIndexStart = i * lineSegmentNum * lineSegmentLength;
+        var individualIndexData = [];
+        for ( var j = 0, jj = lineSegmentNum - 1; j < jj; j++) {
+          var segmentIndexStart = residueIndexStart + j * lineSegmentLength;
+          for ( var k = 0; k < lineSegmentLength; k++) {
+            var nextRes = 1;
+            if (i === currentPartition.count - 1) {
+              nextRes = 0;
+            } else if (k === lineSegmentLength - 1) {
+              nextRes = lineSegmentNum * lineSegmentLength - k;
+            }
+            var add = [ segmentIndexStart + k, segmentIndexStart + lineSegmentLength + k, segmentIndexStart + lineSegmentLength + k + nextRes, segmentIndexStart + k, segmentIndexStart + k + nextRes, segmentIndexStart + lineSegmentLength + k + nextRes ];
+            if (k !== lineSegmentLength - 1) {
+              if (this.front) {
+                individualIndexData.push(add[0], add[1], add[2], add[3], add[5], add[4]);
+              } else {
+                individualIndexData.push(add[0], add[2], add[1], add[3], add[4], add[5]);
+              }
+            }
+            if (k === lineSegmentLength - 2 && i < currentPartition.count - 1) {
+              // jump the gap, the other mesh points will be
+              // covered,
+              // so no need to explicitly skip them
+              var jump = lineSegmentNum * lineSegmentLength - k;
+              add[2] += jump;
+              add[4] += jump;
+              add[5] += jump;
+            }
+            if (this.front) {
+              currentPartition.indexData.push(add[0], add[1], add[2], add[3], add[5], add[4]);
+            } else {
+              currentPartition.indexData.push(add[0], add[2], add[1], add[3], add[4], add[5]);
+            }
+
+            if (cartoon) {
+              if (this.front) {
+                cartoonSegmentIndexData.push(add[0], add[1], add[2], add[3], add[5], add[4]);
+              } else {
+                cartoonSegmentIndexData.push(add[0], add[2], add[1], add[3], add[4], add[5]);
+              }
+            }
+          }
+        }
+        var resName = chain[chainIndex + 1].name;
+        this.segments.push(new SubRibbon(this, resName, individualIndexData, n));
+      }
+      if (cartoon) {
+        var sr = new SubRibbon(this, undefined, cartoonSegmentIndexData, n);
+        var chainIndex = currentPartition.count - 1;
+        for ( var j = 0; j < n; j++) {
+          chainIndex += this.partitions[j].count - 1;
+        }
+        var c = chain[chainIndex];
+        if (c.helix) {
+          sr.helix = true;
+        }
+        if (c.sheet) {
+          sr.sheet = true;
+        }
+        this.cartoonSegments.push(sr);
+      }
+    }
+
+    this.storeData(this.partitions[0].positionData, this.partitions[0].normalData, this.partitions[0].indexData);
+    if (this.partitions.length === 1) {
+      // clear partitions to reduce overhead
+      this.partitions = undefined;
+    }
+  };
+  var _ = d3.Ribbon.prototype = new d3._Mesh();
+  _.render = function(gl, specs) {
+    this.bindBuffers(gl);
+    // colors
+    var color = specs.macro_colorByChain ? this.chainColor : undefined;
+    if (!color) {
+      color = this.front ? specs.proteins_primaryColor : specs.proteins_secondaryColor;
+    }
+    gl.material.setDiffuseColor(color);
+    // render
+    gl.drawElements(gl.TRIANGLES, this.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+    if (this.partitions) {
+      for ( var i = 1, ii = this.partitions.length; i < ii; i++) {
+        var p = this.partitions[i];
+        loadPartition(gl, p);
+        // render
+        gl.drawElements(gl.TRIANGLES, p.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+      }
+    }
+  };
+
+})(ChemDoodle.RESIDUE, ChemDoodle.structures.d3, Math, vec3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(math, d3, v3) {
+  'use strict';
+  d3.Light = function(diffuseColor, specularColor, direction) {
+    this.diffuseRGB = math.getRGB(diffuseColor, 1);
+    this.specularRGB = math.getRGB(specularColor, 1);
+    this.direction = direction;
+  };
+  var _ = d3.Light.prototype;
+  _.lightScene = function(gl) {
+    var prefix = 'u_light.';
+    gl.uniform3f(gl.getUniformLocation(gl.program, prefix + 'diffuse_color'), this.diffuseRGB[0], this.diffuseRGB[1], this.diffuseRGB[2]);
+    gl.uniform3f(gl.getUniformLocation(gl.program, prefix + 'specular_color'), this.specularRGB[0], this.specularRGB[1], this.specularRGB[2]);
+
+    var lightingDirection = v3.create(this.direction);
+    v3.normalize(lightingDirection);
+    v3.negate(lightingDirection);
+    gl.uniform3f(gl.getUniformLocation(gl.program, prefix + 'direction'), lightingDirection[0], lightingDirection[1], lightingDirection[2]);
+
+    // compute the half vector
+    var eyeVector = [ 0, 0, 0 ];
+    var halfVector = [ eyeVector[0] + lightingDirection[0], eyeVector[1] + lightingDirection[1], eyeVector[2] + lightingDirection[2] ];
+    var length = v3.length(halfVector);
+    if (length === 0)
+      halfVector = [ 0, 0, 1 ];
+    else {
+      v3.scale(1 / length);
+    }
+    gl.uniform3f(gl.getUniformLocation(gl.program, prefix + 'half_vector'), halfVector[0], halfVector[1], halfVector[2]);
+  };
+
+})(ChemDoodle.math, ChemDoodle.structures.d3, vec3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3100 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-02-17 07:35:56 -0500 (Thu, 17 Feb 2011) $
+//
+
+(function(d3) {
+  'use strict';
+  d3.Line = function() {
+    this.storeData([ 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 0 ]);
+  };
+  d3.Line.prototype = new d3._Mesh();
+
+})(ChemDoodle.structures.d3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(math, d3) {
+  'use strict';
+  d3.Material = function(gl) {
+    this.gl = gl;
+    var prefix = 'u_material.';
+    this.aUL = gl.getUniformLocation(gl.program, prefix + 'ambient_color');
+    this.dUL = gl.getUniformLocation(gl.program, prefix + 'diffuse_color');
+    this.sUL = gl.getUniformLocation(gl.program, prefix + 'specular_color');
+    this.snUL = gl.getUniformLocation(gl.program, prefix + 'shininess');
+    this.alUL = gl.getUniformLocation(gl.program, prefix + 'alpha');
+  };
+  var _ = d3.Material.prototype;
+  _.setTempColors = function(ambientColor, diffuseColor, specularColor, shininess) {
+    if (!this.aCache || this.aCache !== ambientColor) {
+      this.aCache = ambientColor;
+      var cs = math.getRGB(ambientColor, 1);
+      this.gl.uniform3f(this.aUL, cs[0], cs[1], cs[2]);
+    }
+    if (diffuseColor && (!this.dCache || this.dCache !== diffuseColor)) {
+      this.dCache = diffuseColor;
+      var cs = math.getRGB(diffuseColor, 1);
+      this.gl.uniform3f(this.dUL, cs[0], cs[1], cs[2]);
+    }
+    if (!this.sCache || this.sCache !== specularColor) {
+      this.sCache = specularColor;
+      var cs = math.getRGB(specularColor, 1);
+      this.gl.uniform3f(this.sUL, cs[0], cs[1], cs[2]);
+    }
+    if (!this.snCache || this.snCache !== shininess) {
+      this.snCache = shininess;
+      this.gl.uniform1f(this.snUL, shininess);
+    }
+    this.alCache = 1;
+    this.gl.uniform1f(this.alUL, 1);
+  };
+  _.setDiffuseColor = function(diffuseColor) {
+    if (!this.dCache || this.dCache !== diffuseColor) {
+      this.dCache = diffuseColor;
+      var cs = math.getRGB(diffuseColor, 1);
+      this.gl.uniform3f(this.dUL, cs[0], cs[1], cs[2]);
+    }
+  };
+  _.setAlpha = function(alpha) {
+    if (!this.alCache || this.alCache !== alpha) {
+      this.alCache = alpha;
+      this.gl.uniform1f(this.alUL, alpha);
+    }
+  };
+
+})(ChemDoodle.math, ChemDoodle.structures.d3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3387 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-09-25 08:54:07 -0400 (Sun, 25 Sep 2011) $
+//
+
+(function(structures, d3, ELEMENT, m) {
+  'use strict';
+  d3.MolecularSurface = function(molecule, latitudeBands, longitudeBands, probeRadius, atomRadius) {
+    var positionData = [];
+    var normalData = [];
+    var indexData = [];
+
+    // determine a generic set of normals to define a single atom surface
+    var genericSurface = [];
+    for ( var latNumber = 0; latNumber <= latitudeBands; latNumber++) {
+      var theta = latNumber * m.PI / latitudeBands;
+      var sinTheta = m.sin(theta);
+      var cosTheta = m.cos(theta);
+      for ( var longNumber = 0; longNumber <= longitudeBands; longNumber++) {
+        var phi = longNumber * 2 * m.PI / longitudeBands;
+        genericSurface.push(m.cos(phi) * sinTheta, cosTheta, m.sin(phi) * sinTheta);
+      }
+    }
+
+    // add surfaces for each atom, to be post processed
+    var atomSurfaces = [];
+    for ( var i = 0, ii = molecule.atoms.length; i < ii; i++) {
+      var atomSurface = [];
+      var atom = molecule.atoms[i];
+
+      // cache the atoms within distance, so that we don't need to waste
+      // calculations later
+      var radius = ELEMENT[atom.label][atomRadius] + probeRadius;
+      var checks = [];
+      for ( var j = 0, jj = molecule.atoms.length; j < jj; j++) {
+        if (j !== i) {
+          var check = molecule.atoms[j];
+          check.index = j;
+          if (atom.distance3D(check) < radius + ELEMENT[check.label][atomRadius] + probeRadius) {
+            checks.push(check);
+          }
+        }
+      }
+
+      for ( var j = 0, jj = genericSurface.length; j < jj; j += 3) {
+        var p = new structures.Atom('C', atom.x + radius * genericSurface[j], atom.y + radius * genericSurface[j + 1], atom.z + radius * genericSurface[j + 2]);
+        for ( var k = 0, kk = checks.length; k < kk; k++) {
+          var check = checks[k];
+          if (p.distance3D(check) < ELEMENT[check.label][atomRadius] + probeRadius) {
+            p.contained = true;
+            break;
+          }
+        }
+        atomSurface.push(p);
+      }
+
+      atomSurfaces.push(atomSurface);
+    }
+
+    // set up the mesh vectors
+    var genericIndexes = [];
+    longitudeBands++;
+    for ( var latNumber = 0; latNumber < latitudeBands; latNumber++) {
+      for ( var longNumber = 0; longNumber < longitudeBands; longNumber++) {
+        var first = (latNumber * longitudeBands) + (longNumber % longitudeBands);
+        var second = first + longitudeBands;
+        genericIndexes.push(first);
+        genericIndexes.push(second);
+        genericIndexes.push(first + 1);
+        if (longNumber < longitudeBands - 1) {
+          genericIndexes.push(second);
+          genericIndexes.push(second + 1);
+          genericIndexes.push(first + 1);
+        }
+      }
+    }
+
+    var indexCounter = 0;
+    // connect discrete sphere parts
+    for ( var i = 0, ii = atomSurfaces.length; i < ii; i++) {
+      var atomSurface = atomSurfaces[i];
+      for ( var j = 0, jj = atomSurface.length; j < jj; j++) {
+        var p = atomSurface[j];
+        if (!p.contained) {
+          p.index = indexCounter;
+          indexCounter++;
+          positionData.push(p.x, p.y, p.z);
+          normalData.push(genericSurface[j * 3], genericSurface[j * 3 + 1], genericSurface[j * 3 + 2]);
+        }
+      }
+      for ( var j = 0, jj = genericIndexes.length; j < jj; j += 3) {
+        var first = atomSurface[genericIndexes[j]];
+        var second = atomSurface[genericIndexes[j + 1]];
+        var third = atomSurface[genericIndexes[j + 2]];
+        if (!first.contained && !second.contained && !third.contained) {
+          indexData.push(first.index, second.index, third.index);
+        }
+      }
+    }
+    // sow together spheres
+    function findClosestPoint(pNotContained, checks, exclude1, exclude2) {
+      var index = pNotContained.index;
+      if (pNotContained.contained) {
+        index = -1;
+        var dist = Infinity;
+        for ( var k = 0, kk = checks.length; k < kk; k++) {
+          var check = checks[k];
+          for ( var l = 0, ll = check.length; l < ll; l++) {
+            var p = check[l];
+            if (!p.contained && p.index !== exclude1 && p.index !== exclude2) {
+              var distCheck = p.distance3D(pNotContained);
+              if (distCheck < dist) {
+                index = p.index;
+                dist = distCheck;
+              }
+            }
+          }
+        }
+      }
+      return index;
+    }
+    var seams = [];
+    for ( var i = 0, ii = atomSurfaces.length; i < ii; i++) {
+      var atomSurface = atomSurfaces[i];
+      for ( var j = 0, jj = genericIndexes.length; j < jj; j += 3) {
+        var first = atomSurface[genericIndexes[j]];
+        var second = atomSurface[genericIndexes[j + 1]];
+        var third = atomSurface[genericIndexes[j + 2]];
+        var checks = [];
+        for ( var k = 0, kk = atomSurfaces.length; k < kk; k++) {
+          if (k !== i) {
+            checks.push(atomSurfaces[k]);
+          }
+        }
+        if (!(first.contained && second.contained && third.contained) && (first.contained || second.contained || third.contained)) {
+          var fi = findClosestPoint(first, checks, -1, -1);
+          var si = findClosestPoint(second, checks, fi, -1);
+          var ti = findClosestPoint(third, checks, fi, si);
+          if (fi !== -1 && si !== -1 && ti !== -1) {
+            var already = false;
+            for ( var k = 0, kk = seams.length; k < kk; k += 3) {
+              var already1 = seams[k];
+              var already2 = seams[k + 1];
+              var already3 = seams[k + 2];
+              var f1 = fi === already1 || fi === already2 || fi === already3;
+              var f2 = si === already1 || si === already2 || si === already3;
+              var f3 = ti === already1 || ti === already2 || ti === already3;
+              if (f1 && f2 && f3) {
+                already = true;
+                break;
+              }
+            }
+            if (!already) {
+              seams.push(fi, si, ti);
+            }
+          }
+        }
+      }
+    }
+    indexData = indexData.concat(seams);
+
+    this.storeData(positionData, normalData, indexData);
+  };
+  d3.MolecularSurface.prototype = new d3._Mesh();
+
+})(ChemDoodle.structures, ChemDoodle.structures.d3, ChemDoodle.ELEMENT, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(d3, document) {
+  'use strict';
+  d3.Picker = function() {
+  };
+  var _ = d3.Picker.prototype;
+
+  _.init = function(gl) {
+    // setup for picking system
+    this.framebuffer = gl.createFramebuffer();
+
+    // set pick texture
+    var texture2D = gl.createTexture();
+    var renderbuffer = gl.createRenderbuffer();
+
+    gl.bindTexture(gl.TEXTURE_2D, texture2D);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+    gl.bindRenderbuffer(gl.RENDERBUFFER, renderbuffer);
+
+    // set framebuffer and bind the texture and renderbuffer
+    gl.bindFramebuffer(gl.FRAMEBUFFER, this.framebuffer);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture2D, 0);
+    gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, renderbuffer);
+
+    gl.bindTexture(gl.TEXTURE_2D, null);
+    gl.bindRenderbuffer(gl.RENDERBUFFER, null);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  };
+
+  _.setDimension = function(gl, width, height) {
+    gl.bindFramebuffer(gl.FRAMEBUFFER, this.framebuffer);
+
+    // get binded depth attachment renderbuffer
+    var renderbuffer = gl.getFramebufferAttachmentParameter(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.FRAMEBUFFER_ATTACHMENT_OBJECT_NAME);
+    if (gl.isRenderbuffer(renderbuffer)) {
+      // set renderbuffer dimension
+      gl.bindRenderbuffer(gl.RENDERBUFFER, renderbuffer);
+      gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, width, height);
+      gl.bindRenderbuffer(gl.RENDERBUFFER, null);
+    }
+
+    // get binded color attachment texture 2d
+    var texture2D = gl.getFramebufferAttachmentParameter(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.FRAMEBUFFER_ATTACHMENT_OBJECT_NAME);
+    if (gl.isTexture(texture2D)) {
+      // set texture dimension
+      gl.bindTexture(gl.TEXTURE_2D, texture2D);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+      gl.bindTexture(gl.TEXTURE_2D, null);
+    }
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  };
+
+  _.pick = function(gl, molecules, specs, x, y) {
+    var object = undefined;
+
+    // current clear color
+    var cs = gl.getParameter(gl.COLOR_CLEAR_VALUE);
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, this.framebuffer);
+
+    gl.clearColor(1.0, 1.0, 1.0, 0.0);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+    // disable foging effect
+    gl.fogging.setMode(0);
+
+    // not need the normal for diffuse light, we need flat color
+    gl.disableVertexAttribArray(gl.shader.vertexNormalAttribute);
+
+    var objects = [];
+
+    gl.material.setAlpha(255);
+    for ( var i = 0, ii = molecules.length; i < ii; i++) {
+      molecules[i].renderPickFrame(gl, specs, objects);
+    }
+
+    // flush as this is seen in documentation
+    gl.flush();
+
+    var rgba = new Uint8Array(4);
+    gl.readPixels(x - 2, y + 2, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, rgba);
+
+    var idxMolecule = rgba[3];
+    if (idxMolecule > 0) {
+      var idxAtom = rgba[2] | (rgba[1] << 8) | (rgba[0] << 16);
+      object = objects[idxAtom];
+    }
+
+    // release a little bit memory
+    objects = undefined;
+
+    // reenable the normal attribute
+    gl.enableVertexAttribArray(gl.shader.vertexNormalAttribute);
+
+    // enable fogging
+    gl.fogging.setMode(specs.fog_mode_3D);
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+    // set back the clear color
+    gl.clearColor(cs[0], cs[1], cs[2], cs[3]);
+
+    return object;
+  };
+
+})(ChemDoodle.structures.d3, document);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(d3, m) {
+  'use strict';
+
+  /**
+   * @constructor d3.Pill
+   * @inherit {d3._Mesh}
+   * @param {number}
+   *            height Height of pill including the rounded cap
+   * @param {number}
+   *            radius Radius of pill
+   * @param {number}
+   *            latitudeBands Total bands of latitute division on one pill's
+   *            cap
+   * @param {number}
+   *            longitudeBands Total bands of longitude division on one pill's
+   *            cap and cylinder part
+   */
+  d3.Pill = function(radius, height, latitudeBands, longitudeBands) {
+
+    var capHeightScale = 1;
+    var capDiameter = 2 * radius;
+
+    height -= capDiameter;
+
+    if (height < 0) {
+      capHeightScale = 0;
+      height += capDiameter;
+    } else if (height < capDiameter) {
+      capHeightScale = height / capDiameter;
+      height = capDiameter;
+    }
+
+    // update latitude and logintude band for two caps.
+    // latitudeBands *= 2;
+    // longitudeBands *= 2;
+
+    var positionData = [];
+    var normalData = [];
+    for ( var latNumber = 0; latNumber <= latitudeBands; latNumber++) {
+      var theta = latNumber * m.PI / latitudeBands;
+      var sinTheta = m.sin(theta);
+      var cosTheta = m.cos(theta) * capHeightScale;
+
+      // console.log(cosTheta);
+
+      for ( var longNumber = 0; longNumber <= longitudeBands; longNumber++) {
+        var phi = longNumber * 2 * m.PI / longitudeBands;
+        var sinPhi = m.sin(phi);
+        var cosPhi = m.cos(phi);
+
+        var x = cosPhi * sinTheta;
+        var y = cosTheta;
+        var z = sinPhi * sinTheta;
+
+        normalData.push(x, y, z);
+        positionData.push(radius * x, radius * y + (latNumber < latitudeBands / 2 ? height : 0), radius * z);
+      }
+    }
+
+    var indexData = [];
+    longitudeBands += 1;
+    for ( var latNumber = 0; latNumber < latitudeBands; latNumber++) {
+      for ( var longNumber = 0; longNumber < longitudeBands; longNumber++) {
+        var first = (latNumber * longitudeBands) + (longNumber % longitudeBands);
+        var second = first + longitudeBands;
+        indexData.push(first, first + 1, second);
+        if (longNumber < longitudeBands - 1) {
+          indexData.push(second, first + 1, second + 1);
+        }
+      }
+    }
+
+    this.storeData(positionData, normalData, indexData);
+  };
+  d3.Pill.prototype = new d3._Mesh();
+
+})(ChemDoodle.structures.d3, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4500 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-09-06 14:28:15 -0400 (Fri, 06 Sep 2013) $
+//
+
+(function(d3, document) {
+  'use strict';
+  d3.Shader = function() {
+  };
+  var _ = d3.Shader.prototype;
+  _.init = function(gl) {
+    var vertexShader = this.getShader(gl, 'vertex-shader');
+    if (!vertexShader) {
+      vertexShader = this.loadDefaultVertexShader(gl);
+    }
+    var fragmentShader = this.getShader(gl, 'fragment-shader');
+    if (!fragmentShader) {
+      fragmentShader = this.loadDefaultFragmentShader(gl);
+    }
+
+    gl.attachShader(gl.program, vertexShader);
+    gl.attachShader(gl.program, fragmentShader);
+
+    // the vertex position location must be explicit set to '0',
+    // to prefent vertex normal become location '0'.
+    // It's needed because later normal must be disabled for
+    // rendering on picking framebuffer
+    this.vertexPositionAttribute = 0;
+    gl.bindAttribLocation(gl.program, this.vertexPositionAttribute, 'a_vertex_position');
+
+    gl.linkProgram(gl.program);
+
+    if (!gl.getProgramParameter(gl.program, gl.LINK_STATUS)) {
+      alert('Could not initialize shaders: ' + gl.getProgramInfoLog(gl.program));
+    }
+
+    gl.useProgram(gl.program);
+
+    gl.enableVertexAttribArray(this.vertexPositionAttribute);
+
+    this.vertexNormalAttribute = gl.getAttribLocation(gl.program, 'a_vertex_normal');
+    gl.enableVertexAttribArray(this.vertexNormalAttribute);
+  };
+  _.getShader = function(gl, id) {
+    var shaderScript = document.getElementById(id);
+    if (!shaderScript) {
+      return undefined;
+    }
+    var sb = [];
+    var k = shaderScript.firstChild;
+    while (k) {
+      if (k.nodeType === 3) {
+        sb.push(k.textContent);
+      }
+      k = k.nextSibling;
+    }
+    var shader;
+    if (shaderScript.type === 'x-shader/x-fragment') {
+      shader = gl.createShader(gl.FRAGMENT_SHADER);
+    } else if (shaderScript.type === 'x-shader/x-vertex') {
+      shader = gl.createShader(gl.VERTEX_SHADER);
+    } else {
+      return undefined;
+    }
+    gl.shaderSource(shader, sb.join(''));
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      alert(shaderScript.type + ' ' + gl.getShaderInfoLog(shader));
+      return undefined;
+    }
+    return shader;
+  };
+  _.loadDefaultVertexShader = function(gl) {
+    var sb = [
+    'precision mediump float;',
+    // phong shader
+    'struct Light',
+      '{',
+        'vec3 diffuse_color;',
+        'vec3 specular_color;',
+        'vec3 direction;',
+        'vec3 half_vector;',
+      '};',
+
+    'struct Material',
+      '{',
+        'vec3 ambient_color;',
+        'vec3 diffuse_color;',
+        'vec3 specular_color;',
+        'float shininess;',
+        'float alpha;',
+      '};',
+    // attributes set when rendering objects
+    'attribute vec3 a_vertex_position;',
+    'attribute vec3 a_vertex_normal;',
+    // scene structs
+    'uniform Light u_light;',
+    'uniform Material u_material;',
+    // matrices set by gl.setMatrixUniforms
+    'uniform mat4 u_model_view_matrix;',
+    'uniform mat4 u_projection_matrix;',
+    'uniform mat3 u_normal_matrix;',
+    // sent to the fragment shader
+    'varying vec3 v_diffuse;',
+    'varying vec4 v_ambient;',
+    'varying vec3 v_normal;',
+    'void main(void)',
+      '{',
+        'v_normal = length(a_vertex_normal)==0.0 ? a_vertex_normal : normalize(u_normal_matrix * a_vertex_normal);',
+
+        'v_ambient = vec4(u_material.ambient_color, 1.0);',
+        'v_diffuse = u_material.diffuse_color * u_light.diffuse_color;',
+
+        'gl_Position = u_projection_matrix * u_model_view_matrix * vec4(a_vertex_position, 1.0);',
+        // just to make sure the w is 1
+        'gl_Position /= gl_Position.w;',
+        'gl_PointSize = 2.0;',
+      '}'
+    ].join(''); // reduce memory to hold the array value
+
+    var shader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(shader, sb);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      alert('Vertex shader failed to compile: ' + gl.getShaderInfoLog(shader));
+      return undefined;
+    }
+    return shader;
+  };
+  _.loadDefaultFragmentShader = function(gl) {
+    var sb = [
+    // set float precision
+    'precision mediump float;\n',
+    'struct Light',
+      '{',
+        'vec3 diffuse_color;',
+        'vec3 specular_color;',
+        'vec3 direction;',
+        'vec3 half_vector;',
+      '};',
+    'struct Material',
+      '{',
+        'vec3 ambient_color;',
+        'vec3 diffuse_color;',
+        'vec3 specular_color;',
+        'float shininess;',
+        'float alpha;',
+      '};',
+    'struct Fog',
+      '{',
+        'int mode;',
+        'vec3 color;',
+        'float density;',
+        'float start;',
+        'float end;',
+      '};',
+
+
+    // scene structs
+    'uniform Light u_light;',
+    'uniform Material u_material;',
+    'uniform Fog u_fog;',
+
+    // from the vertex shader
+    'varying vec3 v_diffuse;',
+    'varying vec4 v_ambient;',
+    'varying vec3 v_normal;',
+    'void main(void)',
+      '{',
+        'if(length(v_normal)==0.0){',
+          'gl_FragColor = vec4(vec3(v_diffuse.rgb),u_material.alpha);',
+        '}else{',
+          'float nDotL = max(dot(v_normal, u_light.direction), 0.0);',
+          'vec4 color = vec4(v_diffuse*nDotL, 1.0);',
+          'float nDotHV = max(dot(v_normal, u_light.half_vector), 0.0);',
+          'vec3 specular = u_material.specular_color * u_light.specular_color;',
+          'color+=vec4(specular * pow(nDotHV, u_material.shininess), 1.0);',
+
+          // set the color
+          'gl_FragColor = color+v_ambient;',
+          'gl_FragColor.a*=u_material.alpha;',
+
+
+          // fogging
+          'float fogCoord = gl_FragCoord.z/gl_FragCoord.w;',
+          'float fogFactor = 1.;',
+
+          // linear equation
+          'if(u_fog.mode == 1){',
+            // 'if(u_fog.start <= fogCoord && fogCoord <= u_fog.end){',
+            'if(fogCoord < u_fog.start){',
+              'fogFactor = 1.;',
+            '}else if(fogCoord > u_fog.end){',
+              'fogFactor = 0.;',
+            '}else{',
+              'fogFactor = clamp((u_fog.end - fogCoord) / (u_fog.end - u_fog.start), 0.0, 1.0);',
+            '}',
+          '}',
+          // exp equation
+          'else if(u_fog.mode == 2) {',
+            'fogFactor = clamp(exp(-u_fog.density*fogCoord), 0.0, 1.0);',
+          '}',
+          // exp2 equation
+          'else if(u_fog.mode == 3) {',
+            'fogFactor = clamp(exp(-pow(u_fog.density*fogCoord, 2.0)), 0.0, 1.0);',
+          '}',
+          'gl_FragColor = mix(vec4(vec3(u_fog.color), 1.), gl_FragColor, fogFactor);',
+           // 'gl_FragColor = vec4(vec3(fogFactor), 1.0);',
+        '}',
+      '}'
+    ].join('');
+
+    var shader = gl.createShader(gl.FRAGMENT_SHADER);
+    gl.shaderSource(shader, sb);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      alert('Fragment shader failed to compile: ' + gl.getShaderInfoLog(shader));
+      return undefined;
+    }
+    return shader;
+  };
+
+})(ChemDoodle.structures.d3, document);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3100 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-02-17 07:35:56 -0500 (Thu, 17 Feb 2011) $
+//
+
+(function(structures, d3, v3) {
+  'use strict';
+  d3.Shape = function(points, thickness) {
+    // points must be in the xy-plane, all z-coords must be 0, thickness
+    // will be in the z-plane
+    var numPoints = points.length;
+    var positionData = [];
+    var normalData = [];
+
+    // calculate vertex and normal points
+    var center = new structures.Point();
+    for ( var i = 0, ii = numPoints; i < ii; i++) {
+      var next = i + 1;
+      if (i === ii - 1) {
+        next = 0;
+      }
+      var z = [ 0, 0, 1 ];
+      var currentPoint = points[i];
+      var nextPoint = points[next];
+      var v = [ nextPoint.x - currentPoint.x, nextPoint.y - currentPoint.y, 0 ];
+      var normal = v3.cross(z, v);
+      // first four are for the side normal
+      // second four will do both the bottom and top triangle normals
+      for ( var j = 0; j < 2; j++) {
+        positionData.push(currentPoint.x, currentPoint.y, thickness / 2);
+        positionData.push(currentPoint.x, currentPoint.y, -thickness / 2);
+        positionData.push(nextPoint.x, nextPoint.y, thickness / 2);
+        positionData.push(nextPoint.x, nextPoint.y, -thickness / 2);
+      }
+      // side normals
+      for ( var j = 0; j < 4; j++) {
+        normalData.push(normal[0], normal[1], normal[2]);
+      }
+      // top and bottom normals
+      normalData.push(0, 0, 1);
+      normalData.push(0, 0, -1);
+      normalData.push(0, 0, 1);
+      normalData.push(0, 0, -1);
+      center.add(currentPoint);
+    }
+    // centers
+    center.x /= numPoints;
+    center.y /= numPoints;
+    normalData.push(0, 0, 1);
+    positionData.push(center.x, center.y, thickness / 2);
+    normalData.push(0, 0, -1);
+    positionData.push(center.x, center.y, -thickness / 2);
+
+    // build mesh connectivity
+    var indexData = [];
+    var centerIndex = numPoints * 8;
+    for ( var i = 0, ii = numPoints; i < ii; i++) {
+      var start = i * 8;
+      // sides
+      indexData.push(start);
+      indexData.push(start + 3);
+      indexData.push(start + 1);
+      indexData.push(start);
+      indexData.push(start + 2);
+      indexData.push(start + 3);
+      // top and bottom
+      indexData.push(start + 4);
+      indexData.push(centerIndex);
+      indexData.push(start + 6);
+      indexData.push(start + 5);
+      indexData.push(start + 7);
+      indexData.push(centerIndex + 1);
+    }
+
+    this.storeData(positionData, normalData, indexData);
+  };
+  d3.Shape.prototype = new d3._Mesh();
+
+})(ChemDoodle.structures, ChemDoodle.structures.d3, vec3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3458 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-12-23 10:57:22 -0500 (Fri, 23 Dec 2011) $
+//
+
+(function(d3, m, v3) {
+  'use strict';
+  d3.Star = function() {
+    var ps = [ .8944, .4472, 0, .2764, .4472, .8506, .2764, .4472, -.8506, -.7236, .4472, .5257, -.7236, .4472, -.5257, -.3416, .4472, 0, -.1056, .4472, .3249, -.1056, .4472, -.3249, .2764, .4472, .2008, .2764, .4472, -.2008, -.8944, -.4472, 0, -.2764, -.4472, .8506, -.2764, -.4472, -.8506, .7236, -.4472, .5257, .7236, -.4472, -.5257, .3416, -.4472, 0, .1056, -.4472, .3249, .1056, -.4472, -.3249, -.2764, -.4472, .2008, -.2764, -.4472, -.2008, -.5527, .1058, 0, -.1708, .1058, .5527, -.1708,
+        .1058, -.5527, .4471, .1058, .3249, .4471, .1058, -.3249, .5527, -.1058, 0, .1708, -.1058, .5527, .1708, -.1058, -.5527, -.4471, -.1058, .3249, -.4471, -.1058, -.3249, 0, 1, 0, 0, -1, 0 ];
+    var is = [ 0, 9, 8, 2, 7, 9, 4, 5, 7, 3, 6, 5, 1, 8, 6, 0, 8, 23, 30, 6, 8, 3, 21, 6, 11, 26, 21, 13, 23, 26, 2, 9, 24, 30, 8, 9, 1, 23, 8, 13, 25, 23, 14, 24, 25, 4, 7, 22, 30, 9, 7, 0, 24, 9, 14, 27, 24, 12, 22, 27, 3, 5, 20, 30, 7, 5, 2, 22, 7, 12, 29, 22, 10, 20, 29, 1, 6, 21, 30, 5, 6, 4, 20, 5, 10, 28, 20, 11, 21, 28, 10, 19, 18, 12, 17, 19, 14, 15, 17, 13, 16, 15, 11, 18, 16, 31, 19, 17, 14, 17, 27, 2, 27, 22, 4, 22, 29, 10, 29, 19, 31, 18, 19, 12, 19, 29, 4, 29, 20, 3, 20, 28,
+        11, 28, 18, 31, 16, 18, 10, 18, 28, 3, 28, 21, 1, 21, 26, 13, 26, 16, 31, 15, 16, 11, 16, 26, 1, 26, 23, 0, 23, 25, 14, 25, 15, 31, 17, 15, 13, 15, 25, 0, 25, 24, 2, 24, 27, 12, 27, 17 ];
+
+    var positionData = [];
+    var normalData = [];
+    var indexData = [];
+    for ( var i = 0, ii = is.length; i < ii; i += 3) {
+      var j1 = is[i] * 3;
+      var j2 = is[i + 1] * 3;
+      var j3 = is[i + 2] * 3;
+
+      var p1 = [ ps[j1], ps[j1 + 1], ps[j1 + 2] ];
+      var p2 = [ ps[j2], ps[j2 + 1], ps[j2 + 2] ];
+      var p3 = [ ps[j3], ps[j3 + 1], ps[j3 + 2] ];
+
+      var toAbove = [ p1[0] - p2[0], p1[1] - p2[1], p1[2] - p2[2] ];
+      var toSide = [ p3[0] - p2[0], p3[1] - p2[1], p3[2] - p2[2] ];
+      var normal = v3.cross(toSide, toAbove, []);
+      v3.normalize(normal);
+
+      positionData.push(p1[0], p1[1], p1[2], p2[0], p2[1], p2[2], p3[0], p3[1], p3[2]);
+      normalData.push(normal[0], normal[1], normal[2], normal[0], normal[1], normal[2], normal[0], normal[1], normal[2]);
+      indexData.push(i, i + 1, i + 2);
+    }
+
+    this.storeData(positionData, normalData, indexData);
+  };
+  d3.Star.prototype = new d3._Mesh();
+
+})(ChemDoodle.structures.d3, Math, vec3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3994 $
+//  $Author: kevin $
+//  $LastChangedDate: 2012-12-13 18:52:20 -0500 (Thu, 13 Dec 2012) $
+//
+
+(function(d3, extensions, document) {
+  'use strict';
+  d3.TextImage = function() {
+    this.ctx = document.createElement('canvas').getContext('2d');
+    this.data = [];
+    this.text = '';
+    this.charHeight = 0;
+  };
+
+  var _ = d3.TextImage.prototype;
+
+  _.init = function(gl) {
+    // init texture
+    this.textureImage = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, this.textureImage);
+
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    gl.bindTexture(gl.TEXTURE_2D, null);
+
+    this.updateFont(gl, 12, [ 'Sans-serif' ], false, false, false);
+  };
+
+  _.charData = function(character) {
+    var index = this.text.indexOf(character);
+    return index >= 0 ? this.data[index] : null;
+  };
+
+  _.updateFont = function(gl, fontSize, fontFamilies, fontBold, fontItalic, fontStroke) {
+    var ctx = this.ctx;
+    var canvas = this.ctx.canvas;
+    var data = [];
+    var text = "";
+    var contextFont = extensions.getFontString(fontSize, fontFamilies, fontBold, fontItalic);
+
+    ctx.font = contextFont;
+
+    ctx.save();
+
+    var totalWidth = 0;
+    var charHeight = fontSize * 1.5;
+
+    for ( var i = 32, ii = 127; i < ii; i++) {
+
+      // skip control characters
+      // if(i <= 31 || i == 127) continue;
+
+      var character = String.fromCharCode(i), width = ctx.measureText(character).width;
+
+      data.push({
+        text : character,
+        width : width,
+        height : charHeight
+      });
+
+      totalWidth += width * 2;
+    }
+
+    var areaImage = totalWidth * charHeight;
+    var sqrtArea = Math.sqrt(areaImage);
+    var totalRows = Math.ceil(sqrtArea / charHeight);
+    var maxWidth = Math.ceil(totalWidth / (totalRows - 1));
+
+    canvas.width = maxWidth;
+    canvas.height = totalRows * charHeight;
+
+    ctx.font = contextFont;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 1.4;
+
+    ctx.fillStyle = "#fff";
+
+    var offsetRow = 0;
+    var posX = 0;
+    for ( var i = 0, ii = data.length; i < ii; i++) {
+      var charData = data[i];
+      var charWidth = charData.width * 2;
+      var charHeight = charData.height;
+      var charText = charData.text;
+      var willWidth = posX + charWidth;
+
+      if (willWidth > maxWidth) {
+        offsetRow++;
+        posX = 0;
+      }
+
+      var posY = offsetRow * charHeight;
+
+      if (fontStroke) {
+        // stroke must draw before fill
+        ctx.strokeText(charText, posX, posY + (charHeight / 2));
+      }
+
+      ctx.fillText(charText, posX, posY + (charHeight / 2));
+
+      charData.x = posX;
+      charData.y = posY;
+
+      text += charText;
+
+      posX += charWidth;
+    }
+
+    this.text = text;
+    this.data = data;
+    this.charHeight = charHeight;
+
+    // also update the texture
+    gl.bindTexture(gl.TEXTURE_2D, this.textureImage);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, canvas);
+    gl.bindTexture(gl.TEXTURE_2D, null);
+  };
+  _.pushVertexData = function(text, position, zDepth, data) {
+    // characters of string text
+    var textPiece = text.toString().split("");
+
+    // height of texture image
+    var heightImage = this.getHeight();
+    var widthImage = this.getWidth();
+
+    var x1 = -this.textWidth(text) / 2;
+    var y1 = -this.charHeight / 2;
+
+    // iterate each character
+    for ( var j = 0, jj = textPiece.length; j < jj; j++) {
+      var charData = this.charData(textPiece[j]);
+
+      var width = charData.width;
+      var left = charData.x / widthImage;
+      var right = left + charData.width * 1.8 / widthImage;
+      var top = charData.y / heightImage;
+      var bottom = top + charData.height / heightImage;
+
+      var x2 = x1 + width * 1.8;
+      var y2 = this.charHeight / 2;
+
+      data.position.push(
+      // left top
+      position[0], position[1], position[2],
+      // right top
+      position[0], position[1], position[2],
+      // right bottom
+      position[0], position[1], position[2],
+
+      // left top
+      position[0], position[1], position[2],
+      // left bottom
+      position[0], position[1], position[2],
+      // right bottom
+      position[0], position[1], position[2]);
+
+      data.texCoord.push(
+      // left top
+      left, top,
+      // right bottom
+      right, bottom,
+      // right top
+      right, top,
+
+      // left top
+      left, top,
+      // left bottom
+      left, bottom,
+      // right bottom
+      right, bottom);
+
+      data.translation.push(
+      // left top
+      x1, y2,
+      // right bottom
+      x2, y1,
+      // right top
+      x2, y2,
+
+      // left top
+      x1, y2,
+      // left bottom
+      x1, y1,
+      // right bottom
+      x2, y1);
+
+      data.zDepth.push(zDepth, zDepth, zDepth,
+
+      zDepth, zDepth, zDepth);
+
+      x1 = x2 + width - width * 1.8;
+    }
+
+  };
+  _.getCanvas = function() {
+    return this.ctx.canvas;
+  };
+  _.getHeight = function() {
+    return this.getCanvas().height;
+  };
+  _.getWidth = function() {
+    return this.getCanvas().width;
+  };
+  _.textWidth = function(text) {
+    return this.ctx.measureText(text).width;
+  };
+  _.test = function() {
+    document.body.appendChild(this.getCanvas());
+  };
+  _.useTexture = function(gl) {
+    gl.bindTexture(gl.TEXTURE_2D, this.textureImage);
+  };
+
+})(ChemDoodle.structures.d3, ChemDoodle.extensions, document);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3994 $
+//  $Author: kevin $
+//  $LastChangedDate: 2012-12-13 18:52:20 -0500 (Thu, 13 Dec 2012) $
+//
+
+(function(d3, m) {
+  'use strict';
+  d3.TextMesh = function() {
+  };
+  var _ = d3.TextMesh.prototype;
+  _.init = function(gl) {
+
+    // set vertex buffer
+    this.vertexPositionBuffer = gl.createBuffer();
+    this.vertexTexCoordBuffer = gl.createBuffer();
+    this.vertexTranslationBuffer = gl.createBuffer();
+    this.vertexZDepthBuffer = gl.createBuffer();
+
+  };
+  _.setVertexData = function(gl, vertexBuffer, bufferData, itemSize) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(bufferData), gl.STATIC_DRAW);
+    vertexBuffer.itemSize = itemSize;
+    vertexBuffer.numItems = bufferData.length / itemSize;
+  };
+  _.storeData = function(gl, vertexPositionData, vertexTexCoordData, vertexTranslationData, vertexZDepthData) {
+    this.setVertexData(gl, this.vertexPositionBuffer, vertexPositionData, 3);
+    this.setVertexData(gl, this.vertexTexCoordBuffer, vertexTexCoordData, 2);
+    this.setVertexData(gl, this.vertexTranslationBuffer, vertexTranslationData, 2);
+    this.setVertexData(gl, this.vertexZDepthBuffer, vertexZDepthData, 1);
+  };
+  _.bindBuffers = function(gl) {
+    var shaderText = gl.shaderText;
+
+    // positions
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
+    gl.vertexAttribPointer(shaderText.vertexPositionAttribute, this.vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+    // texCoord
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexTexCoordBuffer);
+    gl.vertexAttribPointer(shaderText.vertexTexCoordAttribute, this.vertexTexCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+    // translation
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexTranslationBuffer);
+    gl.vertexAttribPointer(shaderText.vertexTranslationAttribute, this.vertexTranslationBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+    // z depth
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexZDepthBuffer);
+    gl.vertexAttribPointer(shaderText.vertexZDepthAttribute, this.vertexZDepthBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+  };
+  _.render = function(gl) {
+    var numItems = this.vertexPositionBuffer.numItems;
+
+    if (!numItems) {
+      // nothing to do here
+      return;
+    }
+
+    this.bindBuffers(gl);
+    gl.drawArrays(gl.TRIANGLES, 0, numItems);
+  };
+
+})(ChemDoodle.structures.d3, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3994 $
+//  $Author: kevin $
+//  $LastChangedDate: 2012-12-13 18:52:20 -0500 (Thu, 13 Dec 2012) $
+//
+
+(function(d3) {
+  'use strict';
+  d3.TextShader = function() {
+  };
+
+  var _ = d3.TextShader.prototype = new d3.Shader();
+  _.init = function(gl) {
+
+    gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+
+    // init gl program
+    var vertexShader = this.loadDefaultVertexShader(gl);
+    var fragmentShader = this.loadDefaultFragmentShader(gl);
+
+    gl.attachShader(gl.programLabel, vertexShader);
+    gl.attachShader(gl.programLabel, fragmentShader);
+    gl.linkProgram(gl.programLabel);
+
+    if (!gl.getProgramParameter(gl.programLabel, gl.LINK_STATUS)) {
+      alert('Could not initialize shaders: ' + gl.getProgramInfoLog(gl.programLabel));
+    }
+
+    // assign attribute properties
+    this.vertexPositionAttribute = gl.getAttribLocation(gl.programLabel, 'a_vertex_position');
+    this.vertexTexCoordAttribute = gl.getAttribLocation(gl.programLabel, 'a_vertex_texcoord');
+    this.vertexTranslationAttribute = gl.getAttribLocation(gl.programLabel, 'a_translation');
+    this.vertexZDepthAttribute = gl.getAttribLocation(gl.programLabel, 'a_z_depth');
+
+    // assign uniform properties
+    this.modelViewMatrixUniform = gl.getUniformLocation(gl.programLabel, 'u_model_view_matrix');
+    this.projectionMatrixUniform = gl.getUniformLocation(gl.programLabel, 'u_projection_matrix');
+    this.dimensionUniform = gl.getUniformLocation(gl.programLabel, 'u_dimension');
+
+  };
+  _.loadDefaultVertexShader = function(gl) {
+    var sb = [
+    'precision mediump float;',
+
+    'attribute vec3 a_vertex_position;', 'attribute vec2 a_vertex_texcoord;', 'attribute vec2 a_translation;', 'attribute float a_z_depth;',
+
+    'uniform mat4 u_model_view_matrix;', 'uniform mat4 u_projection_matrix;', 'uniform vec2 u_dimension;',
+
+    'varying vec2 v_texcoord;',
+
+    'void main() {',
+
+    'gl_Position = u_model_view_matrix * vec4(a_vertex_position, 1.0);',
+
+    'vec4 depth_pos = vec4(gl_Position);',
+
+    'depth_pos.z += a_z_depth;',
+
+    'gl_Position = u_projection_matrix * gl_Position;',
+
+    'depth_pos = u_projection_matrix * depth_pos;',
+
+    'gl_Position /= gl_Position.w;',
+
+    'gl_Position.xy += a_translation / u_dimension * 2.0;',
+
+    'gl_Position.z = depth_pos.z / depth_pos.w;',
+
+    'v_texcoord = a_vertex_texcoord;', '}' ].join('');
+
+    var shader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(shader, sb);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      alert('Vertex shader failed to compile: ' + gl.getShaderInfoLog(shader));
+      return undefined;
+    }
+    return shader;
+  };
+  _.loadDefaultFragmentShader = function(gl) {
+    var sb = [
+    'precision mediump float;',
+
+    // our texture
+    'uniform sampler2D u_image;',
+
+    // the texCoords passed in from the vertex shader.
+    'varying vec2 v_texcoord;',
+
+    'void main() {', 'gl_FragColor = texture2D(u_image, v_texcoord);',
+
+    // 'if(gl_FragColor.a == 0.0) discard;',
+
+    // 'gl_FragColor = vec4(1.0,1.0,1.0,1.0);',
+    '}' ].join('');
+
+    var shader = gl.createShader(gl.FRAGMENT_SHADER);
+    gl.shaderSource(shader, sb);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      alert('Fragment shader failed to compile: ' + gl.getShaderInfoLog(shader));
+      return undefined;
+    }
+    return shader;
+  };
+  _.setUniforms = function(gl, modelViewMatrix, projectionMatrix) {
+    gl.uniformMatrix4fv(this.modelViewMatrixUniform, false, modelViewMatrix);
+    gl.uniformMatrix4fv(this.projectionMatrixUniform, false, projectionMatrix);
+    gl.uniform2f(this.dimensionUniform, gl.canvas.clientWidth, gl.canvas.clientHeight);
+  };
+})(ChemDoodle.structures.d3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3078 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-02-06 18:27:15 -0500 (Sun, 06 Feb 2011) $
+//
+
+(function(extensions, RESIDUE, structures, d3, m, m4, v3) {
+  'use strict';
+  var loadPartition = function(gl, p) {
+    // positions
+    gl.bindBuffer(gl.ARRAY_BUFFER, p.vertexPositionBuffer);
+    gl.vertexAttribPointer(gl.shader.vertexPositionAttribute, p.vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    // normals
+    gl.bindBuffer(gl.ARRAY_BUFFER, p.vertexNormalBuffer);
+    gl.vertexAttribPointer(gl.shader.vertexNormalAttribute, p.vertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    // indexes
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, p.vertexIndexBuffer);
+  };
+
+  var PointRotator = function(point, axis, angle) {
+    var d = m.sqrt(axis[1] * axis[1] + axis[2] * axis[2]);
+    var Rx = [ 1, 0, 0, 0, 0, axis[2] / d, -axis[1] / d, 0, 0, axis[1] / d, axis[2] / d, 0, 0, 0, 0, 1 ];
+    var RxT = [ 1, 0, 0, 0, 0, axis[2] / d, axis[1] / d, 0, 0, -axis[1] / d, axis[2] / d, 0, 0, 0, 0, 1 ];
+    var Ry = [ d, 0, -axis[0], 0, 0, 1, 0, 0, axis[0], 0, d, 0, 0, 0, 0, 1 ];
+    var RyT = [ d, 0, axis[0], 0, 0, 1, 0, 0, -axis[0], 0, d, 0, 0, 0, 0, 1 ];
+    var Rz = [ m.cos(angle), -m.sin(angle), 0, 0, m.sin(angle), m.cos(angle), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 ];
+    var matrix = m4.multiply(Rx, m4.multiply(Ry, m4.multiply(Rz, m4.multiply(RyT, RxT, []))));
+    this.rotate = function() {
+      return m4.multiplyVec3(matrix, point);
+    };
+  };
+
+  d3.Tube = function(chain, thickness, cylinderResolution) {
+    var lineSegmentNum = chain[0].lineSegments[0].length;
+    this.partitions = [];
+    var currentPartition;
+    this.ends = [];
+    this.ends.push(chain[0].lineSegments[0][0]);
+    this.ends.push(chain[chain.length - 2].lineSegments[0][0]);
+    // calculate vertex and normal points
+    var last = [ 1, 0, 0 ];
+    for ( var i = 0, ii = chain.length - 1; i < ii; i++) {
+      if (!currentPartition || currentPartition.positionData.length > 65000) {
+        if (this.partitions.length > 0) {
+          i--;
+        }
+        currentPartition = {
+          count : 0,
+          positionData : [],
+          normalData : [],
+          indexData : []
+        };
+        this.partitions.push(currentPartition);
+      }
+      var residue = chain[i];
+      currentPartition.count++;
+      var min = Infinity;
+      var p = new structures.Atom('', chain[i + 1].cp1.x, chain[i + 1].cp1.y, chain[i + 1].cp1.z);
+      for ( var j = 0; j < lineSegmentNum; j++) {
+        var currentPoint = residue.lineSegments[0][j];
+        var nextPoint;
+        if (j === lineSegmentNum - 1) {
+          if (i === chain.length - 2) {
+            nextPoint = residue.lineSegments[0][j - 1];
+          } else {
+            nextPoint = chain[i + 1].lineSegments[0][0];
+          }
+        } else {
+          nextPoint = residue.lineSegments[0][j + 1];
+        }
+        var axis = [ nextPoint.x - currentPoint.x, nextPoint.y - currentPoint.y, nextPoint.z - currentPoint.z ];
+        v3.normalize(axis);
+        if (i === chain.length - 2 && j === lineSegmentNum - 1) {
+          v3.scale(axis, -1);
+        }
+        var startVector = vec3.cross(axis, last, []);
+        v3.normalize(startVector);
+        v3.scale(startVector, thickness / 2);
+        var rotator = new PointRotator(startVector, axis, 2 * Math.PI / cylinderResolution);
+        for ( var k = 0, kk = cylinderResolution; k < kk; k++) {
+          var use = rotator.rotate();
+          if (k === m.floor(cylinderResolution / 4)) {
+            last = [ use[0], use[1], use[2] ];
+          }
+          currentPartition.normalData.push(use[0], use[1], use[2]);
+          currentPartition.positionData.push(currentPoint.x + use[0], currentPoint.y + use[1], currentPoint.z + use[2]);
+        }
+        // find closest point to attach stick to
+        if (p) {
+          var dist = currentPoint.distance3D(p);
+          if (dist < min) {
+            min = dist;
+            chain[i + 1].pPoint = currentPoint;
+          }
+        }
+      }
+    }
+
+    // build mesh connectivity
+    for ( var n = 0, nn = this.partitions.length; n < nn; n++) {
+      var currentPartition = this.partitions[n];
+      for ( var i = 0, ii = currentPartition.count - 1; i < ii; i++) {
+        var indexStart = i * lineSegmentNum * cylinderResolution;
+        for ( var j = 0, jj = lineSegmentNum; j < jj; j++) {
+          var segmentIndexStart = indexStart + j * cylinderResolution;
+          for ( var k = 0; k < cylinderResolution; k++) {
+            var next = 1;
+            var sk = segmentIndexStart + k;
+            currentPartition.indexData.push(sk);
+            currentPartition.indexData.push(sk + cylinderResolution);
+            currentPartition.indexData.push(sk + cylinderResolution + next);
+            currentPartition.indexData.push(sk);
+            currentPartition.indexData.push(sk + cylinderResolution + next);
+            currentPartition.indexData.push(sk + next);
+          }
+        }
+      }
+    }
+
+    this.storeData(this.partitions[0].positionData, this.partitions[0].normalData, this.partitions[0].indexData);
+
+    var ps = [ new structures.Point(2, 0) ];
+    for ( var i = 0; i < 60; i++) {
+      var ang = i / 60 * m.PI;
+      ps.push(new structures.Point(2 * m.cos(ang), -2 * m.sin(ang)));
+    }
+    ps.push(new structures.Point(-2, 0), new structures.Point(-2, 4), new structures.Point(2, 4));
+    var platform = new structures.d3.Shape(ps, 1);
+
+    this.render = function(gl, specs) {
+      // draw tube
+      this.bindBuffers(gl);
+      // colors
+      gl.material.setDiffuseColor(specs.macro_colorByChain ? this.chainColor : specs.nucleics_tubeColor);
+      // render
+      gl.drawElements(gl.TRIANGLES, this.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+      if (this.partitions) {
+        for ( var i = 1, ii = this.partitions.length; i < ii; i++) {
+          var p = this.partitions[i];
+          loadPartition(gl, p);
+          // render
+          gl.drawElements(gl.TRIANGLES, p.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        }
+      }
+
+      // draw ends
+      gl.sphereBuffer.bindBuffers(gl);
+      for ( var i = 0; i < 2; i++) {
+        var p = this.ends[i];
+        var transform = m4.translate(gl.modelViewMatrix, [ p.x, p.y, p.z ], []);
+        var radius = thickness / 2;
+        m4.scale(transform, [ radius, radius, radius ]);
+        // render
+        gl.setMatrixUniforms(transform);
+        gl.drawElements(gl.TRIANGLES, gl.sphereBuffer.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+      }
+
+      // draw nucleotide handles
+      gl.cylinderBuffer.bindBuffers(gl);
+      for ( var i = 1, ii = chain.length - 1; i < ii; i++) {
+        var residue = chain[i];
+        var p1 = residue.pPoint;
+        var p2 = new structures.Atom('', residue.cp2.x, residue.cp2.y, residue.cp2.z);
+        var height = 1.001 * p1.distance3D(p2);
+        var scaleVector = [ thickness / 4, height, thickness / 4 ];
+        var transform = m4.translate(gl.modelViewMatrix, [ p1.x, p1.y, p1.z ], []);
+        var y = [ 0, 1, 0 ];
+        var ang = 0;
+        var axis;
+        var a2b = [ p2.x - p1.x, p2.y - p1.y, p2.z - p1.z ];
+        if (p1.x === p2.x && p1.z === p2.z) {
+          axis = [ 0, 0, 1 ];
+          if (p1.y < p1.y) {
+            ang = m.PI;
+          }
+        } else {
+          ang = extensions.vec3AngleFrom(y, a2b);
+          axis = v3.cross(y, a2b, []);
+        }
+        if (ang !== 0) {
+          m4.rotate(transform, ang, axis);
+        }
+        m4.scale(transform, scaleVector);
+        gl.setMatrixUniforms(transform);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, gl.cylinderBuffer.vertexPositionBuffer.numItems);
+      }
+
+      // draw nucleotide platforms
+      platform.bindBuffers(gl);
+      // colors
+      if (!specs.nucleics_useShapelyColors && !specs.macro_colorByChain) {
+        gl.material.setDiffuseColor(specs.nucleics_baseColor);
+      }
+      for ( var i = 1, ii = chain.length - 1; i < ii; i++) {
+        var residue = chain[i];
+        var p2 = residue.cp2;
+        var transform = m4.translate(gl.modelViewMatrix, [ p2.x, p2.y, p2.z ], []);
+        // rotate to direction
+        var y = [ 0, 1, 0 ];
+        var ang = 0;
+        var axis;
+        var p3 = residue.cp3;
+        var a2b = [ p3.x - p2.x, p3.y - p2.y, p3.z - p2.z ];
+        if (p2.x === p3.x && p2.z === p3.z) {
+          axis = [ 0, 0, 1 ];
+          if (p2.y < p2.y) {
+            ang = m.PI;
+          }
+        } else {
+          ang = extensions.vec3AngleFrom(y, a2b);
+          axis = v3.cross(y, a2b, []);
+        }
+        if (ang !== 0) {
+          m4.rotate(transform, ang, axis);
+        }
+        // rotate to orientation
+        var x = [ 1, 0, 0 ];
+        var rM = m4.rotate(m4.identity([]), ang, axis);
+        m4.multiplyVec3(rM, x);
+        var p4 = residue.cp4;
+        var p5 = residue.cp5;
+        if (!(p4.y === p5.y && p4.z === p5.z)) {
+          var pivot = [ p5.x - p4.x, p5.y - p4.y, p5.z - p4.z ];
+          var ang2 = extensions.vec3AngleFrom(x, pivot);
+          if (v3.dot(a2b, v3.cross(x, pivot)) < 0) {
+            ang2 *= -1;
+          }
+          m4.rotateY(transform, ang2);
+        }
+        // color
+        if (specs.nucleics_useShapelyColors && !specs.macro_colorByChain) {
+          if (RESIDUE[residue.name]) {
+            gl.material.setDiffuseColor(RESIDUE[residue.name].shapelyColor);
+          } else {
+            gl.material.setDiffuseColor(RESIDUE['*'].shapelyColor);
+          }
+        }
+        // render
+        gl.setMatrixUniforms(transform);
+        gl.drawElements(gl.TRIANGLES, platform.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+      }
+
+    };
+  };
+  d3.Tube.prototype = new d3._Mesh();
+
+})(ChemDoodle.extensions, ChemDoodle.RESIDUE, ChemDoodle.structures, ChemDoodle.structures.d3, Math, mat4, vec3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3100 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-02-17 07:35:56 -0500 (Thu, 17 Feb 2011) $
+//
+
+(function(d3, v3) {
+  'use strict';
+  d3.UnitCell = function(unitCellVectors) {
+    var positionData = [];
+    var normalData = [];
+    // calculate vertex and normal points
+
+    var pushSide = function(p1, p2, p3, p4) {
+      positionData.push(p1[0], p1[1], p1[2]);
+      positionData.push(p2[0], p2[1], p2[2]);
+      positionData.push(p3[0], p3[1], p3[2]);
+      positionData.push(p4[0], p4[1], p4[2]);
+      // push 0s for normals so shader gives them full color
+      for ( var i = 0; i < 4; i++) {
+        normalData.push(0, 0, 0);
+      }
+    };
+    pushSide(unitCellVectors.o, unitCellVectors.x, unitCellVectors.xy, unitCellVectors.y);
+    pushSide(unitCellVectors.o, unitCellVectors.y, unitCellVectors.yz, unitCellVectors.z);
+    pushSide(unitCellVectors.o, unitCellVectors.z, unitCellVectors.xz, unitCellVectors.x);
+    pushSide(unitCellVectors.yz, unitCellVectors.y, unitCellVectors.xy, unitCellVectors.xyz);
+    pushSide(unitCellVectors.xyz, unitCellVectors.xz, unitCellVectors.z, unitCellVectors.yz);
+    pushSide(unitCellVectors.xy, unitCellVectors.x, unitCellVectors.xz, unitCellVectors.xyz);
+
+    // build mesh connectivity
+    var indexData = [];
+    for ( var i = 0; i < 6; i++) {
+      var start = i * 4;
+      // sides
+      indexData.push(start, start + 1, start + 1, start + 2, start + 2, start + 3, start + 3, start);
+    }
+
+    this.storeData(positionData, normalData, indexData);
+  };
+  d3.UnitCell.prototype = new d3._Mesh();
+
+})(ChemDoodle.structures.d3, vec3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3078 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-02-06 18:27:15 -0500 (Sun, 06 Feb 2011) $
+//
+
+(function(structures, extensions, m) {
+  'use strict';
+  structures.Plate = function(lanes) {
+    this.lanes = new Array(lanes);
+    for (i = 0, ii = lanes; i < ii; i++) {
+      this.lanes[i] = [];
+    }
+  };
+  var _ = structures.Plate.prototype;
+  _.sort = function() {
+    for (i = 0, ii = this.lanes.length; i < ii; i++) {
+      this.lanes[i].sort(function(a, b) {
+        return a - b;
+      });
+    }
+  };
+  _.draw = function(ctx, specs) {
+    // Front and origin
+    var width = ctx.canvas.width;
+    var height = ctx.canvas.height;
+    this.origin = 9 * height / 10;
+    this.front = height / 10;
+    this.laneLength = this.origin - this.front;
+    ctx.strokeStyle = '#000000';
+    ctx.beginPath();
+    ctx.moveTo(0, this.front);
+    extensions.contextHashTo(ctx, 0, this.front, width, this.front, 3, 3);
+    ctx.closePath();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0, this.origin);
+    ctx.lineTo(width, this.origin);
+    ctx.closePath();
+    ctx.stroke();
+    // Lanes
+    for (i = 0, ii = this.lanes.length; i < ii; i++) {
+      var laneX = (i + 1) * width / (ii + 1);
+      ctx.beginPath();
+      ctx.moveTo(laneX, this.origin);
+      ctx.lineTo(laneX, this.origin + 3);
+      ctx.closePath();
+      ctx.stroke();
+      // Spots
+      for (s = 0, ss = this.lanes[i].length; s < ss; s++) {
+        var spotY = this.origin - (this.laneLength * this.lanes[i][s].rf);
+        switch (this.lanes[i][s].type) {
+        case 'compact':
+          ctx.beginPath();
+          ctx.arc(laneX, spotY, 3, 0, 2 * m.PI, false);
+          ctx.closePath();
+          break;
+        case 'expanded':
+          ctx.beginPath();
+          ctx.arc(laneX, spotY, 7, 0, 2 * m.PI, false);
+          ctx.closePath();
+          break;
+        case 'trailing':
+          // trailing
+          break;
+        case 'widened':
+          extensions.contextOval(ctx, laneX - 18, spotY - 10, 36, 10);
+          break;
+        case 'cresent':
+          ctx.beginPath();
+          ctx.arc(laneX, spotY, 9, 0, m.PI, true);
+          ctx.closePath();
+          break;
+        }
+        switch (this.lanes[i][s].style) {
+        case 'solid':
+          ctx.fillStyle = '#000000';
+          ctx.fill();
+          break;
+        case 'transparent':
+          ctx.stroke();
+          break;
+        case 'gradient':
+          // gradient
+          break;
+        }
+      }
+    }
+  };
+
+  structures.Plate.Spot = function(type, rf, style) {
+    this.type = type;
+    this.rf = rf;
+    this.style = style ? style : 'solid';
+  };
+
+})(ChemDoodle.structures, ChemDoodle.extensions, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4459 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-08-06 14:09:43 -0400 (Tue, 06 Aug 2013) $
+//
+
+(function(c, structures, m) {
+  'use strict';
+  // default canvas properties
+  c.default_backgroundColor = '#FFFFFF';
+  c.default_scale = 1;
+  c.default_rotateAngle = 0;
+  c.default_bondLength_2D = 20;
+  c.default_angstromsPerBondLength = 1.25;
+  c.default_lightDirection_3D = [ -.1, -.1, -1 ];
+  c.default_lightDiffuseColor_3D = '#FFFFFF';
+  c.default_lightSpecularColor_3D = '#FFFFFF';
+  c.default_projectionPerspective_3D = true;
+  c.default_projectionPerspectiveVerticalFieldOfView_3D = 45;
+  c.default_projectionOrthoWidth_3D = 40;
+  c.default_projectionWidthHeightRatio_3D = undefined;
+  c.default_projectionFrontCulling_3D = .1;
+  c.default_projectionBackCulling_3D = 10000;
+  c.default_cullBackFace_3D = true;
+  c.default_fog_mode_3D = 0;
+  c.default_fog_color_3D = '#000000';
+  c.default_fog_start_3D = 0;
+  c.default_fog_end_3D = 1;
+  c.default_fog_density_3D = 1;
+
+  // default atom properties
+  c.default_atoms_display = true;
+  c.default_atoms_color = '#000000';
+  c.default_atoms_font_size_2D = 12;
+  c.default_atoms_font_families_2D = [ 'Helvetica', 'Arial', 'Dialog' ];
+  c.default_atoms_font_bold_2D = false;
+  c.default_atoms_font_italic_2D = false;
+  c.default_atoms_circles_2D = false;
+  c.default_atoms_circleDiameter_2D = 10;
+  c.default_atoms_circleBorderWidth_2D = 1;
+  c.default_atoms_lonePairDistance_2D = 8;
+  c.default_atoms_lonePairSpread_2D = 4;
+  c.default_atoms_lonePairDiameter_2D = 1;
+  c.default_atoms_useJMOLColors = false;
+  c.default_atoms_usePYMOLColors = false;
+  c.default_atoms_resolution_3D = 60;
+  c.default_atoms_sphereDiameter_3D = .8;
+  c.default_atoms_useVDWDiameters_3D = false;
+  c.default_atoms_vdwMultiplier_3D = 1;
+  c.default_atoms_materialAmbientColor_3D = '#000000';
+  c.default_atoms_materialSpecularColor_3D = '#555555';
+  c.default_atoms_materialShininess_3D = 32;
+  c.default_atoms_implicitHydrogens_2D = true;
+  c.default_atoms_displayTerminalCarbonLabels_2D = false;
+  c.default_atoms_showHiddenCarbons_2D = true;
+  c.default_atoms_showAttributedCarbons_2D = true;
+  c.default_atoms_displayAllCarbonLabels_2D = false;
+  c.default_atoms_nonBondedAsStars_3D = false;
+  c.default_atoms_displayLabels_3D = false;
+
+  // default bond properties
+  c.default_bonds_display = true;
+  c.default_bonds_color = '#000000';
+  c.default_bonds_width_2D = 1;
+  c.default_bonds_saturationWidth_2D = .2;
+  c.default_bonds_ends_2D = 'round';
+  c.default_bonds_useJMOLColors = false;
+  c.default_bonds_usePYMOLColors = false;
+  c.default_bonds_colorGradient = false;
+  c.default_bonds_saturationAngle_2D = m.PI / 3;
+  c.default_bonds_symmetrical_2D = false;
+  c.default_bonds_clearOverlaps_2D = false;
+  c.default_bonds_overlapClearWidth_2D = .5;
+  c.default_bonds_atomLabelBuffer_2D = 1;
+  c.default_bonds_wedgeThickness_2D = .22;
+  c.default_bonds_hashWidth_2D = 1;
+  c.default_bonds_hashSpacing_2D = 2.5;
+  c.default_bonds_dotSize_2D = 2;
+  c.default_bonds_showBondOrders_3D = false;
+  c.default_bonds_resolution_3D = 60;
+  c.default_bonds_renderAsLines_3D = false;
+  c.default_bonds_cylinderDiameter_3D = .3;
+  c.default_bonds_pillLatitudeResolution_3D = 10;
+  c.default_bonds_pillLongitudeResolution_3D = 20;
+  c.default_bonds_pillHeight_3D = .3;
+  c.default_bonds_pillSpacing_3D = .1;
+  c.default_bonds_pillDiameter_3D = .3;
+  c.default_bonds_materialAmbientColor_3D = '#222222';
+  c.default_bonds_materialSpecularColor_3D = '#555555';
+  c.default_bonds_materialShininess_3D = 32;
+
+  // default macromolecular properties
+  c.default_proteins_displayRibbon = true;
+  c.default_proteins_displayBackbone = false;
+  c.default_proteins_backboneThickness = 1.5;
+  c.default_proteins_backboneColor = '#CCCCCC';
+  c.default_proteins_ribbonCartoonize = false;
+  c.default_proteins_useShapelyColors = false;
+  c.default_proteins_useAminoColors = false;
+  c.default_proteins_usePolarityColors = false;
+  c.default_proteins_primaryColor = '#FF0D0D';
+  c.default_proteins_secondaryColor = '#FFFF30';
+  c.default_proteins_ribbonCartoonHelixPrimaryColor = '#00E740';
+  c.default_proteins_ribbonCartoonHelixSecondaryColor = '#9905FF';
+  c.default_proteins_ribbonCartoonSheetColor = '#E8BB99';
+  c.default_proteins_ribbonThickness = .2;
+  c.default_proteins_verticalResolution = 10;
+  c.default_proteins_horizontalResolution = 9;
+  c.default_proteins_materialAmbientColor_3D = '#222222';
+  c.default_proteins_materialSpecularColor_3D = '#555555';
+  c.default_proteins_materialShininess_3D = 32;
+  c.default_nucleics_display = true;
+  c.default_nucleics_tubeColor = '#CCCCCC';
+  c.default_nucleics_baseColor = '#C10000';
+  c.default_nucleics_useShapelyColors = true;
+  c.default_nucleics_tubeThickness = 1.5;
+  c.default_nucleics_tubeResolution_3D = 60;
+  c.default_nucleics_verticalResolution = 10;
+  c.default_nucleics_materialAmbientColor_3D = '#222222';
+  c.default_nucleics_materialSpecularColor_3D = '#555555';
+  c.default_nucleics_materialShininess_3D = 32;
+  c.default_macro_displayAtoms = false;
+  c.default_macro_displayBonds = false;
+  c.default_macro_atomToLigandDistance = -1;
+  c.default_macro_showWater = false;
+  c.default_macro_colorByChain = false;
+
+  // default surface properties
+  c.default_surfaces_display = true;
+  c.default_surfaces_style = 'Dot';
+  c.default_surfaces_color = '#E9B862';
+  c.default_surfaces_materialAmbientColor_3D = '#000000';
+  c.default_surfaces_materialSpecularColor_3D = '#000000';
+  c.default_surfaces_materialShininess_3D = 32;
+
+  // default crystallographic properties
+  c.default_crystals_displayUnitCell = true;
+  c.default_crystals_unitCellColor = 'green';
+  c.default_crystals_unitCellLineWidth = 1;
+
+  // default spectrum properties
+  c.default_plots_color = '#000000';
+  c.default_plots_width = 1;
+  c.default_plots_showIntegration = false;
+  c.default_plots_integrationColor = '#c10000';
+  c.default_plots_integrationLineWidth = 1;
+  c.default_plots_showGrid = false;
+  c.default_plots_gridColor = 'gray';
+  c.default_plots_gridLineWidth = .5;
+  c.default_plots_showYAxis = true;
+  c.default_plots_flipXAxis = false;
+
+  // default shape properties
+  c.default_text_font_size = 12;
+  c.default_text_font_families = [ 'Helvetica', 'Arial', 'Dialog' ];
+  c.default_text_font_bold = true;
+  c.default_text_font_italic = false;
+  c.default_text_font_stroke_3D = true;
+  c.default_text_color = '#000000';
+  c.default_shapes_color = '#000000';
+  c.default_shapes_lineWidth_2D = 1;
+  c.default_shapes_arrowLength_2D = 8;
+  c.default_compass_display = false;
+  c.default_compass_axisXColor_3D = '#FF0000';
+  c.default_compass_axisYColor_3D = '#00FF00';
+  c.default_compass_axisZColor_3D = '#0000FF';
+  c.default_compass_size_3D = 50;
+  c.default_compass_resolution_3D = 10;
+  c.default_compass_displayText_3D = true;
+
+  structures.VisualSpecifications = function() {
+    // canvas properties
+    this.backgroundColor = c.default_backgroundColor;
+    this.scale = c.default_scale;
+    this.rotateAngle = c.default_rotateAngle;
+    this.bondLength = c.default_bondLength_2D;
+    this.angstromsPerBondLength = c.default_angstromsPerBondLength;
+    this.lightDirection_3D = c.default_lightDirection_3D;
+    this.lightDiffuseColor_3D = c.default_lightDiffuseColor_3D;
+    this.lightSpecularColor_3D = c.default_lightSpecularColor_3D;
+    this.projectionPerspective_3D = c.default_projectionPerspective_3D;
+    this.projectionPerspectiveVerticalFieldOfView_3D = c.default_projectionPerspectiveVerticalFieldOfView_3D;
+    this.projectionOrthoWidth_3D = c.default_projectionOrthoWidth_3D;
+    this.projectionWidthHeightRatio_3D = c.default_projectionWidthHeightRatio_3D;
+    this.projectionFrontCulling_3D = c.default_projectionFrontCulling_3D;
+    this.projectionBackCulling_3D = c.default_projectionBackCulling_3D;
+    this.cullBackFace_3D = c.default_cullBackFace_3D;
+    this.fog_mode_3D = c.default_fog_mode_3D;
+    this.fog_color_3D = c.default_fog_color_3D;
+    this.fog_start_3D = c.default_fog_start_3D;
+    this.fog_end_3D = c.default_fog_end_3D;
+    this.fog_density_3D = c.default_fog_density_3D;
+
+    // atom properties
+    this.atoms_display = c.default_atoms_display;
+    this.atoms_color = c.default_atoms_color;
+    this.atoms_font_size_2D = c.default_atoms_font_size_2D;
+    this.atoms_font_families_2D = [];
+    for ( var i = 0, ii = c.default_atoms_font_families_2D.length; i < ii; i++) {
+      this.atoms_font_families_2D[i] = c.default_atoms_font_families_2D[i];
+    }
+    this.atoms_font_bold_2D = c.default_atoms_font_bold_2D;
+    this.atoms_font_italic_2D = c.default_atoms_font_italic_2D;
+    this.atoms_circles_2D = c.default_atoms_circles_2D;
+    this.atoms_circleDiameter_2D = c.default_atoms_circleDiameter_2D;
+    this.atoms_circleBorderWidth_2D = c.default_atoms_circleBorderWidth_2D;
+    this.atoms_lonePairDistance_2D = c.default_atoms_lonePairDistance_2D;
+    this.atoms_lonePairSpread_2D = c.default_atoms_lonePairSpread_2D;
+    this.atoms_lonePairDiameter_2D = c.default_atoms_lonePairDiameter_2D;
+    this.atoms_useJMOLColors = c.default_atoms_useJMOLColors;
+    this.atoms_usePYMOLColors = c.default_atoms_usePYMOLColors;
+    this.atoms_resolution_3D = c.default_atoms_resolution_3D;
+    this.atoms_sphereDiameter_3D = c.default_atoms_sphereDiameter_3D;
+    this.atoms_useVDWDiameters_3D = c.default_atoms_useVDWDiameters_3D;
+    this.atoms_vdwMultiplier_3D = c.default_atoms_vdwMultiplier_3D;
+    this.atoms_materialAmbientColor_3D = c.default_atoms_materialAmbientColor_3D;
+    this.atoms_materialSpecularColor_3D = c.default_atoms_materialSpecularColor_3D;
+    this.atoms_materialShininess_3D = c.default_atoms_materialShininess_3D;
+    this.atoms_implicitHydrogens_2D = c.default_atoms_implicitHydrogens_2D;
+    this.atoms_displayTerminalCarbonLabels_2D = c.default_atoms_displayTerminalCarbonLabels_2D;
+    this.atoms_showHiddenCarbons_2D = c.default_atoms_showHiddenCarbons_2D;
+    this.atoms_showAttributedCarbons_2D = c.default_atoms_showAttributedCarbons_2D;
+    this.atoms_displayAllCarbonLabels_2D = c.default_atoms_displayAllCarbonLabels_2D;
+    this.atoms_nonBondedAsStars_3D = c.default_atoms_nonBondedAsStars_3D;
+    this.atoms_displayLabels_3D = c.default_atoms_displayLabels_3D;
+
+    // bond properties
+    this.bonds_display = c.default_bonds_display;
+    this.bonds_color = c.default_bonds_color;
+    this.bonds_width_2D = c.default_bonds_width_2D;
+    this.bonds_saturationWidth_2D = c.default_bonds_saturationWidth_2D;
+    this.bonds_ends_2D = c.default_bonds_ends_2D;
+    this.bonds_useJMOLColors = c.default_bonds_useJMOLColors;
+    this.bonds_usePYMOLColors = c.default_bonds_usePYMOLColors;
+    this.bonds_colorGradient = c.default_bonds_colorGradient;
+    this.bonds_saturationAngle_2D = c.default_bonds_saturationAngle_2D;
+    this.bonds_symmetrical_2D = c.default_bonds_symmetrical_2D;
+    this.bonds_clearOverlaps_2D = c.default_bonds_clearOverlaps_2D;
+    this.bonds_overlapClearWidth_2D = c.default_bonds_overlapClearWidth_2D;
+    this.bonds_atomLabelBuffer_2D = c.default_bonds_atomLabelBuffer_2D;
+    this.bonds_wedgeThickness_2D = c.default_bonds_wedgeThickness_2D;
+    this.bonds_hashWidth_2D = c.default_bonds_hashWidth_2D;
+    this.bonds_hashSpacing_2D = c.default_bonds_hashSpacing_2D;
+    this.bonds_dotSize_2D = c.default_bonds_dotSize_2D;
+    this.bonds_showBondOrders_3D = c.default_bonds_showBondOrders_3D;
+    this.bonds_resolution_3D = c.default_bonds_resolution_3D;
+    this.bonds_renderAsLines_3D = c.default_bonds_renderAsLines_3D;
+    this.bonds_cylinderDiameter_3D = c.default_bonds_cylinderDiameter_3D;
+    this.bonds_pillHeight_3D = c.default_bonds_pillHeight_3D;
+    this.bonds_pillLatitudeResolution_3D = c.default_bonds_pillLatitudeResolution_3D;
+    this.bonds_pillLongitudeResolution_3D = c.default_bonds_pillLongitudeResolution_3D;
+    this.bonds_pillSpacing_3D = c.default_bonds_pillSpacing_3D;
+    this.bonds_pillDiameter_3D = c.default_bonds_pillDiameter_3D;
+    this.bonds_materialAmbientColor_3D = c.default_bonds_materialAmbientColor_3D;
+    this.bonds_materialSpecularColor_3D = c.default_bonds_materialSpecularColor_3D;
+    this.bonds_materialShininess_3D = c.default_bonds_materialShininess_3D;
+
+    // macromolecular properties
+    this.proteins_displayRibbon = c.default_proteins_displayRibbon;
+    this.proteins_displayBackbone = c.default_proteins_displayBackbone;
+    this.proteins_backboneThickness = c.default_proteins_backboneThickness;
+    this.proteins_backboneColor = c.default_proteins_backboneColor;
+    this.proteins_ribbonCartoonize = c.default_proteins_ribbonCartoonize;
+    this.proteins_useShapelyColors = c.default_proteins_useShapelyColors;
+    this.proteins_useAminoColors = c.default_proteins_useAminoColors;
+    this.proteins_usePolarityColors = c.default_proteins_usePolarityColors;
+    this.proteins_primaryColor = c.default_proteins_primaryColor;
+    this.proteins_secondaryColor = c.default_proteins_secondaryColor;
+    this.proteins_ribbonCartoonHelixPrimaryColor = c.default_proteins_ribbonCartoonHelixPrimaryColor;
+    this.proteins_ribbonCartoonHelixSecondaryColor = c.default_proteins_ribbonCartoonHelixSecondaryColor;
+    this.proteins_ribbonCartoonSheetColor = c.default_proteins_ribbonCartoonSheetColor;
+    this.proteins_ribbonThickness = c.default_proteins_ribbonThickness;
+    this.proteins_verticalResolution = c.default_proteins_verticalResolution;
+    this.proteins_horizontalResolution = c.default_proteins_horizontalResolution;
+    this.proteins_materialAmbientColor_3D = c.default_proteins_materialAmbientColor_3D;
+    this.proteins_materialSpecularColor_3D = c.default_proteins_materialSpecularColor_3D;
+    this.proteins_materialShininess_3D = c.default_proteins_materialShininess_3D;
+    this.macro_displayAtoms = c.default_macro_displayAtoms;
+    this.macro_displayBonds = c.default_macro_displayBonds;
+    this.macro_atomToLigandDistance = c.default_macro_atomToLigandDistance;
+    this.nucleics_display = c.default_nucleics_display;
+    this.nucleics_tubeColor = c.default_nucleics_tubeColor;
+    this.nucleics_baseColor = c.default_nucleics_baseColor;
+    this.nucleics_useShapelyColors = c.default_nucleics_useShapelyColors;
+    this.nucleics_tubeThickness = c.default_nucleics_tubeThickness;
+    this.nucleics_tubeResolution_3D = c.default_nucleics_tubeResolution_3D;
+    this.nucleics_verticalResolution = c.default_nucleics_verticalResolution;
+    this.nucleics_materialAmbientColor_3D = c.default_nucleics_materialAmbientColor_3D;
+    this.nucleics_materialSpecularColor_3D = c.default_nucleics_materialSpecularColor_3D;
+    this.nucleics_materialShininess_3D = c.default_nucleics_materialShininess_3D;
+    this.macro_showWater = c.default_macro_showWater;
+    this.macro_colorByChain = c.default_macro_colorByChain;
+
+    // surface properties
+    this.surfaces_display = c.default_surfaces_display;
+    this.surfaces_style = c.default_surfaces_style;
+    this.surfaces_color = c.default_surfaces_color;
+    this.surfaces_materialAmbientColor_3D = c.default_surfaces_materialAmbientColor_3D;
+    this.surfaces_materialSpecularColor_3D = c.default_surfaces_materialSpecularColor_3D;
+    this.surfaces_materialShininess_3D = c.default_surfaces_materialShininess_3D;
+
+    // crystallographic properties
+    this.crystals_displayUnitCell = c.default_crystals_displayUnitCell;
+    this.crystals_unitCellColor = c.default_crystals_unitCellColor;
+    this.crystals_unitCellLineWidth = c.default_crystals_unitCellLineWidth;
+
+    // spectrum properties
+    this.plots_color = c.default_plots_color;
+    this.plots_width = c.default_plots_width;
+    this.plots_showIntegration = c.default_plots_showIntegration;
+    this.plots_integrationColor = c.default_plots_integrationColor;
+    this.plots_integrationLineWidth = c.default_plots_integrationLineWidth;
+    this.plots_showGrid = c.default_plots_showGrid;
+    this.plots_gridColor = c.default_plots_gridColor;
+    this.plots_gridLineWidth = c.default_plots_gridLineWidth;
+    this.plots_showYAxis = c.default_plots_showYAxis;
+    this.plots_flipXAxis = c.default_plots_flipXAxis;
+
+    // shape properties
+    this.text_font_size = c.default_text_font_size;
+    this.text_font_families = [];
+    for ( var i = 0, ii = c.default_text_font_families.length; i < ii; i++) {
+      this.text_font_families[i] = c.default_text_font_families[i];
+    }
+    this.text_font_bold = c.default_text_font_bold;
+    this.text_font_italic = c.default_text_font_italic;
+    this.text_font_stroke_3D = c.default_text_font_stroke_3D;
+    this.text_color = c.default_text_color;
+    this.shapes_color = c.default_shapes_color;
+    this.shapes_lineWidth_2D = c.default_shapes_lineWidth_2D;
+    this.shapes_arrowLength_2D = c.default_shapes_arrowLength_2D;
+    this.compass_display = c.default_compass_display;
+    this.compass_axisXColor_3D = c.default_compass_axisXColor_3D;
+    this.compass_axisYColor_3D = c.default_compass_axisYColor_3D;
+    this.compass_axisZColor_3D = c.default_compass_axisZColor_3D;
+    this.compass_size_3D = c.default_compass_size_3D;
+    this.compass_resolution_3D = c.default_compass_resolution_3D;
+    this.compass_displayText_3D = c.default_compass_displayText_3D;
+  };
+  var _ = structures.VisualSpecifications.prototype;
+  _.set3DRepresentation = function(representation) {
+    this.atoms_display = true;
+    this.bonds_display = true;
+    this.bonds_color = '#777777';
+    this.atoms_useVDWDiameters_3D = true;
+    this.atoms_useJMOLColors = true;
+    this.bonds_useJMOLColors = true;
+    this.bonds_showBondOrders_3D = true;
+    this.bonds_renderAsLines_3D = false;
+    if (representation === 'Ball and Stick') {
+      this.atoms_vdwMultiplier_3D = .3;
+      this.bonds_useJMOLColors = false;
+      this.bonds_cylinderDiameter_3D = .3;
+      this.bonds_materialAmbientColor_3D = c.default_atoms_materialAmbientColor_3D;
+      this.bonds_pillDiameter_3D = .15;
+    } else if (representation === 'van der Waals Spheres') {
+      this.bonds_display = false;
+      this.atoms_vdwMultiplier_3D = 1;
+    } else if (representation === 'Stick') {
+      this.atoms_useVDWDiameters_3D = false;
+      this.bonds_showBondOrders_3D = false;
+      this.bonds_cylinderDiameter_3D = this.atoms_sphereDiameter_3D = .8;
+      this.bonds_materialAmbientColor_3D = this.atoms_materialAmbientColor_3D;
+    } else if (representation === 'Wireframe') {
+      this.atoms_useVDWDiameters_3D = false;
+      this.bonds_cylinderDiameter_3D = this.bonds_pillDiameter_3D = .05;
+      this.atoms_sphereDiameter_3D = .15;
+      this.bonds_materialAmbientColor_3D = c.default_atoms_materialAmbientColor_3D;
+    } else if (representation === 'Line') {
+      this.atoms_display = false;
+      this.bonds_renderAsLines_3D = true;
+      this.bonds_width_2D = 1;
+      this.bonds_cylinderDiameter_3D = .05;
+    } else {
+      alert('"' + representation + '" is not recognized. Use one of the following strings:\n\n' + '1. Ball and Stick\n' + '2. van der Waals Spheres\n' + '3. Stick\n' + '4. Wireframe\n' + '5. Line\n');
+    }
+  };
+
+})(ChemDoodle, ChemDoodle.structures, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+(function(c, ELEMENT, informatics, structures) {
+  'use strict';
+  informatics.getPointsPerAngstrom = function() {
+    return c.default_bondLength_2D / c.default_angstromsPerBondLength;
+  };
+
+  informatics.BondDeducer = function() {
+  };
+  var _ = informatics.BondDeducer.prototype;
+  _.margin = 1.1;
+  _.deduceCovalentBonds = function(molecule, customPointsPerAngstrom) {
+    var pointsPerAngstrom = informatics.getPointsPerAngstrom();
+    if (customPointsPerAngstrom) {
+      pointsPerAngstrom = customPointsPerAngstrom;
+    }
+    for ( var i = 0, ii = molecule.atoms.length; i < ii; i++) {
+      for ( var j = i + 1; j < ii; j++) {
+        var first = molecule.atoms[i];
+        var second = molecule.atoms[j];
+        if (first.distance3D(second) < (ELEMENT[first.label].covalentRadius + ELEMENT[second.label].covalentRadius) * pointsPerAngstrom * this.margin) {
+          molecule.bonds.push(new structures.Bond(first, second, 1));
+        }
+      }
+    }
+  };
+
+})(ChemDoodle, ChemDoodle.ELEMENT, ChemDoodle.informatics, ChemDoodle.structures);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+(function(informatics) {
+  'use strict';
+  informatics.HydrogenDeducer = function() {
+  };
+  var _ = informatics.HydrogenDeducer.prototype;
+  _.removeHydrogens = function(molecule) {
+    var atoms = [];
+    var bonds = [];
+    for ( var i = 0, ii = molecule.bonds.length; i < ii; i++) {
+      if (molecule.bonds[i].a1.label !== 'H' && molecule.bonds[i].a2.label !== 'H') {
+        bonds.push(molecule.bonds[i]);
+      }
+    }
+    for ( var i = 0, ii = molecule.atoms.length; i < ii; i++) {
+      if (molecule.atoms[i].label !== 'H') {
+        atoms.push(molecule.atoms[i]);
+      }
+    }
+    molecule.atoms = atoms;
+    molecule.bonds = bonds;
+  };
+
+})(ChemDoodle.informatics);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3103 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-02-20 12:58:08 -0500 (Sun, 20 Feb 2011) $
+//
+(function(c, informatics, d3) {
+  'use strict';
+  informatics.MolecularSurfaceGenerator = function() {
+  };
+  var _ = informatics.MolecularSurfaceGenerator.prototype;
+  _.generateSurface = function(molecule, latitudeBands, longitudeBands, probeRadius, atomRadius) {
+    return new d3.MolecularSurface(molecule, latitudeBands, longitudeBands, probeRadius, atomRadius);
+  };
+
+})(ChemDoodle, ChemDoodle.informatics, ChemDoodle.structures.d3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3103 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-02-20 12:58:08 -0500 (Sun, 20 Feb 2011) $
+//
+(function(informatics, structures) {
+  'use strict';
+  informatics.Splitter = function() {
+  };
+  var _ = informatics.Splitter.prototype;
+  _.split = function(molecule) {
+    var mols = [];
+    for ( var i = 0, ii = molecule.atoms.length; i < ii; i++) {
+      molecule.atoms[i].visited = false;
+    }
+    for ( var i = 0, ii = molecule.bonds.length; i < ii; i++) {
+      molecule.bonds[i].visited = false;
+    }
+    for ( var i = 0, ii = molecule.atoms.length; i < ii; i++) {
+      var a = molecule.atoms[i];
+      if (!a.visited) {
+        var newMol = new structures.Molecule();
+        newMol.atoms.push(a);
+        a.visited = true;
+        var q = new structures.Queue();
+        q.enqueue(a);
+        while (!q.isEmpty()) {
+          var atom = q.dequeue();
+          for ( var j = 0, jj = molecule.bonds.length; j < jj; j++) {
+            var b = molecule.bonds[j];
+            if (b.contains(atom) && !b.visited) {
+              b.visited = true;
+              newMol.bonds.push(b);
+              var neigh = b.getNeighbor(atom);
+              if (!neigh.visited) {
+                neigh.visited = true;
+                newMol.atoms.push(neigh);
+                q.enqueue(neigh);
+              }
+            }
+          }
+        }
+        mols.push(newMol);
+      }
+    }
+    return mols;
+  };
+
+})(ChemDoodle.informatics, ChemDoodle.structures);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4208 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-03-24 10:31:41 -0400 (Sun, 24 Mar 2013) $
+//
+(function(informatics, io, structures) {
+  'use strict';
+  informatics.StructureBuilder = function() {
+  };
+  var _ = informatics.StructureBuilder.prototype;
+  _.copy = function(molecule) {
+    var json = new io.JSONInterpreter();
+    return json.molFrom(json.molTo(molecule));
+  };
+
+})(ChemDoodle.informatics, ChemDoodle.io, ChemDoodle.structures);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+(function(informatics) {
+  'use strict';
+  informatics._Counter = function() {
+  };
+  var _ = informatics._Counter.prototype;
+  _.value = 0;
+  _.molecule = undefined;
+  _.setMolecule = function(molecule) {
+    this.value = 0;
+    this.molecule = molecule;
+    if (this.innerCalculate) {
+      this.innerCalculate();
+    }
+  };
+})(ChemDoodle.informatics);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+(function(informatics) {
+  'use strict';
+  informatics.FrerejacqueNumberCounter = function(molecule) {
+    this.setMolecule(molecule);
+  };
+  var _ = informatics.FrerejacqueNumberCounter.prototype = new informatics._Counter();
+  _.innerCalculate = function() {
+    this.value = this.molecule.bonds.length - this.molecule.atoms.length + new informatics.NumberOfMoleculesCounter(this.molecule).value;
+  };
+})(ChemDoodle.informatics);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+(function(structures, informatics) {
+  'use strict';
+  informatics.NumberOfMoleculesCounter = function(molecule) {
+    this.setMolecule(molecule);
+  };
+  var _ = informatics.NumberOfMoleculesCounter.prototype = new informatics._Counter();
+  _.innerCalculate = function() {
+    for ( var i = 0, ii = this.molecule.atoms.length; i < ii; i++) {
+      this.molecule.atoms[i].visited = false;
+    }
+    for ( var i = 0, ii = this.molecule.atoms.length; i < ii; i++) {
+      if (!this.molecule.atoms[i].visited) {
+        this.value++;
+        var q = new structures.Queue();
+        this.molecule.atoms[i].visited = true;
+        q.enqueue(this.molecule.atoms[i]);
+        while (!q.isEmpty()) {
+          var atom = q.dequeue();
+          for ( var j = 0, jj = this.molecule.bonds.length; j < jj; j++) {
+            var b = this.molecule.bonds[j];
+            if (b.contains(atom)) {
+              var neigh = b.getNeighbor(atom);
+              if (!neigh.visited) {
+                neigh.visited = true;
+                q.enqueue(neigh);
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+})(ChemDoodle.structures, ChemDoodle.informatics);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4137 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-22 12:46:00 -0500 (Fri, 22 Feb 2013) $
+//
+
+(function(informatics) {
+  'use strict';
+  informatics._RingFinder = function() {
+  };
+  var _ = informatics._RingFinder.prototype;
+  _.atoms = undefined;
+  _.bonds = undefined;
+  _.rings = undefined;
+  _.reduce = function(molecule) {
+    for ( var i = 0, ii = molecule.atoms.length; i < ii; i++) {
+      molecule.atoms[i].visited = false;
+    }
+    for ( var i = 0, ii = molecule.bonds.length; i < ii; i++) {
+      molecule.bonds[i].visited = false;
+    }
+    var cont = true;
+    while (cont) {
+      cont = false;
+      for ( var i = 0, ii = molecule.atoms.length; i < ii; i++) {
+        var count = 0;
+        var bond;
+        for ( var j = 0, jj = molecule.bonds.length; j < jj; j++) {
+          if (molecule.bonds[j].contains(molecule.atoms[i]) && !molecule.bonds[j].visited) {
+            count++;
+            if (count === 2) {
+              break;
+            }
+            bond = molecule.bonds[j];
+          }
+        }
+        if (count === 1) {
+          cont = true;
+          bond.visited = true;
+          molecule.atoms[i].visited = true;
+        }
+      }
+    }
+    for ( var i = 0, ii = molecule.atoms.length; i < ii; i++) {
+      if (!molecule.atoms[i].visited) {
+        this.atoms.push(molecule.atoms[i]);
+      }
+    }
+    for ( var i = 0, ii = molecule.bonds.length; i < ii; i++) {
+      if (!molecule.bonds[i].visited) {
+        this.bonds.push(molecule.bonds[i]);
+      }
+    }
+    if (this.bonds.length === 0 && this.atoms.length !== 0) {
+      this.atoms = [];
+    }
+  };
+  _.setMolecule = function(molecule) {
+    this.atoms = [];
+    this.bonds = [];
+    this.rings = [];
+    this.reduce(molecule);
+    if (this.atoms.length > 2 && this.innerGetRings) {
+      this.innerGetRings();
+    }
+  };
+  _.fuse = function() {
+    for ( var i = 0, ii = this.rings.length; i < ii; i++) {
+      for ( var j = 0, jj = this.bonds.length; j < jj; j++) {
+        if (this.rings[i].atoms.indexOf(this.bonds[j].a1) !== -1 && this.rings[i].atoms.indexOf(this.bonds[j].a2) !== -1) {
+          this.rings[i].bonds.push(this.bonds[j]);
+        }
+      }
+    }
+  };
+
+})(ChemDoodle.informatics);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4137 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-22 12:46:00 -0500 (Fri, 22 Feb 2013) $
+//
+(function(informatics, structures) {
+  'use strict';
+  function Finger(a, from) {
+    this.atoms = [];
+    if (from) {
+      for ( var i = 0, ii = from.atoms.length; i < ii; i++) {
+        this.atoms[i] = from.atoms[i];
+      }
+    }
+    this.atoms.push(a);
+  }
+  var _2 = Finger.prototype;
+  _2.grow = function(bonds, blockers) {
+    var last = this.atoms[this.atoms.length - 1];
+    var neighs = [];
+    for ( var i = 0, ii = bonds.length; i < ii; i++) {
+      if (bonds[i].contains(last)) {
+        var neigh = bonds[i].getNeighbor(last);
+        if (blockers.indexOf(neigh) === -1) {
+          neighs.push(neigh);
+        }
+      }
+    }
+    var returning = [];
+    for ( var i = 0, ii = neighs.length; i < ii; i++) {
+      returning.push(new Finger(neighs[i], this));
+    }
+    return returning;
+  };
+  _2.check = function(bonds, finger, a) {
+    // check that they dont contain similar parts
+    for ( var i = 0, ii = finger.atoms.length - 1; i < ii; i++) {
+      if (this.atoms.indexOf(finger.atoms[i]) !== -1) {
+        return undefined;
+      }
+    }
+    var ring;
+    // check if fingers meet at tips
+    if (finger.atoms[finger.atoms.length - 1] === this.atoms[this.atoms.length - 1]) {
+      ring = new structures.Ring();
+      ring.atoms[0] = a;
+      for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+        ring.atoms.push(this.atoms[i]);
+      }
+      for ( var i = finger.atoms.length - 2; i >= 0; i--) {
+        ring.atoms.push(finger.atoms[i]);
+      }
+    } else {
+      // check if fingers meet at bond
+      var endbonds = [];
+      for ( var i = 0, ii = bonds.length; i < ii; i++) {
+        if (bonds[i].contains(finger.atoms[finger.atoms.length - 1])) {
+          endbonds.push(bonds[i]);
+        }
+      }
+      for ( var i = 0, ii = endbonds.length; i < ii; i++) {
+        if ((finger.atoms.length === 1 || !endbonds[i].contains(finger.atoms[finger.atoms.length - 2])) && endbonds[i].contains(this.atoms[this.atoms.length - 1])) {
+          ring = new structures.Ring();
+          ring.atoms[0] = a;
+          for ( var j = 0, jj = this.atoms.length; j < jj; j++) {
+            ring.atoms.push(this.atoms[j]);
+          }
+          for ( var j = finger.atoms.length - 1; j >= 0; j--) {
+            ring.atoms.push(finger.atoms[j]);
+          }
+          break;
+        }
+      }
+    }
+    return ring;
+  };
+
+  informatics.EulerFacetRingFinder = function(molecule) {
+    this.setMolecule(molecule);
+  };
+  var _ = informatics.EulerFacetRingFinder.prototype = new informatics._RingFinder();
+  _.fingerBreak = 5;
+  _.innerGetRings = function() {
+    for ( var i = 0, ii = this.atoms.length; i < ii; i++) {
+      var neigh = [];
+      for ( var j = 0, jj = this.bonds.length; j < jj; j++) {
+        if (this.bonds[j].contains(this.atoms[i])) {
+          neigh.push(this.bonds[j].getNeighbor(this.atoms[i]));
+        }
+      }
+      for ( var j = 0, jj = neigh.length; j < jj; j++) {
+        // weird that i can't optimize this loop without breaking a test
+        // case...
+        for ( var k = j + 1; k < neigh.length; k++) {
+          var fingers = [];
+          fingers[0] = new Finger(neigh[j]);
+          fingers[1] = new Finger(neigh[k]);
+          var blockers = [];
+          blockers[0] = this.atoms[i];
+          for ( var l = 0, ll = neigh.length; l < ll; l++) {
+            if (l !== j && l !== k) {
+              blockers.push(neigh[l]);
+            }
+          }
+          var found = [];
+          // check for 3 membered ring
+          var three = fingers[0].check(this.bonds, fingers[1], this.atoms[i]);
+          if (three) {
+            found[0] = three;
+          }
+          while (found.length === 0 && fingers.length > 0 && fingers[0].atoms.length < this.fingerBreak) {
+            var newfingers = [];
+            for ( var l = 0, ll = fingers.length; l < ll; l++) {
+              var adding = fingers[l].grow(this.bonds, blockers);
+              for ( var m = 0, mm = adding.length; m < mm; m++) {
+                newfingers.push(adding[m]);
+              }
+            }
+            fingers = newfingers;
+            for ( var l = 0, ll = fingers.length; l < ll; l++) {
+              for ( var m = l + 1; m < ll; m++) {
+                var r = fingers[l].check(this.bonds, fingers[m], this.atoms[i]);
+                if (r) {
+                  found.push(r);
+                }
+              }
+            }
+            if (found.length === 0) {
+              var newBlockers = [];
+              for ( var l = 0, ll = blockers.length; l < ll; l++) {
+                for ( var m = 0, mm = this.bonds.length; m < mm; m++) {
+                  if (this.bonds[m].contains(blockers[l])) {
+                    var neigh = this.bonds[m].getNeighbor(blockers[l]);
+                    if (blockers.indexOf(neigh) === -1 && newBlockers.indexOf(neigh) === -1) {
+                      newBlockers.push(neigh);
+                    }
+                  }
+                }
+              }
+              for ( var l = 0, ll = newBlockers.length; l < ll; l++) {
+                blockers.push(newBlockers[l]);
+              }
+            }
+          }
+          if (found.length > 0) {
+            // this undefined is required...weird, don't know why
+            var use = undefined;
+            for ( var l = 0, ll = found.length; l < ll; l++) {
+              if (!use || use.atoms.length > found[l].atoms.length) {
+                use = found[l];
+              }
+            }
+            var already = false;
+            for ( var l = 0, ll = this.rings.length; l < ll; l++) {
+              var all = true;
+              for ( var m = 0, mm = use.atoms.length; m < mm; m++) {
+                if (this.rings[l].atoms.indexOf(use.atoms[m]) === -1) {
+                  all = false;
+                  break;
+                }
+              }
+              if (all) {
+                already = true;
+                break;
+              }
+            }
+            if (!already) {
+              this.rings.push(use);
+            }
+          }
+        }
+      }
+    }
+    this.fuse();
+  };
+
+})(ChemDoodle.informatics, ChemDoodle.structures);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(informatics) {
+  'use strict';
+  informatics.SSSRFinder = function(molecule) {
+    this.rings = [];
+    if (molecule.atoms.length > 0) {
+      var frerejacqueNumber = new informatics.FrerejacqueNumberCounter(molecule).value;
+      var all = new informatics.EulerFacetRingFinder(molecule).rings;
+      all.sort(function(a, b) {
+        return a.atoms.length - b.atoms.length;
+      });
+      for ( var i = 0, ii = molecule.bonds.length; i < ii; i++) {
+        molecule.bonds[i].visited = false;
+      }
+      for ( var i = 0, ii = all.length; i < ii; i++) {
+        var use = false;
+        for ( var j = 0, jj = all[i].bonds.length; j < jj; j++) {
+          if (!all[i].bonds[j].visited) {
+            use = true;
+            break;
+          }
+        }
+        if (use) {
+          for ( var j = 0, jj = all[i].bonds.length; j < jj; j++) {
+            all[i].bonds[j].visited = true;
+          }
+          this.rings.push(all[i]);
+        }
+        if (this.rings.length === frerejacqueNumber) {
+          break;
+        }
+      }
+    }
+  };
+
+})(ChemDoodle.informatics);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3915 $
+//  $Author: kevin $
+//  $LastChangedDate: 2012-11-30 12:11:00 -0500 (Fri, 30 Nov 2012) $
+//
+(function(io) {
+  'use strict';
+  io._Interpreter = function() {
+  };
+  var _ = io._Interpreter.prototype;
+  _.fit = function(data, length, leftAlign) {
+    var size = data.length;
+    var padding = [];
+    for ( var i = 0; i < length - size; i++) {
+      padding.push(' ');
+    }
+    return leftAlign ? data + padding.join('') : padding.join('') + data;
+  };
+
+})(ChemDoodle.io);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3385 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-09-18 11:40:07 -0400 (Sun, 18 Sep 2011) $
+//
+
+(function(c, extensions, io, structures, m, m4, v3) {
+  'use strict';
+  var whitespaceRegex = /\s+/g;
+  var whitespaceAndParenthesisRegex = /\(|\)|\s+/g;
+  var whitespaceAndQuoteRegex = /\'|\s+/g;
+  var whitespaceAndQuoteAndCommaRegex = /,|\'|\s+/g;
+  var leadingWhitespaceRegex = /^\s+/;
+  var digitsRegex = /[0-9]/g;
+  var digitsSymbolRegex = /[0-9]|\+|\-/g;
+
+  var filter = function(s) {
+    return s.length !== 0;
+  };
+
+  var hallTranslations = {
+    'P' : [],
+    'A' : [ [ 0, .5, .5 ] ],
+    'B' : [ [ .5, 0, .5 ] ],
+    'C' : [ [ .5, .5, 0 ] ],
+    'I' : [ [ .5, .5, .5 ] ],
+    'R' : [ [ 2 / 3, 1 / 3, 1 / 3 ], [ 1 / 3, 2 / 3, 2 / 3 ] ],
+    'S' : [ [ 1 / 3, 1 / 3, 2 / 3 ], [ 2 / 3, 2 / 3, 1 / 3 ] ],
+    'T' : [ [ 1 / 3, 2 / 3, 1 / 3 ], [ 2 / 3, 1 / 3, 2 / 3 ] ],
+    'F' : [ [ 0, .5, .5 ], [ .5, 0, .5 ], [ .5, .5, 0 ] ]
+  };
+
+  var parseTransform = function(s) {
+    var displacement = 0;
+    var x = 0, y = 0, z = 0;
+    var indexx = s.indexOf('x');
+    var indexy = s.indexOf('y');
+    var indexz = s.indexOf('z');
+    if (indexx !== -1) {
+      x++;
+      if (indexx > 0 && s.charAt(indexx - 1) !== '+') {
+        x *= -1;
+      }
+    }
+    if (indexy !== -1) {
+      y++;
+      if (indexy > 0 && s.charAt(indexy - 1) !== '+') {
+        y *= -1;
+      }
+    }
+    if (indexz !== -1) {
+      z++;
+      if (indexz > 0 && s.charAt(indexz - 1) !== '+') {
+        z *= -1;
+      }
+    }
+    if (s.length > 2) {
+      var op = '+';
+      for ( var i = 0, ii = s.length; i < ii; i++) {
+        var l = s.charAt(i);
+        if ((l === '-' || l === '/') && (i === s.length - 1 || s.charAt(i + 1).match(digitsRegex))) {
+          op = l;
+        }
+        if (l.match(digitsRegex)) {
+          if (op === '+') {
+            displacement += parseInt(l);
+          } else if (op === '-') {
+            displacement -= parseInt(l);
+          } else if (op === '/') {
+            displacement /= parseInt(l);
+          }
+        }
+      }
+    }
+    return [ displacement, x, y, z ];
+  };
+
+  var generateABC2XYZ = function(a, b, c, alpha, beta, gamma) {
+    var d = (m.cos(alpha) - m.cos(gamma) * m.cos(beta)) / m.sin(gamma);
+    return [ a, 0, 0, 0, b * m.cos(gamma), b * m.sin(gamma), 0, 0, c * m.cos(beta), c * d, c * m.sqrt(1 - m.pow(m.cos(beta), 2) - d * d), 0, 0, 0, 0, 1 ];
+  };
+
+  io.CIFInterpreter = function() {
+  };
+  var _ = io.CIFInterpreter.prototype = new io._Interpreter();
+  _.read = function(content, xSuper, ySuper, zSuper) {
+    xSuper = xSuper ? xSuper : 1;
+    ySuper = ySuper ? ySuper : 1;
+    zSuper = zSuper ? zSuper : 1;
+    var molecule = new structures.Molecule();
+    if (!content) {
+      return molecule;
+    }
+    var lines = content.split('\n');
+    var aLength = 0, bLength = 0, cLength = 0, alphaAngle = 0, betaAngle = 0, gammaAngle = 0;
+    var hallClass = 'P';
+    var transformLoop;
+    var atomLoop;
+    var bondLoop;
+
+    var line;
+    var shift = true;
+    while (lines.length > 0) {
+      if (shift) {
+        line = lines.shift();
+      } else {
+        shift = true;
+      }
+      if (line.length > 0) {
+        if (extensions.stringStartsWith(line, '_cell_length_a')) {
+          aLength = parseFloat(line.split(whitespaceAndParenthesisRegex)[1]);
+        } else if (extensions.stringStartsWith(line, '_cell_length_b')) {
+          bLength = parseFloat(line.split(whitespaceAndParenthesisRegex)[1]);
+        } else if (extensions.stringStartsWith(line, '_cell_length_c')) {
+          cLength = parseFloat(line.split(whitespaceAndParenthesisRegex)[1]);
+        } else if (extensions.stringStartsWith(line, '_cell_angle_alpha')) {
+          alphaAngle = m.PI * parseFloat(line.split(whitespaceAndParenthesisRegex)[1]) / 180;
+        } else if (extensions.stringStartsWith(line, '_cell_angle_beta')) {
+          betaAngle = m.PI * parseFloat(line.split(whitespaceAndParenthesisRegex)[1]) / 180;
+        } else if (extensions.stringStartsWith(line, '_cell_angle_gamma')) {
+          gammaAngle = m.PI * parseFloat(line.split(whitespaceAndParenthesisRegex)[1]) / 180;
+        } else if (extensions.stringStartsWith(line, '_symmetry_space_group_name_H-M')) {
+          hallClass = line.split(whitespaceAndQuoteRegex)[1];
+        } else if (extensions.stringStartsWith(line, 'loop_')) {
+          var loop = {
+            fields : [],
+            lines : []
+          };
+          var pushingLines = false;
+          // keep undefined check here because the line may be an
+          // empty string
+          while ((line = lines.shift()) !== undefined && !extensions.stringStartsWith(line = line.replace(leadingWhitespaceRegex, ''), 'loop_') && line.length > 0) {
+            // remove leading whitespace that may appear in
+            // subloop lines ^
+            if (extensions.stringStartsWith(line, '_')) {
+              if (pushingLines) {
+                break;
+              }
+              loop.fields = loop.fields.concat(line.split(whitespaceRegex).filter(filter));
+            } else {
+              pushingLines = true;
+              loop.lines.push(line);
+            }
+          }
+          if (lines.length !== 0 && (extensions.stringStartsWith(line, 'loop_') || extensions.stringStartsWith(line, '_'))) {
+            shift = false;
+          }
+          if (loop.fields.indexOf('_symmetry_equiv_pos_as_xyz') !== -1 || loop.fields.indexOf('_space_group_symop_operation_xyz') !== -1) {
+            transformLoop = loop;
+          } else if (loop.fields.indexOf('_atom_site_label') !== -1) {
+            atomLoop = loop;
+          } else if (loop.fields.indexOf('_geom_bond_atom_site_label_1') !== -1) {
+            bondLoop = loop;
+          }
+        }
+      }
+    }
+    var abc2xyz = generateABC2XYZ(aLength, bLength, cLength, alphaAngle, betaAngle, gammaAngle);
+    // internal atom coordinates
+    if (atomLoop) {
+      var labelIndex = -1, altLabelIndex = -1, xIndex = -1, yIndex = -1, zIndex = -1;
+      for ( var i = 0, ii = atomLoop.fields.length; i < ii; i++) {
+        var field = atomLoop.fields[i];
+        if (field === '_atom_site_type_symbol') {
+          labelIndex = i;
+        } else if (field === '_atom_site_label') {
+          altLabelIndex = i;
+        } else if (field === '_atom_site_fract_x') {
+          xIndex = i;
+        } else if (field === '_atom_site_fract_y') {
+          yIndex = i;
+        } else if (field === '_atom_site_fract_z') {
+          zIndex = i;
+        }
+      }
+      for ( var i = 0, ii = atomLoop.lines.length; i < ii; i++) {
+        line = atomLoop.lines[i];
+        var tokens = line.split(whitespaceRegex).filter(filter);
+        var a = new structures.Atom(tokens[labelIndex === -1 ? altLabelIndex : labelIndex].split(digitsSymbolRegex)[0], parseFloat(tokens[xIndex]), parseFloat(tokens[yIndex]), parseFloat(tokens[zIndex]));
+        molecule.atoms.push(a);
+        if (altLabelIndex !== -1) {
+          a.cifId = tokens[altLabelIndex];
+          a.cifPart = 0;
+        }
+      }
+    }
+    // transforms, unless bonds are specified
+    if (transformLoop && !bondLoop) {
+      // assume the index is 0, just incase a different identifier is
+      // used
+      var symIndex = 0;
+      for ( var i = 0, ii = transformLoop.fields.length; i < ii; i++) {
+        var field = transformLoop.fields[i];
+        if (field === '_symmetry_equiv_pos_as_xyz' || field === '_space_group_symop_operation_xyz') {
+          symIndex = i;
+        }
+      }
+      var impliedTranslations = hallTranslations[hallClass];
+      var add = [];
+      for ( var i = 0, ii = transformLoop.lines.length; i < ii; i++) {
+        var parts = transformLoop.lines[i].split(whitespaceAndQuoteAndCommaRegex).filter(filter);
+        var multx = parseTransform(parts[symIndex]);
+        var multy = parseTransform(parts[symIndex + 1]);
+        var multz = parseTransform(parts[symIndex + 2]);
+        for ( var j = 0, jj = molecule.atoms.length; j < jj; j++) {
+          var a = molecule.atoms[j];
+          var x = a.x * multx[1] + a.y * multx[2] + a.z * multx[3] + multx[0];
+          var y = a.x * multy[1] + a.y * multy[2] + a.z * multy[3] + multy[0];
+          var z = a.x * multz[1] + a.y * multz[2] + a.z * multz[3] + multz[0];
+          var copy1 = new structures.Atom(a.label, x, y, z);
+          add.push(copy1);
+          // cifID could be 0, so check for undefined
+          if (a.cifId !== undefined) {
+            copy1.cifId = a.cifId;
+            copy1.cifPart = i + 1;
+          }
+          if (impliedTranslations) {
+            for ( var k = 0, kk = impliedTranslations.length; k < kk; k++) {
+              var trans = impliedTranslations[k];
+              var copy2 = new structures.Atom(a.label, x + trans[0], y + trans[1], z + trans[2]);
+              add.push(copy2);
+              // cifID could be 0, so check for undefined
+              if (a.cifId !== undefined) {
+                copy2.cifId = a.cifId;
+                copy2.cifPart = i + 1;
+              }
+            }
+          }
+        }
+      }
+      // make sure all atoms are within the unit cell
+      for ( var i = 0, ii = add.length; i < ii; i++) {
+        var a = add[i];
+        while (a.x >= 1) {
+          a.x--;
+        }
+        while (a.x < 0) {
+          a.x++;
+        }
+        while (a.y >= 1) {
+          a.y--;
+        }
+        while (a.y < 0) {
+          a.y++;
+        }
+        while (a.z >= 1) {
+          a.z--;
+        }
+        while (a.z < 0) {
+          a.z++;
+        }
+      }
+      // remove overlaps
+      var noOverlaps = [];
+      for ( var i = 0, ii = add.length; i < ii; i++) {
+        var overlap = false;
+        var a = add[i];
+        for ( var j = 0, jj = molecule.atoms.length; j < jj; j++) {
+          if (molecule.atoms[j].distance3D(a) < .0001) {
+            overlap = true;
+            break;
+          }
+        }
+        if (!overlap) {
+          for ( var j = 0, jj = noOverlaps.length; j < jj; j++) {
+            if (noOverlaps[j].distance3D(a) < .0001) {
+              overlap = true;
+              break;
+            }
+          }
+          if (!overlap) {
+            noOverlaps.push(a);
+          }
+        }
+      }
+      // concat arrays
+      molecule.atoms = molecule.atoms.concat(noOverlaps);
+    }
+    // build super cell
+    var extras = [];
+    for ( var i = 0; i < xSuper; i++) {
+      for ( var j = 0; j < ySuper; j++) {
+        for ( var k = 0; k < zSuper; k++) {
+          if (!(i === 0 && j === 0 && k === 0)) {
+            for ( var l = 0, ll = molecule.atoms.length; l < ll; l++) {
+              var a = molecule.atoms[l];
+              var copy = new structures.Atom(a.label, a.x + i, a.y + j, a.z + k);
+              extras.push(copy);
+              // cifID could be 0, so check for undefined
+              if (a.cifId !== undefined) {
+                copy.cifId = a.cifId;
+                copy.cifPart = a.cifPart + (transformLoop ? transformLoop.lines.length : 0) + i + j * 10 + k * 100;
+              }
+            }
+          }
+        }
+      }
+    }
+    molecule.atoms = molecule.atoms.concat(extras);
+    // convert to xyz
+    for ( var i = 0, ii = molecule.atoms.length; i < ii; i++) {
+      var a = molecule.atoms[i];
+      var xyz = m4.multiplyVec3(abc2xyz, [ a.x, a.y, a.z ]);
+      a.x = xyz[0];
+      a.y = xyz[1];
+      a.z = xyz[2];
+    }
+    // handle bonds
+    if (bondLoop) {
+      var atom1 = -1, atom2 = -1;
+      for ( var i = 0, ii = bondLoop.fields.length; i < ii; i++) {
+        var field = bondLoop.fields[i];
+        if (field === '_geom_bond_atom_site_label_1') {
+          atom1 = i;
+        } else if (field === '_geom_bond_atom_site_label_2') {
+          atom2 = i;
+        }
+      }
+      for ( var k = 0, kk = bondLoop.lines.length; k < kk; k++) {
+        var tokens = bondLoop.lines[k].split(whitespaceRegex).filter(filter);
+        var id1 = tokens[atom1];
+        var id2 = tokens[atom2];
+        for ( var i = 0, ii = molecule.atoms.length; i < ii; i++) {
+          for ( var j = i + 1; j < ii; j++) {
+            var ai = molecule.atoms[i];
+            var aj = molecule.atoms[j];
+            if (ai.cifPart !== aj.cifPart) {
+              break;
+            }
+            if (ai.cifId === id1 && aj.cifId === id2 || ai.cifId === id2 && aj.cifId === id1) {
+              molecule.bonds.push(new structures.Bond(ai, aj));
+            }
+          }
+        }
+      }
+    } else {
+      new c.informatics.BondDeducer().deduceCovalentBonds(molecule, 1);
+    }
+    // generate unit cell
+    var o = [ -xSuper / 2, -ySuper / 2, -zSuper / 2 ];
+    molecule.unitCellVectors = {
+      o : m4.multiplyVec3(abc2xyz, o, []),
+      x : m4.multiplyVec3(abc2xyz, [ o[0] + 1, o[1], o[2] ]),
+      y : m4.multiplyVec3(abc2xyz, [ o[0], o[1] + 1, o[2] ]),
+      z : m4.multiplyVec3(abc2xyz, [ o[0], o[1], o[2] + 1 ]),
+      xy : m4.multiplyVec3(abc2xyz, [ o[0] + 1, o[1] + 1, o[2] ]),
+      xz : m4.multiplyVec3(abc2xyz, [ o[0] + 1, o[1], o[2] + 1 ]),
+      yz : m4.multiplyVec3(abc2xyz, [ o[0], o[1] + 1, o[2] + 1 ]),
+      xyz : m4.multiplyVec3(abc2xyz, [ o[0] + 1, o[1] + 1, o[2] + 1 ])
+    };
+    return molecule;
+  };
+
+  // shortcuts
+  var interpreter = new io.CIFInterpreter();
+  c.readCIF = function(content, xSuper, ySuper, zSuper) {
+    return interpreter.read(content, xSuper, ySuper, zSuper);
+  };
+
+})(ChemDoodle, ChemDoodle.extensions, ChemDoodle.io, ChemDoodle.structures, Math, mat4, vec3);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4500 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-09-06 14:28:15 -0400 (Fri, 06 Sep 2013) $
+//
+
+(function(c, ELEMENT, io, structures) {
+  'use strict';
+  io.MOLInterpreter = function() {
+  };
+  var _ = io.MOLInterpreter.prototype = new io._Interpreter();
+  _.read = function(content, multiplier) {
+    if (!multiplier) {
+      multiplier = c.default_bondLength_2D;
+    }
+    var molecule = new structures.Molecule();
+    if (!content) {
+      return molecule;
+    }
+    var currentTagTokens = content.split('\n');
+
+    var counts = currentTagTokens[3];
+    var numAtoms = parseInt(counts.substring(0, 3));
+    var numBonds = parseInt(counts.substring(3, 6));
+
+    for ( var i = 0; i < numAtoms; i++) {
+      var line = currentTagTokens[4 + i];
+      molecule.atoms[i] = new structures.Atom(line.substring(31, 34), parseFloat(line.substring(0, 10)) * multiplier, (multiplier === 1 ? 1 : -1) * parseFloat(line.substring(10, 20)) * multiplier, parseFloat(line.substring(20, 30)) * multiplier);
+      var massDif = parseInt(line.substring(34, 36));
+      if (massDif !== 0 && ELEMENT[molecule.atoms[i].label]) {
+        molecule.atoms[i].mass = ELEMENT[molecule.atoms[i].label].mass + massDif;
+      }
+      switch (parseInt(line.substring(36, 39))) {
+      case 1:
+        molecule.atoms[i].charge = 3;
+        break;
+      case 2:
+        molecule.atoms[i].charge = 2;
+        break;
+      case 3:
+        molecule.atoms[i].charge = 1;
+        break;
+      case 5:
+        molecule.atoms[i].charge = -1;
+        break;
+      case 6:
+        molecule.atoms[i].charge = -2;
+        break;
+      case 7:
+        molecule.atoms[i].charge = -3;
+        break;
+      }
+    }
+    for ( var i = 0; i < numBonds; i++) {
+      var line = currentTagTokens[4 + numAtoms + i];
+      var bondOrder = parseInt(line.substring(6, 9));
+      var stereo = parseInt(line.substring(9, 12));
+      if (bondOrder > 3) {
+        switch (bondOrder) {
+        case 4:
+          bondOrder = 1.5;
+          break;
+        default:
+          bondOrder = 1;
+          break;
+        }
+      }
+      var b = new structures.Bond(molecule.atoms[parseInt(line.substring(0, 3)) - 1], molecule.atoms[parseInt(line.substring(3, 6)) - 1], bondOrder);
+      switch (stereo) {
+      case 3:
+        b.stereo = structures.Bond.STEREO_AMBIGUOUS;
+        break;
+      case 1:
+        b.stereo = structures.Bond.STEREO_PROTRUDING;
+        break;
+      case 6:
+        b.stereo = structures.Bond.STEREO_RECESSED;
+        break;
+      }
+      molecule.bonds[i] = b;
+    }
+    return molecule;
+  };
+  _.write = function(molecule) {
+    var sb = [];
+    sb.push('Molecule from ChemDoodle Web Components\n\nhttp://www.ichemlabs.com\n');
+    sb.push(this.fit(molecule.atoms.length.toString(), 3));
+    sb.push(this.fit(molecule.bonds.length.toString(), 3));
+    sb.push('  0  0  0  0            999 V2000\n');
+    var p = molecule.getCenter();
+    for ( var i = 0, ii = molecule.atoms.length; i < ii; i++) {
+      var a = molecule.atoms[i];
+      var mass = ' 0';
+      if (a.mass !== -1 && ELEMENT[a.label]) {
+        var dif = a.mass - ELEMENT[a.label].mass;
+        if (dif < 5 && dif > -4) {
+          mass = (dif > -1 ? ' ' : '') + dif;
+        }
+      }
+      var charge = '  0';
+      if (a.charge !== 0) {
+        switch (a.charge) {
+        case 3:
+          charge = '  1';
+          break;
+        case 2:
+          charge = '  2';
+          break;
+        case 1:
+          charge = '  3';
+          break;
+        case -1:
+          charge = '  5';
+          break;
+        case -2:
+          charge = '  6';
+          break;
+        case -3:
+          charge = '  7';
+          break;
+        }
+      }
+      sb.push(this.fit(((a.x - p.x) / c.default_bondLength_2D).toFixed(4), 10));
+      sb.push(this.fit((-(a.y - p.y) / c.default_bondLength_2D).toFixed(4), 10));
+      sb.push(this.fit((a.z / c.default_bondLength_2D).toFixed(4), 10));
+      sb.push(' ');
+      sb.push(this.fit(a.label, 3, true));
+      sb.push(mass);
+      sb.push(charge);
+      sb.push('  0  0  0  0\n');
+    }
+    for ( var i = 0, ii = molecule.bonds.length; i < ii; i++) {
+      var b = molecule.bonds[i];
+      var stereo = 0;
+      if (b.stereo === structures.Bond.STEREO_AMBIGUOUS) {
+        stereo = 3;
+      } else if (b.stereo === structures.Bond.STEREO_PROTRUDING) {
+        stereo = 1;
+      } else if (b.stereo === structures.Bond.STEREO_RECESSED) {
+        stereo = 6;
+      }
+      sb.push(this.fit((molecule.atoms.indexOf(b.a1) + 1).toString(), 3));
+      sb.push(this.fit((molecule.atoms.indexOf(b.a2) + 1).toString(), 3));
+      var btype = b.bondOrder;
+      if(btype==1.5){
+        btype = 4;
+      }else if(btype>3 || btype%1!=0){
+        btype = 1;
+      }
+      sb.push(this.fit(btype, 3));
+      sb.push('  ');
+      sb.push(stereo);
+      sb.push('     0  0\n');
+    }
+    sb.push('M  END');
+    return sb.join('');
+  };
+
+  // shortcuts
+  var interpreter = new io.MOLInterpreter();
+  c.readMOL = function(content, multiplier) {
+    return interpreter.read(content, multiplier);
+  };
+  c.writeMOL = function(mol) {
+    return interpreter.write(mol);
+  };
+
+})(ChemDoodle, ChemDoodle.ELEMENT, ChemDoodle.io, ChemDoodle.structures);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(c, extensions, io, structures, ELEMENT, trim, m) {
+  'use strict';
+  function checkContained(residue, set, chainID, index, helix) {
+    for ( var j = 0, jj = set.length; j < jj; j++) {
+      var check = set[j];
+      if (check.id === chainID && index >= check.start && index <= check.end) {
+        if (helix) {
+          residue.helix = true;
+        } else {
+          residue.sheet = true;
+        }
+        if (index + 1 === check.end) {
+          residue.arrow = true;
+        }
+        return;
+      }
+    }
+  }
+
+  io.PDBInterpreter = function() {
+  };
+  var _ = io.PDBInterpreter.prototype = new io._Interpreter();
+  _.calculateRibbonDistances = false;
+  _.deduceResidueBonds = false;
+  _.read = function(content, multiplier) {
+    var molecule = new structures.Molecule();
+    molecule.chains = [];
+    if (!content) {
+      return molecule;
+    }
+    var currentTagTokens = content.split('\n');
+    if (!multiplier) {
+      multiplier = 1;
+    }
+    var helices = [];
+    var sheets = [];
+    var lastC;
+    var currentChain = [];
+    var resatoms = [];
+    var atomSerials = [];
+    for ( var i = 0, ii = currentTagTokens.length; i < ii; i++) {
+      var line = currentTagTokens[i];
+      if (extensions.stringStartsWith(line, 'HELIX')) {
+        helices.push({
+          id : line.substring(19, 20),
+          start : parseInt(line.substring(21, 25)),
+          end : parseInt(line.substring(33, 37))
+        });
+      } else if (extensions.stringStartsWith(line, 'SHEET')) {
+        sheets.push({
+          id : line.substring(21, 22),
+          start : parseInt(line.substring(22, 26)),
+          end : parseInt(line.substring(33, 37))
+        });
+      } else if (extensions.stringStartsWith(line, 'ATOM')) {
+        var altLoc = line.substring(16, 17);
+        if (altLoc === ' ' || altLoc === 'A') {
+          var label = trim(line.substring(76, 78));
+          if (label.length === 0) {
+            var s = trim(line.substring(12, 14));
+            if (s === 'HD') {
+              label = 'H';
+            } else if (s.length > 0) {
+              if (s.length > 1) {
+                label = s.charAt(0) + s.substring(1).toLowerCase();
+              } else {
+                label = s;
+              }
+            }
+          }
+          var a = new structures.Atom(label, parseFloat(line.substring(30, 38)) * multiplier, parseFloat(line.substring(38, 46)) * multiplier, parseFloat(line.substring(46, 54)) * multiplier);
+          a.hetatm = false;
+          resatoms.push(a);
+          // set up residue
+          var resSeq = parseInt(line.substring(22, 26));
+          if (currentChain.length === 0) {
+            for ( var j = 0; j < 2; j++) {
+              var dummyFront = new structures.Residue(-1);
+              dummyFront.cp1 = a;
+              dummyFront.cp2 = a;
+              currentChain.push(dummyFront);
+            }
+          }
+          if (resSeq !== Number.NaN && currentChain[currentChain.length - 1].resSeq !== resSeq) {
+            var r = new structures.Residue(resSeq);
+            r.name = trim(line.substring(17, 20));
+            if (r.name.length === 3) {
+              r.name = r.name.substring(0, 1) + r.name.substring(1).toLowerCase();
+            } else {
+              if (r.name.length === 2 && r.name.charAt(0) === 'D') {
+                r.name = r.name.substring(1);
+              }
+            }
+            currentChain.push(r);
+            var chainID = line.substring(21, 22);
+            checkContained(r, helices, chainID, resSeq, true);
+            checkContained(r, sheets, chainID, resSeq, false);
+          }
+          // end residue setup
+          var atomName = trim(line.substring(12, 16));
+          var currentResidue = currentChain[currentChain.length - 1];
+          if (atomName === 'CA' || atomName === 'P' || atomName === 'O5\'') {
+            if (!currentResidue.cp1) {
+              currentResidue.cp1 = a;
+            }
+          } else if (atomName === 'N3' && (currentResidue.name === 'C' || currentResidue.name === 'U' || currentResidue.name === 'T') || atomName === 'N1' && (currentResidue.name === 'A' || currentResidue.name === 'G')) {
+            // control points for base platform direction
+            currentResidue.cp3 = a;
+          } else if (atomName === 'C2') {
+            // control points for base platform orientation
+            currentResidue.cp4 = a;
+          } else if (atomName === 'C4' && (currentResidue.name === 'C' || currentResidue.name === 'U' || currentResidue.name === 'T') || atomName === 'C6' && (currentResidue.name === 'A' || currentResidue.name === 'G')) {
+            // control points for base platform orientation
+            currentResidue.cp5 = a;
+          } else if (atomName === 'O' || atomName === 'C6' && (currentResidue.name === 'C' || currentResidue.name === 'U' || currentResidue.name === 'T') || atomName === 'N9') {
+            if (!currentChain[currentChain.length - 1].cp2) {
+              if (atomName === 'C6' || atomName === 'N9') {
+                lastC = a;
+              }
+              currentResidue.cp2 = a;
+            }
+          } else if (atomName === 'C') {
+            lastC = a;
+          }
+        }
+      } else if (extensions.stringStartsWith(line, 'HETATM')) {
+        var symbol = trim(line.substring(76, 78));
+        if (symbol.length === 0) {
+          // handle the case where an improperly formatted PDB
+          // file states the element label in the atom name column
+          symbol = trim(line.substring(12, 16));
+        }
+        if (symbol.length > 1) {
+          symbol = symbol.substring(0, 1) + symbol.substring(1).toLowerCase();
+        }
+        var het = new structures.Atom(symbol, parseFloat(line.substring(30, 38)) * multiplier, parseFloat(line.substring(38, 46)) * multiplier, parseFloat(line.substring(46, 54)) * multiplier);
+        het.hetatm = true;
+        var residueName = trim(line.substring(17, 20));
+        if (residueName === 'HOH') {
+          het.isWater = true;
+        }
+        molecule.atoms.push(het);
+        atomSerials[parseInt(trim(line.substring(6, 11)))] = het;
+      } else if (extensions.stringStartsWith(line, 'CONECT')) {
+        var oid = parseInt(trim(line.substring(6, 11)));
+        if (atomSerials[oid]) {
+          var origin = atomSerials[oid];
+          for ( var k = 0; k < 4; k++) {
+            var next = trim(line.substring(11 + k * 5, 16 + k * 5));
+            if (next.length !== 0) {
+              var nid = parseInt(next);
+              if (atomSerials[nid]) {
+                var a2 = atomSerials[nid];
+                var found = false;
+                for ( var j = 0, jj = molecule.bonds.length; j < jj; j++) {
+                  var b = molecule.bonds[j];
+                  if (b.a1 === origin && b.a2 === a2 || b.a1 === a2 && b.a2 === origin) {
+                    found = true;
+                    break;
+                  }
+                }
+                if (!found) {
+                  molecule.bonds.push(new structures.Bond(origin, a2));
+                }
+              }
+            }
+          }
+        }
+      } else if (extensions.stringStartsWith(line, 'TER')) {
+        this.endChain(molecule, currentChain, lastC, resatoms);
+        currentChain = [];
+      } else if (extensions.stringStartsWith(line, 'ENDMDL')) {
+        break;
+      }
+    }
+    this.endChain(molecule, currentChain, lastC, resatoms);
+    if (molecule.bonds.size === 0) {
+      new c.informatics.BondDeducer().deduceCovalentBonds(molecule, multiplier);
+    }
+    if (this.deduceResidueBonds) {
+      for ( var i = 0, ii = resatoms.length; i < ii; i++) {
+        var max = m.min(ii, i + 20);
+        for ( var j = i + 1; j < max; j++) {
+          var first = resatoms[i];
+          var second = resatoms[j];
+          if (first.distance3D(second) < (ELEMENT[first.label].covalentRadius + ELEMENT[second.label].covalentRadius) * 1.1) {
+            molecule.bonds.push(new structures.Bond(first, second, 1));
+          }
+        }
+      }
+    }
+    molecule.atoms = molecule.atoms.concat(resatoms);
+    if (this.calculateRibbonDistances) {
+      this.calculateDistances(molecule, resatoms);
+    }
+    return molecule;
+  };
+  _.endChain = function(molecule, chain, lastC, resatoms) {
+    if (chain.length > 0) {
+      var last = chain[chain.length - 1];
+      if (!last.cp1) {
+        last.cp1 = resatoms[resatoms.length - 2];
+      }
+      if (!last.cp2) {
+        last.cp2 = resatoms[resatoms.length - 1];
+      }
+      for ( var i = 0; i < 4; i++) {
+        var dummyEnd = new structures.Residue(-1);
+        dummyEnd.cp1 = lastC;
+        dummyEnd.cp2 = chain[chain.length - 1].cp2;
+        chain.push(dummyEnd);
+      }
+      molecule.chains.push(chain);
+    }
+  };
+  _.calculateDistances = function(molecule, resatoms) {
+    var hetatm = [];
+    for ( var i = 0, ii = molecule.atoms.length; i < ii; i++) {
+      var a = molecule.atoms[i];
+      if (a.hetatm) {
+        if (!a.isWater) {
+          hetatm.push(a);
+        }
+      }
+    }
+    for ( var i = 0, ii = resatoms.length; i < ii; i++) {
+      var a = resatoms[i];
+      a.closestDistance = Number.POSITIVE_INFINITY;
+      if (hetatm.length === 0) {
+        a.closestDistance = 0;
+      } else {
+        for ( var j = 0, jj = hetatm.length; j < jj; j++) {
+          a.closestDistance = Math.min(a.closestDistance, a.distance3D(hetatm[j]));
+        }
+      }
+    }
+  };
+
+  // shortcuts
+  var interpreter = new io.PDBInterpreter();
+  c.readPDB = function(content, multiplier) {
+    return interpreter.read(content, multiplier);
+  };
+
+})(ChemDoodle, ChemDoodle.extensions, ChemDoodle.io, ChemDoodle.structures, ChemDoodle.ELEMENT, jQuery.trim, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4137 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-22 12:46:00 -0500 (Fri, 22 Feb 2013) $
+//
+
+(function(c, extensions, io, structures, q, trim) {
+  'use strict';
+  var SQZ_HASH = {
+    '@' : 0,
+    'A' : 1,
+    'B' : 2,
+    'C' : 3,
+    'D' : 4,
+    'E' : 5,
+    'F' : 6,
+    'G' : 7,
+    'H' : 8,
+    'I' : 9,
+    'a' : -1,
+    'b' : -2,
+    'c' : -3,
+    'd' : -4,
+    'e' : -5,
+    'f' : -6,
+    'g' : -7,
+    'h' : -8,
+    'i' : -9
+  }, DIF_HASH = {
+    '%' : 0,
+    'J' : 1,
+    'K' : 2,
+    'L' : 3,
+    'M' : 4,
+    'N' : 5,
+    'O' : 6,
+    'P' : 7,
+    'Q' : 8,
+    'R' : 9,
+    'j' : -1,
+    'k' : -2,
+    'l' : -3,
+    'm' : -4,
+    'n' : -5,
+    'o' : -6,
+    'p' : -7,
+    'q' : -8,
+    'r' : -9
+  }, DUP_HASH = {
+    'S' : 1,
+    'T' : 2,
+    'U' : 3,
+    'V' : 4,
+    'W' : 5,
+    'X' : 6,
+    'Y' : 7,
+    'Z' : 8,
+    's' : 9
+  };
+
+  io.JCAMPInterpreter = function() {
+  };
+  var _ = io.JCAMPInterpreter.prototype = new io._Interpreter();
+  _.convertHZ2PPM = false;
+  _.read = function(content) {
+    this.isBreak = function(c) {
+      // some of these arrays may return zero, so check if undefined
+      return SQZ_HASH[c] !== undefined || DIF_HASH[c] !== undefined || DUP_HASH[c] !== undefined || c === ' ' || c === '-' || c === '+';
+    };
+    this.getValue = function(decipher, lastDif) {
+      var first = decipher.charAt(0);
+      var rest = decipher.substring(1);
+      // some of these arrays may return zero, so check if undefined
+      if (SQZ_HASH[first] !== undefined) {
+        return parseFloat(SQZ_HASH[first] + rest);
+      } else if (DIF_HASH[first] !== undefined) {
+        return parseFloat(DIF_HASH[first] + rest) + lastDif;
+      }
+      return parseFloat(rest);
+    };
+    var spectrum = new structures.Spectrum();
+    if (content === undefined || content.length === 0) {
+      return spectrum;
+    }
+    var lines = content.split('\n');
+    var sb = [];
+    var xLast, xFirst, yFirst, nPoints, xFactor = 1, yFactor = 1, observeFrequency = 1, deltaX = -1, shiftOffsetNum = -1, shiftOffsetVal = -1;
+    var recordMeta = true, divideByFrequency = false;
+    for ( var i = 0, ii = lines.length; i < ii; i++) {
+      var use = trim(lines[i]);
+      var index = use.indexOf('$$');
+      if (index !== -1) {
+        use = use.substring(0, index);
+      }
+      if (sb.length === 0 || !extensions.stringStartsWith(lines[i], '##')) {
+        if (sb.length !== 0) {
+          sb.push('\n');
+        }
+        sb.push(trim(use));
+      } else {
+        var currentRecord = sb.join('');
+        if (recordMeta && currentRecord.length < 100) {
+          spectrum.metadata.push(currentRecord);
+        }
+        sb = [ use ];
+        if (extensions.stringStartsWith(currentRecord, '##TITLE=')) {
+          spectrum.title = trim(currentRecord.substring(8));
+        } else if (extensions.stringStartsWith(currentRecord, '##XUNITS=')) {
+          spectrum.xUnit = trim(currentRecord.substring(9));
+          if (this.convertHZ2PPM && spectrum.xUnit.toUpperCase() === 'HZ') {
+            spectrum.xUnit = 'PPM';
+            divideByFrequency = true;
+          }
+        } else if (extensions.stringStartsWith(currentRecord, '##YUNITS=')) {
+          spectrum.yUnit = trim(currentRecord.substring(9));
+        } else if (extensions.stringStartsWith(currentRecord, '##XYPAIRS=')) {
+          // spectrum.yUnit =
+          // trim(currentRecord.substring(9));
+        } else if (extensions.stringStartsWith(currentRecord, '##FIRSTX=')) {
+          xFirst = parseFloat(trim(currentRecord.substring(9)));
+        } else if (extensions.stringStartsWith(currentRecord, '##LASTX=')) {
+          xLast = parseFloat(trim(currentRecord.substring(8)));
+        } else if (extensions.stringStartsWith(currentRecord, '##FIRSTY=')) {
+          yFirst = parseFloat(trim(currentRecord.substring(9)));
+        } else if (extensions.stringStartsWith(currentRecord, '##NPOINTS=')) {
+          nPoints = parseFloat(trim(currentRecord.substring(10)));
+        } else if (extensions.stringStartsWith(currentRecord, '##XFACTOR=')) {
+          xFactor = parseFloat(trim(currentRecord.substring(10)));
+        } else if (extensions.stringStartsWith(currentRecord, '##YFACTOR=')) {
+          yFactor = parseFloat(trim(currentRecord.substring(10)));
+        } else if (extensions.stringStartsWith(currentRecord, '##DELTAX=')) {
+          deltaX = parseFloat(trim(currentRecord.substring(9)));
+        } else if (extensions.stringStartsWith(currentRecord, '##.OBSERVE FREQUENCY=')) {
+          if (this.convertHZ2PPM) {
+            observeFrequency = parseFloat(trim(currentRecord.substring(21)));
+          }
+        } else if (extensions.stringStartsWith(currentRecord, '##.SHIFT REFERENCE=')) {
+          if (this.convertHZ2PPM) {
+            var parts = currentRecord.substring(19).split(',');
+            shiftOffsetNum = parseInt(trim(parts[2]));
+            shiftOffsetVal = parseFloat(trim(parts[3]));
+          }
+        } else if (extensions.stringStartsWith(currentRecord, '##XYDATA=')) {
+          if (!divideByFrequency) {
+            observeFrequency = 1;
+          }
+          recordMeta = false;
+          var lastWasDif = false;
+          var innerLines = currentRecord.split('\n');
+          var abscissaSpacing = (xLast - xFirst) / (nPoints - 1);
+          // use provided deltaX if determined to be compressed
+          // and discontinuous
+          if (deltaX !== -1) {
+            for ( var j = 1, jj = innerLines.length; j < jj; j++) {
+              if (innerLines[j].charAt(0) === '|') {
+                abscissaSpacing = deltaX;
+                break;
+              }
+            }
+          }
+          var lastX = xFirst - abscissaSpacing;
+          var lastY = yFirst;
+          var lastDif = 0;
+          var lastOrdinate;
+          for ( var j = 1, jj = innerLines.length; j < jj; j++) {
+            var data = [];
+            var read = trim(innerLines[j]);
+            var sb = [];
+            var isCompressedDiscontinuous = false;
+            for ( var k = 0, kk = read.length; k < kk; k++) {
+              if (this.isBreak(read.charAt(k))) {
+                if (sb.length > 0 && !(sb.length === 1 && sb[0] === ' ')) {
+                  data.push(sb.join(''));
+                }
+                sb = [ read.charAt(k) ];
+              } else {
+                if (read.charAt(k) === '|') {
+                  isCompressedDiscontinuous = true;
+                } else {
+                  sb.push(read.charAt(k));
+                }
+              }
+            }
+            data.push(sb.join(''));
+            lastX = parseFloat(data[0]) * xFactor - abscissaSpacing;
+            for ( var k = 1, kk = data.length; k < kk; k++) {
+              var decipher = data[k];
+              // some of these arrays may return zero, so
+              // check if undefined
+              if (DUP_HASH[decipher.charAt(0)] !== undefined) {
+                // be careful when reading this, to keep
+                // spectra efficient, DUPS are actually
+                // discarded, except the last y!
+                var dup = parseInt(DUP_HASH[decipher.charAt(0)] + decipher.substring(1)) - 1;
+                for ( var l = 0; l < dup; l++) {
+                  lastX += abscissaSpacing;
+                  lastDif = this.getValue(lastOrdinate, lastDif);
+                  lastY = lastDif * yFactor;
+                  count++;
+                  spectrum.data[spectrum.data.length - 1] = new structures.Point(lastX / observeFrequency, lastY);
+                }
+              } else {
+                // some of these arrays may return zero, so
+                // check if undefined
+                if (!(SQZ_HASH[decipher.charAt(0)] !== undefined && lastWasDif)) {
+                  lastWasDif = DIF_HASH[decipher.charAt(0)] !== undefined;
+                  lastOrdinate = decipher;
+                  lastX += abscissaSpacing;
+                  lastDif = this.getValue(decipher, lastDif);
+                  lastY = lastDif * yFactor;
+                  count++;
+                  spectrum.data.push(new structures.Point(lastX / observeFrequency, lastY));
+                } else {
+                  lastY = this.getValue(decipher, lastDif) * yFactor;
+                  if (isCompressedDiscontinuous) {
+                    lastX += abscissaSpacing;
+                    spectrum.data.push(new structures.Point(lastX / observeFrequency, lastY));
+                  }
+                }
+              }
+            }
+          }
+          if (shiftOffsetNum !== -1) {
+            var dif = shiftOffsetVal - spectrum.data[shiftOffsetNum - 1].x;
+            for ( var i = 0, ii = spectrum.data.length; i < ii; i++) {
+              spectrum.data[i].x += dif;
+            }
+          }
+        } else if (extensions.stringStartsWith(currentRecord, '##PEAK TABLE=')) {
+          recordMeta = false;
+          spectrum.continuous = false;
+          var innerLines = currentRecord.split('\n');
+          var count = 0;
+          for ( var j = 1, jj = innerLines.length; j < jj; j++) {
+            var items = innerLines[j].split(/[\s,]+/);
+            count += items.length / 2;
+            for ( var k = 0, kk = items.length; k + 1 < kk; k += 2) {
+              spectrum.data.push(new structures.Point(parseFloat(trim(items[k])), parseFloat(trim(items[k + 1]))));
+            }
+          }
+        }
+      }
+    }
+    spectrum.setup();
+    return spectrum;
+  };
+
+  // shortcuts
+  var interpreter = new io.JCAMPInterpreter();
+  interpreter.convertHZ2PPM = true;
+  c.readJCAMP = function(content) {
+    return interpreter.read(content);
+  };
+})(ChemDoodle, ChemDoodle.extensions, ChemDoodle.io, ChemDoodle.structures, jQuery, jQuery.trim);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 2934 $
+//  $Author: kevin $
+//  $LastChangedDate: 2010-12-08 20:53:47 -0500 (Wed, 08 Dec 2010) $
+//
+(function(c, io, structures, d2, JSON) {
+  'use strict';
+  io.JSONInterpreter = function() {
+  };
+  var _ = io.JSONInterpreter.prototype;
+  _.contentTo = function(mols, shapes) {
+    var count1 = 0, count2 = 0;
+    for ( var i = 0, ii = mols.length; i < ii; i++) {
+      var mol = mols[i];
+      for ( var j = 0, jj = mol.atoms.length; j < jj; j++) {
+        mol.atoms[j].tmpid = 'a' + count1++;
+      }
+      for ( var j = 0, jj = mol.bonds.length; j < jj; j++) {
+        mol.bonds[j].tmpid = 'b' + count2++;
+      }
+    }
+    count1 = 0;
+    for ( var i = 0, ii = shapes.length; i < ii; i++) {
+      shapes[i].tmpid = 's' + count1++;
+    }
+    var dummy = {};
+    if (mols && mols.length > 0) {
+      dummy.m = [];
+      for ( var i = 0, ii = mols.length; i < ii; i++) {
+        dummy.m.push(this.molTo(mols[i]));
+      }
+    }
+    if (shapes && shapes.length > 0) {
+      dummy.s = [];
+      for ( var i = 0, ii = shapes.length; i < ii; i++) {
+        dummy.s.push(this.shapeTo(shapes[i]));
+      }
+    }
+    for ( var i = 0, ii = mols.length; i < ii; i++) {
+      var mol = mols[i];
+      for ( var j = 0, jj = mol.atoms.length; j < jj; j++) {
+        mol.atoms[j].tmpid = undefined;
+      }
+      for ( var j = 0, jj = mol.bonds.length; j < jj; j++) {
+        mol.bonds[j].tmpid = undefined;
+      }
+    }
+    for ( var i = 0, ii = shapes.length; i < ii; i++) {
+      shapes[i].tmpid = undefined;
+    }
+    return dummy;
+  };
+  _.contentFrom = function(dummy) {
+    var obj = {
+      molecules : [],
+      shapes : []
+    };
+    if (dummy.m) {
+      for ( var i = 0, ii = dummy.m.length; i < ii; i++) {
+        obj.molecules.push(this.molFrom(dummy.m[i]));
+      }
+    }
+    if (dummy.s) {
+      for ( var i = 0, ii = dummy.s.length; i < ii; i++) {
+        obj.shapes.push(this.shapeFrom(dummy.s[i], obj.molecules));
+      }
+    }
+    for ( var i = 0, ii = obj.molecules.length; i < ii; i++) {
+      var mol = obj.molecules[i];
+      for ( var j = 0, jj = mol.atoms.length; j < jj; j++) {
+        mol.atoms[j].tmpid = undefined;
+      }
+      for ( var j = 0, jj = mol.bonds.length; j < jj; j++) {
+        mol.bonds[j].tmpid = undefined;
+      }
+    }
+    for ( var i = 0, ii = obj.shapes.length; i < ii; i++) {
+      obj.shapes[i].tmpid = undefined;
+    }
+    return obj;
+  };
+  _.molTo = function(mol) {
+    var dummy = {
+      a : []
+    };
+    for ( var i = 0, ii = mol.atoms.length; i < ii; i++) {
+      var a = mol.atoms[i];
+      var da = {
+        x : a.x,
+        y : a.y
+      };
+      if (a.tmpid) {
+        da.i = a.tmpid;
+      }
+      if (a.label !== 'C') {
+        da.l = a.label;
+      }
+      if (a.z !== 0) {
+        da.z = a.z;
+      }
+      if (a.charge !== 0) {
+        da.c = a.charge;
+      }
+      if (a.mass !== -1) {
+        da.m = a.mass;
+      }
+      if (a.numRadical !== 0) {
+        da.r = a.numRadical;
+      }
+      if (a.numLonePair !== 0) {
+        da.p = a.numLonePair;
+      }
+      if (a.any) {
+        da.q = true;
+      }
+      if (a.rgroup !== -1) {
+        da.rg = a.rgroup;
+      }
+      dummy.a.push(da);
+    }
+    if (mol.bonds.length > 0) {
+      dummy.b = [];
+      for ( var i = 0, ii = mol.bonds.length; i < ii; i++) {
+        var b = mol.bonds[i];
+        var db = {
+          b : mol.atoms.indexOf(b.a1),
+          e : mol.atoms.indexOf(b.a2)
+        };
+        if (b.tmpid) {
+          db.i = b.tmpid;
+        }
+        if (b.bondOrder !== 1) {
+          db.o = b.bondOrder;
+        }
+        if (b.stereo !== structures.Bond.STEREO_NONE) {
+          db.s = b.stereo;
+        }
+        dummy.b.push(db);
+      }
+    }
+    return dummy;
+  };
+  _.molFrom = function(json) {
+    var molecule = new structures.Molecule();
+    for ( var i = 0, ii = json.a.length; i < ii; i++) {
+      var c = json.a[i];
+      var a = new structures.Atom(c.l ? c.l : 'C', c.x, c.y);
+      if (c.i) {
+        a.tmpid = c.i;
+      }
+      if (c.z) {
+        a.z = c.z;
+      }
+      if (c.c) {
+        a.charge = c.c;
+      }
+      if (c.m) {
+        a.mass = c.m;
+      }
+      if (c.r) {
+        a.numRadical = c.r;
+      }
+      if (c.p) {
+        a.numLonePair = c.p;
+      }
+      if (c.q) {
+        a.any = true;
+      }
+      if (c.rg) {
+        a.rgroup = c.rg;
+      }
+      // these are booleans or numbers, so check if undefined
+      if (c.p_h !== undefined) {
+        a.hetatm = c.p_h;
+      }
+      if (c.p_w !== undefined) {
+        a.isWater = c.p_w;
+      }
+      if (c.p_d !== undefined) {
+        a.closestDistance = c.p_d;
+      }
+      molecule.atoms.push(a);
+    }
+    if (json.b) {
+      for ( var i = 0, ii = json.b.length; i < ii; i++) {
+        var c = json.b[i];
+        // order can be 0, so check against undefined
+        var b = new structures.Bond(molecule.atoms[c.b], molecule.atoms[c.e], c.o === undefined ? 1 : c.o);
+        if (c.i) {
+          b.tmpid = c.i;
+        }
+        if (c.s) {
+          b.stereo = c.s;
+        }
+        molecule.bonds.push(b);
+      }
+    }
+    return molecule;
+  };
+  _.shapeTo = function(shape) {
+    var dummy = {};
+    if (shape.tmpid) {
+      dummy.i = shape.tmpid;
+    }
+    if (shape instanceof d2.Line) {
+      dummy.t = 'Line';
+      dummy.x1 = shape.p1.x;
+      dummy.y1 = shape.p1.y;
+      dummy.x2 = shape.p2.x;
+      dummy.y2 = shape.p2.y;
+      dummy.a = shape.arrowType;
+    } else if (shape instanceof d2.Pusher) {
+      dummy.t = 'Pusher';
+      dummy.o1 = shape.o1.tmpid;
+      dummy.o2 = shape.o2.tmpid;
+      if (shape.numElectron !== 1) {
+        dummy.e = shape.numElectron;
+      }
+    } else if (shape instanceof d2.Bracket) {
+      dummy.t = 'Bracket';
+      dummy.x1 = shape.p1.x;
+      dummy.y1 = shape.p1.y;
+      dummy.x2 = shape.p2.x;
+      dummy.y2 = shape.p2.y;
+      if (shape.charge !== 0) {
+        dummy.c = shape.charge;
+      }
+      if (shape.mult !== 0) {
+        dummy.m = shape.mult;
+      }
+      if (shape.repeat !== 0) {
+        dummy.r = shape.repeat;
+      }
+    }
+    return dummy;
+  };
+  _.shapeFrom = function(dummy, mols) {
+    var shape;
+    if (dummy.t === 'Line') {
+      shape = new d2.Line(new structures.Point(dummy.x1, dummy.y1), new structures.Point(dummy.x2, dummy.y2));
+      shape.arrowType = dummy.a;
+    } else if (dummy.t === 'Pusher') {
+      var o1;
+      var o2;
+      for ( var i = 0, ii = mols.length; i < ii; i++) {
+        var mol = mols[i];
+        for ( var j = 0, jj = mol.atoms.length; j < jj; j++) {
+          var a = mol.atoms[j];
+          if (a.tmpid === dummy.o1) {
+            o1 = a;
+          } else if (a.tmpid === dummy.o2) {
+            o2 = a;
+          }
+        }
+        for ( var j = 0, jj = mol.bonds.length; j < jj; j++) {
+          var b = mol.bonds[j];
+          if (b.tmpid === dummy.o1) {
+            o1 = b;
+          } else if (b.tmpid === dummy.o2) {
+            o2 = b;
+          }
+        }
+      }
+      shape = new d2.Pusher(o1, o2);
+      if (dummy.e) {
+        shape.numElectron = dummy.e;
+      }
+    } else if (dummy.t === 'Bracket') {
+      shape = new d2.Bracket(new structures.Point(dummy.x1, dummy.y1), new structures.Point(dummy.x2, dummy.y2));
+      if (dummy.c !== undefined) {
+        // have to check against undefined as it is an integer that can
+        // be 0
+        shape.charge = dummy.c;
+      }
+      if (dummy.m !== undefined) {
+        // have to check against undefined as it is an integer that can
+        // be 0
+        shape.mult = dummy.m;
+      }
+      if (dummy.r !== undefined) {
+        // have to check against undefined as it is an integer that can
+        // be 0
+        shape.repeat = dummy.r;
+      }
+    }
+    return shape;
+  };
+  _.pdbFrom = function(content) {
+    var mol = this.molFrom(content.mol);
+    mol.findRings = false;
+    // mark from JSON to note to algorithms that atoms in chain are not
+    // same
+    // objects as in atom array
+    mol.fromJSON = true;
+    mol.chains = this.chainsFrom(content.ribbons);
+    return mol;
+  };
+  _.chainsFrom = function(content) {
+    var chains = [];
+    for ( var i = 0, ii = content.cs.length; i < ii; i++) {
+      var chain = content.cs[i];
+      var c = [];
+      for ( var j = 0, jj = chain.length; j < jj; j++) {
+        var convert = chain[j];
+        var r = new structures.Residue();
+        r.name = convert.n;
+        r.cp1 = new structures.Atom('', convert.x1, convert.y1, convert.z1);
+        r.cp2 = new structures.Atom('', convert.x2, convert.y2, convert.z2);
+        if (convert.x3) {
+          r.cp3 = new structures.Atom('', convert.x3, convert.y3, convert.z3);
+          r.cp4 = new structures.Atom('', convert.x4, convert.y4, convert.z4);
+          r.cp5 = new structures.Atom('', convert.x5, convert.y5, convert.z5);
+        }
+        r.helix = convert.h;
+        r.sheet = convert.s;
+        r.arrow = convert.a;
+        c.push(r);
+      }
+      chains.push(c);
+    }
+    return chains;
+  };
+
+  // shortcuts
+  var interpreter = new io.JSONInterpreter();
+  c.readJSON = function(string) {
+    var obj;
+    try {
+      obj = JSON.parse(string);
+    } catch (e) {
+      // not json
+      return undefined;
+    }
+    if (obj) {
+      if (obj.m || obj.s) {
+        return interpreter.contentFrom(obj);
+      } else if (obj.a) {
+        return obj = {
+          molecules : [ interpreter.molFrom(obj) ],
+          shapes : []
+        };
+      } else {
+        return obj = {
+          molecules : [],
+          shapes : []
+        };
+      }
+    }
+    return undefined;
+  };
+  c.writeJSON = function(mols, shapes) {
+    return JSON.stringify(interpreter.contentTo(mols, shapes));
+  };
+
+})(ChemDoodle, ChemDoodle.io, ChemDoodle.structures, ChemDoodle.structures.d2, JSON);
+(function(c, io, structures) {
+  'use strict';
+  io.RXNInterpreter = function() {
+  };
+  var _ = io.RXNInterpreter.prototype = new io._Interpreter();
+  _.read = function(content, multiplier) {
+    if (!multiplier) {
+      multiplier = c.default_bondLength_2D;
+    }
+    var molecules = [];
+    var line;
+    if (!content) {
+      molecules.push(new structures.Molecule());
+      line = new structures.d2.Line(new structures.Point(-20, 0), new structures.Point(20, 0));
+    } else {
+      var contentTokens = content.split('$MOL\n');
+      var headerTokens = contentTokens[0].split('\n');
+      var counts = headerTokens[4];
+      var numReactants = parseInt(counts.substring(0, 3));
+      var numProducts = parseInt(counts.substring(3, 6));
+      var currentMolecule = 1;
+      var start = 0;
+      for ( var i = 0, ii = numReactants + numProducts; i < ii; i++) {
+        molecules[i] = c.readMOL(contentTokens[currentMolecule], multiplier);
+        var b = molecules[i].getBounds();
+        var width = b.maxX - b.minX;
+        start -= width + 40;
+        currentMolecule++;
+      }
+      for ( var i = 0, ii = numReactants; i < ii; i++) {
+        var b = molecules[i].getBounds();
+        var width = b.maxX - b.minX;
+        var center = molecules[i].getCenter();
+        for ( var j = 0, jj = molecules[i].atoms.length; j < jj; j++) {
+          var a = molecules[i].atoms[j];
+          a.x += start + (width / 2) - center.x;
+          a.y -= center.y;
+        }
+        start += width + 40;
+      }
+      line = new structures.d2.Line(new structures.Point(start, 0), new structures.Point(start + 40, 0));
+      start += 80;
+      for ( var i = numReactants, ii = numReactants + numProducts; i < ii; i++) {
+        var b = molecules[i].getBounds();
+        var width = b.maxX - b.minX;
+        var center = molecules[i].getCenter();
+        for ( var j = 0; j < molecules[i].atoms.length; j++) {
+          var a = molecules[i].atoms[j];
+          a.x += start + (width / 2) - center.x;
+          a.y -= center.y;
+        }
+        start += width + 40;
+      }
+    }
+    line.arrowType = structures.d2.Line.ARROW_SYNTHETIC;
+    return {
+      'molecules' : molecules,
+      'shapes' : [ line ]
+    };
+  };
+  _.write = function(mols, shapes) {
+    var molecules = [ [], [] ];
+    var ps = undefined;
+    if (!mols || !shapes) {
+      return;
+    }
+    for (i = 0, ii = shapes.length; i < ii; i++) {
+      if (shapes[i] instanceof structures.d2.Line) {
+        ps = shapes[i].getPoints();
+        break;
+      }
+    }
+    if (!ps) {
+      return '';
+    }
+    for ( var i = 0, ii = mols.length; i < ii; i++) {
+      var center = mols[i].getCenter();
+      if (center.x < ps[1].x) {
+        molecules[0].push(mols[i]);
+      } else {
+        molecules[1].push(mols[i]);
+      }
+    }
+    var sb = [];
+    sb.push('$RXN\nReaction from ChemDoodle Web Components\n\nhttp://www.ichemlabs.com\n');
+    sb.push(this.fit(molecules[0].length.toString(), 3));
+    sb.push(this.fit(molecules[1].length.toString(), 3));
+    sb.push('\n');
+    for ( var i = 0; i < 2; i++) {
+      for ( var j = 0, jj = molecules[i].length; j < jj; j++) {
+        sb.push('$MOL\n');
+        sb.push(c.writeMOL(molecules[i][j]));
+        sb.push('\n');
+      }
+    }
+    return sb.join('');
+  };
+
+  // shortcuts
+  var interpreter = new io.RXNInterpreter();
+  c.readRXN = function(content, multiplier) {
+    return interpreter.read(content, multiplier);
+  };
+  c.writeRXN = function(mols, shapes) {
+    return interpreter.write(mols, shapes);
+  };
+
+})(ChemDoodle, ChemDoodle.io, ChemDoodle.structures);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3450 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-12-01 19:48:46 -0500 (Thu, 01 Dec 2011) $
+//
+
+(function(c, ELEMENT, SYMBOLS, io, structures, trim) {
+  'use strict';
+  io.XYZInterpreter = function() {
+  };
+  var _ = io.XYZInterpreter.prototype = new io._Interpreter();
+  _.deduceCovalentBonds = true;
+  _.read = function(content) {
+    var molecule = new structures.Molecule();
+    if (!content) {
+      return molecule;
+    }
+    var lines = content.split('\n');
+
+    var numAtoms = parseInt(trim(lines[0]));
+
+    for ( var i = 0; i < numAtoms; i++) {
+      var line = lines[i + 2];
+      var tokens = line.split(/\s+/g);
+      molecule.atoms[i] = new structures.Atom(isNaN(tokens[0]) ? tokens[0] : SYMBOLS[parseInt(tokens[0]) - 1], parseFloat(tokens[1]), parseFloat(tokens[2]), parseFloat(tokens[3]));
+    }
+    if (this.deduceCovalentBonds) {
+      new c.informatics.BondDeducer().deduceCovalentBonds(molecule, 1);
+    }
+    return molecule;
+  };
+
+  // shortcuts
+  var interpreter = new io.XYZInterpreter();
+  c.readXYZ = function(content) {
+    return interpreter.read(content);
+  };
+
+})(ChemDoodle, ChemDoodle.ELEMENT, ChemDoodle.SYMBOLS, ChemDoodle.io, ChemDoodle.structures, jQuery.trim);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 2974 $
+//  $Author: kevin $
+//  $LastChangedDate: 2010-12-29 11:07:06 -0500 (Wed, 29 Dec 2010) $
+//
+
+ChemDoodle.monitor = (function(featureDetection, q, document) {
+  'use strict';
+  var m = {};
+
+  m.CANVAS_DRAGGING = undefined;
+  m.CANVAS_OVER = undefined;
+  m.ALT = false;
+  m.SHIFT = false;
+  m.META = false;
+
+  if (!featureDetection.supports_touch()) {
+    q(document).ready(function() {
+      // handles dragging beyond the canvas bounds
+      q(document).mousemove(function(e) {
+        if (m.CANVAS_DRAGGING) {
+          if (m.CANVAS_DRAGGING.drag) {
+            m.CANVAS_DRAGGING.prehandleEvent(e);
+            m.CANVAS_DRAGGING.drag(e);
+          }
+        }
+      });
+      q(document).mouseup(function(e) {
+        if (m.CANVAS_DRAGGING && m.CANVAS_DRAGGING !== m.CANVAS_OVER) {
+          if (m.CANVAS_DRAGGING.mouseup) {
+            m.CANVAS_DRAGGING.prehandleEvent(e);
+            m.CANVAS_DRAGGING.mouseup(e);
+          }
+        }
+        m.CANVAS_DRAGGING = undefined;
+      });
+      // handles modifier keys from a single keyboard
+      q(document).keydown(function(e) {
+        m.SHIFT = e.shiftKey;
+        m.ALT = e.altKey;
+        m.META = e.metaKey || e.ctrlKey;
+        var affecting = m.CANVAS_OVER;
+        if (m.CANVAS_DRAGGING) {
+          affecting = m.CANVAS_DRAGGING;
+        }
+        if (affecting) {
+          if (affecting.keydown) {
+            affecting.prehandleEvent(e);
+            affecting.keydown(e);
+          }
+        }
+      });
+      q(document).keypress(function(e) {
+        var affecting = m.CANVAS_OVER;
+        if (m.CANVAS_DRAGGING) {
+          affecting = m.CANVAS_DRAGGING;
+        }
+        if (affecting) {
+          if (affecting.keypress) {
+            affecting.prehandleEvent(e);
+            affecting.keypress(e);
+          }
+        }
+      });
+      q(document).keyup(function(e) {
+        m.SHIFT = e.shiftKey;
+        m.ALT = e.altKey;
+        m.META = e.metaKey || e.ctrlKey;
+        var affecting = m.CANVAS_OVER;
+        if (m.CANVAS_DRAGGING) {
+          affecting = m.CANVAS_DRAGGING;
+        }
+        if (affecting) {
+          if (affecting.keyup) {
+            affecting.prehandleEvent(e);
+            affecting.keyup(e);
+          }
+        }
+      });
+    });
+  }
+
+  return m;
+
+})(ChemDoodle.featureDetection, jQuery, document);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4208 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-03-24 10:31:41 -0400 (Sun, 24 Mar 2013) $
+//
+(function(c, featureDetection, math, monitor, structures, q, browser, m, document, window) {
+  'use strict';
+  c._Canvas = function() {
+  };
+  var _ = c._Canvas.prototype;
+  _.molecules = undefined;
+  _.shapes = undefined;
+  _.emptyMessage = undefined;
+  _.image = undefined;
+  _.repaint = function() {
+    if (this.test) {
+      return;
+    }
+    var canvas = document.getElementById(this.id);
+    if (canvas.getContext) {
+      var ctx = canvas.getContext('2d');
+      if (this.pixelRatio !== 1 && canvas.width === this.width) {
+        canvas.width = this.width * this.pixelRatio;
+        canvas.height = this.height * this.pixelRatio;
+        ctx.scale(this.pixelRatio, this.pixelRatio);
+      }
+      if (!this.image) {
+        if (this.specs.backgroundColor && this.bgCache !== canvas.style.backgroundColor) {
+          canvas.style.backgroundColor = this.specs.backgroundColor;
+          this.bgCache = canvas.style.backgroundColor;
+        }
+        // clearRect is correct, but doesn't work as expected on Android
+        // ctx.clearRect(0, 0, this.width, this.height);
+        ctx.fillStyle = this.specs.backgroundColor;
+        ctx.fillRect(0, 0, this.width, this.height);
+      } else {
+        ctx.drawImage(this.image, 0, 0);
+      }
+      if (this.innerRepaint) {
+        this.innerRepaint(ctx);
+      } else {
+        if (this.molecules.length !== 0 || this.shapes.length !== 0) {
+          ctx.save();
+          ctx.translate(this.width / 2, this.height / 2);
+          ctx.rotate(this.specs.rotateAngle);
+          ctx.scale(this.specs.scale, this.specs.scale);
+          ctx.translate(-this.width / 2, -this.height / 2);
+          for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+            this.molecules[i].check(true);
+            this.molecules[i].draw(ctx, this.specs);
+          }
+          for ( var i = 0, ii = this.shapes.length; i < ii; i++) {
+            this.shapes[i].draw(ctx, this.specs);
+          }
+          ctx.restore();
+        } else if (this.emptyMessage) {
+          ctx.fillStyle = '#737683';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.font = '18px Helvetica, Verdana, Arial, Sans-serif';
+          ctx.fillText(this.emptyMessage, this.width / 2, this.height / 2);
+        }
+      }
+      if (this.drawChildExtras) {
+        this.drawChildExtras(ctx);
+      }
+    }
+  };
+  _.resize = function(w, h) {
+    var cap = q('#' + this.id);
+    cap.attr({
+      width : w,
+      height : h
+    });
+    cap.css('width', w);
+    cap.css('height', h);
+    this.width = w;
+    this.height = h;
+    if (c._Canvas3D && this instanceof c._Canvas3D) {
+      this.gl.viewport(0, 0, w, h);
+      this.setupScene();
+    } else if (this.molecules.length > 0) {
+      this.center();
+      for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+        this.molecules[i].check();
+      }
+    }
+    this.repaint();
+  };
+  _.setBackgroundImage = function(path) {
+    this.image = new Image(); // Create new Image object
+    var me = this;
+    this.image.onload = function() {
+      me.repaint();
+    };
+    this.image.src = path; // Set source path
+  };
+  _.loadMolecule = function(molecule) {
+    this.clear();
+    this.molecules.push(molecule);
+    this.center();
+    if (!(c._Canvas3D && this instanceof c._Canvas3D)) {
+      molecule.check();
+    }
+    if (this.afterLoadContent) {
+      this.afterLoadContent();
+    }
+    this.repaint();
+  };
+  _.loadContent = function(mols, shapes) {
+    this.molecules = mols?mols:[];
+    this.shapes = shapes?shapes:[];
+    this.center();
+    if (!(c._Canvas3D && this instanceof c._Canvas3D)) {
+      for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+        this.molecules[i].check();
+      }
+    }
+    if (this.afterLoadContent) {
+      this.afterLoadContent();
+    }
+    this.repaint();
+  };
+  _.addMolecule = function(molecule) {
+    this.molecules.push(molecule);
+    if (!(c._Canvas3D && this instanceof c._Canvas3D)) {
+      molecule.check();
+    }
+    this.repaint();
+  };
+  _.removeMolecule = function(mol) {
+    this.molecules = q.grep(this.molecules, function(value) {
+      return value !== mol;
+    });
+    this.repaint();
+  };
+  _.getMolecule = function() {
+    return this.molecules.length > 0 ? this.molecules[0] : undefined;
+  };
+  _.getMolecules = function() {
+    return this.molecules;
+  };
+  _.addShape = function(shape) {
+    this.shapes.push(shape);
+    this.repaint();
+  };
+  _.removeShape = function(shape) {
+    this.shapes = q.grep(this.shapes, function(value) {
+      return value !== shape;
+    });
+    this.repaint();
+  };
+  _.getShapes = function() {
+    return this.shapes;
+  };
+  _.clear = function() {
+    this.molecules = [];
+    this.shapes = [];
+    this.specs.scale = 1;
+    this.repaint();
+  };
+  _.center = function() {
+    var bounds = this.getContentBounds();
+    var center = new structures.Point((this.width - bounds.minX - bounds.maxX) / 2, (this.height - bounds.minY - bounds.maxY) / 2);
+    for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+      var mol = this.molecules[i];
+      for ( var j = 0, jj = mol.atoms.length; j < jj; j++) {
+        mol.atoms[j].add(center);
+      }
+    }
+    for ( var i = 0, ii = this.shapes.length; i < ii; i++) {
+      var sps = this.shapes[i].getPoints();
+      for ( var j = 0, jj = sps.length; j < jj; j++) {
+        sps[j].add(center);
+      }
+    }
+    this.specs.scale = 1;
+    var difX = bounds.maxX - bounds.minX;
+    var difY = bounds.maxY - bounds.minY;
+    if (difX > this.width || difY > this.height) {
+      this.specs.scale = m.min(this.width / difX, this.height / difY) * .85;
+    }
+  };
+  _.bondExists = function(a1, a2) {
+    for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+      var mol = this.molecules[i];
+      for ( var j = 0, jj = mol.bonds.length; j < jj; j++) {
+        var b = mol.bonds[j];
+        if (b.contains(a1) && b.contains(a2)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+  _.getBond = function(a1, a2) {
+    for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+      var mol = this.molecules[i];
+      for ( var j = 0, jj = mol.bonds.length; j < jj; j++) {
+        var b = mol.bonds[j];
+        if (b.contains(a1) && b.contains(a2)) {
+          return b;
+        }
+      }
+    }
+    return undefined;
+  };
+  _.getMoleculeByAtom = function(a) {
+    for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+      var mol = this.molecules[i];
+      if (mol.atoms.indexOf(a) !== -1) {
+        return mol;
+      }
+    }
+    return undefined;
+  };
+  _.getAllAtoms = function() {
+    var as = [];
+    for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+      as = as.concat(this.molecules[i].atoms);
+    }
+    return as;
+  };
+  _.getAllPoints = function() {
+    var ps = [];
+    for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+      ps = ps.concat(this.molecules[i].atoms);
+    }
+    for ( var i = 0, ii = this.shapes.length; i < ii; i++) {
+      ps = ps.concat(this.shapes[i].getPoints());
+    }
+    return ps;
+  };
+  _.getContentBounds = function() {
+    var bounds = new math.Bounds();
+    for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+      bounds.expand(this.molecules[i].getBounds());
+    }
+    for ( var i = 0, ii = this.shapes.length; i < ii; i++) {
+      bounds.expand(this.shapes[i].getBounds());
+    }
+    return bounds;
+  };
+  _.create = function(id, width, height) {
+    this.id = id;
+    this.width = width;
+    this.height = height;
+    this.molecules = [];
+    this.shapes = [];
+    if (document.getElementById(id)) {
+      var canvas = q('#' + id);
+      if (!width) {
+        this.width = canvas.attr('width');
+      } else {
+        canvas.attr('width', width);
+      }
+      if (!height) {
+        this.height = canvas.attr('height');
+      } else {
+        canvas.attr('height', height);
+      }
+      // If the canvas is pre-created, make sure that the class attribute
+      // is specified.
+      canvas.attr('class', 'ChemDoodleWebComponent');
+    } else if (!c.featureDetection.supports_canvas_text() && browser.msie && browser.version >= '6') {
+      // Install Google Chrome Frame
+      document.writeln('<div style="border: 1px solid black;" width="' + width + '" height="' + height + '">Please install <a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>, then restart Internet Explorer.</div>');
+      return;
+    } else {
+      document.writeln('<canvas class="ChemDoodleWebComponent" id="' + id + '" width="' + width + '" height="' + height + '" alt="ChemDoodle Web Component">This browser does not support HTML5/Canvas.</canvas>');
+    }
+    var jqCapsule = q('#' + id);
+    jqCapsule.css('width', this.width);
+    jqCapsule.css('height', this.height);
+    this.pixelRatio = window.devicePixelRatio ? window.devicePixelRatio : 1;
+    this.specs = new structures.VisualSpecifications();
+    // setup input events
+    // make sure prehandle events are only in if statements if handled, so
+    // as not to block browser events
+    var me = this;
+    if (featureDetection.supports_touch()) {
+      // for iPhone OS and Android devices (and other mobile browsers that
+      // support mobile events)
+      jqCapsule.bind('touchstart', function(e) {
+        var time = new Date().getTime();
+        if (!featureDetection.supports_gesture() && e.originalEvent.touches.length === 2) {
+          // on some platforms, like Android, there is no gesture
+          // support, so we have to implement it
+          var ts = e.originalEvent.touches;
+          var p1 = new structures.Point(ts[0].pageX, ts[0].pageY);
+          var p2 = new structures.Point(ts[1].pageX, ts[1].pageY);
+          me.implementedGestureDist = p1.distance(p2);
+          me.implementedGestureAngle = p1.angle(p2);
+          if (me.gesturestart) {
+            me.prehandleEvent(e);
+            me.gesturestart(e);
+          }
+        }
+        if (me.lastTouch && e.originalEvent.touches.length === 1 && (time - me.lastTouch) < 500) {
+          if (me.dbltap) {
+            me.prehandleEvent(e);
+            me.dbltap(e);
+          } else if (me.dblclick) {
+            me.prehandleEvent(e);
+            me.dblclick(e);
+          } else if (me.touchstart) {
+            me.prehandleEvent(e);
+            me.touchstart(e);
+          } else if (me.mousedown) {
+            me.prehandleEvent(e);
+            me.mousedown(e);
+          }
+        } else if (me.touchstart) {
+          me.prehandleEvent(e);
+          me.touchstart(e);
+          if (this.hold) {
+            clearTimeout(this.hold);
+          }
+          if (this.touchhold) {
+            this.hold = setTimeout(function() {
+              me.touchhold(e);
+            }, 1000);
+          }
+        } else if (me.mousedown) {
+          me.prehandleEvent(e);
+          me.mousedown(e);
+        }
+        me.lastTouch = time;
+      });
+      jqCapsule.bind('touchmove', function(e) {
+        if (this.hold) {
+          clearTimeout(this.hold);
+          this.hold = undefined;
+        }
+        if (!featureDetection.supports_gesture() && e.originalEvent.touches.length === 2) {
+          // on some platforms, like Android, there is no gesture
+          // support, so we have to implement it
+          if (me.gesturechange) {
+            var ts = e.originalEvent.touches;
+            var p1 = new structures.Point(ts[0].pageX, ts[0].pageY);
+            var p2 = new structures.Point(ts[1].pageX, ts[1].pageY);
+            var newDist = p1.distance(p2);
+            var newAngle = p1.angle(p2);
+            e.originalEvent.scale = newDist / me.implementedGestureDist;
+            e.originalEvent.rotation = 180 * (me.implementedGestureAngle - newAngle) / m.PI;
+            me.prehandleEvent(e);
+            me.gesturechange(e);
+          }
+        }
+        if (e.originalEvent.touches.length > 1 && me.multitouchmove) {
+          var numFingers = e.originalEvent.touches.length;
+          me.prehandleEvent(e);
+          var center = new structures.Point(-e.offset.left * numFingers, -e.offset.top * numFingers);
+          for ( var i = 0; i < numFingers; i++) {
+            center.x += e.originalEvent.changedTouches[i].pageX;
+            center.y += e.originalEvent.changedTouches[i].pageY;
+          }
+          center.x /= numFingers;
+          center.y /= numFingers;
+          e.p = center;
+          me.multitouchmove(e, numFingers);
+        } else if (me.touchmove) {
+          me.prehandleEvent(e);
+          me.touchmove(e);
+        } else if (me.drag) {
+          me.prehandleEvent(e);
+          me.drag(e);
+        }
+      });
+      jqCapsule.bind('touchend', function(e) {
+        if (this.hold) {
+          clearTimeout(this.hold);
+          this.hold = undefined;
+        }
+        if (!featureDetection.supports_gesture() && me.implementedGestureDist) {
+          // on some platforms, like Android, there is no gesture
+          // support, so we have to implement it
+          me.implementedGestureDist = undefined;
+          me.implementedGestureAngle = undefined;
+          if (me.gestureend) {
+            me.prehandleEvent(e);
+            me.gestureend(e);
+          }
+        }
+        if (me.touchend) {
+          me.prehandleEvent(e);
+          me.touchend(e);
+        } else if (me.mouseup) {
+          me.prehandleEvent(e);
+          me.mouseup(e);
+        }
+        if ((new Date().getTime() - me.lastTouch) < 250) {
+          if (me.tap) {
+            me.prehandleEvent(e);
+            me.tap(e);
+          } else if (me.click) {
+            me.prehandleEvent(e);
+            me.click(e);
+          }
+        }
+      });
+      jqCapsule.bind('gesturestart', function(e) {
+        if (me.gesturestart) {
+          me.prehandleEvent(e);
+          me.gesturestart(e);
+        }
+      });
+      jqCapsule.bind('gesturechange', function(e) {
+        if (me.gesturechange) {
+          me.prehandleEvent(e);
+          me.gesturechange(e);
+        }
+      });
+      jqCapsule.bind('gestureend', function(e) {
+        if (me.gestureend) {
+          me.prehandleEvent(e);
+          me.gestureend(e);
+        }
+      });
+    } else {
+      // normal events
+      // some mobile browsers will simulate mouse events, so do not set
+      // these
+      // events if mobile, or it will interfere with the handling of touch
+      // events
+      jqCapsule.click(function(e) {
+        switch (e.which) {
+        case 1:
+          // left mouse button pressed
+          if (me.click) {
+            me.prehandleEvent(e);
+            me.click(e);
+          }
+          break;
+        case 2:
+          // middle mouse button pressed
+          if (me.middleclick) {
+            me.prehandleEvent(e);
+            me.middleclick(e);
+          }
+          break;
+        case 3:
+          // right mouse button pressed
+          if (me.rightclick) {
+            me.prehandleEvent(e);
+            me.rightclick(e);
+          }
+          break;
+        }
+      });
+      jqCapsule.dblclick(function(e) {
+        if (me.dblclick) {
+          me.prehandleEvent(e);
+          me.dblclick(e);
+        }
+      });
+      jqCapsule.mousedown(function(e) {
+        switch (e.which) {
+        case 1:
+          // left mouse button pressed
+          monitor.CANVAS_DRAGGING = me;
+          if (me.mousedown) {
+            me.prehandleEvent(e);
+            me.mousedown(e);
+          }
+          break;
+        case 2:
+          // middle mouse button pressed
+          if (me.middlemousedown) {
+            me.prehandleEvent(e);
+            me.middlemousedown(e);
+          }
+          break;
+        case 3:
+          // right mouse button pressed
+          if (me.rightmousedown) {
+            me.prehandleEvent(e);
+            me.rightmousedown(e);
+          }
+          break;
+        }
+      });
+      jqCapsule.mousemove(function(e) {
+        if (!monitor.CANVAS_DRAGGING && me.mousemove) {
+          me.prehandleEvent(e);
+          me.mousemove(e);
+        }
+      });
+      jqCapsule.mouseout(function(e) {
+        monitor.CANVAS_OVER = undefined;
+        if (me.mouseout) {
+          me.prehandleEvent(e);
+          me.mouseout(e);
+        }
+      });
+      jqCapsule.mouseover(function(e) {
+        monitor.CANVAS_OVER = me;
+        if (me.mouseover) {
+          me.prehandleEvent(e);
+          me.mouseover(e);
+        }
+      });
+      jqCapsule.mouseup(function(e) {
+        switch (e.which) {
+        case 1:
+          // left mouse button pressed
+          if (me.mouseup) {
+            me.prehandleEvent(e);
+            me.mouseup(e);
+          }
+          break;
+        case 2:
+          // middle mouse button pressed
+          if (me.middlemouseup) {
+            me.prehandleEvent(e);
+            me.middlemouseup(e);
+          }
+          break;
+        case 3:
+          // right mouse button pressed
+          if (me.rightmouseup) {
+            me.prehandleEvent(e);
+            me.rightmouseup(e);
+          }
+          break;
+        }
+      });
+      jqCapsule.mousewheel(function(e, delta) {
+        if (me.mousewheel) {
+          me.prehandleEvent(e);
+          me.mousewheel(e, delta);
+        }
+      });
+    }
+    if (this.subCreate) {
+      this.subCreate();
+    }
+  };
+  _.prehandleEvent = function(e) {
+    if (e.originalEvent.changedTouches) {
+      e.pageX = e.originalEvent.changedTouches[0].pageX;
+      e.pageY = e.originalEvent.changedTouches[0].pageY;
+    }
+    e.preventDefault();
+    e.offset = q('#' + this.id).offset();
+    e.p = new structures.Point(e.pageX - e.offset.left, e.pageY - e.offset.top);
+  };
+})(ChemDoodle, ChemDoodle.featureDetection, ChemDoodle.math, ChemDoodle.monitor, ChemDoodle.structures, jQuery, jQuery.browser, Math, document, window);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(c) {
+  'use strict';
+  c._AnimatorCanvas = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+  };
+  var _ = c._AnimatorCanvas.prototype = new c._Canvas();
+  _.timeout = 33;
+  _.startAnimation = function() {
+    this.stopAnimation();
+    this.lastTime = new Date().getTime();
+    var me = this;
+    if (this.nextFrame) {
+      this.handle = setInterval(function() {
+        // advance clock
+        var timeNow = new Date().getTime();
+        // update and repaint
+        me.nextFrame(timeNow - me.lastTime);
+        me.repaint();
+        me.lastTime = timeNow;
+      }, this.timeout);
+    }
+  };
+  _.stopAnimation = function() {
+    if (this.handle) {
+      clearInterval(this.handle);
+      this.handle = undefined;
+    }
+  };
+  _.isRunning = function() {
+    // must compare to undefined here to return a boolean
+    return this.handle !== undefined;
+  };
+
+})(ChemDoodle);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(c, document) {
+  'use strict';
+  c.FileCanvas = function(id, width, height, action) {
+    if (id) {
+      this.create(id, width, height);
+    }
+    var form = '<br><form name="FileForm" enctype="multipart/form-data" method="POST" action="' + action + '" target="HiddenFileFrame"><input type="file" name="f" /><input type="submit" name="submitbutton" value="Show File" /></form><iframe id="HFF-' + id + '" name="HiddenFileFrame" height="0" width="0" style="display:none;" onLoad="GetMolFromFrame(\'HFF-' + id + '\', ' + id + ')"></iframe>';
+    document.writeln(form);
+    this.emptyMessage = 'Click below to load file';
+    this.repaint();
+  };
+  c.FileCanvas.prototype = new c._Canvas();
+
+})(ChemDoodle, document);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(c) {
+  'use strict';
+  c.HyperlinkCanvas = function(id, width, height, urlOrFunction, color, size) {
+    if (id) {
+      this.create(id, width, height);
+    }
+    this.urlOrFunction = urlOrFunction;
+    this.color = color ? color : 'blue';
+    this.size = size ? size : 2;
+  };
+  var _ = c.HyperlinkCanvas.prototype = new c._Canvas();
+  _.openInNewWindow = true;
+  _.hoverImage = undefined;
+  _.drawChildExtras = function(ctx) {
+    if (this.e) {
+      if (this.hoverImage) {
+        ctx.drawImage(this.hoverImage, 0, 0);
+      } else {
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = this.size * 2;
+        ctx.strokeRect(0, 0, this.width, this.height);
+      }
+    }
+  };
+  _.setHoverImage = function(url) {
+    this.hoverImage = new Image();
+    this.hoverImage.src = url;
+  };
+  _.click = function(p) {
+    this.e = undefined;
+    this.repaint();
+    if (this.urlOrFunction instanceof Function) {
+      this.urlOrFunction();
+    } else {
+      if (this.openInNewWindow) {
+        window.open(this.urlOrFunction);
+      } else {
+        location.href = this.urlOrFunction;
+      }
+    }
+  };
+  _.mouseout = function(e) {
+    this.e = undefined;
+    this.repaint();
+  };
+  _.mouseover = function(e) {
+    this.e = e;
+    this.repaint();
+  };
+
+})(ChemDoodle);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(c, iChemLabs, q, document) {
+  'use strict';
+  c.MolGrabberCanvas = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+    var sb = [];
+    sb.push('<br><input type="text" id="');
+    sb.push(id);
+    sb.push('_query" size="32" value="" />');
+    sb.push('<br><nobr>');
+    sb.push('<select id="');
+    sb.push(id);
+    sb.push('_select">');
+    sb.push('<option value="chemexper">ChemExper');
+    sb.push('<option value="chemspider">ChemSpider');
+    sb.push('<option value="pubchem" selected>PubChem');
+    sb.push('</select>');
+    sb.push('<button id="');
+    sb.push(id);
+    sb.push('_submit">Show Molecule</button>');
+    sb.push('</nobr>');
+
+    // Don't use document.writeln here, it breaks the whole page after
+    // document is closed.
+    document.getElementById(id);
+    var canvas = q('#' + id);
+    canvas.after(sb.join(''));
+
+    var self = this;
+    q('#' + id + '_submit').click(function() {
+      self.search();
+    });
+    q('#' + id + '_query').keypress(function(e) {
+      if (e.which === 13) {
+        self.search();
+      }
+    });
+    this.emptyMessage = 'Enter search term below';
+    this.repaint();
+  };
+  var _ = c.MolGrabberCanvas.prototype = new c._Canvas();
+  _.setSearchTerm = function(term) {
+    q('#' + this.id + '_query').val(term);
+    this.search();
+  };
+  _.search = function() {
+    this.emptyMessage = 'Searching...';
+    this.clear();
+    var self = this;
+    iChemLabs.getMoleculeFromDatabase(q('#' + this.id + '_query').val(), {
+      database : q('#' + this.id + '_select').val()
+    }, function(mol) {
+      self.loadMolecule(mol);
+    });
+  };
+
+})(ChemDoodle, ChemDoodle.iChemLabs, jQuery, document);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(c, m, m4) {
+  'use strict';
+  // keep these declaration outside the loop to avoid overhead
+  var matrix = [];
+  var xAxis = [ 1, 0, 0 ];
+  var yAxis = [ 0, 1, 0 ];
+  var zAxis = [ 0, 0, 1 ];
+
+  c.RotatorCanvas = function(id, width, height, rotate3D) {
+    if (id) {
+      this.create(id, width, height);
+    }
+    this.rotate3D = rotate3D;
+  };
+  var _ = c.RotatorCanvas.prototype = new c._AnimatorCanvas();
+  var increment = m.PI / 15;
+  _.xIncrement = increment;
+  _.yIncrement = increment;
+  _.zIncrement = increment;
+  _.nextFrame = function(delta) {
+    if (this.molecules.length === 0 && this.shapes.length === 0) {
+      this.stopAnimation();
+      return;
+    }
+    var change = delta / 1000;
+    if (this.rotate3D) {
+      m4.identity(matrix);
+      m4.rotate(matrix, this.xIncrement * change, xAxis);
+      m4.rotate(matrix, this.yIncrement * change, yAxis);
+      m4.rotate(matrix, this.zIncrement * change, zAxis);
+      for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+        var m = this.molecules[i];
+        for ( var j = 0, jj = m.atoms.length; j < jj; j++) {
+          var a = m.atoms[j];
+          var p = [ a.x - this.width / 2, a.y - this.height / 2, a.z ];
+          m4.multiplyVec3(matrix, p);
+          a.x = p[0] + this.width / 2;
+          a.y = p[1] + this.height / 2;
+          a.z = p[2];
+        }
+        for ( var j = 0, jj = m.rings.length; j < jj; j++) {
+          m.rings[j].center = m.rings[j].getCenter();
+        }
+        if (this.specs.atoms_display && this.specs.atoms_circles_2D) {
+          m.sortAtomsByZ();
+        }
+        if (this.specs.bonds_display && this.specs.bonds_clearOverlaps_2D) {
+          m.sortBondsByZ();
+        }
+      }
+      for ( var i = 0, ii = this.shapes.length; i < ii; i++) {
+        var sps = this.shapes[i].getPoints();
+        for ( var j = 0, jj = sps.length; j < jj; j++) {
+          var a = sps[j];
+          var p = [ a.x - this.width / 2, a.y - this.height / 2, 0 ];
+          m4.multiplyVec3(matrix, p);
+          a.x = p[0] + this.width / 2;
+          a.y = p[1] + this.height / 2;
+        }
+      }
+    } else {
+      this.specs.rotateAngle += this.zIncrement * change;
+    }
+  };
+  _.dblclick = function(e) {
+    if (this.isRunning()) {
+      this.stopAnimation();
+    } else {
+      this.startAnimation();
+    }
+  };
+
+})(ChemDoodle, Math, mat4);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(c, math) {
+  'use strict';
+  c.SlideshowCanvas = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+  };
+  var _ = c.SlideshowCanvas.prototype = new c._AnimatorCanvas();
+  _.frames = [];
+  _.curIndex = 0;
+  _.timeout = 5000;
+  _.alpha = 0;
+  _.innerHandle = undefined;
+  _.phase = 0;
+  _.drawChildExtras = function(ctx) {
+    var rgb = math.getRGB(this.specs.backgroundColor, 255);
+    ctx.fillStyle = 'rgba(' + rgb[0] + ', ' + rgb[1] + ', ' + rgb[2] + ', ' + this.alpha + ')';
+    ctx.fillRect(0, 0, this.width, this.height);
+  };
+  _.nextFrame = function(delta) {
+    if (this.frames.length === 0) {
+      this.stopAnimation();
+      return;
+    }
+    this.phase = 0;
+    var me = this;
+    var count = 1;
+    this.innerHandle = setInterval(function() {
+      me.alpha = count / 15;
+      me.repaint();
+      if (count === 15) {
+        me.breakInnerHandle();
+      }
+      count++;
+    }, 33);
+  };
+  _.breakInnerHandle = function() {
+    if (this.innerHandle) {
+      clearInterval(this.innerHandle);
+      this.innerHandle = undefined;
+    }
+    if (this.phase === 0) {
+      this.curIndex++;
+      if (this.curIndex > this.frames.length - 1) {
+        this.curIndex = 0;
+      }
+      this.alpha = 1;
+      var f = this.frames[this.curIndex];
+      this.loadContent(f.mols, f.shapes);
+      this.phase = 1;
+      var me = this;
+      var count = 1;
+      this.innerHandle = setInterval(function() {
+        me.alpha = (15 - count) / 15;
+        me.repaint();
+        if (count === 15) {
+          me.breakInnerHandle();
+        }
+        count++;
+      }, 33);
+    } else if (this.phase === 1) {
+      this.alpha = 0;
+      this.repaint();
+    }
+  };
+  _.addFrame = function(molecules, shapes) {
+    if (this.frames.length === 0) {
+      this.loadContent(molecules, shapes);
+    }
+    this.frames.push({
+      mols : molecules,
+      shapes : shapes
+    });
+  };
+
+})(ChemDoodle, ChemDoodle.math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4403 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-06-09 14:16:09 -0400 (Sun, 09 Jun 2013) $
+//
+
+(function(c, monitor, structures, m, m4) {
+  'use strict';
+  c.TransformCanvas = function(id, width, height, rotate3D) {
+    if (id) {
+      this.create(id, width, height);
+    }
+    this.rotate3D = rotate3D;
+  };
+  var _ = c.TransformCanvas.prototype = new c._Canvas();
+  _.lastPoint = undefined;
+  _.rotationMultMod = 1.3;
+  _.lastPinchScale = 1;
+  _.lastGestureRotate = 0;
+  _.mousedown = function(e) {
+    this.lastPoint = e.p;
+  };
+  _.dblclick = function(e) {
+    // center structure
+    this.center();
+    this.repaint();
+  };
+  _.drag = function(e) {
+    if (!this.lastPoint.multi) {
+      if (monitor.ALT) {
+        var t = new structures.Point(e.p.x, e.p.y);
+        t.sub(this.lastPoint);
+        for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+          var mol = this.molecules[i];
+          for ( var j = 0, jj = mol.atoms.length; j < jj; j++) {
+            mol.atoms[j].add(t);
+          }
+          mol.check();
+        }
+        for ( var i = 0, ii = this.shapes.length; i < ii; i++) {
+          var sps = this.shapes[i].getPoints();
+          for ( var j = 0, jj = sps.length; j < jj; j++) {
+            sps[j].add(t);
+          }
+        }
+        this.lastPoint = e.p;
+        this.repaint();
+      } else {
+        if (this.rotate3D === true) {
+          var diameter = m.max(this.width / 4, this.height / 4);
+          var difx = e.p.x - this.lastPoint.x;
+          var dify = e.p.y - this.lastPoint.y;
+          var yIncrement = difx / diameter * this.rotationMultMod;
+          var xIncrement = -dify / diameter * this.rotationMultMod;
+          var matrix = [];
+          m4.identity(matrix);
+          m4.rotate(matrix, xIncrement, [ 1, 0, 0 ]);
+          m4.rotate(matrix, yIncrement, [ 0, 1, 0 ]);
+          for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+            var mol = this.molecules[i];
+            for ( var j = 0, jj = mol.atoms.length; j < jj; j++) {
+              var a = mol.atoms[j];
+              var p = [ a.x - this.width / 2, a.y - this.height / 2, a.z ];
+              m4.multiplyVec3(matrix, p);
+              a.x = p[0] + this.width / 2;
+              a.y = p[1] + this.height / 2;
+              a.z = p[2];
+            }
+            for ( var i = 0, ii = mol.rings.length; i < ii; i++) {
+              mol.rings[i].center = mol.rings[i].getCenter();
+            }
+            this.lastPoint = e.p;
+            if (this.specs.atoms_display && this.specs.atoms_circles_2D) {
+              mol.sortAtomsByZ();
+            }
+            if (this.specs.bonds_display && this.specs.bonds_clearOverlaps_2D) {
+              mol.sortBondsByZ();
+            }
+          }
+          this.repaint();
+        } else {
+          var center = new structures.Point(this.width / 2, this.height / 2);
+          var before = center.angle(this.lastPoint);
+          var after = center.angle(e.p);
+          this.specs.rotateAngle -= (after - before);
+          this.lastPoint = e.p;
+          this.repaint();
+        }
+      }
+    }
+  };
+  _.mousewheel = function(e, delta) {
+    this.specs.scale += delta / 50;
+    if (this.specs.scale < .01) {
+      this.specs.scale = .01;
+    }
+    this.repaint();
+  };
+  _.multitouchmove = function(e, numFingers) {
+    if (numFingers === 2) {
+      if (this.lastPoint.multi) {
+        var t = new structures.Point(e.p.x, e.p.y);
+        t.sub(this.lastPoint);
+        for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+          var m = this.molecules[i];
+          for ( var j = 0, jj = m.atoms.length; j < jj; j++) {
+            m.atoms[j].add(t);
+          }
+          m.check();
+        }
+        for ( var i = 0, ii = this.shapes.length; i < ii; i++) {
+          var sps = this.shapes[i].getPoints();
+          for ( var j = 0, jj = sps.length; j < jj; j++) {
+            sps[j].add(t);
+          }
+        }
+        this.lastPoint = e.p;
+        this.lastPoint.multi = true;
+        this.repaint();
+      } else {
+        this.lastPoint = e.p;
+        this.lastPoint.multi = true;
+      }
+    }
+  };
+  _.gesturechange = function(e) {
+    if (e.originalEvent.scale - this.lastPinchScale !== 0) {
+      this.specs.scale *= e.originalEvent.scale / this.lastPinchScale;
+      if (this.specs.scale < .01) {
+        this.specs.scale = .01;
+      }
+      this.lastPinchScale = e.originalEvent.scale;
+    }
+    if (this.lastGestureRotate - e.originalEvent.rotation !== 0) {
+      var rot = (this.lastGestureRotate - e.originalEvent.rotation) / 180 * m.PI;
+      var center = new structures.Point(this.width / 2, this.height / 2);
+      for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+        var m = this.molecules[i];
+        for ( var j = 0, jj = m.atoms.length; j < jj; j++) {
+          var a = m.atoms[j];
+          var dist = center.distance(a);
+          var angle = center.angle(a) + rot;
+          a.x = center.x + dist * m.cos(angle);
+          a.y = center.y - dist * m.sin(angle);
+        }
+        m.check();
+      }
+      this.lastGestureRotate = e.originalEvent.rotation;
+    }
+    this.repaint();
+  };
+  _.gestureend = function(e) {
+    this.lastPinchScale = 1;
+    this.lastGestureRotate = 0;
+  };
+
+})(ChemDoodle, ChemDoodle.monitor, ChemDoodle.structures, Math, mat4);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(c) {
+  'use strict';
+  c.ViewerCanvas = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+  };
+  c.ViewerCanvas.prototype = new c._Canvas();
+
+})(ChemDoodle);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(c, document) {
+  'use strict';
+  c._SpectrumCanvas = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+  };
+  var _ = c._SpectrumCanvas.prototype = new c._Canvas();
+  _.spectrum = undefined;
+  _.emptyMessage = 'No Spectrum Loaded or Recognized';
+  _.loadMolecule = undefined;
+  _.getMolecule = undefined;
+  _.innerRepaint = function(ctx) {
+    if (this.spectrum && this.spectrum.data.length > 0) {
+      this.spectrum.draw(ctx, this.specs, this.width, this.height);
+    } else if (this.emptyMessage) {
+      ctx.fillStyle = '#737683';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = '18px Helvetica, Verdana, Arial, Sans-serif';
+      ctx.fillText(this.emptyMessage, this.width / 2, this.height / 2);
+    }
+  };
+  _.loadSpectrum = function(spectrum) {
+    this.spectrum = spectrum;
+    this.repaint();
+  };
+  _.getSpectrum = function() {
+    return this.spectrum;
+  };
+  _.getSpectrumCoordinates = function(x, y) {
+    return spectrum.getInternalCoordinates(x, y, this.width, this.height);
+  };
+
+})(ChemDoodle, document);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(c) {
+  'use strict';
+  c.ObserverCanvas = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+  };
+  c.ObserverCanvas.prototype = new c._SpectrumCanvas();
+
+})(ChemDoodle);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3078 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-02-06 18:27:15 -0500 (Sun, 06 Feb 2011) $
+//
+
+(function(c) {
+  'use strict';
+  c.OverlayCanvas = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+  };
+  var _ = c.OverlayCanvas.prototype = new c._SpectrumCanvas();
+  _.overlaySpectra = [];
+  _.superRepaint = _.innerRepaint;
+  _.innerRepaint = function(ctx) {
+    this.superRepaint(ctx);
+    if (this.spectrum && this.spectrum.data.length > 0) {
+      for ( var i = 0, ii = this.overlaySpectra.length; i < ii; i++) {
+        var s = this.overlaySpectra[i];
+        if (s && s.data.length > 0) {
+          s.minX = this.spectrum.minX;
+          s.maxX = this.spectrum.maxX;
+          s.drawPlot(ctx, this.specs, this.width, this.height, this.spectrum.memory.offsetTop, this.spectrum.memory.offsetLeft, this.spectrum.memory.offsetBottom);
+        }
+      }
+    }
+  };
+  _.addSpectrum = function(spectrum) {
+    if (!this.spectrum) {
+      this.spectrum = spectrum;
+    } else {
+      this.overlaySpectra.push(spectrum);
+    }
+  };
+
+})(ChemDoodle);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(c, monitor, m) {
+  'use strict';
+  c.PerspectiveCanvas = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+  };
+  var _ = c.PerspectiveCanvas.prototype = new c._SpectrumCanvas();
+  _.dragRange = undefined;
+  _.rescaleYAxisOnZoom = true;
+  _.lastPinchScale = 1;
+  _.mousedown = function(e) {
+    this.dragRange = new c.structures.Point(e.p.x, e.p.x);
+  };
+  _.mouseup = function(e) {
+    if (this.dragRange && this.dragRange.x !== this.dragRange.y) {
+      if (!this.dragRange.multi) {
+        var newScale = this.spectrum.zoom(this.dragRange.x, e.p.x, this.width, this.rescaleYAxisOnZoom);
+        if (this.rescaleYAxisOnZoom) {
+          this.specs.scale = newScale;
+        }
+      }
+      this.dragRange = undefined;
+      this.repaint();
+    }
+  };
+  _.drag = function(e) {
+    if (this.dragRange) {
+      if (this.dragRange.multi) {
+        this.dragRange = undefined;
+      } else if (monitor.SHIFT) {
+        this.spectrum.translate(e.p.x - this.dragRange.x, this.width);
+        this.dragRange.x = e.p.x;
+        this.dragRange.y = e.p.x;
+      } else {
+        this.dragRange.y = e.p.x;
+      }
+      this.repaint();
+    }
+  };
+  _.drawChildExtras = function(ctx) {
+    if (this.dragRange) {
+      var xs = m.min(this.dragRange.x, this.dragRange.y);
+      var xe = m.max(this.dragRange.x, this.dragRange.y);
+      ctx.strokeStyle = 'gray';
+      ctx.lineStyle = 1;
+      ctx.beginPath();
+      ctx.moveTo(xs, this.height / 2);
+      for ( var i = xs; i <= xe; i++) {
+        if (i % 10 < 5) {
+          ctx.lineTo(i, m.round(this.height / 2));
+        } else {
+          ctx.moveTo(i, m.round(this.height / 2));
+        }
+      }
+      ctx.stroke();
+    }
+  };
+  _.mousewheel = function(e, delta) {
+    this.specs.scale += delta / 10;
+    if (this.specs.scale < .01) {
+      this.specs.scale = .01;
+    }
+    this.repaint();
+  };
+  _.dblclick = function(e) {
+    this.spectrum.setup();
+    this.specs.scale = 1;
+    this.repaint();
+  };
+  _.multitouchmove = function(e, numFingers) {
+    if (numFingers === 2) {
+      if (!this.dragRange || !this.dragRange.multi) {
+        this.dragRange = new c.structures.Point(e.p.x, e.p.x);
+        this.dragRange.multi = true;
+      } else {
+        this.spectrum.translate(e.p.x - this.dragRange.x, this.width);
+        this.dragRange.x = e.p.x;
+        this.dragRange.y = e.p.x;
+        this.repaint();
+      }
+    }
+  };
+  _.gesturechange = function(e) {
+    this.specs.scale *= e.originalEvent.scale / this.lastPinchScale;
+    if (this.specs.scale < .01) {
+      this.specs.scale = .01;
+    }
+    this.lastPinchScale = e.originalEvent.scale;
+    this.repaint();
+  };
+  _.gestureend = function(e) {
+    this.lastPinchScale = 1;
+  };
+
+})(ChemDoodle, ChemDoodle.monitor, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3078 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-02-06 18:27:15 -0500 (Sun, 06 Feb 2011) $
+//
+
+(function(c, extensions, m) {
+  'use strict';
+  c.SeekerCanvas = function(id, width, height, seekType) {
+    if (id) {
+      this.create(id, width, height);
+    }
+    this.seekType = seekType;
+  };
+  var _ = c.SeekerCanvas.prototype = new c._SpectrumCanvas();
+  _.superRepaint = _.innerRepaint;
+  _.innerRepaint = function(ctx) {
+    this.superRepaint(ctx);
+    if (this.spectrum && this.spectrum.data.length > 0 && this.p) {
+      // set up coords
+      var renderP;
+      var internalP;
+      if (this.seekType === c.SeekerCanvas.SEEK_POINTER) {
+        renderP = this.p;
+        internalP = this.spectrum.getInternalCoordinates(renderP.x, renderP.y);
+      } else if (this.seekType === c.SeekerCanvas.SEEK_PLOT || this.seekType === c.SeekerCanvas.SEEK_PEAK) {
+        internalP = this.seekType === c.SeekerCanvas.SEEK_PLOT ? this.spectrum.getClosestPlotInternalCoordinates(this.p.x) : this.spectrum.getClosestPeakInternalCoordinates(this.p.x);
+        if (!internalP) {
+          return;
+        }
+        renderP = {
+          x : this.spectrum.getTransformedX(internalP.x, this.specs, this.width, this.spectrum.memory.offsetLeft),
+          y : this.spectrum.getTransformedY(internalP.y / 100, this.specs, this.height, this.spectrum.memory.offsetBottom, this.spectrum.memory.offsetTop)
+        };
+      }
+      // draw point
+      ctx.fillStyle = 'white';
+      ctx.strokeStyle = this.specs.plots_color;
+      ctx.lineWidth = this.specs.plots_width;
+      ctx.beginPath();
+      ctx.arc(renderP.x, renderP.y, 3, 0, m.PI * 2, false);
+      ctx.fill();
+      ctx.stroke();
+      // draw internal coordinates
+      ctx.font = extensions.getFontString(this.specs.text_font_size, this.specs.text_font_families);
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'bottom';
+      var s = 'x:' + internalP.x.toFixed(3) + ', y:' + internalP.y.toFixed(3);
+      var x = renderP.x + 3;
+      var w = ctx.measureText(s).width;
+      if (x + w > this.width - 2) {
+        x -= 6 + w;
+      }
+      var y = renderP.y;
+      if (y - this.specs.text_font_size - 2 < 0) {
+        y += this.specs.text_font_size;
+      }
+      ctx.fillRect(x, y - this.specs.text_font_size, w, this.specs.text_font_size);
+      ctx.fillStyle = 'black';
+      ctx.fillText(s, x, y);
+    }
+  };
+  _.mouseout = function(e) {
+    this.p = undefined;
+    this.repaint();
+  };
+  _.mousemove = function(e) {
+    this.p = {
+      x : e.p.x - 2,
+      y : e.p.y - 3
+    };
+    this.repaint();
+  };
+  _.touchstart = function(e) {
+    this.mousemove(e);
+  };
+  _.touchmove = function(e) {
+    this.mousemove(e);
+  };
+  _.touchend = function(e) {
+    this.mouseout(e);
+  };
+  c.SeekerCanvas.SEEK_POINTER = 'pointer';
+  c.SeekerCanvas.SEEK_PLOT = 'plot';
+  c.SeekerCanvas.SEEK_PEAK = 'peak';
+
+})(ChemDoodle, ChemDoodle.extensions, Math);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4500 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-09-06 14:28:15 -0400 (Fri, 06 Sep 2013) $
+
+(function(c, extensions, math, structures, d3, RESIDUE, m, document, m4, m3, v3, window) {
+  'use strict';
+  c._Canvas3D = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+  };
+  var _ = c._Canvas3D.prototype = new c._Canvas();
+  _.rotationMatrix = undefined;
+  _.translationMatrix = undefined;
+  _.lastPoint = undefined;
+  _.emptyMessage = 'WebGL is Unavailable!';
+  _.afterLoadContent = function() {
+    var bounds = new math.Bounds();
+    for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+      bounds.expand(this.molecules[i].getBounds3D());
+    }
+    // build fog parameter
+    var maxDimension3D = v3.dist([bounds.maxX, bounds.maxY, bounds.maxZ], [bounds.minX, bounds.minY, bounds.minZ]) / 2 + 1.5;
+
+    var fov = 45;
+    var theta = fov / 360 * Math.PI;
+    var tanTheta = Math.tan(theta) / 0.8;
+    var top = maxDimension3D;
+    this.depth = top / tanTheta;
+    var near = m.max(this.depth - top, 0.1);
+    var far = this.depth + top;
+    var aspec = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
+
+    if (aspec < 1) {
+      fov /= aspec;
+    }
+
+    this.specs.projectionOrthoWidth_3D = Math.tan(fov / 360 * Math.PI) * this.depth * 2 * aspec;
+    this.specs.projectionPerspectiveVerticalFieldOfView_3D = fov;
+    this.specs.projectionFrontCulling_3D = near;
+    this.specs.projectionBackCulling_3D = far;
+    this.specs.projectionWidthHeightRatio_3D = aspec;
+
+    this.translationMatrix = m4.translate(m4.identity([]), [ 0, 0, -this.depth ]);
+
+    this.maxDimension = m.max(bounds.maxX - bounds.minX, bounds.maxY - bounds.minY);
+    // this.translationMatrix = m4.translate(m4.identity([]), [ 0, 0,
+    // -this.maxDimension - 10 ]);
+    this.setupScene();
+  };
+  _.setViewDistance = function(fov) {
+    var minFov = 0.1;
+    var maxFov = 179.9;
+    this.specs.projectionPerspectiveVerticalFieldOfView_3D = math.clamp(this.specs.projectionPerspectiveVerticalFieldOfView_3D / fov, minFov, maxFov);
+    this.specs.projectionOrthoWidth_3D = m.tan(this.specs.projectionPerspectiveVerticalFieldOfView_3D / 360 * Math.PI) * this.depth * 2 * this.specs.projectionWidthHeightRatio_3D;
+    this.updateScene();
+  };
+  _.repaint = function() {
+    if (this.gl) {
+      // ready the bits for rendering
+      this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+
+      // set up the model view matrix to the specified transformations
+      this.gl.modelViewMatrix = m4.multiply(this.translationMatrix, this.rotationMatrix, []);
+      this.gl.rotationMatrix = this.rotationMatrix;
+
+      // use default projection matrix to draw the molecule
+      var pUniform = this.gl.getUniformLocation(this.gl.program, 'u_projection_matrix');
+      this.gl.uniformMatrix4fv(pUniform, false, this.gl.projectionMatrix);
+      this.gl.fogging.setMode(this.specs.fog_mode_3D);
+
+      for ( var i = 0, ii = this.molecules.length; i < ii; i++) {
+        this.molecules[i].render(this.gl, this.specs);
+      }
+      for ( var i = 0, ii = this.shapes.length; i < ii; i++) {
+        this.shapes[i].render(this.gl, this.specs);
+      }
+
+      if (this.specs.compass_display) {
+        // use projection matrix to draw the compass
+        this.gl.uniformMatrix4fv(pUniform, false, this.compass.projectionMatrix);
+        this.compass.render(this.gl, this.specs);
+      }
+
+      // set up GLProgram and shader for rendering text
+      var shaderText = this.gl.shaderText;
+      this.gl.useProgram(this.gl.programLabel);
+
+      // enable blend and depth mask set to false
+      this.gl.enable(this.gl.BLEND);
+      this.gl.blendFuncSeparate(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA, this.gl.ONE, this.gl.ONE_MINUS_SRC_ALPHA);
+      this.gl.depthMask(false);
+
+      // enable vertex for draw text
+      this.gl.enableVertexAttribArray(shaderText.vertexPositionAttribute);
+      this.gl.enableVertexAttribArray(shaderText.vertexTexCoordAttribute);
+      this.gl.enableVertexAttribArray(shaderText.vertexTranslationAttribute);
+      this.gl.enableVertexAttribArray(shaderText.vertexZDepthAttribute);
+
+      // draw label molecule
+      if (this.specs.atoms_displayLabels_3D) {
+        this.label3D.render(this.gl, this.specs, this.getMolecules());
+      }
+
+      // draw compass X Y Z text
+      if (this.specs.compass_display && this.specs.compass_displayText_3D) {
+        this.compass.renderText(this.gl);
+      }
+
+      // disable vertex for draw text
+      this.gl.disableVertexAttribArray(shaderText.vertexPositionAttribute);
+      this.gl.disableVertexAttribArray(shaderText.vertexTexCoordAttribute);
+      this.gl.disableVertexAttribArray(shaderText.vertexTranslationAttribute);
+      this.gl.disableVertexAttribArray(shaderText.vertexZDepthAttribute);
+
+      // disable blend and depth mask set to true
+      this.gl.disable(this.gl.BLEND);
+      this.gl.depthMask(true);
+
+      // reset to prev setting
+      this.gl.useProgram(this.gl.program);
+      this.gl.enableVertexAttribArray(this.gl.shader.vertexPositionAttribute);
+      this.gl.enableVertexAttribArray(this.gl.shader.vertexNormalAttribute);
+
+      // flush as this is seen in documentation
+      this.gl.flush();
+    }
+  };
+  _.pick = function(x, y) {
+    if (this.gl) {
+      var gl = this.gl;
+
+      // set up the model view matrix to the specified transformations
+      m4.multiply(this.translationMatrix, this.rotationMatrix, this.gl.modelViewMatrix);
+      this.gl.rotationMatrix = this.rotationMatrix;
+
+      // use default projection matrix to draw the molecule
+      var pUniform = this.gl.getUniformLocation(this.gl.program, 'u_projection_matrix');
+      this.gl.uniformMatrix4fv(pUniform, false, this.gl.projectionMatrix);
+
+      // draw with pick framebuffer
+      return this.picker.pick(gl, this.molecules, this.specs, x, this.height - y);
+    }
+    return undefined;
+  };
+  _.center = function() {
+    var canvas = document.getElementById(this.id);
+    var p = new structures.Atom();
+    for ( var k = 0, kk = this.molecules.length; k < kk; k++) {
+      var m = this.molecules[k];
+      p.add3D(m.getCenter3D());
+    }
+    p.x /= this.molecules.length;
+    p.y /= this.molecules.length;
+    for ( var k = 0, kk = this.molecules.length; k < kk; k++) {
+      var m = this.molecules[k];
+      for ( var i = 0, ii = m.atoms.length; i < ii; i++) {
+        m.atoms[i].sub3D(p);
+      }
+      if (m.chains && m.fromJSON) {
+        for ( var i = 0, ii = m.chains.length; i < ii; i++) {
+          var chain = m.chains[i];
+          for ( var j = 0, jj = chain.length; j < jj; j++) {
+            var residue = chain[j];
+            residue.cp1.sub3D(p);
+            residue.cp2.sub3D(p);
+            if (residue.cp3) {
+              residue.cp3.sub3D(p);
+              residue.cp4.sub3D(p);
+              residue.cp5.sub3D(p);
+            }
+          }
+        }
+      }
+    }
+  };
+  _.subCreate = function() {
+    // setup gl object
+    try {
+      var canvas = document.getElementById(this.id);
+      this.gl = canvas.getContext('webgl');
+      if (!this.gl) {
+        this.gl = canvas.getContext('experimental-webgl');
+      }
+    } catch (e) {
+    }
+    if (this.gl) {
+      // setup matrices
+      this.rotationMatrix = m4.identity([]);
+      this.translationMatrix = m4.identity([]);
+      // setup viewport
+      this.gl.viewport(0, 0, this.width, this.height);
+      this.gl.program = this.gl.createProgram();
+      // this is the shader
+      this.gl.shader = new d3.Shader();
+      this.gl.shader.init(this.gl);
+      // shader for text renderer
+      this.gl.programLabel = this.gl.createProgram();
+      this.gl.shaderText = new d3.TextShader();
+      this.gl.shaderText.init(this.gl);
+      this.setupScene();
+    } else {
+      this.displayMessage();
+    }
+  };
+  c._Canvas.prototype.displayMessage = function() {
+    var canvas = document.getElementById(this.id);
+    if (canvas.getContext) {
+      var ctx = canvas.getContext('2d');
+      if (this.specs.backgroundColor) {
+        ctx.fillStyle = this.specs.backgroundColor;
+        ctx.fillRect(0, 0, this.width, this.height);
+      }
+      if (this.emptyMessage) {
+        ctx.fillStyle = '#737683';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = '18px Helvetica, Verdana, Arial, Sans-serif';
+        ctx.fillText(this.emptyMessage, this.width / 2, this.height / 2);
+      }
+    }
+  };
+  _.setupScene = function() {
+    if (this.gl) {
+      // clear the canvas
+      var cs = math.getRGB(this.specs.backgroundColor, 1);
+      this.gl.clearColor(cs[0], cs[1], cs[2], 1.0);
+      this.gl.clearDepth(1.0);
+      this.gl.enable(this.gl.DEPTH_TEST);
+      this.gl.depthFunc(this.gl.LEQUAL);
+      if (this.specs.cullBackFace_3D) {
+        this.gl.enable(this.gl.CULL_FACE);
+      }
+      // here is the sphere buffer to be drawn, make it once, then scale
+      // and translate to draw atoms
+      this.gl.sphereBuffer = new d3.Sphere(1, this.specs.atoms_resolution_3D, this.specs.atoms_resolution_3D);
+      this.gl.starBuffer = new d3.Star();
+      this.gl.cylinderBuffer = new d3.Cylinder(1, 1, this.specs.bonds_resolution_3D);
+      this.gl.pillBuffer = new d3.Pill(this.specs.bonds_pillDiameter_3D / 2, this.specs.bonds_pillHeight_3D, this.specs.bonds_pillLatitudeResolution_3D, this.specs.bonds_pillLongitudeResolution_3D);
+      this.gl.lineBuffer = new d3.Line();
+      this.gl.arrowBuffer = new d3.Arrow(0.3, this.specs.compass_resolution_3D);
+      // add label
+      this.label3D = new d3.Label();
+      this.label3D.init(this.gl, this.specs);
+
+      for ( var k = 0, kk = this.molecules.length; k < kk; k++) {
+        var mol = this.molecules[k];
+        if (!(mol.labelMesh instanceof d3.TextMesh)) {
+          mol.labelMesh = new d3.TextMesh();
+          mol.labelMesh.init(this.gl);
+        }
+        if (mol.unitCellVectors) {
+          mol.unitCell = new d3.UnitCell(mol.unitCellVectors);
+        }
+        if (mol.chains) {
+          mol.ribbons = [];
+          mol.cartoons = [];
+          mol.tubes = [];
+          // set up ribbon diagram if available and not already setup
+          for ( var j = 0, jj = mol.chains.length; j < jj; j++) {
+            var rs = mol.chains[j];
+            var isNucleotide = rs.length > 2 && RESIDUE[rs[2].name] && RESIDUE[rs[2].name].aminoColor === '#BEA06E';
+            if (rs.length > 0 && !rs[0].lineSegments) {
+              for ( var i = 0, ii = rs.length - 1; i < ii; i++) {
+                rs[i].setup(rs[i + 1].cp1, isNucleotide ? 1 : this.specs.proteins_horizontalResolution);
+              }
+              if (!isNucleotide) {
+                for ( var i = 1, ii = rs.length - 1; i < ii; i++) {
+                  // reverse guide points if carbonyl
+                  // orientation flips
+                  if (extensions.vec3AngleFrom(rs[i - 1].D, rs[i].D) > m.PI / 2) {
+                    rs[i].guidePointsSmall.reverse();
+                    rs[i].guidePointsLarge.reverse();
+                    v3.scale(rs[i].D, -1);
+                  }
+                }
+              }
+              for ( var i = 1, ii = rs.length - 3; i < ii; i++) {
+                // compute line segments
+                rs[i].computeLineSegments(rs[i - 1], rs[i + 1], rs[i + 2], !isNucleotide, isNucleotide ? this.specs.nucleics_verticalResolution : this.specs.proteins_verticalResolution);
+              }
+              // remove unneeded dummies
+              rs.pop();
+              rs.pop();
+              rs.pop();
+              rs.shift();
+            }
+            // create the hsl color for the chain
+            var rgb = math.hsl2rgb(jj === 1 ? .5 : j / jj, 1, .5);
+            var chainColor = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
+            rs.chainColor = chainColor;
+            if (isNucleotide) {
+              var t = new d3.Tube(rs, this.specs.nucleics_tubeThickness, this.specs.nucleics_tubeResolution_3D);
+              t.chainColor = chainColor;
+              mol.tubes.push(t);
+            } else {
+              var r = {
+                front : new d3.Ribbon(rs, this.specs.proteins_ribbonThickness, false),
+                back : new d3.Ribbon(rs, -this.specs.proteins_ribbonThickness, false)
+              };
+              r.front.chainColor = chainColor;
+              r.back.chainColor = chainColor;
+              for ( var i = 0, ii = r.front.segments.length; i < ii; i++) {
+                r.front.segments[i].chainColor = chainColor;
+              }
+              for ( var i = 0, ii = r.back.segments.length; i < ii; i++) {
+                r.back.segments[i].chainColor = chainColor;
+              }
+              mol.ribbons.push(r);
+              var d = {
+                front : new d3.Ribbon(rs, this.specs.proteins_ribbonThickness, true),
+                back : new d3.Ribbon(rs, -this.specs.proteins_ribbonThickness, true)
+              };
+              d.front.chainColor = chainColor;
+              d.back.chainColor = chainColor;
+              for ( var i = 0, ii = d.front.segments.length; i < ii; i++) {
+                d.front.segments[i].chainColor = chainColor;
+              }
+              for ( var i = 0, ii = d.back.segments.length; i < ii; i++) {
+                d.back.segments[i].chainColor = chainColor;
+              }
+              for ( var i = 0, ii = d.front.cartoonSegments.length; i < ii; i++) {
+                d.front.cartoonSegments[i].chainColor = chainColor;
+              }
+              for ( var i = 0, ii = d.back.cartoonSegments.length; i < ii; i++) {
+                d.back.cartoonSegments[i].chainColor = chainColor;
+              }
+              mol.cartoons.push(d);
+            }
+          }
+        }
+      }
+      this.label3D.updateVerticesBuffer(this.gl, this.getMolecules(), this.specs);
+
+      // the molecules in frame of MovieCanvas3D must be handled
+      if (this instanceof c.MovieCanvas3D && this.frames) {
+        for ( var i = 0, ii = this.frames.length; i < ii; i++) {
+          var f = this.frames[i];
+          for ( var j = 0, jj = f.mols.length; j < jj; j++) {
+            var mol = f.mols[j];
+            if (!(mol.labelMesh instanceof structures.d3.TextMesh)) {
+              mol.labelMesh = new structures.d3.TextMesh();
+              mol.labelMesh.init(this.gl);
+            }
+          }
+          this.label3D.updateVerticesBuffer(this.gl, f.mols, this.specs);
+        }
+      }
+      // set up lighting
+      this.gl.lighting = new d3.Light(this.specs.lightDiffuseColor_3D, this.specs.lightSpecularColor_3D, this.specs.lightDirection_3D);
+      this.gl.lighting.lightScene(this.gl);
+      // set up material
+      this.gl.material = new d3.Material(this.gl);
+      // set up fogging
+      this.gl.fogging = new d3.Fog(this.gl);
+      this.gl.fogging.setTempParameter(this.specs.fog_color_3D || this.specs.backgroundColor, this.specs.fog_start_3D, this.specs.fog_end_3D, this.specs.fog_density_3D);
+      // set up compass
+      this.compass = new d3.Compass(this.gl, this.specs);
+
+      // projection matrix
+      // arg1: vertical field of view (degrees)
+      // arg2: width to height ratio
+      // arg3: front culling
+      // arg4: back culling
+      var widthHeightRatio = this.width / this.height;
+      if (this.specs.projectionWidthHeightRatio_3D) {
+        widthHeightRatio = this.specs.projectionWidthHeightRatio_3D;
+      }
+      this.gl.projectionMatrix = this.specs.projectionPerspective_3D ? m4.perspective(this.specs.projectionPerspectiveVerticalFieldOfView_3D, widthHeightRatio, this.specs.projectionFrontCulling_3D, this.specs.projectionBackCulling_3D) : m4.ortho(-this.specs.projectionOrthoWidth_3D / 2, this.specs.projectionOrthoWidth_3D / 2, -this.specs.projectionOrthoWidth_3D / 2 / widthHeightRatio, this.specs.projectionOrthoWidth_3D / 2 / widthHeightRatio, this.specs.projectionFrontCulling_3D,
+          this.specs.projectionBackCulling_3D);
+      // push the projection matrix to the graphics card
+      var pUniform = this.gl.getUniformLocation(this.gl.program, 'u_projection_matrix');
+      this.gl.uniformMatrix4fv(pUniform, false, this.gl.projectionMatrix);
+      // matrix setup functions
+      var mvUL = this.gl.getUniformLocation(this.gl.program, 'u_model_view_matrix');
+      var nUL = this.gl.getUniformLocation(this.gl.program, 'u_normal_matrix');
+      this.gl.setMatrixUniforms = function(mvMatrix) {
+        // push the model-view matrix to the graphics card
+        this.uniformMatrix4fv(mvUL, false, mvMatrix);
+        // create the normal matrix and push it to the graphics card
+        var normalMatrix = m3.transpose(m4.toInverseMat3(mvMatrix, []));
+        this.uniformMatrix3fv(nUL, false, normalMatrix);
+      };
+
+      // set framebuffer
+      this.picker = new d3.Picker();
+      this.picker.init(this.gl);
+      this.picker.setDimension(this.gl, this.width, this.height);
+    }
+  };
+  _.mousedown = function(e) {
+    this.lastPoint = e.p;
+  };
+  _.rightmousedown = function(e) {
+    this.lastPoint = e.p;
+  };
+  _.drag = function(e) {
+    if (c.monitor.ALT) {
+      var t = new structures.Point(e.p.x, e.p.y);
+      t.sub(this.lastPoint);
+      var theta = this.specs.projectionPerspectiveVerticalFieldOfView_3D / 360 * m.PI;
+      var tanTheta = m.tan(theta);
+      var topScreen = this.height / 2;
+      var nearScreen = topScreen / tanTheta;
+      var nearRatio = this.depth / nearScreen;
+      m4.translate(this.translationMatrix, [ t.x * nearRatio, -t.y * nearRatio, 0 ]);
+      this.lastPoint = e.p;
+      this.repaint();
+    } else {
+      var difx = e.p.x - this.lastPoint.x;
+      var dify = e.p.y - this.lastPoint.y;
+      var rotation = m4.rotate(m4.identity([]), difx * m.PI / 180.0, [ 0, 1, 0 ]);
+      m4.rotate(rotation, dify * m.PI / 180.0, [ 1, 0, 0 ]);
+      this.rotationMatrix = m4.multiply(rotation, this.rotationMatrix);
+      this.lastPoint = e.p;
+      this.repaint();
+    }
+  };
+  _.mousewheel = function(e, delta) {
+    var minFov = 0.1;
+    var maxFov = 179.9;
+    var dz = delta;
+    var fov = this.specs.projectionPerspectiveVerticalFieldOfView_3D + dz;
+
+    this.specs.projectionPerspectiveVerticalFieldOfView_3D = fov < minFov ? minFov : fov > maxFov ? maxFov : fov;
+    this.specs.projectionOrthoWidth_3D = Math.tan(this.specs.projectionPerspectiveVerticalFieldOfView_3D / 360 * Math.PI) * this.depth * 2 * this.specs.projectionWidthHeightRatio_3D;
+
+    this.updateScene();
+  };
+  _.updateScene = function() {
+    this.gl.fogging.setTempParameter(this.specs.fog_color_3D || this.specs.backgroundColor, this.specs.fog_start_3D, this.specs.fog_end_3D, this.specs.fog_density_3D);
+    var widthHeightRatio = this.width / this.height;
+    if (this.specs.projectionWidthHeightRatio_3D) {
+      widthHeightRatio = this.specs.projectionWidthHeightRatio_3D;
+    }
+    this.gl.projectionMatrix = this.specs.projectionPerspective_3D ? m4.perspective(this.specs.projectionPerspectiveVerticalFieldOfView_3D, widthHeightRatio, this.specs.projectionFrontCulling_3D, this.specs.projectionBackCulling_3D) : m4.ortho(-this.specs.projectionOrthoWidth_3D / 2, this.specs.projectionOrthoWidth_3D / 2, -this.specs.projectionOrthoWidth_3D / 2 / widthHeightRatio, this.specs.projectionOrthoWidth_3D / 2 / widthHeightRatio, this.specs.projectionFrontCulling_3D,
+        this.specs.projectionBackCulling_3D);
+    this.repaint();
+  };
+
+})(ChemDoodle, ChemDoodle.extensions, ChemDoodle.math, ChemDoodle.structures, ChemDoodle.structures.d3, ChemDoodle.RESIDUE, Math, document, mat4, mat3, vec3, window);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(c, iChemLabs, q, document) {
+  'use strict';
+  c.MolGrabberCanvas3D = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+    var sb = [];
+    sb.push('<br><input type="text" id="');
+    sb.push(id);
+    sb.push('_query" size="32" value="" />');
+    sb.push('<br><nobr>');
+    sb.push('<select id="');
+    sb.push(id);
+    sb.push('_select">');
+    // sb.push('<option value="chemexper">ChemExper');
+    // sb.push('<option value="chemspider">ChemSpider');
+    sb.push('<option value="pubchem" selected>PubChem');
+    sb.push('</select>');
+    sb.push('<button id="');
+    sb.push(id);
+    sb.push('_submit">Show Molecule</button>');
+    sb.push('</nobr>');
+    document.writeln(sb.join(''));
+    var self = this;
+    q('#' + id + '_submit').click(function() {
+      self.search();
+    });
+    q('#' + id + '_query').keypress(function(e) {
+      if (e.which === 13) {
+        self.search();
+      }
+    });
+  };
+  var _ = c.MolGrabberCanvas3D.prototype = new c._Canvas3D();
+  _.setSearchTerm = function(term) {
+    q('#' + this.id + '_query').val(term);
+    this.search();
+  };
+  _.search = function() {
+    var self = this;
+    iChemLabs.getMoleculeFromDatabase(q('#' + this.id + '_query').val(), {
+      database : q('#' + this.id + '_select').val(),
+      dimension : 3
+    }, function(mol) {
+      self.loadMolecule(mol);
+    });
+  };
+
+})(ChemDoodle, ChemDoodle.iChemLabs, jQuery, document);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3078 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-02-06 18:27:15 -0500 (Sun, 06 Feb 2011) $
+//
+(function(c, structures) {
+  'use strict';
+  c.MovieCanvas3D = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+    this.frames = [];
+  };
+  c.MovieCanvas3D.PLAY_ONCE = 0;
+  c.MovieCanvas3D.PLAY_LOOP = 1;
+  c.MovieCanvas3D.PLAY_SPRING = 2;
+  var _ = c.MovieCanvas3D.prototype = new c._Canvas3D();
+  _.timeout = 50;
+  _.frameNumber = 0;
+  _.playMode = 2;
+  _.reverse = false;
+  _.startAnimation = c._AnimatorCanvas.prototype.startAnimation;
+  _.stopAnimation = c._AnimatorCanvas.prototype.stopAnimation;
+  _.isRunning = c._AnimatorCanvas.prototype.isRunning;
+  _.dblclick = c.RotatorCanvas.prototype.dblclick;
+  _.nextFrame = function(delta) {
+    var f = this.frames[this.frameNumber];
+    this.molecules = f.mols;
+    this.shapes = f.shapes;
+    if (this.playMode === 2 && this.reverse) {
+      this.frameNumber--;
+      if (this.frameNumber < 0) {
+        this.frameNumber = 1;
+        this.reverse = false;
+      }
+    } else {
+      this.frameNumber++;
+      if (this.frameNumber >= this.frames.length) {
+        if (this.playMode === 2) {
+          this.frameNumber -= 2;
+          this.reverse = true;
+        } else {
+          this.frameNumber = 0;
+          if (this.playMode === 0) {
+            this.stopAnimation();
+          }
+        }
+      }
+    }
+  };
+  _.center = function() {
+    // override this function to center the entire movie
+    var p = new structures.Atom();
+    var first = this.frames[0];
+    for ( var j = 0, jj = first.mols.length; j < jj; j++) {
+      p.add3D(first.mols[j].getCenter3D());
+    }
+    p.x /= first.mols.length;
+    p.y /= first.mols.length;
+    var center = new structures.Atom();
+    center.sub3D(p);
+    for ( var i = 0, ii = this.frames.length; i < ii; i++) {
+      var f = this.frames[i];
+      for ( var j = 0, jj = f.mols.length; j < jj; j++) {
+        var mol = f.mols[j];
+        for ( var k = 0, kk = mol.atoms.length; k < kk; k++) {
+          mol.atoms[k].add3D(center);
+        }
+      }
+    }
+  };
+  _.addFrame = function(molecules, shapes) {
+    this.frames.push({
+      mols : molecules,
+      shapes : shapes
+    });
+  };
+
+})(ChemDoodle, ChemDoodle.structures);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+
+(function(c, m, m4) {
+  'use strict';
+  // keep these declaration outside the loop to avoid overhead
+  var matrix = [];
+  var xAxis = [ 1, 0, 0 ];
+  var yAxis = [ 0, 1, 0 ];
+  var zAxis = [ 0, 0, 1 ];
+
+  c.RotatorCanvas3D = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+  };
+  var _ = c.RotatorCanvas3D.prototype = new c._Canvas3D();
+  _.timeout = 33;
+  var increment = m.PI / 15;
+  _.xIncrement = increment;
+  _.yIncrement = increment;
+  _.zIncrement = increment;
+  _.startAnimation = c._AnimatorCanvas.prototype.startAnimation;
+  _.stopAnimation = c._AnimatorCanvas.prototype.stopAnimation;
+  _.isRunning = c._AnimatorCanvas.prototype.isRunning;
+  _.dblclick = c.RotatorCanvas.prototype.dblclick;
+  _.mousedown = undefined;
+  _.rightmousedown = undefined;
+  _.drag = undefined;
+  _.mousewheel = undefined;
+  _.nextFrame = function(delta) {
+    if (this.molecules.length === 0 && this.shapes.length === 0) {
+      this.stopAnimation();
+      return;
+    }
+    m4.identity(matrix);
+    var change = delta / 1000;
+    m4.rotate(matrix, this.xIncrement * change, xAxis);
+    m4.rotate(matrix, this.yIncrement * change, yAxis);
+    m4.rotate(matrix, this.zIncrement * change, zAxis);
+    m4.multiply(this.rotationMatrix, matrix);
+  };
+
+})(ChemDoodle, Math, mat4);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+(function(c) {
+  'use strict';
+  c.TransformCanvas3D = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+  };
+  c.TransformCanvas3D.prototype = new c._Canvas3D();
+
+})(ChemDoodle);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 4131 $
+//  $Author: kevin $
+//  $LastChangedDate: 2013-02-18 21:02:56 -0500 (Mon, 18 Feb 2013) $
+//
+(function(c) {
+  'use strict';
+  c.ViewerCanvas3D = function(id, width, height) {
+    if (id) {
+      this.create(id, width, height);
+    }
+  };
+  var _ = c.ViewerCanvas3D.prototype = new c._Canvas3D();
+  _.mousedown = undefined;
+  _.rightmousedown = undefined;
+  _.drag = undefined;
+  _.mousewheel = undefined;
+
+})(ChemDoodle);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3078 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-02-06 18:27:15 -0500 (Sun, 06 Feb 2011) $
+//
+
+(function(c, extensions, math, document) {
+  'use strict';
+  function PeriodicCell(element, x, y, dimension) {
+    this.element = element;
+    this.x = x;
+    this.y = y;
+    this.dimension = dimension;
+  }
+
+  c.PeriodicTableCanvas = function(id, cellDimension) {
+    this.padding = 5;
+    if (id) {
+      this.create(id, cellDimension * 18 + this.padding * 2, cellDimension * 10 + this.padding * 2);
+    }
+    this.cellDimension = cellDimension ? cellDimension : 20;
+    this.setupTable();
+    this.repaint();
+  };
+  var _ = c.PeriodicTableCanvas.prototype = new c._Canvas();
+  _.loadMolecule = undefined;
+  _.getMolecule = undefined;
+  _.getHoveredElement = function() {
+    if (this.hovered) {
+      return this.hovered.element;
+    }
+    return undefined;
+  };
+  _.innerRepaint = function(ctx) {
+    for ( var i = 0, ii = this.cells.length; i < ii; i++) {
+      this.drawCell(ctx, this.specs, this.cells[i]);
+    }
+    if (this.hovered) {
+      this.drawCell(ctx, this.specs, this.hovered);
+    }
+    if (this.selected) {
+      this.drawCell(ctx, this.specs, this.selected);
+    }
+  };
+  _.setupTable = function() {
+    this.cells = [];
+    var x = this.padding;
+    var y = this.padding;
+    var count = 0;
+    for ( var i = 0, ii = c.SYMBOLS.length; i < ii; i++) {
+      if (count === 18) {
+        count = 0;
+        y += this.cellDimension;
+        x = this.padding;
+      }
+      var e = c.ELEMENT[c.SYMBOLS[i]];
+      if (e.atomicNumber === 2) {
+        x += 16 * this.cellDimension;
+        count += 16;
+      } else if (e.atomicNumber === 5 || e.atomicNumber === 13) {
+        x += 10 * this.cellDimension;
+        count += 10;
+      }
+      if ((e.atomicNumber < 58 || e.atomicNumber > 71 && e.atomicNumber < 90 || e.atomicNumber > 103) && e.atomicNumber < 113) {
+        this.cells.push(new PeriodicCell(e, x, y, this.cellDimension));
+        x += this.cellDimension;
+        count++;
+      }
+    }
+    y += 2 * this.cellDimension;
+    x = 3 * this.cellDimension + this.padding;
+    for ( var i = 57; i < 104; i++) {
+      var e = c.ELEMENT[c.SYMBOLS[i]];
+      if (e.atomicNumber === 90) {
+        y += this.cellDimension;
+        x = 3 * this.cellDimension + this.padding;
+      }
+      if (e.atomicNumber >= 58 && e.atomicNumber <= 71 || e.atomicNumber >= 90 && e.atomicNumber <= 103) {
+        this.cells.push(new PeriodicCell(e, x, y, this.cellDimension));
+        x += this.cellDimension;
+      }
+    }
+  };
+  _.drawCell = function(ctx, specs, cell) {
+    var radgrad = ctx.createRadialGradient(cell.x + cell.dimension / 3, cell.y + cell.dimension / 3, cell.dimension * 1.5, cell.x + cell.dimension / 3, cell.y + cell.dimension / 3, cell.dimension / 10);
+    radgrad.addColorStop(0, '#000000');
+    radgrad.addColorStop(.7, cell.element.jmolColor);
+    radgrad.addColorStop(1, '#FFFFFF');
+    ctx.fillStyle = radgrad;
+    extensions.contextRoundRect(ctx, cell.x, cell.y, cell.dimension, cell.dimension, cell.dimension / 8);
+    if (cell === this.hovered || cell === this.selected) {
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#c10000';
+      ctx.stroke();
+      ctx.fillStyle = 'white';
+    }
+    ctx.fill();
+    ctx.font = extensions.getFontString(specs.text_font_size, specs.text_font_families);
+    ctx.fillStyle = specs.text_color;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(cell.element.symbol, cell.x + cell.dimension / 2, cell.y + cell.dimension / 2);
+  };
+  _.click = function(e) {
+    if (this.hovered) {
+      this.selected = this.hovered;
+      this.repaint();
+    }
+  };
+  _.mousemove = function(e) {
+    var x = e.p.x;
+    var y = e.p.y;
+    this.hovered = undefined;
+    for ( var i = 0, ii = this.cells.length; i < ii; i++) {
+      var c = this.cells[i];
+      if (math.isBetween(x, c.x, c.x + c.dimension) && math.isBetween(y, c.y, c.y + c.dimension)) {
+        this.hovered = c;
+        break;
+      }
+    }
+    this.repaint();
+  };
+  _.mouseout = function(e) {
+    this.hovered = undefined;
+    this.repaint();
+  };
+
+})(ChemDoodle, ChemDoodle.extensions, ChemDoodle.math, document);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3200 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-04-18 20:50:47 -0400 (Mon, 18 Apr 2011) $
+//
+
+(function(io, document, window) {
+  'use strict';
+  io.png = {};
+
+  io.png.create = function(canvas) {
+    // this will not work for WebGL canvases in some browsers
+    // to fix that you need to set the "preserveDrawingBuffer" to true when
+    // creating the WebGL context
+    // note that this will cause performance issues on some platforms and is
+    // therefore not done by default
+    window.open(document.getElementById(canvas.id).toDataURL('image/png'));
+  };
+
+})(ChemDoodle.io, document, window);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 3200 $
+//  $Author: kevin $
+//  $LastChangedDate: 2011-04-18 20:50:47 -0400 (Mon, 18 Apr 2011) $
+//
+
+(function(io, q) {
+  'use strict';
+  io.file = {};
+
+  // this function will only work with files from the same origin it is being
+  // called from, unless the receiving server supports XHR2
+  io.file.content = function(url, callback) {
+    q.get(url, '', callback);
+  };
+
+})(ChemDoodle.io, jQuery);
+//
+//  Copyright 2009 iChemLabs, LLC.  All rights reserved.
+//
+//  $Revision: 2976 $
+//  $Author: kevin $
+//  $LastChangedDate: 2010-12-29 18:16:10 -0500 (Wed, 29 Dec 2010) $
+//
+
+(function(c, iChemLabs, io, structures, q) {
+  'use strict';
+  iChemLabs.SERVER_URL = 'http://ichemlabs.cloud.chemdoodle.com/icl_cdc_v050000/WebHQ';
+
+  iChemLabs.inRelay = false;
+  iChemLabs.asynchronous = true;
+
+  iChemLabs.INFO = {
+    userAgent : navigator.userAgent,
+    v_cwc : c.getVersion(),
+    v_jQuery : q.version,
+    v_jQuery_ui : (q.ui ? q.ui.version : 'N/A')
+  };
+
+  var JSON_INTERPRETER = new io.JSONInterpreter();
+
+  iChemLabs._contactServer = function(call, content, options, callback, errorback) {
+    if (this.inRelay) {
+      alert('Already connecting to the server, please wait for the first request to finish.');
+    } else {
+      iChemLabs.inRelay = true;
+      q.ajax({
+        dataType : 'text',
+        type : 'POST',
+        data : JSON.stringify({
+          'call' : call,
+          'content' : content,
+          'options' : options,
+          'info' : iChemLabs.INFO
+        }),
+        url : this.SERVER_URL,
+        success : function(data) {
+          iChemLabs.inRelay = false;
+          var o = JSON.parse(data);
+          if (o.message) {
+            alert(o.message);
+          }
+          if (callback && o.content && !o.stop) {
+            callback(o.content);
+          }
+          if (o.stop && errorback) {
+            errorback();
+          }
+        },
+        error : function(xhr, status, error) {
+          iChemLabs.inRelay = false;
+          alert('Call failed. Please try again. If you continue to see this message, please contact iChemLabs customer support.');
+          if (errorback) {
+            errorback();
+          }
+        },
+        xhrFields : {
+          withCredentials : true
+        },
+        async : iChemLabs.asynchronous
+      });
+    }
+  };
+
+  // undocumented, this call is for clients that have licensed cloud for their
+  // own servers
+  iChemLabs.authenticate = function(credential, options, callback, errorback) {
+    this._contactServer('authenticate', {
+      'credential' : credential
+    }, options, function(content) {
+      callback(content);
+    }, errorback);
+  };
+
+  iChemLabs.calculate = function(mol, options, callback, errorback) {
+    this._contactServer('calculate', {
+      'mol' : JSON_INTERPRETER.molTo(mol)
+    }, options, function(content) {
+      callback(content);
+    }, errorback);
+  };
+
+  iChemLabs.generateImage = function(mol, options, callback, errorback) {
+    this._contactServer('generateImage', {
+      'mol' : JSON_INTERPRETER.molTo(mol)
+    }, options, function(content) {
+      callback(content.link);
+    }, errorback);
+  };
+
+  iChemLabs.generateIUPACName = function(mol, options, callback, errorback) {
+    this._contactServer('generateIUPACName', {
+      'mol' : JSON_INTERPRETER.molTo(mol)
+    }, options, function(content) {
+      callback(content.iupac);
+    }, errorback);
+  };
+
+  iChemLabs.getAd = function(callback, errorback) {
+    this._contactServer('getAd', {}, {}, function(content) {
+      callback(content.image_url, content.target_url);
+    }, errorback);
+  };
+
+  iChemLabs.getMoleculeFromContent = function(input, options, callback, errorback) {
+    this._contactServer('getMoleculeFromContent', {
+      'content' : input
+    }, options, function(content) {
+      var z = false;
+      for ( var i = 0, ii = content.mol.a.length; i < ii; i++) {
+        if (content.mol.a[i].z !== 0) {
+          z = true;
+          break;
+        }
+      }
+      if (z) {
+        for ( var i = 0, ii = content.mol.a.length; i < ii; i++) {
+          content.mol.a[i].x /= 20;
+          content.mol.a[i].y /= 20;
+          content.mol.a[i].z /= 20;
+        }
+      }
+      callback(JSON_INTERPRETER.molFrom(content.mol));
+    }, errorback);
+  };
+
+  iChemLabs.getMoleculeFromDatabase = function(query, options, callback, errorback) {
+    this._contactServer('getMoleculeFromDatabase', {
+      'query' : query
+    }, options, function(content) {
+      if (options.dimension === 3) {
+        for ( var i = 0, ii = content.mol.a.length; i < ii; i++) {
+          content.mol.a[i].x /= 20;
+          content.mol.a[i].y /= -20;
+          content.mol.a[i].z /= 20;
+        }
+      }
+      callback(JSON_INTERPRETER.molFrom(content.mol));
+    }, errorback);
+  };
+
+  iChemLabs.getOptimizedPDBStructure = function(id, options, callback, errorback) {
+    this._contactServer('getOptimizedPDBStructure', {
+      'id' : id
+    }, options, function(content) {
+      var mol;
+      if (content.mol) {
+        mol = JSON_INTERPRETER.molFrom(content.mol);
+      } else {
+        var mol = new structures.Molecule();
+      }
+      mol.chains = JSON_INTERPRETER.chainsFrom(content.ribbons);
+      mol.fromJSON = true;
+      callback(mol);
+    }, errorback);
+  };
+
+  iChemLabs.getZeoliteFromIZA = function(query, options, callback, errorback) {
+    this._contactServer('getZeoliteFromIZA', {
+      'query' : query
+    }, options, function(content) {
+      callback(ChemDoodle.readCIF(content.cif, options.xSuper, options.ySuper, options.zSuper));
+    }, errorback);
+  };
+
+  iChemLabs.isGraphIsomorphism = function(arrow, target, options, callback, errorback) {
+    this._contactServer('isGraphIsomorphism', {
+      'arrow' : JSON_INTERPRETER.molTo(arrow),
+      'target' : JSON_INTERPRETER.molTo(target)
+    }, options, function(content) {
+      callback(content.value);
+    }, errorback);
+  };
+
+  iChemLabs.isSubgraphIsomorphism = function(arrow, target, options, callback, errorback) {
+    this._contactServer('isSubgraphIsomorphism', {
+      'arrow' : JSON_INTERPRETER.molTo(arrow),
+      'target' : JSON_INTERPRETER.molTo(target)
+    }, options, function(content) {
+      callback(content.value);
+    }, errorback);
+  };
+
+  iChemLabs.kekulize = function(mol, options, callback, errorback) {
+    this._contactServer('kekulize', {
+      'mol' : JSON_INTERPRETER.molTo(mol)
+    }, options, function(content) {
+      callback(JSON_INTERPRETER.molFrom(content.mol));
+    }, errorback);
+  };
+
+  iChemLabs.optimize = function(mol, options, callback, errorback) {
+    this._contactServer('optimize', {
+      'mol' : JSON_INTERPRETER.molTo(mol)
+    }, options, function(content) {
+      var optimized = JSON_INTERPRETER.molFrom(content.mol);
+      if (options.dimension === 2) {
+        for ( var i = 0, ii = optimized.atoms.length; i < ii; i++) {
+          mol.atoms[i].x = optimized.atoms[i].x;
+          mol.atoms[i].y = optimized.atoms[i].y;
+        }
+        callback();
+      } else if (options.dimension === 3) {
+        for ( var i = 0, ii = optimized.atoms.length; i < ii; i++) {
+          optimized.atoms[i].x /= 20;
+          optimized.atoms[i].y /= -20;
+          optimized.atoms[i].z /= 20;
+        }
+        callback(optimized);
+      }
+    }, errorback);
+  };
+
+  iChemLabs.readIUPACName = function(iupac, options, callback, errorback) {
+    this._contactServer('readIUPACName', {
+      'iupac' : iupac
+    }, options, function(content) {
+      callback(JSON_INTERPRETER.molFrom(content.mol));
+    }, errorback);
+  };
+
+  iChemLabs.readSMILES = function(smiles, options, callback, errorback) {
+    this._contactServer('readSMILES', {
+      'smiles' : smiles
+    }, options, function(content) {
+      callback(JSON_INTERPRETER.molFrom(content.mol));
+    }, errorback);
+  };
+
+  iChemLabs.saveFile = function(mol, options, callback, errorback) {
+    this._contactServer('saveFile', {
+      'mol' : JSON_INTERPRETER.molTo(mol)
+    }, options, function(content) {
+      callback(content.link);
+    }, errorback);
+  };
+
+  iChemLabs.simulate13CNMR = function(mol, options, callback, errorback) {
+    options.nucleus = 'C';
+    options.isotope = 13;
+    this._contactServer('simulateNMR', {
+      'mol' : JSON_INTERPRETER.molTo(mol)
+    }, options, function(content) {
+      callback(c.readJCAMP(content.jcamp));
+    }, errorback);
+  };
+
+  iChemLabs.simulate1HNMR = function(mol, options, callback, errorback) {
+    options.nucleus = 'H';
+    options.isotope = 1;
+    this._contactServer('simulateNMR', {
+      'mol' : JSON_INTERPRETER.molTo(mol)
+    }, options, function(content) {
+      callback(c.readJCAMP(content.jcamp));
+    }, errorback);
+  };
+
+  iChemLabs.simulateMassParentPeak = function(mol, options, callback, errorback) {
+    this._contactServer('simulateMassParentPeak', {
+      'mol' : JSON_INTERPRETER.molTo(mol)
+    }, options, function(content) {
+      callback(c.readJCAMP(content.jcamp));
+    }, errorback);
+  };
+
+  iChemLabs.writeSMILES = function(mol, options, callback, errorback) {
+    this._contactServer('writeSMILES', {
+      'mol' : JSON_INTERPRETER.molTo(mol)
+    }, options, function(content) {
+      callback(content.smiles);
+    }, errorback);
+  };
+
+  iChemLabs.version = function(options, callback, errorback) {
+    this._contactServer('version', {}, options, function(content) {
+      callback(content.value);
+    }, errorback);
+  };
+
+})(ChemDoodle, ChemDoodle.iChemLabs, ChemDoodle.io, ChemDoodle.structures, jQuery);
