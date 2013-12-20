@@ -2,6 +2,10 @@ ProjectPrototype::Application.routes.draw do
 
   root  'main_app#app'
 
+  get '/mu-1234-cafe-5678-babe' do
+    '42'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
