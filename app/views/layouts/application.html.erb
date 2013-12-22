@@ -10,10 +10,10 @@
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
+    <%= render 'shared/header' %>
     <%= yield %>
     <%= javascript_include_tag "application" %>
-    <%= render 'layouts/scene' %>
-    <%= render 'layouts/footer' %>
+    <%= render 'shared/scene' %>
+    <%= render 'shared/footer' %>
   </body>
 </html>
