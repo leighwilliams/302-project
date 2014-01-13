@@ -34,7 +34,6 @@
 // require foundation/foundation.placeholder
 
 //= require turbolinks
-//= require ChemDoodleWeb-libs
 //= require ChemDoodleWeb
 //= require_tree .
 
