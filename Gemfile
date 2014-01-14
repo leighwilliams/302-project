@@ -37,10 +37,16 @@ gem 'foundation-rails'
 # Use
 gem 'heroku-deflater', :group => :production
 
-# Use
-gem 'rails_12factor', group: :production
+# For Heroku
+gem 'rails_12factor', :group => :production
 
+# Unicorn server
 gem 'unicorn'
+
+# LiveReload
+# gem "guard-livereload", :require => false, :group => :development
+# gem "rack-livereload", :group => :development
+# gem 'rb-readline', :group => :development
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

@@ -1,4 +1,4 @@
-// Footer
+// Footer.
 footer {
   background-color: #333;
   width: 100%;
@@ -29,7 +29,7 @@ body {
 // canvas.ChemDoodleWebComponent {
 // }
 
-// Left nav
+// Left nav.
 #left {
   background-color: #222;
   height: 100%;
@@ -37,22 +37,37 @@ body {
   float: left;
 }
 
-// Scene
+// Scene.
 #right {
   background-color: #111;
   height: 100%;
 }
 
-// popup
+// Amino acid popup box.
 .popup {
   display: none;
   position: absolute;
   z-index: 999;
   padding: 3px;
-  background: #333;
+  background: #222;
+  border-style: solid;
+  border-color: #333;
+  border-width: 2px;
   border-radius: 2px;
+  text-align: center; // For the amino acid name.
 
-  .arrow {
+  #header {
+    color: #111;
+    background-color: #77DD77;
+    // pastel green #77DD77
+    // pastel orange #FFB347
+    // dark pastel blue #779ECB
+    // pastel magenta #F49AC2
+    margin-bottom: 0px; // Overwrite Foundation default 20px.
+    border-bottom-color: #99D19D;
+  }
+
+  #arrow {
     display: block;
     position: absolute;
     width: 0;
@@ -60,21 +75,15 @@ body {
     border: solid 7px;
     border-color: transparent #333 transparent transparent;
     top: 8px;
-    left: -14px;
+    left: -15px;
   }
 
-  .close {
+  #close {
     display: block;
     position: absolute;
     color: #FFF;
     -webkit-text-stroke: 1px black;
     font-weight: bold;
-    // text-shadow:
-    //    3px 3px 0 #000,
-    //  -1px -1px 0 #000,
-    //   1px -1px 0 #000,
-    //   -1px 1px 0 #000,
-    //    1px 1px 0 #000;
     top: -17px;
     right: -8px;
     font-size: 30px;

@@ -15,7 +15,7 @@
 
 //= require foundation/foundation
 //= require foundation/foundation.topbar
-
+//= require foundation/foundation.tooltip
 // Available components
 // require foundation/foundation
 // require foundation/foundation.abide
@@ -28,7 +28,7 @@
 // require foundation/foundation.orbit
 // require foundation/foundation.reveal
 // require foundation/foundation.section
-// require foundation/foundation.tooltips
+// require foundation/foundation.tooltip
 // require foundation/foundation.topbar
 // require foundation/foundation.interchange
 // require foundation/foundation.placeholder
