@@ -10979,18 +10979,224 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     reflow : function () {}
   };
 }(jQuery, this, this.document));
+;(function ($, window, document, undefined) {
+  'use strict';
+
+  Foundation.libs.tooltip = {
+    name : 'tooltip',
+
+    version : '5.0.0',
+
+    settings : {
+      additional_inheritable_classes : [],
+      tooltip_class : '.tooltip',
+      append_to: 'body',
+      touch_close_text: 'Tap To Close',
+      disable_for_touch: false,
+      tip_template : function (selector, content) {
+        return '<span data-selector="' + selector + '" class="' 
+          + Foundation.libs.tooltip.settings.tooltip_class.substring(1) 
+          + '">' + content + '<span class="nub"></span></span>';
+      }
+    },
+
+    cache : {},
+
+    init : function (scope, method, options) {
+      this.bindings(method, options);
+    },
+
+    events : function () {
+      var self = this;
+
+      if (Modernizr.touch) {
+        $(this.scope)
+          .off('.tooltip')
+          .on('click.fndtn.tooltip touchstart.fndtn.tooltip touchend.fndtn.tooltip', 
+            '[data-tooltip]', function (e) {
+            var settings = $.extend({}, self.settings, self.data_options($(this)));
+            if (!settings.disable_for_touch) {
+              e.preventDefault();
+              $(settings.tooltip_class).hide();
+              self.showOrCreateTip($(this));
+            }
+          })
+          .on('click.fndtn.tooltip touchstart.fndtn.tooltip touchend.fndtn.tooltip', 
+            this.settings.tooltip_class, function (e) {
+            e.preventDefault();
+            $(this).fadeOut(150);
+          });
+      } else {
+        $(this.scope)
+          .off('.tooltip')
+          .on('mouseenter.fndtn.tooltip mouseleave.fndtn.tooltip', 
+            '[data-tooltip]', function (e) {
+            var $this = $(this);
+
+            if (/enter|over/i.test(e.type)) {
+              self.showOrCreateTip($this);
+            } else if (e.type === 'mouseout' || e.type === 'mouseleave') {
+              self.hide($this);
+            }
+          });
+      }
+    },
+
+    showOrCreateTip : function ($target) {
+      var $tip = this.getTip($target);
+
+      if ($tip && $tip.length > 0) {
+        return this.show($target);
+      }
+
+      return this.create($target);
+    },
+
+    getTip : function ($target) {
+      var selector = this.selector($target),
+          tip = null;
+
+      if (selector) {
+        tip = $('span[data-selector="' + selector + '"]' + this.settings.tooltip_class);
+      }
+
+      return (typeof tip === 'object') ? tip : false;
+    },
+
+    selector : function ($target) {
+      var id = $target.attr('id'),
+          dataSelector = $target.attr('data-tooltip') || $target.attr('data-selector');
+
+      if ((id && id.length < 1 || !id) && typeof dataSelector != 'string') {
+        dataSelector = 'tooltip' + Math.random().toString(36).substring(7);
+        $target.attr('data-selector', dataSelector);
+      }
+
+      return (id && id.length > 0) ? id : dataSelector;
+    },
+
+    create : function ($target) {
+      var $tip = $(this.settings.tip_template(this.selector($target), $('<div></div>').html($target.attr('title')).html())),
+          classes = this.inheritable_classes($target);
+
+      $tip.addClass(classes).appendTo(this.settings.append_to);
+      if (Modernizr.touch) {
+        $tip.append('<span class="tap-to-close">'+this.settings.touch_close_text+'</span>');
+      }
+      $target.removeAttr('title').attr('title','');
+      this.show($target);
+    },
+
+    reposition : function (target, tip, classes) {
+      var width, nub, nubHeight, nubWidth, column, objPos;
+
+      tip.css('visibility', 'hidden').show();
+
+      width = target.data('width');
+      nub = tip.children('.nub');
+      nubHeight = nub.outerHeight();
+      nubWidth = nub.outerHeight();
+
+      objPos = function (obj, top, right, bottom, left, width) {
+        return obj.css({
+          'top' : (top) ? top : 'auto',
+          'bottom' : (bottom) ? bottom : 'auto',
+          'left' : (left) ? left : 'auto',
+          'right' : (right) ? right : 'auto',
+          'width' : (width) ? width : 'auto'
+        }).end();
+      };
+
+      objPos(tip, (target.offset().top + target.outerHeight() + 10), 'auto', 'auto', target.offset().left, width);
+
+      if (this.small()) {
+        objPos(tip, (target.offset().top + target.outerHeight() + 10), 'auto', 'auto', 12.5, $(this.scope).width());
+        tip.addClass('tip-override');
+        objPos(nub, -nubHeight, 'auto', 'auto', target.offset().left);
+      } else {
+        var left = target.offset().left;
+        if (Foundation.rtl) {
+          left = target.offset().left + target.offset().width - tip.outerWidth();
+        }
+        objPos(tip, (target.offset().top + target.outerHeight() + 10), 'auto', 'auto', left, width);
+        tip.removeClass('tip-override');
+        if (classes && classes.indexOf('tip-top') > -1) {
+          objPos(tip, (target.offset().top - tip.outerHeight()), 'auto', 'auto', left, width)
+            .removeClass('tip-override');
+        } else if (classes && classes.indexOf('tip-left') > -1) {
+          objPos(tip, (target.offset().top + (target.outerHeight() / 2) - nubHeight*2.5), 'auto', 'auto', (target.offset().left - tip.outerWidth() - nubHeight), width)
+            .removeClass('tip-override');
+        } else if (classes && classes.indexOf('tip-right') > -1) {
+          objPos(tip, (target.offset().top + (target.outerHeight() / 2) - nubHeight*2.5), 'auto', 'auto', (target.offset().left + target.outerWidth() + nubHeight), width)
+            .removeClass('tip-override');
+        }
+      }
+
+      tip.css('visibility', 'visible').hide();
+    },
+
+    small : function () {
+      return matchMedia(Foundation.media_queries.small).matches;
+    },
+
+    inheritable_classes : function (target) {
+      var inheritables = ['tip-top', 'tip-left', 'tip-bottom', 'tip-right', 'noradius'].concat(this.settings.additional_inheritable_classes),
+          classes = target.attr('class'),
+          filtered = classes ? $.map(classes.split(' '), function (el, i) {
+            if ($.inArray(el, inheritables) !== -1) {
+              return el;
+            }
+          }).join(' ') : '';
+
+      return $.trim(filtered);
+    },
+
+    show : function ($target) {
+      var $tip = this.getTip($target);
+
+      this.reposition($target, $tip, $target.attr('class'));
+      $tip.fadeIn(150);
+    },
+
+    hide : function ($target) {
+      var $tip = this.getTip($target);
+
+      $tip.fadeOut(150);
+    },
+
+    // deprecate reload
+    reload : function () {
+      var $self = $(this);
+
+      return ($self.data('fndtn-tooltips')) ? $self.foundationTooltips('destroy').foundationTooltips('init') : $self.foundationTooltips('init');
+    },
+
+    off : function () {
+      $(this.scope).off('.fndtn.tooltip');
+      $(this.settings.tooltip_class).each(function (i) {
+        $('[data-tooltip]').get(i).attr('title', $(this).text());
+      }).remove();
+    },
+
+    reflow : function () {}
+  };
+}(jQuery, this, this.document));
 (function() {
-  var CSRFToken, anchoredLink, browserCompatibleDocumentParser, browserIsntBuggy, browserSupportsPushState, browserSupportsTurbolinks, cacheCurrentPage, cacheSize, changePage, constrainPageCacheTo, createDocument, crossOriginLink, currentState, executeScriptTags, extractLink, extractTitleAndBody, fetchHistory, fetchReplacement, handleClick, ignoreClick, initializeTurbolinks, installClickHandlerLast, installDocumentReadyPageEventTriggers, installHistoryChangeHandler, installJqueryAjaxSuccessPageUpdateTrigger, loadedAssets, noTurbolink, nonHtmlLink, nonStandardClick, pageCache, pageChangePrevented, pagesCached, popCookie, processResponse, recallScrollPosition, referer, reflectNewUrl, reflectRedirectedUrl, rememberCurrentState, rememberCurrentUrl, rememberReferer, removeHash, removeHashForIE10compatiblity, removeNoscriptTags, requestMethodIsSafe, resetScrollPosition, targetLink, triggerEvent, visit, xhr, _ref,
-    __hasProp = {}.hasOwnProperty,
-    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+  var CSRFToken, allowLinkExtensions, anchoredLink, browserCompatibleDocumentParser, browserIsntBuggy, browserSupportsCustomEvents, browserSupportsPushState, browserSupportsTurbolinks, cacheCurrentPage, cacheSize, changePage, constrainPageCacheTo, createDocument, crossOriginLink, currentState, enableTransitionCache, executeScriptTags, extractLink, extractTitleAndBody, fetch, fetchHistory, fetchReplacement, handleClick, historyStateIsDefined, htmlExtensions, ignoreClick, initializeTurbolinks, installClickHandlerLast, installDocumentReadyPageEventTriggers, installHistoryChangeHandler, installJqueryAjaxSuccessPageUpdateTrigger, loadedAssets, noTurbolink, nonHtmlLink, nonStandardClick, pageCache, pageChangePrevented, pagesCached, popCookie, processResponse, recallScrollPosition, referer, reflectNewUrl, reflectRedirectedUrl, rememberCurrentState, rememberCurrentUrl, rememberReferer, removeHash, removeHashForIE10compatiblity, removeNoscriptTags, requestMethodIsSafe, resetScrollPosition, targetLink, transitionCacheEnabled, transitionCacheFor, triggerEvent, visit, xhr, _ref,
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
+    __slice = [].slice;
 
   pageCache = {};
 
   cacheSize = 10;
 
+  transitionCacheEnabled = false;
+
   currentState = null;
 
   loadedAssets = null;
+
+  htmlExtensions = ['html'];
 
   referer = null;
 
@@ -10998,9 +11204,39 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   xhr = null;
 
-  fetchReplacement = function(url) {
+  fetch = function(url) {
+    var cachedPage;
     rememberReferer();
     cacheCurrentPage();
+    reflectNewUrl(url);
+    if (transitionCacheEnabled && (cachedPage = transitionCacheFor(url))) {
+      fetchHistory(cachedPage);
+      return fetchReplacement(url);
+    } else {
+      return fetchReplacement(url, resetScrollPosition);
+    }
+  };
+
+  transitionCacheFor = function(url) {
+    var cachedPage;
+    cachedPage = pageCache[url];
+    if (cachedPage && !cachedPage.transitionCacheDisabled) {
+      return cachedPage;
+    }
+  };
+
+  enableTransitionCache = function(enable) {
+    if (enable == null) {
+      enable = true;
+    }
+    return transitionCacheEnabled = enable;
+  };
+
+  fetchReplacement = function(url, onLoadFunction) {
+    var _this = this;
+    if (onLoadFunction == null) {
+      onLoadFunction = function() {};
+    }
     triggerEvent('page:fetch', {
       url: url
     });
@@ -11015,10 +11251,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
       var doc;
       triggerEvent('page:receive');
       if (doc = processResponse()) {
-        reflectNewUrl(url);
         changePage.apply(null, extractTitleAndBody(doc));
         reflectRedirectedUrl();
-        resetScrollPosition();
+        onLoadFunction();
         return triggerEvent('page:load');
       } else {
         return document.location.href = url;
@@ -11027,9 +11262,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     xhr.onloadend = function() {
       return xhr = null;
     };
-    xhr.onabort = function() {
-      return rememberCurrentUrl();
-    };
     xhr.onerror = function() {
       return document.location.href = url;
     };
@@ -11037,7 +11269,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   };
 
   fetchHistory = function(cachedPage) {
-    cacheCurrentPage();
     if (xhr != null) {
       xhr.abort();
     }
@@ -11047,12 +11278,14 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   };
 
   cacheCurrentPage = function() {
-    pageCache[currentState.position] = {
+    pageCache[currentState.url] = {
       url: document.location.href,
       body: document.body,
       title: document.title,
       positionY: window.pageYOffset,
-      positionX: window.pageXOffset
+      positionX: window.pageXOffset,
+      cachedAt: new Date().getTime(),
+      transitionCacheDisabled: document.querySelector('[data-no-transition-cache]') != null
     };
     return constrainPageCacheTo(cacheSize);
   };
@@ -11067,14 +11300,23 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   };
 
   constrainPageCacheTo = function(limit) {
-    var key, value;
-    for (key in pageCache) {
-      if (!__hasProp.call(pageCache, key)) continue;
-      value = pageCache[key];
-      if (key <= currentState.position - limit) {
-        pageCache[key] = null;
+    var cacheTimesRecentFirst, key, pageCacheKeys, _i, _len, _results;
+    pageCacheKeys = Object.keys(pageCache);
+    cacheTimesRecentFirst = pageCacheKeys.map(function(url) {
+      return pageCache[url].cachedAt;
+    }).sort(function(a, b) {
+      return b - a;
+    });
+    _results = [];
+    for (_i = 0, _len = pageCacheKeys.length; _i < _len; _i++) {
+      key = pageCacheKeys[_i];
+      if (!(pageCache[key].cachedAt <= cacheTimesRecentFirst[limit])) {
+        continue;
       }
+      triggerEvent('page:expire', pageCache[key]);
+      _results.push(delete pageCache[key]);
     }
+    return _results;
   };
 
   changePage = function(title, body, csrfToken, runScripts) {
@@ -11083,7 +11325,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     if (csrfToken != null) {
       CSRFToken.update(csrfToken);
     }
-    removeNoscriptTags();
     if (runScripts) {
       executeScriptTags();
     }
@@ -11113,20 +11354,16 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     }
   };
 
-  removeNoscriptTags = function() {
-    var noscript, noscriptTags, _i, _len;
-    noscriptTags = Array.prototype.slice.call(document.body.getElementsByTagName('noscript'));
-    for (_i = 0, _len = noscriptTags.length; _i < _len; _i++) {
-      noscript = noscriptTags[_i];
-      noscript.parentNode.removeChild(noscript);
-    }
+  removeNoscriptTags = function(node) {
+    node.innerHTML = node.innerHTML.replace(/<noscript[\S\s]*?<\/noscript>/ig, '');
+    return node;
   };
 
   reflectNewUrl = function(url) {
     if (url !== referer) {
       return window.history.pushState({
         turbolinks: true,
-        position: currentState.position + 1
+        url: url
       }, '', url);
     }
   };
@@ -11146,7 +11383,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   rememberCurrentUrl = function() {
     return window.history.replaceState({
       turbolinks: true,
-      position: Date.now()
+      url: document.location.href
     }, '', document.location.href);
   };
 
@@ -11253,7 +11490,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   extractTitleAndBody = function(doc) {
     var title;
     title = doc.querySelector('title');
-    return [title != null ? title.textContent : void 0, doc.body, CSRFToken.get(doc).token, 'runScripts'];
+    return [title != null ? title.textContent : void 0, removeNoscriptTags(doc.body), CSRFToken.get(doc).token, 'runScripts'];
   };
 
   CSRFToken = {
@@ -11351,7 +11588,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   nonHtmlLink = function(link) {
     var url;
     url = removeHash(link);
-    return url.match(/\.[a-z]+(\?.*)?$/g) && !url.match(/\.html?(\?.*)?$/g);
+    return url.match(/\.[a-z]+(\?.*)?$/g) && !url.match(new RegExp("\\.(?:" + (htmlExtensions.join('|')) + ")?(\\?.*)?$", 'g'));
   };
 
   noTurbolink = function(link) {
@@ -11375,6 +11612,16 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     return crossOriginLink(link) || anchoredLink(link) || nonHtmlLink(link) || noTurbolink(link) || targetLink(link) || nonStandardClick(event);
   };
 
+  allowLinkExtensions = function() {
+    var extension, extensions, _i, _len;
+    extensions = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+    for (_i = 0, _len = extensions.length; _i < _len; _i++) {
+      extension = extensions[_i];
+      htmlExtensions.push(extension);
+    }
+    return htmlExtensions;
+  };
+
   installDocumentReadyPageEventTriggers = function() {
     return document.addEventListener('DOMContentLoaded', (function() {
       triggerEvent('page:change');
@@ -11396,7 +11643,8 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   installHistoryChangeHandler = function(event) {
     var cachedPage, _ref;
     if ((_ref = event.state) != null ? _ref.turbolinks : void 0) {
-      if (cachedPage = pageCache[event.state.position]) {
+      if (cachedPage = pageCache[event.state.url]) {
+        cacheCurrentPage();
         return fetchHistory(cachedPage);
       } else {
         return visit(event.target.location.href);
@@ -11412,7 +11660,9 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     return window.addEventListener('popstate', installHistoryChangeHandler, false);
   };
 
-  browserSupportsPushState = window.history && window.history.pushState && window.history.replaceState && window.history.state !== void 0;
+  historyStateIsDefined = window.history.state !== void 0 || navigator.userAgent.match(/Firefox\/26/);
+
+  browserSupportsPushState = window.history && window.history.pushState && window.history.replaceState && historyStateIsDefined;
 
   browserIsntBuggy = !navigator.userAgent.match(/CriOS\//);
 
@@ -11420,12 +11670,15 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   browserSupportsTurbolinks = browserSupportsPushState && browserIsntBuggy && requestMethodIsSafe;
 
-  installDocumentReadyPageEventTriggers();
+  browserSupportsCustomEvents = document.addEventListener && document.createEvent;
 
-  installJqueryAjaxSuccessPageUpdateTrigger();
+  if (browserSupportsCustomEvents) {
+    installDocumentReadyPageEventTriggers();
+    installJqueryAjaxSuccessPageUpdateTrigger();
+  }
 
   if (browserSupportsTurbolinks) {
-    visit = fetchReplacement;
+    visit = fetch;
     initializeTurbolinks();
   } else {
     visit = function(url) {
@@ -11436,6 +11689,8 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   this.Turbolinks = {
     visit: visit,
     pagesCached: pagesCached,
+    enableTransitionCache: enableTransitionCache,
+    allowLinkExtensions: allowLinkExtensions,
     supported: browserSupportsTurbolinks
   };
 
@@ -12214,7 +12469,8 @@ var mol_GLYCINE = 'Glycine\n  -ISIS-            3D\nd36 C2H5O2N NCC(O)=O\n 10  9
 // == menu click events ==
 $(function() { // jQuery document ready
 
-  // Display Modes
+  // Display Modes.
+  // Set 'Ball and Stick'.
   $("#BS").click(function() {
     $(this).addClass("success");
     $("#SF").removeClass("success");
@@ -12223,6 +12479,7 @@ $(function() { // jQuery document ready
     viewer.updateScene()
   });
 
+  // Set 'Space Filling'.
   $("#SF").click(function() {
     $(this).addClass("success");
     $("#BS").removeClass("success");
@@ -12231,6 +12488,7 @@ $(function() { // jQuery document ready
     viewer.updateScene()
   });
 
+  // Set 'Wireframe'.
   $("#WF").click(function() {
     $(this).addClass("success");
     $("#BS").removeClass("success");
@@ -12239,7 +12497,7 @@ $(function() { // jQuery document ready
     viewer.updateScene()
   });
 
-  // Labels
+  // Togle amino acid labels.
   $("#Labs").click(function() {
     viewer.specs.atoms_displayLabels_3D =! viewer.specs.atoms_displayLabels_3D;
     viewer.updateScene()
@@ -12275,46 +12533,33 @@ $(function() { // jQuery document ready
         file = pdb_1F6S;
         viewer.loadMolecule(file);
         break;
-      case "AS1CB":
-        file = ChemDoodle.readPDB(pdb_AS1CB, 1);
-        viewer.loadMolecule(file);
-        break;
-      case "AS2C":
-        file = ChemDoodle.readPDB(pdb_AS2C, 1);
-        viewer.loadMolecule(file);
-        break;
-      // case "BCA":
-      //   file = ChemDoodle.readPDB(pdb_BCA, 1);
-      //   viewer.loadMolecule(file);
-      //   break;
-      // case "KCB":
-      //   file = ChemDoodle.readPDB(pdb_KCB, 1);
-      //   viewer.loadMolecule(file);
-      //   break;
     }
   });
 
   // Right click canvas popup.
   $("#viewer").bind('contextmenu', function(e) {
+    // $("#header").css("background-color", "#F49AC2");
+    // $("#header").text("Testing.");
     $("#popup").css({
       top: e.pageY - 19,
       left: e.pageX + 6
     }).fadeIn('fast');
-    popupViewer.startAnimation();
+
+    //popupViewer.startAnimation();
     return false;
   });
 
   // Close popup.
   // Click.
-  $(".close").click(function() {
+  $("#close").click(function() {
     $("#popup").fadeOut("fast");
-    popupViewer.stopAnimation();
+    //popupViewer.stopAnimation();
   });
-  // Escape key
+  // Escape key.
   $(document).keydown(function(e) {
     if (e.keyCode == 27) {
       $("#popup").fadeOut("fast");
-      popupViewer.stopAnimation();
+      //popupViewer.stopAnimation();
     };
   });
 
@@ -12349,7 +12594,7 @@ $(function() { // jQuery document ready
 // require foundation/foundation.orbit
 // require foundation/foundation.reveal
 // require foundation/foundation.section
-// require foundation/foundation.tooltips
+// require foundation/foundation.tooltip
 // require foundation/foundation.topbar
 // require foundation/foundation.interchange
 // require foundation/foundation.placeholder
