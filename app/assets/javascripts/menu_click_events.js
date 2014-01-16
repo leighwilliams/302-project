@@ -7,6 +7,7 @@ $(function() { // jQuery document ready
     $(this).addClass("success");
     $("#SF").removeClass("success");
     $("#WF").removeClass("success");
+    $("#Hydro").removeClass("success");
     viewer.specs.set3DRepresentation('Ball and Stick');
     viewer.updateScene()
   });
@@ -16,6 +17,7 @@ $(function() { // jQuery document ready
     $(this).addClass("success");
     $("#BS").removeClass("success");
     $("#WF").removeClass("success");
+    $("#Hydro").removeClass("success");
     viewer.specs.set3DRepresentation('van der Waals Spheres');
     viewer.updateScene()
   });
@@ -25,11 +27,18 @@ $(function() { // jQuery document ready
     $(this).addClass("success");
     $("#BS").removeClass("success");
     $("#SF").removeClass("success");
+    $("#Hydro").removeClass("success");
     viewer.specs.set3DRepresentation('Wireframe');
     viewer.updateScene()
   });
 
-  // Togle amino acid labels.
+  // Toggle display of hydrophobic/hydrophilic domains.
+  $("#Hydro").change(function() {
+    viewer.specs.proteins_residueColor = $("#Hydro").is(":checked") ? 'polarity' : 'none';
+    viewer.updateScene();
+  });
+
+  // Toggle amino acid labels.
   $("#Labs").click(function() {
     viewer.specs.atoms_displayLabels_3D =! viewer.specs.atoms_displayLabels_3D;
     viewer.updateScene();
