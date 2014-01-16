@@ -16,6 +16,8 @@
 //= require foundation/foundation
 //= require foundation/foundation.topbar
 //= require foundation/foundation.tooltip
+//= require foundation/foundation.reveal
+
 // Available components
 // require foundation/foundation
 // require foundation/foundation.abide

@@ -3,11 +3,12 @@
 
   <h6 class="subheader">Display Modes</h6>
   <ul>
-    <li><a id="BS" class="tiny button radius">Ball and Stick</a></li>
-    <li><a id="SF" class="tiny button radius success">Space Filling</a></li>
-    <li><a id="WF" class="tiny button radius">Wireframe</a></li>
-    <li><input type="checkbox" id="Hydro"> <label for="Hydro">Polarity</a></label></li>
+    <li><a href="#" id="BS" class="tiny button radius">Ball and Stick</a></li>
+    <li><a href="#" id="SF" class="tiny button radius success">Space Filling</a></li>
+    <li><a href="#" id="WF" class="tiny button radius">Wireframe</a></li>
+    <li><input type="checkbox" id="Hydro"> <label for="Hydro">Polarity</label></li>
     <li><input type="checkbox" id="Labs"> <label for="Labs">Labels</label></li>
+    <li><li><a href="#" data-reveal-id="hydrogenBondsModal" class="tiny button radius">Bonds (Temp link)</a></li></li>
   </ul>
 
   <h6 class="subheader">Protein Structures</h6>
@@ -21,9 +22,9 @@
     <option value="1F6S">1F6S</option>
   </select>
 
-  <h6 class="subheader">Amino acid structures</h6>
+  <h6 class="subheader">Amino Acid Structures</h6>
   <select id="AS">
-    <option>Select to view model.</option>
+    <option>Select to view model</option>
     <option disabled >Hydrophobic</option>
     <option disabled >-----------</option>
     <option value="Trp">Trp</option>
@@ -61,7 +62,14 @@
     <li><a id="test" class="tiny button radius alert">Count nitrogen atoms!</a></li>
   </ul> -->
 
+  <h6 class="subheader">Digestive Enzymes</h6>
+  <a href="#" class="tiny button radius" data-reveal-id="enzymesModal">Info</a>
+
+  <h6 class="subheader">Kjeldahl Method</h6>
+  <a href="#" class="tiny button radius" data-reveal-id="kjeldahlModal">Info</a>
+
 </div> <!-- End left menu. -->
+
 <!-- Scene -->
 <div id="right">
 
@@ -73,9 +81,9 @@
   <div id="popup" class="popup" style="display: none">
     <p id="header" data-tooltip class="has-tip"
        title="Green  - Hydrophobic <br>
-             Yellow - Hydrophilic <br>
-             Purple   - Basic <br>
-             Pink   - Acidic">Glycine, Gly (G)
+              Yellow - Hydrophilic <br>
+              Purple   - Basic <br>
+              Pink   - Acidic">Glycine, Gly (G)
     </p>
 
     <div id="arrow" ></div>
@@ -84,5 +92,7 @@
     <canvas id="popupViewer">
     </canvas> <!-- End popup scene. -->
   </div> <!-- End popup box. -->
+
+  <%= render 'shared/modals' %>
 
 </div> <!-- End scene. -->

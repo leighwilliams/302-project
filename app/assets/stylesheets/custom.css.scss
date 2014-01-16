@@ -46,6 +46,16 @@ body {
   height: 100%;
   width: 200px;
   float: left;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+// Amino acid selection drop down.
+#aminoList {
+  p {
+    color: grey;
+    margin-bottom: 0px;
+  }
 }
 
 // Scene.
@@ -102,11 +112,16 @@ body {
   }
 }
 
-#aminoList {
+// Hydrogen bonds modal.
+#hydrogenBondsModal {
+  overflow-y: auto;
+  height: 88%;
+  padding-left: 40px;
+  padding-right: 40px;
+}
 
-
-  p {
-    color: grey;
-    margin-bottom: 0px;
-  }
+#hydroImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
