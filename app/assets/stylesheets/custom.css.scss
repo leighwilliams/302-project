@@ -62,20 +62,20 @@ body {
   padding: 3px;
   background: #222;
   border-style: solid;
-  border-color: #77DD77;
+  border-color: #333;
   border-width: 2px;
   border-radius: 2px;
   text-align: center; // For the amino acid name.
 
   #header {
     color: #111;
-    background-color: #77DD77;
+    background-color: #333;
     // pastel green #77DD77
     // pastel orange #FFB347
     // dark pastel blue #779ECB
     // pastel magenta #F49AC2
     margin-bottom: 0px; // Overwrite Foundation default 20px.
-    border-bottom-color: #99D19D;
+    border-bottom-color: #333;
   }
 
   #arrow {
@@ -84,7 +84,7 @@ body {
     width: 0;
     height: 0;
     border: solid 7px;
-    border-color: transparent #77DD77 transparent transparent;
+    border-color: transparent #333 transparent transparent;
     top: 8px;
     left: -15px;
   }
@@ -99,5 +99,14 @@ body {
     right: -8px;
     font-size: 30px;
     cursor: pointer;
+  }
+}
+
+#aminoList {
+
+
+  p {
+    color: grey;
+    margin-bottom: 0px;
   }
 }

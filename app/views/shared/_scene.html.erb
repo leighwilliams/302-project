@@ -68,8 +68,9 @@
   //   mat4.multiply(this.rotationMatrix, matrix);
   // }
 
-  var molecule = ChemDoodle.readMOL(mol_GLYCINE, 1);
-  popupViewer.loadMolecule(molecule);
+  var aminoFile;
+  var molecule;
+  //popupViewer.loadMolecule(molecule);
 
   // Not starting rotation animation until popup is visible.
   // popupViewer.startAnimation();
