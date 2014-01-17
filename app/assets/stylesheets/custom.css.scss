@@ -5,6 +5,7 @@ footer {
   height: 30px;
   bottom: 0;
   position: fixed;
+  //text-align: center;
 
   a {
     float: right;
@@ -12,6 +13,9 @@ footer {
 
   span {
     color: grey;
+    position: absolute;
+    bottom: 6px;
+    left: 4px;
   }
 }
 
@@ -47,7 +51,14 @@ body {
 // Left nav.
 #left {
   background-color: #222;
-  height: 93%;
+  // Firefox.
+  height: -moz-calc(100% - 75px);
+  // Webkit.
+  height: -webkit-calc(100% - 75px);
+  // Opera.
+  height: -o-calc(100% - 75px);
+  // Standard.
+  height: calc(100% - 75px);
   width: 200px;
   float: left;
   padding-left: 4px;
