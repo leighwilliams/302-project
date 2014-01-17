@@ -5,10 +5,14 @@ footer {
   height: 30px;
   bottom: 0;
   position: fixed;
-}
 
-footer a {
-  float: right;
+  a {
+    float: right;
+  }
+
+  span {
+    color: grey;
+  }
 }
 
 html, body {
