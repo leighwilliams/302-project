@@ -42,7 +42,33 @@ $(function() { // jQuery document ready
   $("#Labs").click(function() {
     viewer.specs.atoms_displayLabels_3D =! viewer.specs.atoms_displayLabels_3D;
     viewer.updateScene();
-  }); // End display modes.
+  });
+
+  // $("#fullScreen").click(function(){
+  //   var width, height;
+  //   // var canvas = document.getElementById("viewer");
+
+  //   // if(canvas.requestFullScreen) {
+  //   //   canvas.requestFullScreen();
+  //   // }
+  //   // else if(canvas.webkitRequestFullScreen) {
+  //   //   canvas.webkitRequestFullScreen();
+  //   // }
+  //   // else if(canvas.mozRequestFullScreen) {
+  //   //   canvas.mozRequestFullScreen();
+  //   // }
+  //   // else if(element.msRequestFullscreen) {
+  //   //   element.msRequestFullscreen();
+  //   // }
+
+  //   width = $(window).innerWidth();
+  //   height = $(window).innerHeight();
+  //   //viewer.resize(width, height);
+  //   //viewer.loadMolecule(file);
+  //   //$("#viewer").css({"display": "block", "width": width, "height": height});
+  // });
+
+  // End display modes.
 
   // // Count nitrogen atoms test.
   // $("#test").click(function() {
