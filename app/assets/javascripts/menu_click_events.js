@@ -246,7 +246,7 @@ $(function() { // jQuery document ready
     $("#arrow").css("border-right-color", popupColour);
 
     $("#popup").css({
-      top: 521,
+      top: 443,
       left: 208
     })
     .css("border-color", popupColour)
