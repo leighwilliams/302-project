@@ -43,6 +43,9 @@ gem 'rails_12factor', :group => :production
 # Unicorn server
 gem 'unicorn'
 
+# CSS auto prefixing
+gem 'autoprefixer-rails'
+
 # LiveReload
 # gem "guard-livereload", :require => false, :group => :development
 # gem "rack-livereload", :group => :development

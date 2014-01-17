@@ -27,6 +27,8 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.1)
     atomic (1.1.14)
+    autoprefixer-rails (1.0.20140117)
+      execjs
     builder (3.1.4)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -37,7 +39,7 @@ GEM
     coffee-script-source (1.6.3)
     erubis (2.7.0)
     execjs (2.0.2)
-    foundation-rails (5.0.3.0)
+    foundation-rails (5.0.3.1)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
     heroku-deflater (0.5.3)
@@ -124,6 +126,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
   coffee-rails (~> 4.0.0)
   foundation-rails
   heroku-deflater
