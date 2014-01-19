@@ -485,8 +485,8 @@
 // $tabbar-middle-padding: 0 rem-calc(10);
 
 // Off Canvas Divider Styles
-// $tabbar-right-section-border: solid 1px lighten($tabbar-bg, 10%);
-// $tabbar-left-section-border: solid 1px darken($tabbar-bg, 10%);
+//$tabbar-right-section-border: solid 1px lighten($tabbar-bg, 10%);
+//$tabbar-left-section-border: solid 1px darken($tabbar-bg, 10%);
 
 // Off Canvas Tab Bar Headers
 // $tabbar-header-color: #FFF;
@@ -495,8 +495,8 @@
 // $tabbar-header-margin: 0;
 
 // Off Canvas Menu Variables
-// $off-canvas-width: 250px;
-// $off-canvas-bg: #333;
+$off-canvas-width: 200px;
+$off-canvas-bg: #222;
 
 // Off Canvas Menu List Variables
 // $off-canvas-label-padding: 0.3rem rem-calc(15);

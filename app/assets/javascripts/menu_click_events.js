@@ -247,7 +247,7 @@ $(function() { // jQuery document ready
 
     $("#popup").css({
       top: 54,
-      left: 208
+      left: 8
     })
     .css("border-color", popupColour)
     .fadeIn('fast');

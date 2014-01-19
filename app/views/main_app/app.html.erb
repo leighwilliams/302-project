@@ -1,80 +1,94 @@
-<!-- Left menu. -->
-<div id="left">
+<div class="off-canvas-wrap">
+  <div class="inner-wrap">
+    <!-- <nav class="tab-bar"> -->
+      <section class="left-small">
+        <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+      </section>
 
-  <h6 class="subheader">Display Modes</h6>
-  <ul>
-    <li><a id="BS" class="tiny button radius">Ball and Stick</a></li>
-    <li><a id="SF" class="tiny button radius success">Space Filling</a></li>
-    <li><a id="WF" class="tiny button radius">Wireframe</a></li>
-    <li><input type="checkbox" id="Hydro"> <label for="Hydro">Polarity</label></li>
-    <li><input type="checkbox" id="Labs"> <label for="Labs">Labels</label></li>
-    <!-- <li><a id="fullScreen" class="tiny button radius">Fullscreen</a></li> -->
-  </ul>
+      <!-- <section class="middle tab-bar-section">
+        <h1 class="title">ProVis</h1>
+      </section> -->
 
-  <h6 class="subheader">Protein Structures</h6>
-  <select id="PS">
-    <option disabled value="">From RCSB PDB</option>
-    <option disabled value="">-------------</option>
-    <option value="4F5S">4F5S</option>
-    <option value="1BEB" selected="selected">1BEB</option>
-    <option value="1BLF">1BLF</option>
-    <option value="1B8E">1B8E</option>
-    <option value="1F6S">1F6S</option>
-  </select>
+      <section class="right-small">
+        <a class="right-off-canvas-toggle menu-icon"><span></span></a>
+      </section>
+    <!-- </nav> -->
 
-  <h6 class="subheader">Amino Acid Structures</h6>
-  <select id="AS">
-    <option>Select to view model</option>
-    <option disabled >Hydrophobic</option>
-    <option disabled >-----------</option>
-    <option value="Trp">Trp</option>
-    <option value="Phe">Phe</option>
-    <option value="Gly">Gly</option>
-    <option value="Ala">Ala</option>
-    <option value="Val">Val</option>
-    <option value="Ile">Ile</option>
-    <option value="Leu">Leu</option>
-    <option value="Met">Met</option>
-    <option value="Pro">Pro</option>
-    <option disabled ></option>
-    <option disabled >Hydrophilic</option>
-    <option disabled >-----------</option>
-    <option value="Tyr">Tyr</option>
-    <option value="Ser">Ser</option>
-    <option value="Thr">Thr</option>
-    <option value="Asn">Asn</option>
-    <option value="Gln">Gln</option>
-    <option value="Cys">Cys</option>
-    <option disabled ></option>
-    <option disabled >Basic</option>
-    <option disabled >-----------</option>
-    <option value="Lys">Lys</option>
-    <option value="Arg">Arg</option>
-    <option value="His">His</option>
-    <option disabled ></option>
-    <option disabled >Acidic</option>
-    <option disabled >-----------</option>
-    <option value="Asp">Asp</option>
-    <option value="Glu">Glu</option>
-  </select>
+    <!-- Off Canvas left menu. -->
+    <aside class="left-off-canvas-menu">
+      <h6 class="subheader">Display Modes</h6>
+      <ul>
+        <li><a id="BS" class="tiny button radius">Ball and Stick</a></li>
+        <li><a id="SF" class="tiny button radius success">Space Filling</a></li>
+        <li><a id="WF" class="tiny button radius">Wireframe</a></li>
+        <li><input type="checkbox" id="Hydro"> <label for="Hydro">Polarity</label></li>
+        <li><input type="checkbox" id="Labs"> <label for="Labs">Labels</label></li>
+        <!-- <li><a id="fullScreen" class="tiny button radius">Fullscreen</a></li> -->
+      </ul>
 
-  <!-- <ul>
-    <li><a id="test" class="tiny button radius alert">Count nitrogen atoms!</a></li>
-  </ul> -->
+      <h6 class="subheader">Protein Structures</h6>
+      <select id="PS">
+        <option disabled value="">From RCSB PDB</option>
+        <option disabled value="">-------------</option>
+        <option value="4F5S">4F5S</option>
+        <option value="1BEB" selected="selected">1BEB</option>
+        <option value="1BLF">1BLF</option>
+        <option value="1B8E">1B8E</option>
+        <option value="1F6S">1F6S</option>
+      </select>
 
-  <h6 class="subheader">Hydrogen Bonds</h6>
-  <a class="tiny button radius" data-reveal-id="bondsModal">Info</a>
+      <h6 class="subheader">Amino Acid Structures</h6>
+      <select id="AS">
+        <option>Select to view model</option>
+        <option disabled >Hydrophobic</option>
+        <option disabled >-----------</option>
+        <option value="Trp">Trp</option>
+        <option value="Phe">Phe</option>
+        <option value="Gly">Gly</option>
+        <option value="Ala">Ala</option>
+        <option value="Val">Val</option>
+        <option value="Ile">Ile</option>
+        <option value="Leu">Leu</option>
+        <option value="Met">Met</option>
+        <option value="Pro">Pro</option>
+        <option disabled ></option>
+        <option disabled >Hydrophilic</option>
+        <option disabled >-----------</option>
+        <option value="Tyr">Tyr</option>
+        <option value="Ser">Ser</option>
+        <option value="Thr">Thr</option>
+        <option value="Asn">Asn</option>
+        <option value="Gln">Gln</option>
+        <option value="Cys">Cys</option>
+        <option disabled ></option>
+        <option disabled >Basic</option>
+        <option disabled >-----------</option>
+        <option value="Lys">Lys</option>
+        <option value="Arg">Arg</option>
+        <option value="His">His</option>
+        <option disabled ></option>
+        <option disabled >Acidic</option>
+        <option disabled >-----------</option>
+        <option value="Asp">Asp</option>
+        <option value="Glu">Glu</option>
+      </select>
 
-  <h6 class="subheader">Digestive Enzymes</h6>
-  <a class="tiny button radius" data-reveal-id="enzymesModal">Info</a>
+      <h6 class="subheader">Hydrogen Bonds</h6>
+      <a class="tiny button radius" data-reveal-id="bondsModal">Info</a>
 
-  <h6 class="subheader">Kjeldahl Method</h6>
-  <a class="tiny button radius" data-reveal-id="kjeldahlModal">Info</a>
+      <h6 class="subheader">Digestive Enzymes</h6>
+      <a class="tiny button radius" data-reveal-id="enzymesModal">Info</a>
 
-</div> <!-- End left menu. -->
+      <h6 class="subheader">Kjeldahl Method</h6>
+      <a class="tiny button radius" data-reveal-id="kjeldahlModal">Info</a>
+    </aside><!-- End Off Canvas left menu. -->
+
+    <!-- Off Canvas right menu. -->
+    <aside class="right-off-canvas-menu">
+
+    </aside>
 
 <!-- Scene -->
-<div id="right">
 
   <!-- Main scene. -->
   <canvas id="viewer">
@@ -98,4 +112,7 @@
 
   <%= render 'shared/modals' %>
 
-</div> <!-- End scene. -->
+
+
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <script>
   // get dimensions
-  var width = window.innerWidth - 200;
-  var height = window.innerHeight - 71;
+  var width = window.innerWidth;
+  var height = window.innerHeight - 75;
 
   // setup component
   var viewer = new ChemDoodle.TransformCanvas3D('viewer', width, height);
@@ -12,7 +12,7 @@
   viewer.specs.proteins_displayBackbone = false;
   viewer.specs.proteins_displayRibbon = true;
   viewer.specs.macro_atomToLigandDistance = 5;
-  viewer.specs.backgroundColor = '#111'; // Black.
+  viewer.specs.backgroundColor = 'black';
   viewer.specs.proteins_ribbonCartoonize = true;
   viewer.emptyMessage = 'No Data Loaded!';
   viewer.specs.compass_display = true;
@@ -32,8 +32,8 @@
     $(window).resize(function(){
       clearTimeout(timer);
       timer = setTimeout(function() {
-        width = $(window).innerWidth() - 200;
-        height = $(window).innerHeight() - 71;
+        width = $(window).innerWidth();
+        height = $(window).innerHeight() - 75;
         //viewer.specs.projectionWidthHeightRatio_3D = width / height;
         viewer.resize(width, height);
         // Have to use loadMolecule() on each resize to avoid warped 3D image.
