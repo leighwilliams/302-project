@@ -119,7 +119,8 @@ $(function() { // jQuery document ready
   // Load amino model.
   var aminoModel,
       popupTitle,
-      popupColour;
+      popupColour,
+      aminoFile;
 
   // pastel green #77DD77
   // pastel orange #FFB347
