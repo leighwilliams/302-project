@@ -714,7 +714,7 @@ $off-canvas-bg: #222;
 
 // We use these to control the style of the modal itself.
 // $reveal-modal-bg: #fff;
-// $reveal-position-top: 50px;
+$reveal-position-top: 6px;
 // $reveal-default-width: 80%;
 // $reveal-modal-padding: rem-calc(20);
 // $reveal-box-shadow: 0 0 10px rgba(#000,.4);
@@ -1000,7 +1000,8 @@ $off-canvas-bg: #222;
   "foundation/components/forms",
   "foundation/components/tooltips",
   "foundation/components/reveal",
-  "foundation/components/keystrokes";
+  "foundation/components/keystrokes",
+  "foundation/components/visibility";
 
 // Available components
 // "foundation/components/accordion",

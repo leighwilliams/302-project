@@ -34,7 +34,6 @@ footer {
 
 html, body {
   height: 100%;
-  background-color: black;
 }
 
 body {
@@ -43,26 +42,26 @@ body {
 }
 
 // Left nav.
-#left {
-  background-color: #222;
-  height: calc(100% - 75px);
-  width: 200px;
-  float: left;
-  padding-left: 4px;
-  padding-right: 4px;
-  overflow-y: auto;
-  position: absolute;
-  z-index: 999;
-}
+// #left {
+//   background-color: #222;
+//   height: calc(100% - 75px);
+//   width: 200px;
+//   float: left;
+//   padding-left: 4px;
+//   padding-right: 4px;
+//   overflow-y: auto;
+//   position: absolute;
+//   z-index: 999;
+// }
 
-// Scene.
-#right {
-  background-color: #111;
-  height: 100%;
-}
+// // Scene.
+// #right {
+//   background-color: #111;
+//   height: 100%;
+// }
 
 // Amino acid popup box.
-.popup {
+#popup {
   display: none;
   position: absolute;
   z-index: 999;
@@ -109,10 +108,10 @@ body {
   }
 }
 
-// Hydrogen bonds modal.
-#bondsModal {
+// Modals.
+.reveal-modal {
   overflow-y: auto;
-  height: 88%;
+  height: calc(100% - 14px);
   padding-left: 40px;
   padding-right: 40px;
 }
