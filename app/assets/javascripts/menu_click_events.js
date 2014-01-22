@@ -258,12 +258,14 @@ $(function() { // jQuery document ready
   // Click.
   $("#close").click(function() {
     $("#popup").fadeOut("fast");
+    $("#AS").val('Select to view model');
     //popupViewer.stopAnimation();
   });
   // Escape key.
   $(document).keydown(function(e) {
     if (e.keyCode == 27) {
       $("#popup").fadeOut("fast");
+      $("#AS").val('Select to view model');
       //popupViewer.stopAnimation();
     };
   });

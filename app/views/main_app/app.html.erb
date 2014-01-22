@@ -28,49 +28,49 @@
 
       <h6 class="subheader">Protein Structures</h6>
       <select id="PS">
-        <option disabled value="">From RCSB PDB</option>
-        <option disabled value="">-------------</option>
-        <option value="4F5S">4F5S</option>
-        <option value="1BEB" selected="selected">1BEB</option>
-        <option value="1BLF">1BLF</option>
-        <option value="1B8E">1B8E</option>
-        <option value="1F6S">1F6S</option>
+        <optgroup label="From RCSB PDB">
+          <option value="4F5S">4F5S</option>
+          <option value="1BEB" selected="selected">1BEB</option>
+          <option value="1BLF">1BLF</option>
+          <option value="1B8E">1B8E</option>
+          <option value="1F6S">1F6S</option>
+        </optgroup>
       </select>
 
       <h6 class="subheader">Amino Acid Structures</h6>
       <select id="AS">
         <option>Select to view model</option>
-        <option disabled >Hydrophobic</option>
-        <option disabled >-----------</option>
-        <option value="Trp">Trp</option>
-        <option value="Phe">Phe</option>
-        <option value="Gly">Gly</option>
-        <option value="Ala">Ala</option>
-        <option value="Val">Val</option>
-        <option value="Ile">Ile</option>
-        <option value="Leu">Leu</option>
-        <option value="Met">Met</option>
-        <option value="Pro">Pro</option>
-        <option disabled ></option>
-        <option disabled >Hydrophilic</option>
-        <option disabled >-----------</option>
-        <option value="Tyr">Tyr</option>
-        <option value="Ser">Ser</option>
-        <option value="Thr">Thr</option>
-        <option value="Asn">Asn</option>
-        <option value="Gln">Gln</option>
-        <option value="Cys">Cys</option>
-        <option disabled ></option>
-        <option disabled >Basic</option>
-        <option disabled >-----------</option>
-        <option value="Lys">Lys</option>
-        <option value="Arg">Arg</option>
-        <option value="His">His</option>
-        <option disabled ></option>
-        <option disabled >Acidic</option>
-        <option disabled >-----------</option>
-        <option value="Asp">Asp</option>
-        <option value="Glu">Glu</option>
+        <optgroup label="Hydrophobic">
+          <option value="Trp">Trp</option>
+          <option value="Phe">Phe</option>
+          <option value="Gly">Gly</option>
+          <option value="Ala">Ala</option>
+          <option value="Val">Val</option>
+          <option value="Ile">Ile</option>
+          <option value="Leu">Leu</option>
+          <option value="Met">Met</option>
+          <option value="Pro">Pro</option>
+        </optgroup>
+
+        <optgroup label="Hydrophilic">
+          <option value="Tyr">Tyr</option>
+          <option value="Ser">Ser</option>
+          <option value="Thr">Thr</option>
+          <option value="Asn">Asn</option>
+          <option value="Gln">Gln</option>
+          <option value="Cys">Cys</option>
+        </optgroup>
+
+        <optgroup label="Basic">
+          <option value="Lys">Lys</option>
+          <option value="Arg">Arg</option>
+          <option value="His">His</option>
+        </optgroup>
+
+        <optgroup label="Acidic">
+          <option value="Asp">Asp</option>
+          <option value="Glu">Glu</option>
+        </optgroup>
       </select>
 
       <!-- <h6 class="subheader">Hydrogen Bonds</h6>
