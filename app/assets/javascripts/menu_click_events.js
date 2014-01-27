@@ -270,4 +270,12 @@ $(function() { // jQuery document ready
     };
   });
 
+  // Click guided tour button
+  // $("#startTour").click(function() {
+  //   $('#helpModal').foundation('reveal', 'close');
+
+  //   // $(document).foundation('joyride', 'start');
+
+  // });
+
 });

@@ -1,18 +1,12 @@
 <div class="off-canvas-wrap">
   <div class="inner-wrap">
-    <!-- <nav class="tab-bar"> -->
-      <section class="left-small">
-        <a class="left-off-canvas-toggle menu-icon"><span>Menu</span></a>
-      </section>
+    <section class="left-small">
+      <a class="left-off-canvas-toggle menu-icon"><span>Menu</span></a>
+    </section>
 
-      <!-- <section class="middle tab-bar-section">
-        <h1 class="title">ProVis</h1>
-      </section> -->
-
-      <section class="right-small">
-        <a class="right-off-canvas-toggle menu-icon"><span></span></a>
-      </section>
-    <!-- </nav> -->
+    <section class="right-small">
+      <a class="right-off-canvas-toggle menu-icon"><span></span></a>
+    </section>
 
     <!-- Off Canvas left menu. -->
     <aside class="left-off-canvas-menu">
@@ -29,11 +23,11 @@
       <h6 class="subheader">Protein Structures</h6>
       <select id="PS">
         <optgroup label="From RCSB PDB">
-          <option value="4F5S">4F5S</option>
-          <option value="1BEB" selected="selected">1BEB</option>
-          <option value="1BLF">1BLF</option>
-          <option value="1B8E">1B8E</option>
-          <option value="1F6S">1F6S</option>
+          <option value="4F5S">Bovine Albumin</option>
+          <option value="1BEB" selected="selected">Bovine Beta-Lactoglobulin (Lattice X)</option>
+          <option value="1BLF">Bovine Lactoferrin</option>
+          <option value="1B8E">Bovine Beta-Lactoglobulin (Isoforms A & B)</option>
+          <option value="1F6S">Bovine Alpha-Lactalbumin</option>
         </optgroup>
       </select>
 
@@ -87,31 +81,25 @@
     <aside class="right-off-canvas-menu">
     </aside>
 
-<!-- Scene -->
+    <!-- Scene -->
+    <!-- Main scene. -->
+    <canvas id="viewer">
+    </canvas> <!-- End main scene. -->
 
-  <!-- Main scene. -->
-  <canvas id="viewer">
-  </canvas> <!-- End main scene. -->
+    <!-- Popup box. -->
+    <div id="popup" style="display: none">
+      <p id="header" data-tooltip class="has-tip"
+         title="Green  - Hydrophobic <br>
+                Yellow - Hydrophilic <br>
+                Purple   - Basic <br>
+                Pink   - Acidic">Glycine, Gly (G)
+      </p>
 
-  <!-- Popup box. -->
-  <div id="popup" style="display: none">
-    <p id="header" data-tooltip class="has-tip"
-       title="Green  - Hydrophobic <br>
-              Yellow - Hydrophilic <br>
-              Purple   - Basic <br>
-              Pink   - Acidic">Glycine, Gly (G)
-    </p>
-
-    <div id="arrow" ></div>
-    <div id="close">&times;</div> <!-- &#10006; -->
-    <!-- Popup scene. -->
-    <canvas id="popupViewer">
-    </canvas> <!-- End popup scene. -->
-  </div> <!-- End popup box. -->
-
-  <%= render 'shared/modals' %>
-
-
-
+      <div id="arrow" ></div>
+      <div id="close">&times;</div> <!-- &#10006; -->
+      <!-- Popup scene. -->
+      <canvas id="popupViewer">
+      </canvas> <!-- End popup scene. -->
+    </div> <!-- End popup box. -->
   </div>
 </div>

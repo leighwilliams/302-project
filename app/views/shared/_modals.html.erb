@@ -3,7 +3,7 @@
   <h2>Hydrogen Bonds</h2>
   <p>A hydrogen bond is a weak electrostatic attraction between an electronegative (partially negative charged) atom, such as nitrogen or oxygen, and a hydrogen atom covalently bonded to a second electronegative atom.</p>
 
-  <%= image_tag("hydrogenBond.gif", id: "hydroImg") %>
+  <%= image_tag("hydrogenBond.png") %>
 
   <p>In a protein, hydrogen bonding helps to form the secondary structure, the alpha-helices and beta-pleated sheets. This is because the C=O and N-H groups of the amino acids head groups (which also make up the peptide bonds) are able to hydrogen bond to other N-H and C=O in the head groups of neighbouring amino acids (4 amino acids distant) along the polypeptide chain, causing the polypeptide chain to either coil into a helix, or form a pleated layer. The following videos explain how the hydrogen bond can be used to form these different structures.</p>
 
@@ -25,9 +25,14 @@
 <div id="enzymesModal" class="reveal-modal medium" data-reveal>
   <h2>Digestive Enzymes</h2>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, ab beatae incidunt maiores iusto. Corporis, blanditiis, illum, ab fugit debitis ut similique praesentium quos ea maiores laudantium ullam pariatur deleniti.</p>
+  <p>Within the gastrointestinal tract are enzymes which help to break down proteins and other biological macromolecules. Each enzyme is specific for cleaving (or breaking) a particular chemical bond. Two in particular, trypsin and chymotrypsin, cleave the peptide bonds in proteins. When the peptide bond is cleaved, the C=O side becomes a carboxylic acid (an <span id="red">OH</span> is added) and the NH side becomes an amine (an <span id="blue">H</span> is added). This addition of water is known as hydrolysis.</p>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, temporibus praesentium reprehenderit amet magni libero ea cumque ipsa illo nemo. Veniam, quo magni dolorem asperiores saepe mollitia necessitatibus culpa praesentium qui quam sit facilis perferendis est eligendi ipsa totam quae unde voluptates aperiam voluptate modi repellendus vero illum cum nulla?</p>
+  <%= image_tag("digestiveEnzyme.png") %>
+
+
+  <p>As a side note (and not required in your learning just yet), trypsin and chymotrypsin cleave only before or after particular amino acids. Chymotrypsin cleaves at the carboxyl (C=O) side of amino acids with an aromatic or large R group, and trypsin cleaves at the carboxyl side of the amino acids lysine (Lys) or arginine (Arg), except when they are followed by proline (Pro).</p>
+
+  <p>You can read more about digestive enzymes in pages 120-121 of Garrett’s “Biochemistry”, and Chapter 6 of Whitney’s “Understanding Nutrition; 13th Edition”, both of which you can find in the resources section.</p>
 
   <a class="close-reveal-modal">&#215;</a>
 </div> <!-- End Digestive Enzymes Modal -->
@@ -36,10 +41,47 @@
 <div id="kjeldahlModal" class="reveal-modal medium" data-reveal>
   <h2>Kjeldahl Method</h2>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, ab beatae incidunt maiores iusto. Corporis, blanditiis, illum, ab fugit debitis ut similique praesentium quos ea maiores laudantium ullam pariatur deleniti.</p>
+  <p>The Kjeldahl method is an analytical method used to approximate the amount of protein in a food sample. Using three chemical reactions, the nitrogen present in amino acids are converted into a different form of nitrogen, ammonium borate, which can be measured by titration. Using the titration data, it is possible to first determine how much nitrogen is in the sample, and from this, calculate the approximate amount of protein.</p>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, temporibus praesentium reprehenderit amet magni libero ea cumque ipsa illo nemo. Veniam, quo magni dolorem asperiores saepe mollitia necessitatibus culpa praesentium qui quam sit facilis perferendis est eligendi ipsa totam quae unde voluptates aperiam voluptate modi repellendus vero illum cum nulla?</p>
+  <p>The Kjeldahl method can be performed manually, or using an automated instrument. In either case, the method requires three steps, which are 1. Digestion, 2. Distillation and 3. Titration. In the first step, the food and protein is ‘digested’ using strong acid, which breaks the protein down to free the nitrogen into a salt form. In the second step, distillation, the nitrogen salt is converted into ammonia, a gas with nitrogen in it, and then another type of nitrogen salt. Finally, in the titration step, a titration is carried out whereby a colour change is used to determine the amount of nitrogen. The chemical reactions for the three steps are shown below.</p>
 
+  <%= image_tag("kjeldahlMethod.png") %>
+
+  <p>The Kjeldahl method is used to measure the amount of nitrogen in a sample, rather than say carbon or hydrogen, because nitrogen is not found in other major food components. For example, fats, sugars and fibres contain carbon and hydrogen and oxygen, but not nitrogen. However, there are some vitamins and minor food components that do contain nitrogen (such as Vitamin B3, Niacin), which is why the Kjeldahl method is an approximate, and not an exact protein calculation. Also, some amino acids (such as Lysine) contain a second nitrogen within their R group, which can also throw out protein calculations.</p>
+
+  <canvas id="niacinViewer"></canvas>
+  <canvas id="lysineViewer"></canvas>
+
+  <script>
+    var niacinViewer = new ChemDoodle.TransformCanvas3D('niacinViewer', 250, 250);
+    niacinViewer.specs.set3DRepresentation('Stick');
+    niacinViewer.specs.backgroundColor = '#222'; // Dark grey.
+    niacinViewer.specs.atoms_displayLabels_3D = true;
+
+    var molFile = "98919-68-7.mol\n  ChemDraw08051019362D\n\n  9  9  0  0  0  0  0  0  0  0999 V2000\n    0.2063   -0.0030    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.2004    0.7114    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.2004   -0.7114    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.0337   -0.0030    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0278    0.7114    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0278   -0.7114    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4465   -0.7114    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4465    0.7114    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4465   -0.0030    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0      \n  1  3  1  0      \n  1  4  1  0      \n  2  5  1  0      \n  3  6  2  0      \n  4  7  1  0      \n  4  8  2  0      \n  5  9  2  0      \n  6  9  1  0      \nM  END";
+
+    var mol = ChemDoodle.readMOL(molFile, 1);
+    niacinViewer.loadMolecule(mol);
+  </script>
+
+  <script>
+    var lysineViewer = new ChemDoodle.TransformCanvas3D('lysineViewer', 250, 250);
+    lysineViewer.specs.set3DRepresentation('Stick');
+    lysineViewer.specs.backgroundColor = '#222'; // Dark grey.
+    lysineViewer.specs.atoms_displayLabels_3D = true;
+
+    molFile = mol_LYSINE;
+    var mol = ChemDoodle.readMOL(molFile, 1);
+    lysineViewer.loadMolecule(mol);
+  </script>
+
+  <p><i>Vitamin B3 contains a nitrogen atom, while the amino acid Lysine contains two nitrogens.</i></p>
+
+  <p>Watch the following video for more information on how the three steps of the Kjeldahl method allow us to work out how much nitrogen, and therefore protein, is in a food sample.</p>
+
+  <%= link_to("Kjeldahl basics and reasoning.", "http://www.educreations.com/lesson/view/kjeldahl-basics-and-reasoning/9272677/") %>
+
+  <p>You can read more about the Kjeldahl Titration in Chapter Five (pg 174-5) of Coultate’s “Food; the Chemistry of its Components”, which you can find in the resources section.</p>
   <a class="close-reveal-modal">&#215;</a>
 </div> <!-- End Kjeldahl Method Modal -->
 
@@ -55,3 +97,13 @@
 
   <a class="close-reveal-modal">&#215;</a>
 </div> <!-- End Resources Modal -->
+
+<!-- Kjeldahl Method Modal -->
+<div id="helpModal" class="reveal-modal medium" data-reveal>
+  <h2>Need some help?</h2>
+  <p>Read on for a general guide or click <a id="startTour">here</a> for a tour of the app!</p>
+
+
+
+  <a class="close-reveal-modal">&#215;</a>
+</div> <!-- End Kjeldahl Method Modal -->

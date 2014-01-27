@@ -114,12 +114,27 @@ body {
   height: calc(100% - 14px);
   padding-left: 40px;
   padding-right: 40px;
-}
 
-#hydroImg {
+  img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  }
+
+  canvas {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 4px;
+  }
+}
+
+#red {
+  color: red;
+}
+
+#blue {
+  color: blue;
 }
 
 .left-off-canvas-menu {
