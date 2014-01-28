@@ -165,9 +165,19 @@ section.right-small {
 
 #help {
   cursor: help;
+  color: white;
+  font-size: 12px;
 }
 
 .close-reveal-modal {
   width: 30px;
   height: 30px
+}
+
+.subheader {
+  color: white;
+}
+
+label {
+  color: $primary-color;
 }
