@@ -5,7 +5,7 @@
 
   // setup component
   var viewer = new ChemDoodle.TransformCanvas3D('viewer', width, height);
-  viewer.specs.set3DRepresentation('van der Waals Spheres');
+  viewer.specs.set3DRepresentation('Ball and Stick');
   viewer.specs.macro_displayAtoms = true;
   viewer.specs.macro_displayBonds = true;
   viewer.specs.macro_showWater = false;
@@ -47,8 +47,6 @@
   var popupViewer = new ChemDoodle.TransformCanvas3D('popupViewer', 300, 300);
   popupViewer.specs.set3DRepresentation('Ball and Stick');
   popupViewer.specs.backgroundColor = '#222'; // Dark grey.
-  popupViewer.specs.atoms_displayLabels_3D = true;
-  popupViewer.specs.bonds_renderAsLines_3D = false;
 
   // Rotation animation.
   // popupViewer.startAnimation = ChemDoodle._AnimatorCanvas.prototype.startAnimation;

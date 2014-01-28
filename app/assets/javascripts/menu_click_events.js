@@ -3,32 +3,26 @@
 // Display Modes.
 // Set 'Ball and Stick'.
 $("#BS").click(function() {
-  $(this).addClass("success");
-  $("#SF").removeClass("success");
-  $("#WF").removeClass("success");
-  $("#Hydro").removeClass("success");
   viewer.specs.set3DRepresentation('Ball and Stick');
   viewer.updateScene()
+  popupViewer.specs.set3DRepresentation('Ball and Stick');
+  popupViewer.updateScene()
 });
 
 // Set 'Space Filling'.
 $("#SF").click(function() {
-  $(this).addClass("success");
-  $("#BS").removeClass("success");
-  $("#WF").removeClass("success");
-  $("#Hydro").removeClass("success");
   viewer.specs.set3DRepresentation('van der Waals Spheres');
   viewer.updateScene()
+  popupViewer.specs.set3DRepresentation('van der Waals Spheres');
+  popupViewer.updateScene()
 });
 
 // Set 'Wireframe'.
 $("#WF").click(function() {
-  $(this).addClass("success");
-  $("#BS").removeClass("success");
-  $("#SF").removeClass("success");
-  $("#Hydro").removeClass("success");
   viewer.specs.set3DRepresentation('Wireframe');
   viewer.updateScene()
+  popupViewer.specs.set3DRepresentation('Wireframe');
+  popupViewer.updateScene()
 });
 
 // Toggle display of hydrophobic/hydrophilic domains.
@@ -41,6 +35,8 @@ $("#Hydro").change(function() {
 $("#Labs").click(function() {
   viewer.specs.atoms_displayLabels_3D =! viewer.specs.atoms_displayLabels_3D;
   viewer.updateScene();
+  popupViewer.specs.atoms_displayLabels_3D =! popupViewer.specs.atoms_displayLabels_3D;
+  popupViewer.updateScene();
 });
 
 // $("#fullScreen").click(function(){
@@ -120,11 +116,6 @@ var aminoModel,
     popupTitle,
     popupColour,
     aminoFile;
-
-// pastel green #77DD77
-// pastel orange #FFB347
-// light pastel purple #B19CD9
-// pastel magenta #F49AC2
 
 var green  = '#77DD77',
     orange = '#FFB347',
