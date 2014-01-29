@@ -267,3 +267,28 @@ $(document).keydown(function(e) {
 //   // $(document).foundation('joyride', 'start');
 
 // });
+
+// Quiz!
+// Draggables.
+$("#a").draggable({
+  cursor: 'move',
+  revert: true,
+  stack: '#words div'
+});
+
+// Droppables
+$("#z").droppable({
+  accept: '#words div',
+  drop: acceptDrop,
+  hoverClass: 'hovered'
+});
+
+function acceptDrop(event, ui) {
+  // if correct
+  ui.draggable.addClass('success');
+  ui.draggable.draggable( 'option', 'revert', false );
+  // if incorrect
+  // ...
+
+  ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
+}

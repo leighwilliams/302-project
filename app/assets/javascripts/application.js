@@ -2,6 +2,10 @@
 //= require jquery
 //= require jquery_ujs
 
+// require jquery.ui.all
+//= require jquery.ui.draggable
+//= require jquery.ui.droppable
+
 //= require foundation/foundation
 //= require foundation/foundation.topbar
 //= require foundation/foundation.tooltip

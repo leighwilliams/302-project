@@ -148,9 +148,29 @@ body {
   -webkit-box-shadow:inset 1px -1px 2px #000000;
   box-shadow:inset 1px -1px 2px #000000;
   width: 50%;
+  overflow-x: hidden;
+
 
   p {
     color: white;
+  }
+
+  #words > div {
+    width: 136px;
+    padding: 4px;
+    margin: 2px;
+    cursor: move;
+  }
+
+  #statements > p > span {
+    width: 136px;
+    padding: 4px;
+    margin: 2px;
+    border: 1px dashed black;
+  }
+
+  #statements span.hovered {
+    background: $primary-color;
   }
 }
 
