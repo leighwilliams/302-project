@@ -75,10 +75,6 @@ body {
 
   #header {
     color: #111;
-    // pastel green #77DD77
-    // pastel orange #FFB347
-    // dark pastel blue #779ECB
-    // pastel magenta #F49AC2
     background-color: #333;
     margin-bottom: 0px; // Overwrite Foundation default 20px.
     border-bottom-color: #333;
@@ -129,6 +125,11 @@ body {
   }
 }
 
+// Dirty hack to get text to display before the right side offcanvas hamburger.
+#rtl {
+  direction: rtl;
+}
+
 #red {
   color: red;
 }
@@ -141,6 +142,7 @@ body {
   -moz-box-shadow:inset -1px -1px 2px #000000;
   -webkit-box-shadow:inset -1px -1px 2px #000000;
   box-shadow:inset -1px -1px 2px #000000;
+  //padding: 10px;
 }
 
 .right-off-canvas-menu {
@@ -148,7 +150,8 @@ body {
   -webkit-box-shadow:inset 1px -1px 2px #000000;
   box-shadow:inset 1px -1px 2px #000000;
   width: 50%;
-  overflow-x: hidden;
+  overflow-y: auto;
+  //overflow-x: hidden;
   padding: 10px;
 
 
