@@ -269,17 +269,29 @@ $(document).keydown(function(e) {
 // });
 
 // Quiz!
-
 var words = ["amino", "hydrophobic", "hydrophilic", "nitrogen", "water",  "denatured",  "chymotrypsin",  "hydrogen",   "secondary structure",  "tertiary structure",  "quaternary", "casein", "glycine", "caboxyl"];
+var droppedCount = 0,
+    correctCount = 0,
+    gameAttempts = 0;
 
-// Draggables.
-for (var i = 1; i <= words.length; i++) {
-  $('<div class="tiny button radius">' + words[i - 1] + '</div>').data('id', i).appendTo('#words').draggable({
-    cursor: 'move',
-    revert: true,
-    stack: '#words div',
-    containment: 'container'
-  });
+// Initialize a new game.
+newGame();
+
+function newGame() {
+  droppedCount = 0;
+  correctCount = 0;
+  gameAttempts = 0;
+  $('#words').html('');
+
+  // Draggables.
+  for (var i = 1; i <= words.length; i++) {
+    $('<div class="tiny button">' + words[i - 1] + '</div>').data('id', i).appendTo('#words').draggable({
+      cursor: 'move',
+      revert: true,
+      stack: '#words div',
+      containment: 'container'
+    });
+  };
 };
 
 // words.sort(function() { return Math.random() - .5 });
@@ -292,7 +304,7 @@ for (var i = 1; i <= words.length; i++) {
 //   });
 
 // Droppables
-$('#statements > p > span').each(function() {
+$("#statements > p > span").each(function() {
   $(this).droppable({
     accept: '#words div',
     drop: acceptDrop,
@@ -301,8 +313,6 @@ $('#statements > p > span').each(function() {
   });
 });
 
-var droppedCount = 0,
-    correctCount = 0;
 function acceptDrop(event, ui) {
   var wordID = ui.draggable.data('id');
   var statementID = $(this).attr('id');
@@ -313,35 +323,53 @@ function acceptDrop(event, ui) {
 
   if (statementID == wordID) {
     ui.draggable.data('correct', 'yes');
+    ui.draggable.data('placed', 'yes');
     correctCount++;
   }
   else {
     ui.draggable.data('correct', 'no');
+    ui.draggable.data('placed', 'yes');
   }
 }
 
+// Click mark button.
 $("#markMe").click(function() {
-  if (droppedCount <= 10) {
-    alert("All questions not answered!");
-    return;
-  }
-
+  gameAttempts++;
   $("#words > div").each(function() {
     if ($(this).data('correct') == 'yes') {
       $(this).removeClass('alert').addClass('success');
       $(this).draggable( 'disable' );
     }
-    else {
+    else if ($(this).data('placed') == 'yes') {
       $(this).addClass('alert');
     }
   });
 
   if (correctCount < 11) {
-    $("#score").text(correctCount + "/11" + " Keep going!");
+    $("#container").addClass('blur');
+    $("#score").text(correctCount + "/11" + " Keep going!").parent().show();
   }
-  if (correctCount >= 11) {
-    $("#score").text("11/11" + " Impressive! Keep up the good work! :D");
+  else if (correctCount >= 11 && gameAttempts == 1) {
+    $("#container").addClass('blur');
+    $("#score").text("11/11" + " Impressive! Keep up the good work! :D").parent().show();
   }
+  else if (correctCount >= 11) {
+    $("#container").addClass('blur');
+    $("#score").text("11/11" + " You rock!").parent().show();
+  }
+});
+
+// Click continue button.
+$("#cont").click(function() {
+  $("#container").removeClass('blur');
+  $("#scorePopup").fadeOut('fast');
+});
+
+// Click restart button.
+$("#restart").click(function() {
+  $("#container").removeClass('blur');
+  $("#scorePopup").fadeOut('fast');
+  newGame();
 });
 
 // $("#popup").draggable({
