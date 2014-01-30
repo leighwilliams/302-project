@@ -273,16 +273,16 @@ $(document).keydown(function(e) {
 var answers = ["amino", "water", "casein", "hydrophobic", "secondary structure", "tertiary structure", "hydrogen", "hydrophilic", "denatured", "glycine", "chymotrypsin", "caboxyl", "nitrogen", "quaternary", ];
 // answers.sort(function() { return Math.random() - .5 });
 
-for (var i = 13; i >= 0; i--) {
-  // Draggables.
-  $('<div class="tiny button radius">' + answers[i] + '</div>').appendTo('#words').draggable({
+var count = 0;
+// Draggables.
+$('#words > div').each(function() {
+  $(this).draggable({
     cursor: 'move',
     revert: true,
     stack: '#words div',
     containment: 'container'
   });
-};
-
+});
 
 // Droppables
 $('#statements > p > span').each(function() {
@@ -295,18 +295,15 @@ $('#statements > p > span').each(function() {
 });
 
 function acceptDrop(event, ui) {
-  ui.draggable.position( { of: $(this), my: 'center center', at: 'center center' } );
-
-  // if correct
-  ui.draggable.addClass('success');
-  ui.draggable.draggable( 'disable' );
-  $(this).droppable( 'disable' );
+  ui.draggable.position({ of: $(this), my: 'center center', at: 'center center' });
   ui.draggable.draggable( 'option', 'revert', false );
-
-  // if incorrect
-  //ui.draggable.addClass('alert');
-
 }
+
+//ui.draggable.addClass('success');
+//ui.draggable.draggable( 'disable' );
+//$(this).droppable( 'disable' );
+
+//$
 
 // $("#popup").draggable({
 //   cursor: 'move'
