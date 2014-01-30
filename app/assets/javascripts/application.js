@@ -5,6 +5,7 @@
 // require jquery.ui.all
 //= require jquery.ui.draggable
 //= require jquery.ui.droppable
+//= require jquery.ui.position
 
 //= require foundation/foundation
 //= require foundation/foundation.topbar

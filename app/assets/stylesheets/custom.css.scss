@@ -156,21 +156,21 @@ body {
   }
 
   #words > div {
-    width: 136px;
+    width: 115px;
     padding: 4px;
     margin: 2px;
     cursor: move;
   }
 
   #statements > p > span {
-    width: 136px;
+    width: 117px;
     padding: 4px;
     margin: 2px;
     border: 1px dashed black;
   }
 
   #statements span.hovered {
-    background: $primary-color;
+    background: purple;
   }
 }
 
