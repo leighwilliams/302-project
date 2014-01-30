@@ -270,19 +270,26 @@ $(document).keydown(function(e) {
 
 // Quiz!
 
-var answers = ["amino", "water", "casein", "hydrophobic", "secondary structure", "tertiary structure", "hydrogen", "hydrophilic", "denatured", "glycine", "chymotrypsin", "caboxyl", "nitrogen", "quaternary", ];
-// answers.sort(function() { return Math.random() - .5 });
+var words = ["amino", "hydrophobic", "hydrophilic", "nitrogen", "water",  "denatured",  "chymotrypsin",  "hydrogen",   "secondary structure",  "tertiary structure",  "quaternary", "casein", "glycine", "caboxyl"];
 
-var count = 0;
 // Draggables.
-$('#words > div').each(function() {
-  $(this).draggable({
+for (var i = 1; i <= words.length; i++) {
+  $('<div class="tiny button radius">' + words[i - 1] + '</div>').data('id', i).appendTo('#words').draggable({
     cursor: 'move',
     revert: true,
     stack: '#words div',
     containment: 'container'
   });
-});
+};
+
+// words.sort(function() { return Math.random() - .5 });
+// for (var i = 1; i <= words.length; i++) {
+//   $('<div class="tiny button radius">' + words[i - 1] + '</div>').data('id', i).appendTo('#words').draggable({
+//     cursor: 'move',
+//     revert: true,
+//     stack: '#words div',
+//     containment: 'container'
+//   });
 
 // Droppables
 $('#statements > p > span').each(function() {
@@ -294,16 +301,48 @@ $('#statements > p > span').each(function() {
   });
 });
 
+var droppedCount = 0,
+    correctCount = 0;
 function acceptDrop(event, ui) {
+  var wordID = ui.draggable.data('id');
+  var statementID = $(this).attr('id');
+  droppedCount++;
+
   ui.draggable.position({ of: $(this), my: 'center center', at: 'center center' });
   ui.draggable.draggable( 'option', 'revert', false );
+
+  if (statementID == wordID) {
+    ui.draggable.data('correct', 'yes');
+    correctCount++;
+  }
+  else {
+    ui.draggable.data('correct', 'no');
+  }
 }
 
-//ui.draggable.addClass('success');
-//ui.draggable.draggable( 'disable' );
-//$(this).droppable( 'disable' );
+$("#markMe").click(function() {
+  if (droppedCount <= 10) {
+    alert("All questions not answered!");
+    return;
+  }
 
-//$
+  $("#words > div").each(function() {
+    if ($(this).data('correct') == 'yes') {
+      $(this).removeClass('alert').addClass('success');
+      $(this).draggable( 'disable' );
+    }
+    else {
+      $(this).addClass('alert');
+    }
+  });
+
+  if (correctCount < 11) {
+    $("#score").text(correctCount + "/11" + " Keep going!");
+  }
+  if (correctCount >= 11) {
+    $("#score").text("11/11" + " Impressive! Keep up the good work! :D");
+  }
+});
 
 // $("#popup").draggable({
 //   cursor: 'move'
