@@ -87,10 +87,6 @@ $("#PS").change(function() {
       file = pdb_1BLF;
       viewer.loadMolecule(file);
       break;
-    case "1B8E":
-      file = pdb_1B8E;
-      viewer.loadMolecule(file);
-      break;
     case "1F6S":
       file = pdb_1F6S;
       viewer.loadMolecule(file);
