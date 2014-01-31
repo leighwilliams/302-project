@@ -40,32 +40,6 @@ $("#Labs").click(function() {
   popupViewer.updateScene();
 });
 
-// $("#fullScreen").click(function(){
-//   var width, height;
-//   // var canvas = document.getElementById("viewer");
-
-//   // if(canvas.requestFullScreen) {
-//   //   canvas.requestFullScreen();
-//   // }
-//   // else if(canvas.webkitRequestFullScreen) {
-//   //   canvas.webkitRequestFullScreen();
-//   // }
-//   // else if(canvas.mozRequestFullScreen) {
-//   //   canvas.mozRequestFullScreen();
-//   // }
-//   // else if(element.msRequestFullscreen) {
-//   //   element.msRequestFullscreen();
-//   // }
-
-//   width = $(window).innerWidth();
-//   height = $(window).innerHeight();
-//   //viewer.resize(width, height);
-//   //viewer.loadMolecule(file);
-//   //$("#viewer").css({"display": "block", "width": width, "height": height});
-// });
-
-// End display modes.
-
 // // Count nitrogen atoms test.
 // $("#test").click(function() {
 //   alert(ChemDoodle.countNitrogens(file));
@@ -246,15 +220,13 @@ $("#AS").change(function() {
 $("#close").click(function() {
   $("#popup").fadeOut("fast");
   $("#AS").val('Select to view model');
-  //popupViewer.stopAnimation();
 });
 // Escape key.
 $(document).keydown(function(e) {
   if (e.keyCode == 27) {
     $("#popup").fadeOut("fast");
     $("#AS").val('Select to view model');
-    //popupViewer.stopAnimation();
-  };
+  }
 });
 
 // Click guided tour button
