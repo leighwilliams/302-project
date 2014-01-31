@@ -267,8 +267,7 @@ $(document).keydown(function(e) {
 // Quiz!
 var words = ["amino", "hydrophobic", "hydrophilic", "nitrogen", "water",  "denatured",  "chymotrypsin",  "hydrogen",   "secondary structure",  "tertiary structure",  "quaternary", "casein", "glycine", "carboxyl"];
 var droppedCount = 0,
-    correctCount = 0,
-    gameAttempts = 0;
+    correctCount = 0;
 
 // Initialize a new game.
 newGame();
@@ -276,7 +275,7 @@ newGame();
 function newGame() {
   droppedCount = 0;
   correctCount = 0;
-  gameAttempts = 0;
+
   $('#words').html('');
 
   // Draggables.
@@ -330,7 +329,11 @@ function acceptDrop(event, ui) {
 
 // Click mark button.
 $("#markMe").click(function() {
-  gameAttempts++;
+  if (droppedCount < 11) {
+    $("#container").addClass('blur');
+    $("#score").text("You're not done. Keep going!").parent().show();
+    return;
+  }
   $("#words > div").each(function() {
     if ($(this).data('correct') == 'yes') {
       $(this).removeClass('alert').addClass('success');
@@ -341,17 +344,21 @@ $("#markMe").click(function() {
     }
   });
 
-  if (correctCount < 11) {
+  if (correctCount >= 0 && correctCount <= 4) {
     $("#container").addClass('blur');
-    $("#score").text(correctCount + "/11" + " Keep going!").parent().show();
+    $("#score").text(correctCount + "/11" + " There is room for improvement. Please go through the information and resources provided and try again!").parent().show();
   }
-  else if (correctCount >= 11 && gameAttempts == 1) {
+  else if (correctCount >= 5 && correctCount <= 7) {
     $("#container").addClass('blur');
-    $("#score").text("11/11" + " Impressive! Keep up the good work! :D").parent().show();
+    $("#score").text(correctCount + "/11" + " You are doing well, but can do better. Please re-visit the structure and information boxes provided, and try again!").parent().show();
+  }
+  else if (correctCount >= 8 && correctCount <= 10) {
+    $("#container").addClass('blur');
+    $("#score").text(correctCount + "/11" + " An excellent attempt. Keep studying the information and resources provided and you can achieve a perfect score!").parent().show();
   }
   else if (correctCount >= 11) {
     $("#container").addClass('blur');
-    $("#score").text("11/11" + " You rock!").parent().show();
+    $("#score").text(correctCount + "/11" + " Fantastic work, a perfect score! You have utilised this site and it's information well. Remember to use this site and resources in your exam study.").parent().show();
   }
 });
 
