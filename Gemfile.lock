@@ -110,6 +110,8 @@ GEM
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
+    touchpunch-rails (1.0.1)
+      railties (>= 3.1, < 4.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -140,6 +142,7 @@ DEPENDENCIES
   rails_12factor
   sass-rails (>= 4.0.0)
   sdoc
+  touchpunch-rails
   turbolinks
   uglifier (>= 1.3.0)
   unicorn

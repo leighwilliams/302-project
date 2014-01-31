@@ -6,6 +6,7 @@
 //= require jquery.ui.draggable
 //= require jquery.ui.droppable
 //= require jquery.ui.position
+//= require jquery.ui.touch-punch
 
 //= require foundation/foundation
 //= require foundation/foundation.topbar
