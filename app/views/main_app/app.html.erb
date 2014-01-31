@@ -10,40 +10,44 @@
 
     <!-- Off Canvas left menu. -->
     <aside class="left-off-canvas-menu">
-      <h5 class="subheader">Display Modes</h5>
-      <ul>
-        <li>
-          <input id="BS" type="radio" name="display" checked = "checked">
-          <label for="BS">Ball and Stick</label>
-        </li>
-        <li>
-          <input id="SF" type="radio" name="display">
-          <label for="SF">Space Filling</label>
-        </li>
-        <li>
-          <input id="WF" type="radio" name="display" >
-          <label for="WF">Wireframe</label>
-        </li>
+      <div id="displayContainer">
+        <h5 class="subheader">Display Modes</h5>
+        <ul>
+          <li>
+            <input id="BS" type="radio" name="display" checked = "checked">
+            <label for="BS">Ball and Stick</label>
+          </li>
+          <li>
+            <input id="SF" type="radio" name="display">
+            <label for="SF">Space Filling</label>
+          </li>
+          <li>
+            <input id="WF" type="radio" name="display" >
+            <label for="WF">Wireframe</label>
+          </li>
 
-        <li><input type="checkbox" id="Hydro">
-          <label for="Hydro">Polarity</label>
-          <a id="help" data-reveal-id="polarityModal">More Info</a>
-        </li>
-        <li>
-          <input type="checkbox" id="Labs">
-          <label for="Labs">Labels</label>
-        </li>
-      </ul>
+          <li><input type="checkbox" id="Hydro">
+            <label for="Hydro">Polarity</label>
+            <a id="help" data-reveal-id="polarityModal">More Info</a>
+          </li>
+          <li>
+            <input type="checkbox" id="Labs">
+            <label for="Labs">Labels</label>
+          </li>
+        </ul>
+      </div>
 
-      <h5 class="subheader">Protein Structures</h5>
-      <select id="PS">
-        <optgroup label="From RCSB PDB">
-          <option value="4F5S">Bovine Albumin</option>
-          <option value="1BEB" selected="selected">Bovine Beta-Lactoglobulin</option>
-          <option value="1BLF">Bovine Lactoferrin</option>
-          <option value="1F6S">Bovine Alpha-Lactalbumin</option>
-        </optgroup>
-      </select>
+      <div id="proteinContainer">
+        <h5 class="subheader">Protein Structures</h5>
+        <select id="PS">
+          <optgroup label="From RCSB PDB">
+            <option value="4F5S">Bovine Albumin</option>
+            <option value="1BEB" selected="selected">Bovine Beta-Lactoglobulin</option>
+            <option value="1BLF">Bovine Lactoferrin</option>
+            <option value="1F6S">Bovine Alpha-Lactalbumin</option>
+          </optgroup>
+        </select>
+      </div>
 
       <h5 class="subheader">Amino Acid Structures</h5>
       <select id="AS">

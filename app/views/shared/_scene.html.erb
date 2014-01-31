@@ -1,73 +1,91 @@
 <script>
-  // get dimensions
+  // // get dimensions
   var width = window.innerWidth;
   var height = window.innerHeight - 75;
 
-  // setup component
-  var viewer = new ChemDoodle.TransformCanvas3D('viewer', width, height);
-  viewer.specs.set3DRepresentation('Ball and Stick');
-  viewer.specs.macro_displayAtoms = true;
-  viewer.specs.macro_displayBonds = true;
-  viewer.specs.macro_showWater = false;
-  viewer.specs.proteins_displayBackbone = false;
-  viewer.specs.proteins_displayRibbon = true;
-  viewer.specs.macro_atomToLigandDistance = 5;
-  viewer.specs.backgroundColor = 'black';
-  viewer.specs.proteins_ribbonCartoonize = true;
-  viewer.emptyMessage = 'No Data Loaded!';
-  viewer.specs.compass_display = true;
-  viewer.macro_displayBonds = true;
-  viewer.specs.compass_type_3D = 0;
+  // ===
+  // Check if WebGL is supported by the browser.
+  if (ChemDoodle.featureDetection.supports_webgl()) {
 
-  // load data
-  var file = pdb_1BEB;
-  //var file = ChemDoodle.readMOL(file);
-  viewer.loadMolecule(file);
+    // Setup main screen 3D viewer.
+    var viewer = new ChemDoodle.TransformCanvas3D('viewer', width, height);
+    viewer.specs.set3DRepresentation('Ball and Stick');
+    viewer.specs.macro_displayAtoms = true;
+    viewer.specs.macro_displayBonds = true;
+    viewer.specs.macro_showWater = false;
+    viewer.specs.proteins_displayBackbone = false;
+    viewer.specs.proteins_displayRibbon = true;
+    viewer.specs.macro_atomToLigandDistance = 5;
+    viewer.specs.backgroundColor = 'black';
+    viewer.specs.proteins_ribbonCartoonize = true;
+    viewer.emptyMessage = 'No Data Loaded!';
+    viewer.specs.compass_display = true;
+    viewer.macro_displayBonds = true;
+    viewer.specs.compass_type_3D = 0;
 
-  // Browser window -> scene resizing
-  var timer, width, height;
-  $(function() {
+    // Load data.
+    var file = pdb_1BEB;
+    viewer.loadMolecule(file);
+
+    // Setup popup 3D viewer.
+    var popupViewer = new ChemDoodle.TransformCanvas3D('popupViewer', 300, 300);
+    popupViewer.specs.set3DRepresentation('Ball and Stick');
+    popupViewer.specs.backgroundColor = '#222'; // Dark grey.
+
+    var aminoFile;
+    var molecule;
+
+    //Browser window/scene resizing.
+    var timer, width, height;
     $(window).resize(function(){
       clearTimeout(timer);
       timer = setTimeout(function() {
         width = $(window).innerWidth();
         height = $(window).innerHeight() - 75;
-        //viewer.specs.projectionWidthHeightRatio_3D = width / height;
         viewer.resize(width, height);
-        // Have to use loadMolecule() on each resize to avoid warped 3D image.
         viewer.loadMolecule(file);
       }, 300); // delay in milliseconds (Don't want to update while resizing too much)
     });
-  }); // jQuery ready
+  }
 
-</script>
+  // ===
+  // If WebGL not supported, check if the canvas element is supported.
+  else if (ChemDoodle.featureDetection.supports_canvas()) {
+    var twoD = true;
 
-<script>
-  // setup component
-  var popupViewer = new ChemDoodle.TransformCanvas3D('popupViewer', 300, 300);
-  popupViewer.specs.set3DRepresentation('Ball and Stick');
-  popupViewer.specs.backgroundColor = '#222'; // Dark grey.
+    // Hide irrelevant model controls etc.
+    $("#displayContainer").hide();
+    $("#proteinContainer").hide();
 
-  // Rotation animation.
-  // popupViewer.startAnimation = ChemDoodle._AnimatorCanvas.prototype.startAnimation;
-  // popupViewer.stopAnimation = ChemDoodle._AnimatorCanvas.prototype.stopAnimation;
-  // popupViewer.isRunning = ChemDoodle._AnimatorCanvas.prototype.isRunning;
-  // popupViewer.dblclick = ChemDoodle.RotatorCanvas.prototype.dblclick;
-  // popupViewer.nextFrame = function(delta){
-  //   var matrix = [];
-  //   mat4.identity(matrix);
-  //   var change = delta/1000;
-  //         var increment = Math.PI/15;
-  //   mat4.rotate(matrix, increment*change, [ 1, 0, 0 ]);
-  //   mat4.rotate(matrix, increment*change, [ 0, 1, 0 ]);
-  //   mat4.rotate(matrix, increment*change, [ 0, 0, 1 ]);
-  //   mat4.multiply(this.rotationMatrix, matrix);
-  // }
+    var viewer = new ChemDoodle.TransformCanvas('viewer', width, height, true);
+    viewer.specs.bonds_useJMOLColors = true;
+    viewer.specs.bonds_width_2D = 3;
+    viewer.specs.atoms_display = false;
+    viewer.specs.backgroundColor = 'black';
+    viewer.specs.bonds_clearOverlaps_2D = true;
 
-  var aminoFile;
-  var molecule;
-  //popupViewer.loadMolecule(molecule);
+    // Load data.
+    var file = ChemDoodle.readMOL(mol_PHENYLALANINE);
+    file.findRings = false;
+    viewer.loadMolecule(file);
 
-  // Not starting rotation animation until popup is visible.
-  // popupViewer.startAnimation();
+    $("#AS").val('Phe');
+
+    //Browser window/scene resizing.
+    var timer, width, height;
+    $(window).resize(function(){
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        width = $(window).innerWidth();
+        height = $(window).innerHeight() - 75;
+        viewer.resize(width, height);
+      }, 300); // delay in milliseconds (Don't want to update while resizing too much)
+    });
+  }
+
+  // ===
+  // If WebGL and canvas are not supported by the browser...
+  else {
+    alert("Your browser is really old. This site will not function correctly.");
+  }
 </script>

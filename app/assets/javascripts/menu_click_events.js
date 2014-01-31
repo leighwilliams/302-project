@@ -199,20 +199,29 @@ $("#AS").change(function() {
     default:
       break;
   }
-  molecule = ChemDoodle.readMOL(aminoFile, 1);
-  popupViewer.loadMolecule(molecule);
 
-  $("#header").text(popupTitle)
-  .css({"background-color": popupColour, "border-bottom-color": popupColour});
+  // Check for 2D mode. I.e. No WebGL
+  if (twoD == true) {
+    file = ChemDoodle.readMOL(aminoFile);
+    file.findRings = false;
+    viewer.loadMolecule(file);
+  }
+  else {
+    molecule = ChemDoodle.readMOL(aminoFile, 1);
+    popupViewer.loadMolecule(molecule);
 
-  $("#arrow").css("border-right-color", popupColour);
+    $("#header").text(popupTitle)
+    .css({"background-color": popupColour, "border-bottom-color": popupColour});
 
-  $("#popup").css({
-    top: 54,
-    left: 8
-  })
-  .css("border-color", popupColour)
-  .fadeIn('fast');
+    $("#arrow").css("border-right-color", popupColour);
+
+    $("#popup").css({
+      top: 54,
+      left: 8
+    })
+    .css("border-color", popupColour)
+    .fadeIn('fast');
+  }
 });
 
 // Close popup.
