@@ -3,6 +3,8 @@
   var width = window.innerWidth;
   var height = window.innerHeight - 75;
 
+  var twoD = false;
+
   // ===
   // Check if WebGL is supported by the browser.
   if (ChemDoodle.featureDetection.supports_webgl()) {
@@ -51,7 +53,7 @@
   // ===
   // If WebGL not supported, check if the canvas element is supported.
   else if (ChemDoodle.featureDetection.supports_canvas()) {
-    var twoD = true;
+    twoD = true;
 
     // Hide irrelevant model controls etc.
     $("#displayContainer").hide();
