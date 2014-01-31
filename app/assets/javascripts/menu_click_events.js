@@ -269,7 +269,7 @@ $(document).keydown(function(e) {
 // });
 
 // Quiz!
-var words = ["amino", "hydrophobic", "hydrophilic", "nitrogen", "water",  "denatured",  "chymotrypsin",  "hydrogen",   "secondary structure",  "tertiary structure",  "quaternary", "casein", "glycine", "caboxyl"];
+var words = ["amino", "hydrophobic", "hydrophilic", "nitrogen", "water",  "denatured",  "chymotrypsin",  "hydrogen",   "secondary structure",  "tertiary structure",  "quaternary", "casein", "glycine", "carboxyl"];
 var droppedCount = 0,
     correctCount = 0,
     gameAttempts = 0;
