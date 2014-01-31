@@ -1,3 +1,4 @@
+
 // == menu click events ==
 
 // Display Modes.
@@ -331,9 +332,10 @@ function acceptDrop(event, ui) {
 $("#markMe").click(function() {
   if (droppedCount < 11) {
     $("#container").addClass('blur');
-    $("#score").text("You're not done. Keep going!").parent().show();
+    $("#score").text("You have not yet finished answering all of the questions. Please enter all of your answers before submitting.").parent().show();
     return;
   }
+
   $("#words > div").each(function() {
     if ($(this).data('correct') == 'yes') {
       $(this).removeClass('alert').addClass('success');
