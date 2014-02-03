@@ -251,34 +251,34 @@ var words = ["amino", "hydrophobic", "hydrophilic", "nitrogen", "water",  "denat
 var droppedCount = 0,
     correctCount = 0;
 
+var shuffledWords = [];
+
 // Initialize a new game.
 newGame();
 
 function newGame() {
   droppedCount = 0;
   correctCount = 0;
-
   $('#words').html('');
+  shuffledWords.length = 0;
 
   // Draggables.
   for (var i = 1; i <= words.length; i++) {
-    $('<div class="tiny button">' + words[i - 1] + '</div>').data('id', i).appendTo('#words').draggable({
+    shuffledWords.push($('<div class="tiny button primary">' + words[i - 1] + '</div>').data('id', i).draggable({
       cursor: 'move',
       revert: true,
       stack: '#words div',
       containment: 'container'
-    });
+    }));
   };
-};
 
-// words.sort(function() { return Math.random() - .5 });
-// for (var i = 1; i <= words.length; i++) {
-//   $('<div class="tiny button radius">' + words[i - 1] + '</div>').data('id', i).appendTo('#words').draggable({
-//     cursor: 'move',
-//     revert: true,
-//     stack: '#words div',
-//     containment: 'container'
-//   });
+  // Shuffle the array.
+  shuffledWords.sort(function() { return Math.random() - .5 });
+
+  for (var i = 0; i < shuffledWords.length; i++) {
+    shuffledWords[i].appendTo('#words');
+  }
+};
 
 // Droppables
 $("#statements > p > span").each(function() {
@@ -301,7 +301,6 @@ function acceptDrop(event, ui) {
   if (statementID == wordID) {
     ui.draggable.data('correct', 'yes');
     ui.draggable.data('placed', 'yes');
-    correctCount++;
   }
   else {
     ui.draggable.data('correct', 'no');
@@ -318,11 +317,12 @@ $("#markMe").click(function() {
   }
 
   $("#words > div").each(function() {
-    if ($(this).data('correct') == 'yes') {
-      $(this).removeClass('alert').addClass('success');
+    if ($(this).data('correct') == 'yes' && ($(this).hasClass('alert') || $(this).hasClass('primary'))) {
+      $(this).removeClass('alert').removeClass('primary').addClass('success');
       $(this).draggable( 'disable' );
+      correctCount++;
     }
-    else if ($(this).data('placed') == 'yes') {
+    else if ($(this).data('placed') == 'yes' && $(this).data('correct') == 'no') {
       $(this).addClass('alert');
     }
   });
