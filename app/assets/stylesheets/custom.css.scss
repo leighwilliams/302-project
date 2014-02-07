@@ -31,10 +31,6 @@ footer {
   }
 }
 
-// html, body {
-//   height: 100%;
-// }
-
 body {
   overflow: hidden;
   background-color: black;
@@ -116,6 +112,10 @@ body {
 
 #blue {
   color: blue;
+}
+
+.off-canvas-wrap {
+  height: 100%;
 }
 
 .left-off-canvas-menu {
