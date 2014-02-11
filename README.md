@@ -7,4 +7,4 @@ Project prototype for protein visualisation tool.
 * [ChemDoodle Web Components](http://web.chemdoodle.com/)
 * [Ruby on Rails](http://rubyonrails.org)
 
-Leigh Williams - 2013
+Leigh Williams - 2013/14
