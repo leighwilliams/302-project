@@ -40,15 +40,11 @@ $("#Labs").click(function() {
   popupViewer.updateScene();
 });
 
-// // Count nitrogen atoms test.
-// $("#test").click(function() {
-//   alert(ChemDoodle.countNitrogens(file));
-// });
 
 // Load models
-var proteinModel;
 $("#PS").change(function() {
-  proteinModel = $("#PS").val();
+  var proteinModel = $("#PS").val();
+
   switch(proteinModel) {
     case "4F5S":
       file = pdb_4F5S;
@@ -69,6 +65,7 @@ $("#PS").change(function() {
   }
 });
 
+
 // Right click canvas popup.
 // $("#viewer").bind('contextmenu', function(e) {
 //   // $("#header").css("background-color", "#F49AC2");
@@ -83,18 +80,17 @@ $("#PS").change(function() {
 // });
 
 // Load amino model.
-var aminoModel,
-    popupTitle,
-    popupColour,
-    aminoFile;
-
-var green  = '#77DD77',
-    orange = '#FFB347',
-    purple = '#B19CD9',
-    pink   = '#F49AC2';
-
 $("#AS").change(function() {
-  aminoModel = $("#AS").val();
+  var aminoFile,
+      popupTitle,
+      popupColour;
+
+  var green  = '#77DD77',
+      orange = '#FFB347',
+      purple = '#B19CD9',
+      pink   = '#F49AC2';
+
+  var aminoModel = $("#AS").val();
   switch(aminoModel) {
     case "Trp":
       aminoFile = mol_TRYPTOPHAN;
@@ -238,29 +234,20 @@ $(document).keydown(function(e) {
   }
 });
 
-// Click guided tour button
-// $("#startTour").click(function() {
-//   $('#helpModal').foundation('reveal', 'close');
-
-//   // $(document).foundation('joyride', 'start');
-
-// });
-
 // Quiz!
-var words = ["amino", "hydrophobic", "hydrophilic", "nitrogen", "water",  "denatured",  "chymotrypsin",  "hydrogen",   "secondary structure",  "tertiary structure",  "quaternary", "casein", "glycine", "carboxyl"];
 var droppedCount = 0,
     correctCount = 0;
-
-var shuffledWords = [];
 
 // Initialize a new game.
 newGame();
 
 function newGame() {
+  var words = ["amino", "hydrophobic", "hydrophilic", "nitrogen", "water",  "denatured",  "chymotrypsin",  "hydrogen",   "secondary structure",  "tertiary structure",  "quaternary", "casein", "glycine", "carboxyl"];
+
   droppedCount = 0;
   correctCount = 0;
   $('#words').html('');
-  shuffledWords.length = 0;
+  var shuffledWords = [];
 
   // Draggables.
   for (var i = 1; i <= words.length; i++) {
@@ -273,7 +260,9 @@ function newGame() {
   };
 
   // Shuffle the array.
-  shuffledWords.sort(function() { return Math.random() - .5 });
+  shuffledWords.sort(function() {
+    return Math.random() - .5
+  });
 
   for (var i = 0; i < shuffledWords.length; i++) {
     shuffledWords[i].appendTo('#words');
@@ -357,7 +346,3 @@ $("#restart").click(function() {
   $("#scorePopup").fadeOut('fast');
   newGame();
 });
-
-// $("#popup").draggable({
-//   cursor: 'move'
-// });
