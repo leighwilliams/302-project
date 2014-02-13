@@ -192,7 +192,7 @@
 <div id="bugModal" class="reveal-modal medium" data-reveal>
   <h2>Got issues?</h2>
 
-  <p>If you come across any bugs or general brokenness you can email Leigh Williams at ltwi@deakin.edu.au.</p>
+  <p>If you come across any bugs or general brokenness you can email Leigh Williams at <%= mail_to("ltwi@deakin.edu.au") %> or <%= mail_to("leighwilliams@fastmail.fm") %></p>
 
   <a class="close-reveal-modal">&#215;</a>
 </div> <!-- End Bug Modal -->
@@ -228,7 +228,7 @@
     <li>Mostafa Jafari</li>
     <li>Matthew Rimmer</li>
     <li>Anthony Williams</li>
-    <li>Leigh Williams</li>
+    <li>Leigh Williams - <%= mail_to("leighwilliams@fastmail.fm") %></li>
   </ul>
 
   <a class="close-reveal-modal">&#215;</a>
