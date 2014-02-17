@@ -1,6 +1,6 @@
 # SIT302 - Project
 
-Project prototype for protein visualisation tool.
+Project for SIT302 (Uni Project) - protein visualisation tool.
 
 ## Made With
 * [Zurb Foundation](http://foundation.zurb.com)
