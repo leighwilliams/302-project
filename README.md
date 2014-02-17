@@ -1,4 +1,4 @@
-# SIT302 - Project Prototype
+# SIT302 - Project
 
 Project prototype for protein visualisation tool.
 
