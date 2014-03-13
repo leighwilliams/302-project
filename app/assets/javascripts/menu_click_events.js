@@ -5,25 +5,25 @@
 // Set 'Ball and Stick'.
 $("#BS").click(function() {
   viewer.specs.set3DRepresentation('Ball and Stick');
-  viewer.updateScene()
+  viewer.updateScene();
   popupViewer.specs.set3DRepresentation('Ball and Stick');
-  popupViewer.updateScene()
+  popupViewer.updateScene();
 });
 
 // Set 'Space Filling'.
 $("#SF").click(function() {
   viewer.specs.set3DRepresentation('van der Waals Spheres');
-  viewer.updateScene()
+  viewer.updateScene();
   popupViewer.specs.set3DRepresentation('van der Waals Spheres');
-  popupViewer.updateScene()
+  popupViewer.updateScene();
 });
 
 // Set 'Wireframe'.
 $("#WF").click(function() {
   viewer.specs.set3DRepresentation('Wireframe');
-  viewer.updateScene()
+  viewer.updateScene();
   popupViewer.specs.set3DRepresentation('Wireframe');
-  popupViewer.updateScene()
+  popupViewer.updateScene();
 });
 
 // Toggle display of hydrophobic/hydrophilic domains.
@@ -197,7 +197,7 @@ $("#AS").change(function() {
   }
 
   // Check for 2D mode. I.e. No WebGL
-  if (twoD == true) {
+  if (twoD === true) {
     file = ChemDoodle.readMOL(aminoFile);
     file.findRings = false;
     viewer.loadMolecule(file);
@@ -257,17 +257,17 @@ function newGame() {
       stack: '#words div',
       containment: 'container'
     }));
-  };
+  }
 
   // Shuffle the array.
   shuffledWords.sort(function() {
-    return Math.random() - .5
+    return Math.random() - 0.5;
   });
 
-  for (var i = 0; i < shuffledWords.length; i++) {
-    shuffledWords[i].appendTo('#words');
+  for (var j = 0; j < shuffledWords.length; j++) {
+    shuffledWords[j].appendTo('#words');
   }
-};
+}
 
 // Droppables
 $("#statements > p > span").each(function() {
