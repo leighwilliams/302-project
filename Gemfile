@@ -40,6 +40,8 @@ gem 'unicorn'
 # CSS auto prefixing
 gem 'autoprefixer-rails'
 
+gem "skylight"
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

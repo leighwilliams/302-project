@@ -1,4 +1,4 @@
-# SIT302 - Project
+# SIT302 - Projectasdasd
 
 Project for SIT302 (Uni Project) - protein visualisation tool.
 
